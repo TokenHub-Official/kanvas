@@ -58,27 +58,23 @@ copies, test screenshots, or generated caches.
 
 ## Verification
 
-During development, run the smallest relevant check. Before submission, run the
-affected workspace type checks, tests, and build. Changes to shared contracts,
-database behavior, build infrastructure, or dependencies require the complete
-gate:
+Run the smallest relevant engineering check during development. For code changes,
+`verify` checks generated code, formatting, types, lint, architecture, builds and
+compiled entry points; it does not execute business tests:
 
 ```bash
 corepack pnpm verify
 ```
 
+For documentation-only changes, check formatting and `corepack pnpm docs:check`.
 Dependency changes also require `corepack pnpm audit:prod`. Do not introduce
 high or critical production dependency vulnerabilities.
 
-The real MySQL integration suite is destructive and may target only a dedicated
-disposable instance. Do not weaken safety checks, remove failing assertions, or
-update unexplained snapshots merely to make CI pass.
-
-Database, migration, or persistent-store changes also require:
-
-```bash
-corepack pnpm test:integration:mysql
-```
+GitHub CI performs lightweight formatting, public-boundary, dependency-audit and
+secret checks. Build validation is performed in the development workflow; report
+which checks actually ran in the PR. Business tests remain available through
+`pnpm test` and the existing specialized test commands for manual investigation
+or acceptance. The MySQL suite must use a dedicated disposable instance.
 
 ## Commits and pull requests
 

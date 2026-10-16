@@ -65,7 +65,7 @@ corepack pnpm dev:worker      # Start Worker only
 corepack pnpm check-types     # Check all workspace types
 corepack pnpm test            # Run repository unit tests
 corepack pnpm build           # Build all production targets
-corepack pnpm verify          # Run the complete release gate
+corepack pnpm verify          # Run engineering checks and build verification
 ```
 
 The real MySQL integration suite destroys its derived test databases and must

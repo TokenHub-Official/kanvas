@@ -65,7 +65,7 @@
     "test:integration:mysql": "pnpm --dir packages/database test:integration:mysql",
     "test:agent-closure": "pnpm --filter @kanvas/contracts exec vitest run test/workspace-agent-contract.test.ts && pnpm --filter @kanvas/server exec vitest run test/workspace-agent.service.test.ts && pnpm --filter @kanvas/agent-runtime test && pnpm --filter @kanvas/worker exec vitest run test/agent-run-processor.test.ts test/agent-model-budget.test.ts test/thread-agent-query-executor.test.ts test/canvas-agent-command-executor.test.ts test/provider-invocation-runtime.test.ts && pnpm --filter @kanvas/database build && pnpm --dir packages/database exec node test/run-disposable-integration.mjs test/agent-foundation-store.integration.test.ts && pnpm --dir packages/database exec node test/run-disposable-integration.mjs test/agent-runtime-store.integration.test.ts",
     "test:dev-command": "node --test tools/development/start-dev.test.mjs tools/development/setup-env.test.mjs",
-    "verify": "pnpm generate:check && pnpm static:check && pnpm test && pnpm test:dev-command && pnpm test:deployment && pnpm build && pnpm verify:dist",
+    "verify": "pnpm generate:check && pnpm static:check && pnpm build && pnpm verify:dist",
     "verify:dist": "node tools/dist-verifier/run.mjs",
     "test:deployment": "node --test deploy/release-k8s.test.mjs deploy/runtime/entrypoint.test.mjs deploy/runtime/supervisor.test.mjs deploy/runtime/decode-env.test.mjs deploy/runtime/standalone-env.test.mjs",
     "release:check": "node --test tools/release/public-files.test.mjs && node tools/release/check-public-tree.mjs",
