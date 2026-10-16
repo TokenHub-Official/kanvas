@@ -1,0 +1,230 @@
+{
+  "schemaVersion": "kanvas.runtime-adapter-definition/v1",
+  "adapterKey": "browser.image.light-enhance.deterministic.v1",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "光线增强 · 浏览器",
+      "en-US": "Light enhance · Browser"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "将光线增强的公开输入输出转换为浏览器运行协议。",
+      "en-US": "Adapts the public Light enhance contract to the Browser runtime protocol."
+    }
+  },
+  "executionTarget": "browser",
+  "sourceKinds": ["plugin"],
+  "supportedModelFormats": [],
+  "invocationInputSchema": {
+    "$id": "kanvas.image-light-enhance-input.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["sourceArtifactId"],
+    "properties": {
+      "tint": {
+        "type": "number",
+        "default": 0,
+        "maximum": 1,
+        "minimum": -1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "shadows": {
+        "type": "number",
+        "default": 0,
+        "maximum": 1,
+        "minimum": -1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "highlights": {
+        "type": "number",
+        "default": 0,
+        "maximum": 1,
+        "minimum": -1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "temperature": {
+        "type": "number",
+        "default": 0,
+        "maximum": 1,
+        "minimum": -1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "exposureStops": {
+        "type": "number",
+        "default": 0,
+        "maximum": 2,
+        "minimum": -2,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "invocationOutputSchema": {
+    "$id": "kanvas.image-light-enhance-result.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "schemaVersion",
+      "imageArtifactId",
+      "parameters",
+      "qualitySignals"
+    ],
+    "properties": {
+      "parameters": {
+        "type": "object",
+        "required": [
+          "exposureStops",
+          "shadows",
+          "highlights",
+          "temperature",
+          "tint"
+        ],
+        "properties": {
+          "tint": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": -1
+          },
+          "shadows": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": -1
+          },
+          "highlights": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": -1
+          },
+          "temperature": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": -1
+          },
+          "exposureStops": {
+            "type": "number",
+            "maximum": 2,
+            "minimum": -2
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "schemaVersion": {
+        "const": "kanvas.image-light-enhance-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "required": [
+          "schemaVersion",
+          "method",
+          "generative",
+          "alphaPreserved",
+          "clippedLowRatio",
+          "clippedHighRatio"
+        ],
+        "properties": {
+          "method": {
+            "const": "deterministic_tone_curve"
+          },
+          "generative": {
+            "const": false
+          },
+          "schemaVersion": {
+            "const": "kanvas.image-light-enhance-quality/v1"
+          },
+          "alphaPreserved": {
+            "const": true
+          },
+          "clippedLowRatio": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0
+          },
+          "clippedHighRatio": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "quality.signals"
+      },
+      "imageArtifactId": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["$kanvas", "outputRole", "outputIndex"],
+        "properties": {
+          "$kanvas": {
+            "const": "attempt-output-artifact/v1"
+          },
+          "outputRole": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "outputIndex": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          }
+        },
+        "x-kanvas-attempt-output-artifact": true,
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "configurationSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "default": {
+      "method": "deterministic_tone_curve",
+      "backend": "javascript",
+      "generative": false,
+      "outputFormat": "png",
+      "alphaPreserved": true,
+      "maximumSourcePixels": 16000000
+    },
+    "const": {
+      "method": "deterministic_tone_curve",
+      "backend": "javascript",
+      "generative": false,
+      "outputFormat": "png",
+      "alphaPreserved": true,
+      "maximumSourcePixels": 16000000
+    }
+  },
+  "runtimeProfile": {
+    "kind": "browser.image-adjustment.v1",
+    "version": 1,
+    "settings": {
+      "backend": "javascript",
+      "role": "light_enhance"
+    }
+  },
+  "artifactInputs": [
+    {
+      "role": "sourceArtifactId",
+      "pointer": "/sourceArtifactId",
+      "required": true,
+      "mediaTypes": ["image/png", "image/jpeg", "image/webp"]
+    }
+  ],
+  "executable": {
+    "kind": "built_in",
+    "packageKey": "kanvas.browser-image-runtime",
+    "packageVersion": "1.0.0",
+    "entrypoint": "browser.image.light-enhance.deterministic.v1",
+    "releaseDigest": "sha256:a9148d81c36b3f091940dba8588c57ace16cf8a29f4a6967f13754f2a654cb64"
+  }
+}

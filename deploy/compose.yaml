@@ -1,0 +1,39 @@
+name: kanvas
+
+# External MySQL and Redis URLs are configured in .env.
+services:
+  kanvas:
+    image: ${KANVAS_IMAGE:-kanvas:local}
+    restart: unless-stopped
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      target: standalone
+    env_file:
+      - .env
+    ports:
+      - "${KANVAS_BIND_ADDRESS:-127.0.0.1}:${KANVAS_PORT:-8080}:8080"
+    user: "10001:10001"
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp:size=256m,mode=1777
+    volumes:
+      - objects:/var/lib/kanvas/objects
+    stop_grace_period: 10m
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:8080/health/ready').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+      interval: 15s
+      timeout: 5s
+      start_period: 120s
+      retries: 3
+
+volumes:
+  objects:

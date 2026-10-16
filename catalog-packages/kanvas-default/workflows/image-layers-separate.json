@@ -1,0 +1,254 @@
+{
+  "schemaVersion": "kanvas.workflow-catalog-asset/v1",
+  "workflowKey": "image_layers_separate",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "图片分层",
+      "en-US": "Layer separation"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "组合主体检测、透明前景提取和 OCR，返回可审查的前景、Mask、主体与文字区域。",
+      "en-US": "Combine subject detection, foreground extraction, and OCR into reviewable layers and regions."
+    }
+  },
+  "category": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "图片分析",
+      "en-US": "Image analysis"
+    }
+  },
+  "topology": {
+    "schemaVersion": 1,
+    "key": "image_layers_separate",
+    "entryNodeKey": "detect_subjects",
+    "limits": {
+      "maxNodeRuns": 3,
+      "timeoutMs": 600000
+    },
+    "nodes": [
+      {
+        "key": "detect_subjects",
+        "kind": "invoke",
+        "capability": {
+          "contractId": "image.subject.detect",
+          "revision": 1,
+          "canonicalDigest": "sha256:f2fc626d9c5320fef21d2414619983b41bbd0999656fb5bfa3cca628dfa69c5f"
+        },
+        "input": {
+          "sourceArtifactId": {
+            "$value": {
+              "source": "workflow_input",
+              "pointer": "/sourceArtifactId"
+            }
+          },
+          "maxSubjects": 8,
+          "includeMask": true
+        },
+        "next": ["extract_foreground"]
+      },
+      {
+        "key": "extract_foreground",
+        "kind": "invoke",
+        "capability": {
+          "contractId": "image.background.remove",
+          "revision": 1,
+          "canonicalDigest": "sha256:85e608e6977c5a84b51856c768f914784d4fc79e9fa5babecd70bb3e6b3c7c5d"
+        },
+        "input": {
+          "sourceArtifactId": {
+            "$value": {
+              "source": "workflow_input",
+              "pointer": "/sourceArtifactId"
+            }
+          },
+          "refinement": "fine"
+        },
+        "next": ["extract_text"]
+      },
+      {
+        "key": "extract_text",
+        "kind": "invoke",
+        "capability": {
+          "contractId": "image.text.extract",
+          "revision": 1,
+          "canonicalDigest": "sha256:03f89dc7869def6ef351da6272742ca4c39d99716b129b68b6d7c42b7a673b12"
+        },
+        "input": {
+          "sourceArtifactId": {
+            "$value": {
+              "source": "workflow_input",
+              "pointer": "/sourceArtifactId"
+            }
+          },
+          "granularity": "line",
+          "minimumConfidence": 0.5
+        },
+        "next": []
+      }
+    ],
+    "outputs": {
+      "schemaVersion": {
+        "required": true,
+        "value": "kanvas.image-layers-separate-result/v1"
+      },
+      "foregroundArtifactId": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "extract_foreground",
+            "scope": "root",
+            "pointer": "/foregroundArtifactId"
+          }
+        }
+      },
+      "subjectMaskArtifactId": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "extract_foreground",
+            "scope": "root",
+            "pointer": "/maskArtifactId"
+          }
+        }
+      },
+      "subjectCandidates": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "detect_subjects",
+            "scope": "root",
+            "pointer": "/candidates"
+          }
+        }
+      },
+      "textBlocks": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "extract_text",
+            "scope": "root",
+            "pointer": "/blocks"
+          }
+        }
+      },
+      "textRegions": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "extract_text",
+            "scope": "root",
+            "pointer": "/regions"
+          }
+        }
+      },
+      "subjectQualitySignals": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "extract_foreground",
+            "scope": "root",
+            "pointer": "/qualitySignals"
+          }
+        }
+      },
+      "textQualitySignals": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "extract_text",
+            "scope": "root",
+            "pointer": "/qualitySignals"
+          }
+        }
+      }
+    }
+  },
+  "inputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "kanvas.image-layers-separate-input.v1",
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["sourceArtifactId"],
+    "properties": {
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+      }
+    }
+  },
+  "outputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "kanvas.image-layers-separate-result.v1",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "schemaVersion",
+      "foregroundArtifactId",
+      "subjectMaskArtifactId",
+      "subjectCandidates",
+      "textBlocks",
+      "textRegions",
+      "subjectQualitySignals",
+      "textQualitySignals"
+    ],
+    "properties": {
+      "schemaVersion": {
+        "const": "kanvas.image-layers-separate-result/v1"
+      },
+      "foregroundArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+      },
+      "subjectMaskArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+      },
+      "subjectCandidates": {
+        "type": "array"
+      },
+      "textBlocks": {
+        "type": "array"
+      },
+      "textRegions": {
+        "type": "array"
+      },
+      "subjectQualitySignals": {
+        "type": "object"
+      },
+      "textQualitySignals": {
+        "type": "object"
+      }
+    }
+  },
+  "requiredCapabilities": [
+    {
+      "key": "image.subject.detect",
+      "revision": 1,
+      "canonicalDigest": "sha256:f2fc626d9c5320fef21d2414619983b41bbd0999656fb5bfa3cca628dfa69c5f"
+    },
+    {
+      "key": "image.background.remove",
+      "revision": 1,
+      "canonicalDigest": "sha256:85e608e6977c5a84b51856c768f914784d4fc79e9fa5babecd70bb3e6b3c7c5d"
+    },
+    {
+      "key": "image.text.extract",
+      "revision": 1,
+      "canonicalDigest": "sha256:03f89dc7869def6ef351da6272742ca4c39d99716b129b68b6d7c42b7a673b12"
+    }
+  ],
+  "canonicalDigest": "sha256:572e550f8e5fcd135913fc91ebb3144087f33c7f9dc4c9c137b0d3b40f70d378"
+}

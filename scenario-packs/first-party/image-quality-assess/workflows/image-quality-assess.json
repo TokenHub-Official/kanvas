@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "key": "image_quality_assess",
+  "entryNodeKey": "assess",
+  "limits": {
+    "maxNodeRuns": 1,
+    "timeoutMs": 180000
+  },
+  "nodes": [
+    {
+      "key": "assess",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "image.quality.assess",
+        "revision": 1,
+        "canonicalDigest": "sha256:63d124e91065b2e72af997ccfa1c834bc6595ec22f18aaae2e0037579088a398"
+      },
+      "input": {
+        "$value": {
+          "source": "workflow_input",
+          "pointer": ""
+        }
+      },
+      "next": []
+    }
+  ],
+  "outputs": {
+    "schemaVersion": {
+      "required": true,
+      "value": "kanvas.image-quality-assess-result/v1"
+    },
+    "sourceWidth": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "assess",
+          "scope": "root",
+          "pointer": "/sourceWidth"
+        }
+      }
+    },
+    "sourceHeight": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "assess",
+          "scope": "root",
+          "pointer": "/sourceHeight"
+        }
+      }
+    },
+    "blurScore": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "assess",
+          "scope": "root",
+          "pointer": "/blurScore"
+        }
+      }
+    },
+    "underExposureRatio": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "assess",
+          "scope": "root",
+          "pointer": "/underExposureRatio"
+        }
+      }
+    },
+    "overExposureRatio": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "assess",
+          "scope": "root",
+          "pointer": "/overExposureRatio"
+        }
+      }
+    },
+    "noiseScore": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "assess",
+          "scope": "root",
+          "pointer": "/noiseScore"
+        }
+      }
+    },
+    "compressionScore": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "assess",
+          "scope": "root",
+          "pointer": "/compressionScore"
+        }
+      }
+    },
+    "subjectScaleRatio": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "assess",
+          "scope": "root",
+          "pointer": "/subjectScaleRatio"
+        }
+      }
+    },
+    "usability": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "assess",
+          "scope": "root",
+          "pointer": "/usability"
+        }
+      }
+    },
+    "findings": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "assess",
+          "scope": "root",
+          "pointer": "/findings"
+        }
+      }
+    },
+    "qualitySignals": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "assess",
+          "scope": "root",
+          "pointer": "/qualitySignals"
+        }
+      }
+    }
+  }
+}

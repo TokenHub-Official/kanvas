@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kanvas.brand-social-starter-input.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["headline", "logoArtifactId", "backgroundColor"],
+  "properties": {
+    "headline": {
+      "title": "主标题",
+      "description": "写下这次内容最希望用户记住的一句话。",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "logoArtifactId": {
+      "title": "Logo",
+      "description": "使用品牌 Logo，也可以为本次作品上传其他图片。",
+      "type": "string",
+      "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+    },
+    "backgroundColor": {
+      "title": "背景颜色",
+      "description": "从品牌颜色中选择，也可以为本次作品自定义。",
+      "type": "string",
+      "pattern": "^#[0-9A-Fa-f]{8}$",
+      "maxLength": 9
+    }
+  }
+}

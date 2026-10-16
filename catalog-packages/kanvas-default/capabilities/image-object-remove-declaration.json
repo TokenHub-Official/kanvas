@@ -1,0 +1,198 @@
+{
+  "schemaVersion": "kanvas.capability-declaration-asset/v1",
+  "contract": {
+    "key": "image.object.remove",
+    "revision": 1,
+    "canonicalDigest": "sha256:b76f3bfd17fdf2fd4857ceac2149aa80e67beb4f710999fe524ae6fddccf5e1c"
+  },
+  "declaration": {
+    "schemaVersion": "kanvas.capability-declaration/v1",
+    "catalog": {
+      "title": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "物体移除",
+          "en-US": "Object remove"
+        }
+      },
+      "description": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "使用蒙版或区域移除图片中的对象。",
+          "en-US": "Remove objects using a mask or selected regions."
+        }
+      },
+      "category": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "图像处理",
+          "en-US": "Image processing"
+        }
+      },
+      "sourceKind": "built_in",
+      "tags": ["remove", "inpaint", "mask"],
+      "surfaces": ["workflow", "agent", "canvas"]
+    },
+    "parameters": [
+      {
+        "key": "regions",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "移除区域",
+            "en-US": "Removal regions"
+          }
+        },
+        "semanticType": "region.list",
+        "required": false,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["constant", "workflow_input", "upstream"],
+          "default": "constant"
+        },
+        "editor": "region_list"
+      },
+      {
+        "key": "guidance",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "补充说明",
+            "en-US": "Additional guidance"
+          }
+        },
+        "semanticType": "prompt.rich",
+        "required": false,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["mixed_rich_text"],
+          "default": "mixed_rich_text"
+        },
+        "editor": "rich_prompt"
+      },
+      {
+        "key": "maskArtifactId",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "蒙版",
+            "en-US": "Mask"
+          }
+        },
+        "description": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "选择与图片或前景空间一致的蒙版。",
+            "en-US": "Choose a mask aligned with the image or foreground."
+          }
+        },
+        "semanticType": "artifact.mask",
+        "required": false,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["workflow_input", "upstream"],
+          "default": "upstream"
+        },
+        "editor": "artifact_picker"
+      },
+      {
+        "key": "sourceArtifactId",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "源图片",
+            "en-US": "Source image"
+          }
+        },
+        "description": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "选择需要处理的流程输入或上游图片。",
+            "en-US": "Choose a workflow input or upstream image to process."
+          }
+        },
+        "semanticType": "artifact.image",
+        "required": true,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["workflow_input", "upstream", "canvas_selection"],
+          "default": "upstream"
+        },
+        "editor": "artifact_picker"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "repairedArtifactId",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "修复结果图",
+            "en-US": "Repaired image"
+          }
+        },
+        "semanticType": "artifact.image",
+        "primary": true,
+        "visibility": "author"
+      },
+      {
+        "key": "qualitySignals",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "质量信息",
+            "en-US": "Quality signals"
+          }
+        },
+        "semanticType": "quality.signals",
+        "primary": false,
+        "visibility": "advanced"
+      },
+      {
+        "key": "removedRegionMaskArtifactId",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "移除区域蒙版",
+            "en-US": "Removed region mask"
+          }
+        },
+        "semanticType": "artifact.mask",
+        "primary": false,
+        "visibility": "advanced"
+      },
+      {
+        "key": "schemaVersion",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "结果版本",
+            "en-US": "Result version"
+          }
+        },
+        "semanticType": "value.any",
+        "primary": false,
+        "visibility": "hidden"
+      }
+    ],
+    "canvas": {
+      "actionGroup": "image.edit",
+      "interactionBehavior": "form",
+      "completionBehavior": "review_required",
+      "outputModes": ["replace_content", "add_node", "asset_only"],
+      "order": 50
+    }
+  }
+}

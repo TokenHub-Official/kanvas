@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "kanvas.skill-catalog-asset/v1",
+  "skillKey": "first-party.brand-social-starter",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "品牌社媒视觉制作",
+      "en-US": "Brand background composition"
+    }
+  },
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "compose",
+      "displayName": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "品牌底图合成",
+          "en-US": "Brand background composition"
+        }
+      },
+      "description": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "将已确认的品牌 Logo 合成到纯色方形底图；这是中间图片，不包含完整海报排版。",
+          "en-US": "Compose an approved brand logo onto a square color background."
+        }
+      },
+      "category": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "品牌创作",
+          "en-US": "Brand creation"
+        }
+      },
+      "outputPresentation": "single_review",
+      "workflow": {
+        "key": "brand_social_starter",
+        "revision": 1,
+        "canonicalDigest": "sha256:b351a713d4243d3f49d3809c72e331731708654693bda17a0942b39e551b8d71"
+      }
+    }
+  ]
+}

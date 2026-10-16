@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "skillKey": "first-party.workflow-authoring-acceptance",
+  "displayName": "工作流作者验收",
+  "nonProduction": true,
+  "entrypoints": [
+    {
+      "entrypointKey": "run",
+      "displayName": "图片处理与人工确认",
+      "description": "验证多节点、质量分支、增强和人工确认的独立工作流。",
+      "category": "工作流验收",
+      "outputPresentation": "single_review",
+      "workflowPath": "workflows/workflow-authoring-acceptance.json"
+    }
+  ]
+}

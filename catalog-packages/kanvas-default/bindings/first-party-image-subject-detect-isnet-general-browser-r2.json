@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "kanvas.capability-binding/v1",
+  "bindingKey": "first-party.image.subject-detect.isnet-general.browser.r2",
+  "contract": {
+    "key": "image.subject.detect",
+    "revision": 1,
+    "canonicalDigest": "sha256:2c3a0832762b13ee4f5a5a0ed1c999010975af9e065e6a132ce875abd8491bf6"
+  },
+  "implementation": {
+    "key": "first-party.image.subject-detect.isnet-general.browser",
+    "revision": 2,
+    "canonicalDigest": "sha256:48d999244c91d538443a5c7e440a5a63b687ca5923f767e6aba932514ebb7337"
+  },
+  "priority": 1,
+  "enabled": true,
+  "eligibility": {},
+  "fallbackOn": ["not_applicable", "unavailable", "retry_exhausted"]
+}

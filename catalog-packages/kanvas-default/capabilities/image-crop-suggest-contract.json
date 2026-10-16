@@ -1,0 +1,242 @@
+{
+  "schemaVersion": 1,
+  "contractKey": "image.crop.suggest",
+  "revision": 1,
+  "inputSchema": {
+    "$id": "kanvas.image-crop-suggest-input.v1",
+    "type": "object",
+    "$defs": {
+      "pixelBounds": {
+        "type": "object",
+        "required": ["x", "y", "width", "height"],
+        "properties": {
+          "x": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "y": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "width": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "height": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["sourceArtifactId", "aspectRatios"],
+    "properties": {
+      "aspectRatios": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]{0,3}:[1-9][0-9]{0,3}$"
+        },
+        "maxItems": 8,
+        "minItems": 1,
+        "uniqueItems": true,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "subjectBounds": {
+        "type": "array",
+        "items": {
+          "$ref": "#/$defs/pixelBounds"
+        },
+        "maxItems": 16,
+        "x-kanvas-semantic-type": "layout.bounds"
+      },
+      "safeMarginRatio": {
+        "type": "number",
+        "default": 0.05,
+        "maximum": 0.25,
+        "minimum": 0,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      },
+      "maxSuggestionsPerRatio": {
+        "type": "integer",
+        "default": 1,
+        "maximum": 3,
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      }
+    },
+    "additionalProperties": false
+  },
+  "outputSchema": {
+    "$id": "kanvas.image-crop-suggest-result.v1",
+    "type": "object",
+    "$defs": {
+      "pixelBounds": {
+        "type": "object",
+        "required": ["x", "y", "width", "height"],
+        "properties": {
+          "x": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "y": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "width": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "height": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "additionalProperties": false
+      },
+      "normalizedBounds": {
+        "type": "object",
+        "required": ["x", "y", "width", "height"],
+        "properties": {
+          "x": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0
+          },
+          "y": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0
+          },
+          "width": {
+            "type": "number",
+            "maximum": 1,
+            "exclusiveMinimum": 0
+          },
+          "height": {
+            "type": "number",
+            "maximum": 1,
+            "exclusiveMinimum": 0
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "schemaVersion",
+      "sourceWidth",
+      "sourceHeight",
+      "suggestions",
+      "qualitySignals"
+    ],
+    "properties": {
+      "sourceWidth": {
+        "type": "integer",
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "suggestions": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "suggestionId",
+            "aspectRatio",
+            "rank",
+            "bounds",
+            "normalizedBounds",
+            "subjectRetention",
+            "confidence",
+            "method"
+          ],
+          "properties": {
+            "rank": {
+              "type": "integer",
+              "maximum": 3,
+              "minimum": 1
+            },
+            "bounds": {
+              "$ref": "#/$defs/pixelBounds"
+            },
+            "method": {
+              "const": "deterministic_saliency_projection"
+            },
+            "confidence": {
+              "type": "number",
+              "maximum": 1,
+              "minimum": 0
+            },
+            "aspectRatio": {
+              "type": "string",
+              "pattern": "^[1-9][0-9]{0,3}:[1-9][0-9]{0,3}$"
+            },
+            "suggestionId": {
+              "type": "string",
+              "pattern": "^crop-[1-9][0-9]*$"
+            },
+            "normalizedBounds": {
+              "$ref": "#/$defs/normalizedBounds"
+            },
+            "subjectRetention": {
+              "type": "number",
+              "maximum": 1,
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        },
+        "maxItems": 24,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "sourceHeight": {
+        "type": "integer",
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "schemaVersion": {
+        "const": "kanvas.image-crop-suggest-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "required": [
+          "schemaVersion",
+          "generative",
+          "sourceModified",
+          "saliencyMethod",
+          "subjectBoundsProvided"
+        ],
+        "properties": {
+          "generative": {
+            "const": false
+          },
+          "schemaVersion": {
+            "const": "kanvas.image-crop-suggest-quality/v1"
+          },
+          "saliencyMethod": {
+            "const": "alpha_luminance_projection"
+          },
+          "sourceModified": {
+            "const": false
+          },
+          "subjectBoundsProvided": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "quality.signals"
+      }
+    },
+    "additionalProperties": false
+  },
+  "idempotencyMode": "keyed",
+  "supportedInvokers": ["user", "workflow", "agent", "canvas"]
+}

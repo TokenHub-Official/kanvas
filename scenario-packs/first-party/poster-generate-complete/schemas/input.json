@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kanvas.poster-generate-complete-input.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["requirements"],
+  "properties": {
+    "requirements": {
+      "title": "额外需求",
+      "description": "描述海报主题、风格、配色、文字空间与其他制作要求。",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
+    },
+    "referenceArtifactId": {
+      "title": "参考图片（可选）",
+      "description": "提供参考图时走图片编辑流程；暂时只支持一张参考图。",
+      "type": "string",
+      "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+    }
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "kanvas.workflow-catalog-asset/v1",
+  "workflowKey": "image_text_remove",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "移除文字",
+      "en-US": "Text removal"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "先提取文字 Polygon，再将显式区域交给物体移除能力生成修复结果。",
+      "en-US": "Extract text polygons and pass explicit regions to object removal for repair."
+    }
+  },
+  "category": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "清理与隔离",
+      "en-US": "Image cleanup"
+    }
+  },
+  "topology": {
+    "schemaVersion": 1,
+    "key": "image_text_remove",
+    "entryNodeKey": "extract",
+    "limits": {
+      "maxNodeRuns": 2,
+      "timeoutMs": 480000
+    },
+    "nodes": [
+      {
+        "key": "extract",
+        "kind": "invoke",
+        "capability": {
+          "contractId": "image.text.extract",
+          "revision": 1,
+          "canonicalDigest": "sha256:03f89dc7869def6ef351da6272742ca4c39d99716b129b68b6d7c42b7a673b12"
+        },
+        "input": {
+          "sourceArtifactId": {
+            "$value": {
+              "source": "workflow_input",
+              "pointer": "/sourceArtifactId"
+            }
+          },
+          "granularity": "line",
+          "minimumConfidence": 0.5
+        },
+        "next": ["remove"]
+      },
+      {
+        "key": "remove",
+        "kind": "invoke",
+        "capability": {
+          "contractId": "image.object.remove",
+          "revision": 1,
+          "canonicalDigest": "sha256:17642c3a8100a24c4733bcd132c077874b72816ee1533ca79bf2e13bfac63535"
+        },
+        "input": {
+          "sourceArtifactId": {
+            "$value": {
+              "source": "workflow_input",
+              "pointer": "/sourceArtifactId"
+            }
+          },
+          "regions": {
+            "$value": {
+              "source": "node_output",
+              "nodeKey": "extract",
+              "scope": "root",
+              "pointer": "/regions"
+            }
+          },
+          "guidance": "Remove only the detected text and reconstruct the original background without introducing new words, symbols, logos, or objects."
+        },
+        "next": []
+      }
+    ],
+    "outputs": {
+      "schemaVersion": {
+        "required": true,
+        "value": "kanvas.image-object-remove-result/v1"
+      },
+      "repairedArtifactId": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "remove",
+            "scope": "root",
+            "pointer": "/repairedArtifactId"
+          }
+        }
+      },
+      "removedRegionMaskArtifactId": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "remove",
+            "scope": "root",
+            "pointer": "/removedRegionMaskArtifactId"
+          }
+        }
+      },
+      "qualitySignals": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "remove",
+            "scope": "root",
+            "pointer": "/qualitySignals"
+          }
+        }
+      }
+    }
+  },
+  "inputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "kanvas.image-text-remove-input.v1",
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["sourceArtifactId"],
+    "properties": {
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+      }
+    }
+  },
+  "outputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "kanvas.image-text-remove-result.v1",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "schemaVersion",
+      "repairedArtifactId",
+      "removedRegionMaskArtifactId",
+      "qualitySignals"
+    ],
+    "properties": {
+      "schemaVersion": {
+        "const": "kanvas.image-object-remove-result/v1"
+      },
+      "repairedArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+      },
+      "removedRegionMaskArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+      },
+      "qualitySignals": {
+        "type": "object"
+      }
+    }
+  },
+  "requiredCapabilities": [
+    {
+      "key": "image.text.extract",
+      "revision": 1,
+      "canonicalDigest": "sha256:03f89dc7869def6ef351da6272742ca4c39d99716b129b68b6d7c42b7a673b12"
+    },
+    {
+      "key": "image.object.remove",
+      "revision": 1,
+      "canonicalDigest": "sha256:17642c3a8100a24c4733bcd132c077874b72816ee1533ca79bf2e13bfac63535"
+    }
+  ],
+  "canonicalDigest": "sha256:417c264186ad53327320d1beb9e508d87082702f9104f774fe33b805fa5180f0"
+}

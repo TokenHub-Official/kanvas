@@ -1,0 +1,250 @@
+{
+  "schemaVersion": 1,
+  "contractKey": "image.background.compose",
+  "revision": 1,
+  "inputSchema": {
+    "$id": "kanvas.image-background-compose-input.v1",
+    "type": "object",
+    "allOf": [
+      {
+        "if": {
+          "properties": {
+            "background": {
+              "properties": {
+                "kind": {
+                  "const": "artifact"
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "background": {
+              "required": ["artifactId"]
+            }
+          }
+        }
+      }
+    ],
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["foregroundArtifactId", "background", "canvas", "placement"],
+    "properties": {
+      "canvas": {
+        "type": "object",
+        "required": ["width", "height"],
+        "properties": {
+          "width": {
+            "type": "integer",
+            "maximum": 8192,
+            "minimum": 1
+          },
+          "height": {
+            "type": "integer",
+            "maximum": 8192,
+            "minimum": 1
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "layout.canvas"
+      },
+      "placement": {
+        "type": "object",
+        "required": ["x", "y", "width", "height", "fit"],
+        "properties": {
+          "x": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "y": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "fit": {
+            "enum": ["contain", "cover", "stretch"],
+            "type": "string"
+          },
+          "width": {
+            "type": "integer",
+            "maximum": 8192,
+            "minimum": 1
+          },
+          "height": {
+            "type": "integer",
+            "maximum": 8192,
+            "minimum": 1
+          },
+          "opacity": {
+            "type": "number",
+            "default": 1,
+            "maximum": 1,
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "layout.placement"
+      },
+      "background": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": ["kind", "color"],
+            "properties": {
+              "kind": {
+                "const": "color"
+              },
+              "color": {
+                "type": "string",
+                "pattern": "^#[0-9A-Fa-f]{8}$"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "required": ["kind", "artifactId", "fit"],
+            "properties": {
+              "fit": {
+                "enum": ["cover", "contain", "stretch"],
+                "type": "string"
+              },
+              "kind": {
+                "const": "artifact"
+              },
+              "artifactId": {
+                "type": "string",
+                "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+              }
+            },
+            "additionalProperties": false
+          }
+        ],
+        "x-kanvas-semantic-type": "background.source"
+      },
+      "maskArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.mask"
+      },
+      "foregroundArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.foreground"
+      }
+    },
+    "additionalProperties": false
+  },
+  "outputSchema": {
+    "$id": "kanvas.image-background-compose-result.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "schemaVersion",
+      "imageArtifactId",
+      "compositionMaskArtifactId",
+      "canvas",
+      "resolvedPlacement",
+      "inputArtifactIds",
+      "qualitySignals"
+    ],
+    "properties": {
+      "canvas": {
+        "type": "object",
+        "required": ["width", "height"],
+        "properties": {
+          "width": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "height": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "layout.canvas"
+      },
+      "schemaVersion": {
+        "const": "kanvas.image-background-compose-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "required": [
+          "schemaVersion",
+          "generative",
+          "deterministic",
+          "alphaComposited",
+          "colorSpace"
+        ],
+        "properties": {
+          "colorSpace": {
+            "const": "srgb"
+          },
+          "generative": {
+            "const": false
+          },
+          "deterministic": {
+            "const": true
+          },
+          "schemaVersion": {
+            "const": "kanvas.image-background-compose-quality/v1"
+          },
+          "alphaComposited": {
+            "const": true
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "quality.signals"
+      },
+      "imageArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      },
+      "inputArtifactIds": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+        },
+        "maxItems": 3,
+        "minItems": 1,
+        "uniqueItems": true,
+        "x-kanvas-semantic-type": "artifact.image_list"
+      },
+      "resolvedPlacement": {
+        "type": "object",
+        "required": ["x", "y", "width", "height"],
+        "properties": {
+          "x": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "y": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "width": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "height": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "layout.placement"
+      },
+      "compositionMaskArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.mask"
+      }
+    },
+    "additionalProperties": false
+  },
+  "idempotencyMode": "keyed",
+  "supportedInvokers": ["user", "workflow", "agent", "canvas"]
+}

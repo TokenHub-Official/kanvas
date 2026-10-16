@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "packId": "first-party.single-image-cutout-canary",
+  "displayName": "Single-image cutout deterministic canary",
+  "workflows": [
+    {
+      "path": "workflows/single-image-cutout.json"
+    }
+  ],
+  "skill": {
+    "path": "skill/manifest.json"
+  },
+  "capabilities": [
+    {
+      "path": "capabilities/test-image-background-remove.json"
+    }
+  ],
+  "requiredCapabilities": [
+    {
+      "contractId": "test.image.background.remove",
+      "revision": 1,
+      "canonicalDigest": "sha256:3e700ea4d6cd47e3f116b0507590e0d622f757acc4503b09db1d9bc49172f43d"
+    }
+  ]
+}

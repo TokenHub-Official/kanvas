@@ -1,0 +1,296 @@
+{
+  "schemaVersion": "kanvas.background-remove-eval-provenance/v1",
+  "generatedAt": "2026-08-03T13:05:33.059Z",
+  "reviewStatus": "candidate_pending_kanvas_designer_review",
+  "sources": [
+    {
+      "dataset": "DIS5K V1.0",
+      "upstream": "https://github.com/xuebinqin/DIS",
+      "mirror": "https://huggingface.co/datasets/nobg/DIS5K",
+      "use": "local non-production evaluation candidate"
+    },
+    {
+      "dataset": "P3M-10K",
+      "upstream": "https://github.com/JizhiziLi/P3M",
+      "mirror": "https://huggingface.co/datasets/nobg/P3M-10K",
+      "use": "local non-production evaluation candidate"
+    },
+    {
+      "dataset": "CAMO",
+      "upstream": "https://sites.google.com/view/ltnghia/research/camo",
+      "mirror": "https://huggingface.co/datasets/nobg/camo",
+      "use": "local non-production evaluation candidate"
+    }
+  ],
+  "samples": [
+    {
+      "id": "dis-bag",
+      "dataset": "nobg/DIS5K",
+      "split": "DIS_TE1",
+      "row": 0,
+      "upstreamName": "1#Accessories#1#Bag#26345192014_f722d1ef0b_o.jpg",
+      "sourceDigest": "sha256:63047df5daaccdc4a0e77b8a058193603afefb2458c16f2eaeceb01d5fcf6e68",
+      "groundTruthMaskDigest": "sha256:6b3a7946a06f7abd2dc4c8ac141387c953807ad77d1ca08998b15afe9729054b"
+    },
+    {
+      "id": "dis-eyeglasses",
+      "dataset": "nobg/DIS5K",
+      "split": "DIS_TE1",
+      "row": 2,
+      "upstreamName": "1#Accessories#3#Eyeglasses#109390527_bfc9cf0dd7_o.jpg",
+      "sourceDigest": "sha256:f4811a59cb39ac001ecaf5ad32ebd376b7033fc9a423af0c269f1a84fd819998",
+      "groundTruthMaskDigest": "sha256:14c2aeaf0d8dd1df3a88af54763c8f73cbd21d114681b1b46412c2db46e07465"
+    },
+    {
+      "id": "dis-jewelry",
+      "dataset": "nobg/DIS5K",
+      "split": "DIS_TE1",
+      "row": 27,
+      "upstreamName": "1#Accessories#5#Jewelry#10073342715_881cdde0e0_o.jpg",
+      "sourceDigest": "sha256:c4d31aac9f83cac8535c795896d4ac7860806d69194f237d7afbeae7a74f71a0",
+      "groundTruthMaskDigest": "sha256:b8b32ba4563f464fdf7a7b0709cbc1a11af7eca6fa5b090fc2c5fb329e146795"
+    },
+    {
+      "id": "dis-ring",
+      "dataset": "nobg/DIS5K",
+      "split": "DIS_TE1",
+      "row": 28,
+      "upstreamName": "1#Accessories#6#Ring#3097935941_c00cc1710c_o.jpg",
+      "sourceDigest": "sha256:2a1ef650f1495aec411d30b9a396c4934da4ae0f9d0d3d2285acb59f99e41a4d",
+      "groundTruthMaskDigest": "sha256:534f68cf096af58da07877aef86887508d36e14213c7cb7eb0c709f79fe353f8"
+    },
+    {
+      "id": "dis-watch",
+      "dataset": "nobg/DIS5K",
+      "split": "DIS_TE1",
+      "row": 35,
+      "upstreamName": "1#Accessories#8#Watch#15764653584_66c8307fea_o.jpg",
+      "sourceDigest": "sha256:2f0306f90fe9b1714df130d8223d2ccdd12f5ea380d0967829df239435a0aac6",
+      "groundTruthMaskDigest": "sha256:774d31cbeb873491ab94856c1caa0ec90746062b0bdfc62a05fa9843d44d985a"
+    },
+    {
+      "id": "dis-shoe",
+      "dataset": "nobg/DIS5K",
+      "split": "DIS_TE1",
+      "row": 32,
+      "upstreamName": "1#Accessories#7#Shoe#2541873901_43a3c08fbb_o.jpg",
+      "sourceDigest": "sha256:5d3985882b946870a76dfd2bd23cb44d5bbdcc321e54d324f7eb641bb291acf4",
+      "groundTruthMaskDigest": "sha256:3483507595e07fc31e181ae63570ca48b3061202f49f6d6a8dccfdd0fabea11c"
+    },
+    {
+      "id": "dis-ladder",
+      "dataset": "nobg/DIS5K",
+      "split": "DIS_TE1",
+      "row": 74,
+      "upstreamName": "11#Furniture#13#Ladder#1509210310_3dc9188928_o.jpg",
+      "sourceDigest": "sha256:3780d2487d0af25d2cfa69b22dd44d0125bcaa77d474d02e78a88d809d2b4a62",
+      "groundTruthMaskDigest": "sha256:6bc39553a792fe38d95538f49a35521311736cc9cfeee6bb8a10af51cba981fe"
+    },
+    {
+      "id": "dis-table-chair",
+      "dataset": "nobg/DIS5K",
+      "split": "DIS_TE1",
+      "row": 105,
+      "upstreamName": "11#Furniture#18#TableChair#237451906_78633d2df9_o.jpg",
+      "sourceDigest": "sha256:da2b030acae069dc4c04d07247806be8103117b7a8472f36b9966e5885884a5b",
+      "groundTruthMaskDigest": "sha256:161e02cdb543ff32da1e43eecf2adf424798284832d22b34efb7cc8a089b7aa3"
+    },
+    {
+      "id": "dis-skeleton",
+      "dataset": "nobg/DIS5K",
+      "split": "DIS_TE1",
+      "row": 58,
+      "upstreamName": "10#Frame#6#Skeleton#7594007450_37389320bb_o.jpg",
+      "sourceDigest": "sha256:01e348006f22c73c641c44f70b3f11ab287e44f86f9b9afc06bacd15e278ab96",
+      "groundTruthMaskDigest": "sha256:c40ad20feb4ad65391ab91d8677f9148be055005df67753b34b595e123f4fc90"
+    },
+    {
+      "id": "dis-butterfly",
+      "dataset": "nobg/DIS5K",
+      "split": "DIS_TE1",
+      "row": 171,
+      "upstreamName": "13#Insect#4#Butterfly#16023994688_7ff8cdccb1_o.jpg",
+      "sourceDigest": "sha256:cf4a02f06a66fa74bf894deb63664cd1e8d7bae70f7817d1f4eeb00eb1ff810b",
+      "groundTruthMaskDigest": "sha256:012ee67d8f1b4d8d801c28ce15e1bf0a80c31e2cade9682928f891a8f194943b"
+    },
+    {
+      "id": "dis-snake",
+      "dataset": "nobg/DIS5K",
+      "split": "DIS_TE1",
+      "row": 165,
+      "upstreamName": "13#Insect#12#Snake#2648526355_79256bb331_o.jpg",
+      "sourceDigest": "sha256:7331fe5f40154fb73ac7ccc9f6ef8b15623e54867c629f15925430c84c2882de",
+      "groundTruthMaskDigest": "sha256:bc9c8bdda2c015da97ab79fbe7eaa6775d9ca46a6f7363f2f7a6f8ce288c1a4a"
+    },
+    {
+      "id": "dis-wine-glass",
+      "dataset": "nobg/DIS5K",
+      "split": "DIS_TE1",
+      "row": 176,
+      "upstreamName": "14#Kitchenware#10#WineGlass#2888346876_88032f3c48_o.jpg",
+      "sourceDigest": "sha256:a746db84e3fbb81ac188950f97ecb8f836d7334d7cf4e8f8b1ffd67d0538576b",
+      "groundTruthMaskDigest": "sha256:4ea7ded969b70104c7342fd16f2e2df6c3e96ff26c126b21926d0a72f1a7a80a"
+    },
+    {
+      "id": "dis-wire-whisk",
+      "dataset": "nobg/DIS5K",
+      "split": "DIS_TE1",
+      "row": 183,
+      "upstreamName": "14#Kitchenware#11#WireWhisk#16214461594_0ece406239_o.jpg",
+      "sourceDigest": "sha256:38479cfb25e37a2b73cd2be2995f24527f904ffc45d953237f4f16f1b293f84c",
+      "groundTruthMaskDigest": "sha256:122859494e649c6dcefe965cff76affbec20aff1b0adb7e56eff2ca1ceeaa7dd"
+    },
+    {
+      "id": "dis-robot",
+      "dataset": "nobg/DIS5K",
+      "split": "DIS_TE1",
+      "row": 477,
+      "upstreamName": "8#Electronics#10#Robot#3345909709_6ee2411a36_o.jpg",
+      "sourceDigest": "sha256:2246469ec36d41ec3430c265ae240e05c888a2567c9ac08ba91b3ad1fdb760f3",
+      "groundTruthMaskDigest": "sha256:df9955a1a551c6a8acfd313c18a366b2d153780dd1a1f44734d1de0d2511e17c"
+    },
+    {
+      "id": "dis-rock-climbing",
+      "dataset": "nobg/DIS5K",
+      "split": "DIS_TE1",
+      "row": 267,
+      "upstreamName": "20#Sports#9#RockClimbing#113448262_1499b3c463_o.jpg",
+      "sourceDigest": "sha256:57fe10a16bf5b9c5dd94845c2716cb383402790ece70bf57a7c8bdda6b9ff26f",
+      "groundTruthMaskDigest": "sha256:a10b7bda72b128c715db7acb31dae3902f1a16673c6f23e2883166a828f51b3d"
+    },
+    {
+      "id": "dis-needle",
+      "dataset": "nobg/DIS5K",
+      "split": "DIS_TE1",
+      "row": 324,
+      "upstreamName": "21#Tool#26#Needle#1879902771_b243eac29b_o.jpg",
+      "sourceDigest": "sha256:4c3e2c1138c5eb96c137681f5076407b85831cfa665a7e64926220a9b4d6d682",
+      "groundTruthMaskDigest": "sha256:034efd51392dd0dfd944df907e1ac7f242d76838da790aa85d53ae64845a204f"
+    },
+    {
+      "id": "dis-sailboat",
+      "dataset": "nobg/DIS5K",
+      "split": "DIS_TE1",
+      "row": 230,
+      "upstreamName": "19#Ship#3#Sailboat#241162568_9bba3c65a6_o.jpg",
+      "sourceDigest": "sha256:1f974608e3b4fe1196165632803c5913ec7817c6b5cc0e571365b7c8efd48e1c",
+      "groundTruthMaskDigest": "sha256:c212c4e2ea6cd84f3a6340f0e98c0202474b676bff501ac5bebc2b962d240c8a"
+    },
+    {
+      "id": "dis-kite",
+      "dataset": "nobg/DIS5K",
+      "split": "DIS_TE1",
+      "row": 241,
+      "upstreamName": "2#Aircraft#5#Kite#13104545564_5afceec9bd_o.jpg",
+      "sourceDigest": "sha256:782caec90ba453fcfa3fca3141a9e8635e6d53bc159db65e59fb98e962c65515",
+      "groundTruthMaskDigest": "sha256:9cfcd1139eb8c843260613a4db3b8631d3f4a659cc4704fc0f0ea988b4df9e97"
+    },
+    {
+      "id": "dis-sculpture",
+      "dataset": "nobg/DIS5K",
+      "split": "DIS_TE1",
+      "row": 382,
+      "upstreamName": "4#Architecture#13#Sculpture#122852060_b7c7591b74_o.jpg",
+      "sourceDigest": "sha256:012695dcda9df8fb50209f3da66b60184cb9ba1ac7470cf87eaec521d42fc6e7",
+      "groundTruthMaskDigest": "sha256:efd1628c80a9be327c29ea896ff8b28aa02c9de9d5d2053bc8aecfe1ee48686c"
+    },
+    {
+      "id": "p3m-person-01",
+      "dataset": "nobg/P3M-10K",
+      "split": "P3M_500_NP",
+      "row": 0,
+      "upstreamName": "P3M_500_NP/0",
+      "sourceDigest": "sha256:206dd280b0ebfd05e5b3e280ac7f0f9d6dec5482218c16c8b3b182346a812bb4",
+      "groundTruthMaskDigest": "sha256:c53d144a25689fc747882e8b6e524c71ebee59eb3546ab3cf466abe2e9914283"
+    },
+    {
+      "id": "p3m-person-02",
+      "dataset": "nobg/P3M-10K",
+      "split": "P3M_500_NP",
+      "row": 1,
+      "upstreamName": "P3M_500_NP/1",
+      "sourceDigest": "sha256:38d034b9fa64daf2b3c1b672b9a27934921835b1320f8efd8ea9b7366d344089",
+      "groundTruthMaskDigest": "sha256:bfa22d3176fcb5c4dfbe7c29401da5cd08e72a0e4ebee42b7afe50377765b46a"
+    },
+    {
+      "id": "p3m-person-03",
+      "dataset": "nobg/P3M-10K",
+      "split": "P3M_500_NP",
+      "row": 2,
+      "upstreamName": "P3M_500_NP/2",
+      "sourceDigest": "sha256:bab9fffd38ef44a56d3ca7c1eb9ae89bd619a688186ab1d24275d6191a94262e",
+      "groundTruthMaskDigest": "sha256:cd6558727d76a1f82de89e6aa3706c6a9f18672e0032540e258a65445b9b2fef"
+    },
+    {
+      "id": "p3m-person-04",
+      "dataset": "nobg/P3M-10K",
+      "split": "P3M_500_NP",
+      "row": 3,
+      "upstreamName": "P3M_500_NP/3",
+      "sourceDigest": "sha256:56a60fac53302d3fb23cff7f440a8772b6f12d0bca103748e48d190af566f534",
+      "groundTruthMaskDigest": "sha256:566b2c3ce9fa7ee56e5607534d83135f3acc298781521b2c2cbc7029f09f2613"
+    },
+    {
+      "id": "p3m-person-05",
+      "dataset": "nobg/P3M-10K",
+      "split": "P3M_500_NP",
+      "row": 4,
+      "upstreamName": "P3M_500_NP/4",
+      "sourceDigest": "sha256:90f19e50f137b6567eaa22eda9b23ad1aab08ec18281bf238402b4932748144d",
+      "groundTruthMaskDigest": "sha256:3dda158c4fdf1bcea1beb56937f89c4acc8ddb7d2762cc9f166dd0ebf1e5a36a"
+    },
+    {
+      "id": "camo-01",
+      "dataset": "nobg/camo",
+      "split": "test",
+      "row": 0,
+      "upstreamName": "camourflage_00012",
+      "sourceDigest": "sha256:89f2697d796a5ac996ba08bcba43263d9849764b875070ba8a32beffc00d7a73",
+      "groundTruthMaskDigest": "sha256:ecfe193c5b0b88ef603d7bc23568e6fa97e183605567aed9c1413145a1d799fb"
+    },
+    {
+      "id": "camo-02",
+      "dataset": "nobg/camo",
+      "split": "test",
+      "row": 1,
+      "upstreamName": "camourflage_00018",
+      "sourceDigest": "sha256:91d8f49d54d73455dd20152b49e6bf66a397f459084dd5cf3a6250fafc1d45c8",
+      "groundTruthMaskDigest": "sha256:4d2dc4c03e6cb5666dc36d1906032153c4e04167882cb77b389d5f86c260ddfe"
+    },
+    {
+      "id": "camo-03",
+      "dataset": "nobg/camo",
+      "split": "test",
+      "row": 2,
+      "upstreamName": "camourflage_00061",
+      "sourceDigest": "sha256:5888d724dae0f05682f687640abc48e1d5bd50bc93ab640902e6f5c55db27662",
+      "groundTruthMaskDigest": "sha256:96619f23389fb19299525ba3e0dd53a5bc3e23ec8e2588cfe4d7bc5eee97eac6"
+    },
+    {
+      "id": "camo-04",
+      "dataset": "nobg/camo",
+      "split": "test",
+      "row": 3,
+      "upstreamName": "camourflage_00064",
+      "sourceDigest": "sha256:6e08e55e063442e67a390d69eca2fd682c63586527c4215c2fd5049e98d10ab6",
+      "groundTruthMaskDigest": "sha256:432f39b6cb5ec608eaf37280715b0a766bebd07b07a073423cd60ab7e7705ac8"
+    },
+    {
+      "id": "camo-05",
+      "dataset": "nobg/camo",
+      "split": "test",
+      "row": 4,
+      "upstreamName": "camourflage_00071",
+      "sourceDigest": "sha256:ff36c0b9b8ddcb4233589c934eb7cc63e14a9d8ef1037c3fa6acb41f331f7a46",
+      "groundTruthMaskDigest": "sha256:566e2982003be2acaa79b84b4f33846920c87a20473e323daff9606c616f2329"
+    },
+    {
+      "id": "unsupported-animated-gif",
+      "dataset": "generated-contract-probe",
+      "split": "unsupported",
+      "row": 0,
+      "upstreamName": "two-frame-animated.gif",
+      "sourceDigest": "sha256:329cf5f78cae8350059bfc6b8f42eba37f96b74e61cf48f696456fb1dc81d582"
+    }
+  ]
+}

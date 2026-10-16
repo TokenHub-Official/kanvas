@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "contractKey": "image.upscale",
+  "revision": 1,
+  "inputSchema": {
+    "$id": "kanvas.image-upscale-input.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["sourceArtifactId", "qualityIntent"],
+    "properties": {
+      "guidance": {
+        "type": "string",
+        "maxLength": 1000,
+        "minLength": 1,
+        "x-kanvas-semantic-type": "prompt.rich"
+      },
+      "scaleFactor": {
+        "const": 2,
+        "default": 2,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "qualityIntent": {
+        "enum": ["faithful", "reconstructive"],
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "outputSchema": {
+    "$id": "kanvas.image-upscale-result.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "schemaVersion",
+      "imageArtifactId",
+      "qualityIntent",
+      "scaleFactor",
+      "sourceWidth",
+      "sourceHeight",
+      "outputWidth",
+      "outputHeight",
+      "qualitySignals"
+    ],
+    "properties": {
+      "outputWidth": {
+        "type": ["integer", "null"],
+        "minimum": 1,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "scaleFactor": {
+        "const": 2,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "sourceWidth": {
+        "type": ["integer", "null"],
+        "minimum": 1,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "outputHeight": {
+        "type": ["integer", "null"],
+        "minimum": 1,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "sourceHeight": {
+        "type": ["integer", "null"],
+        "minimum": 1,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "qualityIntent": {
+        "enum": ["faithful", "reconstructive"],
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "schemaVersion": {
+        "const": "kanvas.image-upscale-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "required": [
+          "schemaVersion",
+          "method",
+          "generative",
+          "resamplingKernel"
+        ],
+        "properties": {
+          "method": {
+            "enum": ["deterministic_resample", "generative_reconstruction"],
+            "type": "string"
+          },
+          "generative": {
+            "type": "boolean"
+          },
+          "schemaVersion": {
+            "const": "kanvas.image-upscale-quality/v1"
+          },
+          "resamplingKernel": {
+            "enum": ["lanczos3", null],
+            "type": ["string", "null"]
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "quality.signals"
+      },
+      "imageArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "idempotencyMode": "keyed",
+  "supportedInvokers": ["user", "workflow", "agent", "canvas"]
+}

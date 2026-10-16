@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "kanvas.capability-implementation/v1",
+  "implementationKey": "first-party.image.denoise.median-blend.browser",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "图像降噪 · 浏览器运行",
+      "en-US": "Image denoise · Browser runtime"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "通过浏览器运行提供图像降噪，上层只依赖固定公开契约。",
+      "en-US": "Provides Image denoise through Browser runtime behind the stable public contract."
+    }
+  },
+  "contract": {
+    "key": "image.denoise",
+    "revision": 1,
+    "canonicalDigest": "sha256:5b3215c362a6097a8b7169690317f4876adad880f9151daf9d5eb321d71f645f"
+  },
+  "adapter": {
+    "adapterKey": "browser.image.denoise.median-blend.v1",
+    "revision": 1,
+    "canonicalDigest": "sha256:3323bb74943c6d8fc05bac2ab0c3e12699a8fcf286d132686d5c90d2f3b21e69"
+  },
+  "source": {
+    "kind": "plugin",
+    "plugin": {
+      "key": "kanvas.browser-image-runtime",
+      "revision": 1,
+      "canonicalDigest": "sha256:f33d086aeb45af4a14df4bcfe8fcfbb9e4dd14464bf65be6e6537b4add436e4f"
+    }
+  },
+  "configuration": {
+    "method": "median_blend",
+    "backend": "javascript",
+    "kernelSize": 3,
+    "outputFormat": "png",
+    "qualityIntent": "faithful",
+    "alphaPreserved": true,
+    "defaultStrength": 0.5,
+    "maximumSourcePixels": 16000000
+  },
+  "inputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "input",
+    "expression": {
+      "op": "source",
+      "root": "input",
+      "pointer": ""
+    }
+  },
+  "outputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "output",
+    "expression": {
+      "op": "source",
+      "root": "result",
+      "pointer": ""
+    }
+  },
+  "fixtures": [
+    {
+      "name": "default contract mapping",
+      "capabilityInput": {
+        "strength": 0.5,
+        "sourceArtifactId": "01K00000000000000000000001"
+      },
+      "configuration": {
+        "method": "median_blend",
+        "backend": "javascript",
+        "kernelSize": 3,
+        "outputFormat": "png",
+        "qualityIntent": "faithful",
+        "alphaPreserved": true,
+        "defaultStrength": 0.5,
+        "maximumSourcePixels": 16000000
+      },
+      "expectedAdapterInput": {
+        "strength": 0.5,
+        "sourceArtifactId": "01K00000000000000000000001"
+      },
+      "adapterResult": {
+        "method": "median_blend",
+        "strength": 0.1,
+        "noiseEstimate": 0,
+        "schemaVersion": "kanvas.image-denoise-result/v1",
+        "qualitySignals": {
+          "generative": false,
+          "kernelSize": 3,
+          "qualityIntent": "faithful",
+          "schemaVersion": "kanvas.image-denoise-quality/v1",
+          "alphaPreserved": true
+        },
+        "imageArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "sample",
+          "outputIndex": 0
+        }
+      },
+      "expectedCapabilityOutput": {
+        "method": "median_blend",
+        "strength": 0.1,
+        "noiseEstimate": 0,
+        "schemaVersion": "kanvas.image-denoise-result/v1",
+        "qualitySignals": {
+          "generative": false,
+          "kernelSize": 3,
+          "qualityIntent": "faithful",
+          "schemaVersion": "kanvas.image-denoise-quality/v1",
+          "alphaPreserved": true
+        },
+        "imageArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "sample",
+          "outputIndex": 0
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "packId": "first-party.poster-generate-simple",
+  "displayName": "Simple poster generation",
+  "workflows": [{ "path": "workflows/poster-generate-simple.json" }],
+  "skill": { "path": "skill/manifest.json" },
+  "capabilities": [],
+  "requiredCapabilities": [
+    {
+      "contractId": "image.generate",
+      "revision": 2,
+      "canonicalDigest": "sha256:ab27d66ae9e0ce75be370628477f388468a8330b2c7e864be026cf01b7851314"
+    }
+  ]
+}

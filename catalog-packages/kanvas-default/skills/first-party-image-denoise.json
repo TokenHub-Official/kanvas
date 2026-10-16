@@ -1,0 +1,173 @@
+{
+  "schemaVersion": "kanvas.skill-catalog-asset/v1",
+  "skillKey": "first-party.image-denoise",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "图片去噪",
+      "en-US": "Image denoise"
+    }
+  },
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "denoise",
+      "displayName": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "去噪",
+          "en-US": "Image denoise"
+        }
+      },
+      "description": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "使用不生成新内容的确定性 Worker 算法降低局部噪声。",
+          "en-US": "Reduce local image noise with a deterministic non-generative algorithm."
+        }
+      },
+      "category": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "画质修复",
+          "en-US": "Image enhancement"
+        }
+      },
+      "outputPresentation": "board",
+      "inputUiSchema": {
+        "schemaVersion": "kanvas.entrypoint-ui/v0",
+        "canvasTool": {
+          "surface": "canvas.image",
+          "completionBehavior": "auto_replace_safe",
+          "interactionBehavior": "direct",
+          "operationId": "image.denoise",
+          "order": 210,
+          "costNotice": "由 Worker 确定性执行，不发送到外部模型，不产生 Provider 费用。",
+          "source": {
+            "parameterKey": "sourceArtifactId",
+            "value": "artifact_id"
+          },
+          "parameters": [
+            {
+              "key": "strength",
+              "label": "强度",
+              "control": "select",
+              "required": false,
+              "defaultValue": 0.5,
+              "options": [
+                {
+                  "value": 0.25,
+                  "label": "轻"
+                },
+                {
+                  "value": 0.5,
+                  "label": "中"
+                },
+                {
+                  "value": 0.85,
+                  "label": "强"
+                }
+              ]
+            }
+          ],
+          "result": {
+            "artifactPath": ["imageArtifactId"],
+            "outputModes": ["add_node", "replace_content", "asset_only"]
+          }
+        }
+      },
+      "inputUiSchemaByLocale": {
+        "zh-CN": {
+          "schemaVersion": "kanvas.entrypoint-ui/v0",
+          "canvasTool": {
+            "surface": "canvas.image",
+            "completionBehavior": "auto_replace_safe",
+            "interactionBehavior": "direct",
+            "operationId": "image.denoise",
+            "order": 210,
+            "costNotice": "由 Worker 确定性执行，不发送到外部模型，不产生 Provider 费用。",
+            "source": {
+              "parameterKey": "sourceArtifactId",
+              "value": "artifact_id"
+            },
+            "parameters": [
+              {
+                "key": "strength",
+                "label": "强度",
+                "control": "select",
+                "required": false,
+                "defaultValue": 0.5,
+                "options": [
+                  {
+                    "value": 0.25,
+                    "label": "轻"
+                  },
+                  {
+                    "value": 0.5,
+                    "label": "中"
+                  },
+                  {
+                    "value": 0.85,
+                    "label": "强"
+                  }
+                ]
+              }
+            ],
+            "result": {
+              "artifactPath": ["imageArtifactId"],
+              "outputModes": ["add_node", "replace_content", "asset_only"]
+            }
+          }
+        },
+        "en-US": {
+          "schemaVersion": "kanvas.entrypoint-ui/v0",
+          "canvasTool": {
+            "surface": "canvas.image",
+            "completionBehavior": "auto_replace_safe",
+            "interactionBehavior": "direct",
+            "operationId": "image.denoise",
+            "order": 210,
+            "costNotice": "Execution follows the configured capability priority and may use local compute or a model service.",
+            "source": {
+              "parameterKey": "sourceArtifactId",
+              "value": "artifact_id"
+            },
+            "parameters": [
+              {
+                "key": "strength",
+                "label": "Denoise strength",
+                "control": "select",
+                "required": false,
+                "defaultValue": 0.5,
+                "options": [
+                  {
+                    "value": 0.25,
+                    "label": "0 25"
+                  },
+                  {
+                    "value": 0.5,
+                    "label": "0 5"
+                  },
+                  {
+                    "value": 0.85,
+                    "label": "0 85"
+                  }
+                ]
+              }
+            ],
+            "result": {
+              "artifactPath": ["imageArtifactId"],
+              "outputModes": ["add_node", "replace_content", "asset_only"]
+            }
+          }
+        }
+      },
+      "workflow": {
+        "key": "image_denoise",
+        "revision": 1,
+        "canonicalDigest": "sha256:0dc4a18ef31bd0be5d31a384b104a55b15ef019ab900aab4c0f4691ea7f54904"
+      }
+    }
+  ]
+}

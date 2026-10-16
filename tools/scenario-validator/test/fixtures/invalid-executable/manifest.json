@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "packId": "test.invalid-executable",
+  "displayName": "Invalid executable fixture",
+  "workflows": [
+    {
+      "path": "workflows/invalid.json"
+    }
+  ],
+  "requiredCapabilities": []
+}

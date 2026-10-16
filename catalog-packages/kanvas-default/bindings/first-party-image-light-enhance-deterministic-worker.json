@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "kanvas.capability-binding/v1",
+  "bindingKey": "first-party.image.light-enhance.deterministic.worker",
+  "contract": {
+    "key": "image.light.enhance",
+    "revision": 1,
+    "canonicalDigest": "sha256:28ca3b4530dea3e906278c46c26555b5cc6dfa5a5cf9aae3056e5719570bde6f"
+  },
+  "implementation": {
+    "key": "first-party.image.light-enhance.deterministic.worker",
+    "revision": 1,
+    "canonicalDigest": "sha256:fd5d0401bc1ee803a067625af69aef65399ab4f540c44fd566ac859f2cb7f7b4"
+  },
+  "priority": 1,
+  "enabled": true,
+  "eligibility": {},
+  "fallbackOn": ["not_applicable", "unavailable", "retry_exhausted"]
+}

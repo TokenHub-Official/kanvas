@@ -1,0 +1,43 @@
+{
+  "name": "@kanvas/application",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./runtime": {
+      "types": "./dist/runtime/index.d.ts",
+      "default": "./dist/runtime/index.js"
+    },
+    "./browser-execution": {
+      "types": "./dist/modules/browser-execution/index.d.ts",
+      "default": "./dist/modules/browser-execution/index.js"
+    },
+    "./storage": {
+      "types": "./dist/modules/storage/index.d.ts",
+      "default": "./dist/modules/storage/index.js"
+    },
+    "./workflow": {
+      "types": "./dist/modules/workflow/index.d.ts",
+      "default": "./dist/modules/workflow/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "check-types": "tsc --noEmit -p tsconfig.json",
+    "dev": "tsc -p tsconfig.build.json --watch --preserveWatchOutput",
+    "lint": "eslint src test",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@kanvas/contracts": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "license": "Apache-2.0"
+}

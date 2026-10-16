@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "kanvas.capability-implementation/v1",
+  "implementationKey": "first-party.image.crop-suggest.deterministic.worker",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "裁剪建议 · Worker 运行",
+      "en-US": "Crop suggestions · Worker runtime"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "通过Worker 运行提供裁剪建议，上层只依赖固定公开契约。",
+      "en-US": "Provides Crop suggestions through Worker runtime behind the stable public contract."
+    }
+  },
+  "contract": {
+    "key": "image.crop.suggest",
+    "revision": 1,
+    "canonicalDigest": "sha256:3e8aacbed06ae2c6ed05c82762367864884cf2267c39c42f3d17a71bb987042d"
+  },
+  "adapter": {
+    "adapterKey": "first-party.image.crop-suggest.deterministic.v1",
+    "revision": 1,
+    "canonicalDigest": "sha256:3f4fc1bda3066582c9f7d8929ffb28f894f53ccc0cef433b640f8ebee0312c92"
+  },
+  "source": {
+    "kind": "plugin",
+    "plugin": {
+      "key": "kanvas.worker-image-runtime",
+      "revision": 1,
+      "canonicalDigest": "sha256:9e049ad3af02618da9117a03f570da7c49bd92cff20eff3308cf191148a2a43e"
+    }
+  },
+  "configuration": {
+    "operation": "image.crop.suggest",
+    "colorSpace": "srgb",
+    "generative": false,
+    "providerCost": false,
+    "externalEgress": false,
+    "algorithmVersion": "batch-c-deterministic-rgba-v1",
+    "maximumSourcePixels": 32000000,
+    "outputArtifactCount": 0
+  },
+  "inputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "input",
+    "expression": {
+      "op": "source",
+      "root": "input",
+      "pointer": ""
+    }
+  },
+  "outputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "output",
+    "expression": {
+      "op": "source",
+      "root": "result",
+      "pointer": ""
+    }
+  },
+  "fixtures": [
+    {
+      "name": "default contract mapping",
+      "capabilityInput": {
+        "aspectRatios": ["sample"],
+        "safeMarginRatio": 0.05,
+        "sourceArtifactId": "01K00000000000000000000001",
+        "maxSuggestionsPerRatio": 1
+      },
+      "configuration": {
+        "operation": "image.crop.suggest",
+        "colorSpace": "srgb",
+        "generative": false,
+        "providerCost": false,
+        "externalEgress": false,
+        "algorithmVersion": "batch-c-deterministic-rgba-v1",
+        "maximumSourcePixels": 32000000,
+        "outputArtifactCount": 0
+      },
+      "expectedAdapterInput": {
+        "aspectRatios": ["sample"],
+        "safeMarginRatio": 0.05,
+        "sourceArtifactId": "01K00000000000000000000001",
+        "maxSuggestionsPerRatio": 1
+      },
+      "adapterResult": {
+        "sourceWidth": 1,
+        "suggestions": [],
+        "sourceHeight": 1,
+        "schemaVersion": "kanvas.image-crop-suggest-result/v1",
+        "qualitySignals": {
+          "generative": false,
+          "schemaVersion": "kanvas.image-crop-suggest-quality/v1",
+          "saliencyMethod": "alpha_luminance_projection",
+          "sourceModified": false,
+          "subjectBoundsProvided": true
+        }
+      },
+      "expectedCapabilityOutput": {
+        "sourceWidth": 1,
+        "suggestions": [],
+        "sourceHeight": 1,
+        "schemaVersion": "kanvas.image-crop-suggest-result/v1",
+        "qualitySignals": {
+          "generative": false,
+          "schemaVersion": "kanvas.image-crop-suggest-quality/v1",
+          "saliencyMethod": "alpha_luminance_projection",
+          "sourceModified": false,
+          "subjectBoundsProvided": true
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+# Local deployment configuration and secrets
+.env
+.env.*
+!.env.example
+deploy/secrets/
+
+# Dependencies and generated output
+node_modules/
+dist/
+coverage/
+.turbo/
+.playwright-cli/
+output/
+artifacts/
+prototypes/
+*.tsbuildinfo
+.pnpm-store/
+.tmp/
+apps/web/public/models/*.onnx
+apps/web/public/onnxruntime/*.mjs
+apps/web/public/onnxruntime/*.wasm
+apps/web/public/fluent-emoji/
+eval-data/background-remove/*
+!eval-data/background-remove/README.md
+!eval-data/background-remove/corpus.template.json
+!eval-data/background-remove/corpus.json
+!eval-data/background-remove/provenance.json
+!eval-data/background-remove/report-isnet-approved.json
+eval-data/subject-detect/report.json
+
+# Local editor and OS files
+.DS_Store
+.idea/
+.vscode/
+
+# Agents and Codex
+.agents/
+.codex/
+
+# In-memory adapter test session artifact
+**/:memory:.ses
+
+# Local review input contains private object-storage identities.
+/eval-data/image-atomic-designer-review-v1/source-selection.json

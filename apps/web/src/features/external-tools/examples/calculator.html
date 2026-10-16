@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; form-action 'none'; base-uri 'none'"
+    />
+    <title>Calculator</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 28px;
+        color: #151515;
+        background: #fff;
+        font:
+          14px/1.6 system-ui,
+          sans-serif;
+      }
+      main {
+        max-width: 480px;
+        margin: auto;
+      }
+      h1 {
+        margin: 0 0 24px;
+        font-size: 24px;
+      }
+      label {
+        display: block;
+        margin-top: 16px;
+        font-weight: 600;
+      }
+      input,
+      select,
+      button {
+        width: 100%;
+        margin-top: 6px;
+        padding: 12px;
+        font: inherit;
+        border: 1px solid #dedce8;
+        border-radius: 12px;
+        background: white;
+        color: inherit;
+      }
+      button {
+        margin-top: 24px;
+        background: #3048f5;
+        color: white;
+        border: 0;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      :focus-visible {
+        outline: 3px solid #3048f5;
+        outline-offset: 3px;
+      }
+      output {
+        display: block;
+        margin-top: 24px;
+        overflow-wrap: anywhere;
+        font-size: 28px;
+        font-variant-numeric: tabular-nums;
+      }
+      #error {
+        color: #c33b32;
+        min-height: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1 id="heading">计算器</h1>
+      <form id="calculator">
+        <label
+          ><span id="first-label">第一个数</span
+          ><input id="first" type="number" step="any" required value="12"
+        /></label>
+        <label
+          ><span id="operation-label">运算</span
+          ><select id="operation">
+            <option value="add">+</option>
+            <option value="subtract">−</option>
+            <option value="multiply">×</option>
+            <option value="divide">÷</option>
+          </select></label
+        >
+        <label
+          ><span id="second-label">第二个数</span
+          ><input id="second" type="number" step="any" required value="3"
+        /></label>
+        <button id="calculate" type="button">计算</button>
+      </form>
+      <output id="result" aria-live="polite">—</output>
+      <p id="error" role="alert"></p>
+    </main>
+    <script>
+      // This tool deliberately has no dependency on the host or its bridge.
+      const english = document.documentElement.lang.startsWith("en");
+      if (english) {
+        for (const [id, text] of Object.entries({
+          heading: "Calculator",
+          "first-label": "First number",
+          "operation-label": "Operation",
+          "second-label": "Second number",
+          calculate: "Calculate",
+        }))
+          document.getElementById(id).textContent = text;
+      }
+      function calculate() {
+        if (!document.getElementById("calculator").reportValidity()) return;
+        const first = document.getElementById("first").valueAsNumber;
+        const second = document.getElementById("second").valueAsNumber;
+        const operation = document.getElementById("operation").value;
+        const result = document.getElementById("result");
+        const error = document.getElementById("error");
+        error.textContent = "";
+        result.textContent = "—";
+        if (operation === "divide" && second === 0) {
+          error.textContent = english
+            ? "Cannot divide by zero."
+            : "除数不能为零。";
+          return;
+        }
+        const value = {
+          add: () => first + second,
+          subtract: () => first - second,
+          multiply: () => first * second,
+          divide: () => first / second,
+        }[operation]();
+        if (!Number.isFinite(value)) {
+          error.textContent = english
+            ? "Enter numbers within the supported range."
+            : "请输入有效范围内的数字。";
+          return;
+        }
+        result.textContent = String(Number(value.toPrecision(12)));
+      }
+      document.getElementById("calculate").addEventListener("click", calculate);
+      document
+        .getElementById("calculator")
+        .addEventListener("keydown", (event) => {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            calculate();
+          }
+        });
+    </script>
+  </body>
+</html>

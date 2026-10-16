@@ -1,0 +1,145 @@
+/* Canvas Core V1 */
+
+/*
+ * Retained boundary: cross-component geometry only. Canvas viewport code reads
+ * the stage-safe custom properties, while the grid areas coordinate Topbar,
+ * LeftPanel, Stage, PageStrip and ViewControls across component ownership.
+ */
+
+.canvas-v1-workspace {
+  --canvas-v1-topbar-height: 56px;
+
+  /*
+   * Keep the page inside a stable editing lane. The aggregate inset must stay
+   * aligned with the viewport fit contract: 240px inline and 274px block.
+   */
+  --canvas-v1-stage-safe-top: 94px;
+  --canvas-v1-stage-safe-inline: 120px;
+  --canvas-v1-stage-safe-bottom: 180px;
+  --canvas-v1-chrome-edge: 16px;
+  --canvas-v1-chrome-gap: 12px;
+
+  position: relative;
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  grid-template:
+    "topbar topbar" var(--canvas-v1-topbar-height)
+    "sidebar stage" minmax(0, 1fr) /
+    auto minmax(0, 1fr);
+  overflow: hidden;
+  color: var(--ink);
+  background: var(--mist);
+}
+
+.canvas-v1-topbar {
+  position: relative;
+  z-index: 60;
+  display: grid;
+  min-width: 0;
+  grid-area: topbar;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+}
+
+.canvas-v1-stage {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  grid-area: stage;
+  overflow: hidden;
+  background: var(--mist);
+  container-name: canvas-stage;
+  container-type: inline-size;
+  touch-action: none;
+  outline: none;
+}
+
+.canvas-v1-stage-scroll {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: var(--canvas-v1-stage-safe-top) var(--canvas-v1-stage-safe-inline)
+    var(--canvas-v1-stage-safe-bottom);
+  overflow: hidden;
+}
+
+@keyframes canvas-image-buffer {
+  from {
+    background-position: 110% 0;
+  }
+
+  to {
+    background-position: -110% 0;
+  }
+}
+
+.canvas-v1-bottom-chrome {
+  --canvas-v1-view-controls-reserve: 308px;
+
+  position: absolute;
+  z-index: 30;
+  right: var(--canvas-v1-chrome-edge);
+  bottom: var(--canvas-v1-chrome-edge);
+  left: var(--canvas-v1-chrome-edge);
+  display: grid;
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr);
+  place-items: end center;
+  pointer-events: none;
+}
+
+.canvas-v1-bottom-chrome > .canvas-v1-page-strip {
+  position: static;
+  z-index: auto;
+  grid-area: 1 / 1;
+  width: max-content;
+  max-width: min(
+    760px,
+    max(72px, calc(100% - var(--canvas-v1-view-controls-reserve) * 2))
+  );
+  transform: none;
+}
+
+.canvas-v1-bottom-chrome > .canvas-v1-view-controls {
+  position: static;
+  z-index: auto;
+  grid-area: 1 / 1;
+  justify-self: end;
+}
+
+/* Stage-width orchestration cannot be expressed by viewport Tailwind variants. */
+@container canvas-stage (max-width: 720px) {
+  .canvas-v1-bottom-chrome {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--canvas-v1-chrome-gap);
+    justify-items: stretch;
+  }
+
+  .canvas-v1-bottom-chrome > .canvas-v1-page-strip {
+    grid-area: auto;
+    grid-column: 1;
+    max-width: 100%;
+    justify-self: center;
+  }
+
+  .canvas-v1-bottom-chrome > .canvas-v1-view-controls {
+    grid-area: auto;
+    grid-column: 2;
+    justify-self: end;
+  }
+}
+
+/* The editor is gated below 768px; this range only serves 768px–900px. */
+@media (width <= 900px) {
+  .canvas-v1-title {
+    min-width: 80px;
+    max-width: clamp(80px, 18vw, 180px);
+  }
+
+  .canvas-v1-stage-scroll {
+    padding-inline: 54px;
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "kanvas.runtime-adapter-definition/v1",
+  "adapterKey": "browser.image.denoise.median-blend.v1",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "图像降噪 · 浏览器",
+      "en-US": "Image denoise · Browser"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "将图像降噪的公开输入输出转换为浏览器运行协议。",
+      "en-US": "Adapts the public Image denoise contract to the Browser runtime protocol."
+    }
+  },
+  "executionTarget": "browser",
+  "sourceKinds": ["plugin"],
+  "supportedModelFormats": [],
+  "invocationInputSchema": {
+    "$id": "kanvas.image-denoise-input.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["sourceArtifactId"],
+    "properties": {
+      "strength": {
+        "type": "number",
+        "default": 0.5,
+        "maximum": 1,
+        "minimum": 0.1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "invocationOutputSchema": {
+    "$id": "kanvas.image-denoise-result.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "schemaVersion",
+      "imageArtifactId",
+      "noiseEstimate",
+      "method",
+      "strength",
+      "qualitySignals"
+    ],
+    "properties": {
+      "method": {
+        "const": "median_blend",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "strength": {
+        "type": "number",
+        "maximum": 1,
+        "minimum": 0.1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "noiseEstimate": {
+        "type": "number",
+        "maximum": 1,
+        "minimum": 0,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "schemaVersion": {
+        "const": "kanvas.image-denoise-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "required": [
+          "schemaVersion",
+          "qualityIntent",
+          "generative",
+          "alphaPreserved",
+          "kernelSize"
+        ],
+        "properties": {
+          "generative": {
+            "const": false
+          },
+          "kernelSize": {
+            "const": 3
+          },
+          "qualityIntent": {
+            "const": "faithful"
+          },
+          "schemaVersion": {
+            "const": "kanvas.image-denoise-quality/v1"
+          },
+          "alphaPreserved": {
+            "const": true
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "quality.signals"
+      },
+      "imageArtifactId": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["$kanvas", "outputRole", "outputIndex"],
+        "properties": {
+          "$kanvas": {
+            "const": "attempt-output-artifact/v1"
+          },
+          "outputRole": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "outputIndex": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          }
+        },
+        "x-kanvas-attempt-output-artifact": true,
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "configurationSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "default": {
+      "method": "median_blend",
+      "backend": "javascript",
+      "kernelSize": 3,
+      "outputFormat": "png",
+      "qualityIntent": "faithful",
+      "alphaPreserved": true,
+      "defaultStrength": 0.5,
+      "maximumSourcePixels": 16000000
+    },
+    "const": {
+      "method": "median_blend",
+      "backend": "javascript",
+      "kernelSize": 3,
+      "outputFormat": "png",
+      "qualityIntent": "faithful",
+      "alphaPreserved": true,
+      "defaultStrength": 0.5,
+      "maximumSourcePixels": 16000000
+    }
+  },
+  "runtimeProfile": {
+    "kind": "browser.image-adjustment.v1",
+    "version": 1,
+    "settings": {
+      "backend": "javascript",
+      "role": "image_denoise"
+    }
+  },
+  "artifactInputs": [
+    {
+      "role": "sourceArtifactId",
+      "pointer": "/sourceArtifactId",
+      "required": true,
+      "mediaTypes": ["image/png", "image/jpeg", "image/webp"]
+    }
+  ],
+  "executable": {
+    "kind": "built_in",
+    "packageKey": "kanvas.browser-image-runtime",
+    "packageVersion": "1.0.0",
+    "entrypoint": "browser.image.denoise.median-blend.v1",
+    "releaseDigest": "sha256:f33d086aeb45af4a14df4bcfe8fcfbb9e4dd14464bf65be6e6537b4add436e4f"
+  }
+}

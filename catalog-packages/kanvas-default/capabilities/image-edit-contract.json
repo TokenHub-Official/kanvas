@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "contractKey": "image.edit",
+  "revision": 1,
+  "inputSchema": {
+    "$id": "kanvas.image-edit-input.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["sourceArtifactId", "prompt"],
+    "properties": {
+      "seed": {
+        "type": "integer",
+        "maximum": 4294967295,
+        "minimum": 0,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "size": {
+        "enum": ["auto", "1024x1024", "1536x1024", "1024x1536"],
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "prompt": {
+        "type": "string",
+        "maxLength": 8000,
+        "minLength": 1,
+        "x-kanvas-semantic-type": "prompt.rich"
+      },
+      "quality": {
+        "enum": ["auto", "low", "medium", "high"],
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "background": {
+        "enum": ["auto", "opaque", "transparent"],
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "resolution": {
+        "enum": ["auto", "512", "1k", "2k", "4k"],
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "aspectRatio": {
+        "enum": [
+          "auto",
+          "1:1",
+          "3:2",
+          "2:3",
+          "4:3",
+          "3:4",
+          "4:5",
+          "5:4",
+          "16:9",
+          "9:16",
+          "21:9"
+        ],
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "outputFormat": {
+        "enum": ["png", "jpeg", "webp"],
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "maskArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.mask"
+      },
+      "numberOfImages": {
+        "type": "integer",
+        "maximum": 4,
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      },
+      "outputCompression": {
+        "type": "integer",
+        "maximum": 100,
+        "minimum": 0,
+        "x-kanvas-semantic-type": "number.scalar"
+      }
+    },
+    "additionalProperties": false,
+    "x-kanvas-provider-parameter-keys": [
+      "aspectRatio",
+      "resolution",
+      "size",
+      "quality",
+      "outputFormat",
+      "background",
+      "outputCompression",
+      "numberOfImages",
+      "seed"
+    ],
+    "x-kanvas-provider-model-operation": "image.edit"
+  },
+  "outputSchema": {
+    "$id": "kanvas.image-edit-result.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["schemaVersion", "imageArtifactId", "sourceArtifactId"],
+    "properties": {
+      "schemaVersion": {
+        "const": "kanvas.image-edit-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "imageArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "idempotencyMode": "keyed",
+  "supportedInvokers": ["user", "workflow", "agent", "canvas"]
+}

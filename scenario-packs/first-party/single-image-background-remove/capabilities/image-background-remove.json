@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "contractKey": "image.background.remove",
+  "revision": 2,
+  "inputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "kanvas.image-background-remove-input.v1",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "sourceArtifactId",
+      "refinement"
+    ],
+    "properties": {
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+      },
+      "refinement": {
+        "type": "string",
+        "enum": [
+          "standard",
+          "fine"
+        ]
+      },
+      "subjectHint": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 240
+      }
+    }
+  },
+  "outputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "kanvas.image-background-remove-result.v1",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "schemaVersion",
+      "foregroundArtifactId",
+      "maskArtifactId",
+      "qualitySignals"
+    ],
+    "properties": {
+      "schemaVersion": {
+        "const": "kanvas.image-background-remove-result/v1"
+      },
+      "foregroundArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+      },
+      "maskArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schemaVersion",
+          "foregroundRatio",
+          "uncertainEdgeRatio",
+          "modelVariant",
+          "modelDigest",
+          "refinement"
+        ],
+        "properties": {
+          "schemaVersion": {
+            "const": "kanvas.image-background-remove-quality/v1"
+          },
+          "foregroundRatio": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "uncertainEdgeRatio": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "modelVariant": {
+            "type": "string",
+            "enum": [
+              "u2net",
+              "u2netp",
+              "isnet-general",
+              "isnet-general-fp16"
+            ]
+          },
+          "modelDigest": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          },
+          "refinement": {
+            "type": "string",
+            "enum": [
+              "standard",
+              "fine"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "idempotencyMode": "keyed",
+  "supportedInvokers": [
+    "workflow"
+  ]
+}

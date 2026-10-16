@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "skillKey": "first-party.single-image-background-remove",
+  "displayName": "单图去背景",
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "remove-background",
+      "displayName": "去背景",
+      "description": "从当前图片生成透明底前景，并保留可审查的蒙版产物。",
+      "category": "图片清理",
+      "outputPresentation": "board",
+      "inputUiSchema": {
+        "schemaVersion": "kanvas.entrypoint-ui/v0",
+        "canvasTool": {
+          "surface": "canvas.image",
+          "completionBehavior": "auto_replace_safe",
+          "interactionBehavior": "direct",
+          "operationId": "image.background.remove",
+          "order": 100,
+          "costNotice": "浏览器本地模型优先，不产生外部模型调用费用；回退 Worker 时由 Workspace 基础设施承担计算成本。",
+          "source": {
+            "parameterKey": "sourceArtifactId",
+            "value": "artifact_id"
+          },
+          "parameters": [
+            {
+              "key": "refinement",
+              "label": "边缘处理",
+              "control": "select",
+              "required": true,
+              "defaultValue": "standard",
+              "options": [
+                {
+                  "value": "standard",
+                  "label": "标准"
+                },
+                {
+                  "value": "fine",
+                  "label": "精细"
+                }
+              ]
+            },
+            {
+              "key": "subjectHint",
+              "label": "主体提示（可选）",
+              "control": "text",
+              "required": false,
+              "maxLength": 240
+            }
+          ],
+          "result": {
+            "artifactPath": [
+              "foregroundArtifactId"
+            ],
+            "maskArtifactPath": [
+              "maskArtifactId"
+            ],
+            "outputModes": [
+              "add_node",
+              "replace_content",
+              "set_background"
+            ]
+          }
+        }
+      },
+      "workflowPath": "workflows/single-image-background-remove.json"
+    }
+  ]
+}

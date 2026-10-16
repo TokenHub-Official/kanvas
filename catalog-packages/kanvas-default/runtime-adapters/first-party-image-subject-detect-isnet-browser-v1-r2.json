@@ -1,0 +1,315 @@
+{
+  "schemaVersion": "kanvas.runtime-adapter-definition/v1",
+  "adapterKey": "first-party.image.subject-detect.isnet.browser.v1",
+  "revision": 2,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "主体检测 · 浏览器",
+      "en-US": "Subject detect · Browser"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "将主体检测的公开输入输出转换为浏览器运行协议。",
+      "en-US": "Adapts the public Subject detect contract to the Browser runtime protocol."
+    }
+  },
+  "executionTarget": "browser",
+  "sourceKinds": ["model_resource"],
+  "supportedModelFormats": ["onnx"],
+  "modelResourceInterfaceDigest": "sha256:c3a88630834b92c6b6798e3c0b80f68290e61225f2ba5fafdaac231c83ab839c",
+  "invocationInputSchema": {
+    "$id": "kanvas.image-subject-detect-input.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["sourceArtifactId"],
+    "properties": {
+      "includeMask": {
+        "type": "boolean",
+        "default": true,
+        "x-kanvas-semantic-type": "boolean.flag"
+      },
+      "maxSubjects": {
+        "type": "integer",
+        "default": 8,
+        "maximum": 16,
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "minimumAreaRatio": {
+        "type": "number",
+        "default": 0.001,
+        "maximum": 0.5,
+        "minimum": 0.00001,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      },
+      "minimumConfidence": {
+        "type": "number",
+        "default": 0.35,
+        "maximum": 0.95,
+        "minimum": 0.05,
+        "x-kanvas-semantic-type": "number.scalar"
+      }
+    },
+    "additionalProperties": false
+  },
+  "invocationOutputSchema": {
+    "$id": "kanvas.image-subject-detect-result.v1",
+    "type": "object",
+    "$defs": {
+      "pixelBounds": {
+        "type": "object",
+        "required": ["x", "y", "width", "height"],
+        "properties": {
+          "x": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "y": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "width": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "height": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "additionalProperties": false
+      },
+      "normalizedBounds": {
+        "type": "object",
+        "required": ["x", "y", "width", "height"],
+        "properties": {
+          "x": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0
+          },
+          "y": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0
+          },
+          "width": {
+            "type": "number",
+            "maximum": 1,
+            "exclusiveMinimum": 0
+          },
+          "height": {
+            "type": "number",
+            "maximum": 1,
+            "exclusiveMinimum": 0
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "schemaVersion",
+      "sourceWidth",
+      "sourceHeight",
+      "candidates",
+      "maskArtifactId",
+      "qualitySignals"
+    ],
+    "properties": {
+      "candidates": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "subjectId",
+            "rank",
+            "category",
+            "confidence",
+            "areaRatio",
+            "bounds",
+            "normalizedBounds"
+          ],
+          "properties": {
+            "rank": {
+              "type": "integer",
+              "maximum": 16,
+              "minimum": 1
+            },
+            "bounds": {
+              "$ref": "#/$defs/pixelBounds"
+            },
+            "category": {
+              "const": "visual_subject"
+            },
+            "areaRatio": {
+              "type": "number",
+              "maximum": 1,
+              "minimum": 0
+            },
+            "subjectId": {
+              "type": "string",
+              "pattern": "^subject-[1-9][0-9]*$"
+            },
+            "confidence": {
+              "type": "number",
+              "maximum": 1,
+              "minimum": 0
+            },
+            "normalizedBounds": {
+              "$ref": "#/$defs/normalizedBounds"
+            }
+          },
+          "additionalProperties": false
+        },
+        "maxItems": 16,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "sourceWidth": {
+        "type": "integer",
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "sourceHeight": {
+        "type": "integer",
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "schemaVersion": {
+        "const": "kanvas.image-subject-detect-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "maskArtifactId": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["$kanvas", "outputRole", "outputIndex"],
+        "properties": {
+          "$kanvas": {
+            "const": "attempt-output-artifact/v1"
+          },
+          "outputRole": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "outputIndex": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          }
+        },
+        "x-kanvas-attempt-output-artifact": true,
+        "x-kanvas-semantic-type": "artifact.mask"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "required": [
+          "schemaVersion",
+          "candidateCount",
+          "foregroundRatio",
+          "uncertainEdgeRatio",
+          "taxonomy",
+          "modelVariant",
+          "modelDigest"
+        ],
+        "properties": {
+          "taxonomy": {
+            "const": "class_agnostic_isnet"
+          },
+          "modelDigest": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          },
+          "modelVariant": {
+            "enum": ["u2net", "u2netp", "isnet-general", "isnet-general-fp16"],
+            "type": "string"
+          },
+          "schemaVersion": {
+            "const": "kanvas.image-subject-detect-quality/v1"
+          },
+          "candidateCount": {
+            "type": "integer",
+            "maximum": 16,
+            "minimum": 0
+          },
+          "foregroundRatio": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0
+          },
+          "uncertainEdgeRatio": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "quality.signals"
+      }
+    },
+    "additionalProperties": false
+  },
+  "configurationSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "default": {
+      "model": {
+        "family": "isnet",
+        "sha256": "2eb4b5dda7ec41c617e59706e5aafa1f978c9a5f983d2518d9f0ae4d6eb04f20",
+        "source": "huggingface.co/imgly/isnet-general-onnx@440dea96dd4a3b06bbbf5abec3e26569dd7ec49f/onnx/model_fp16.onnx",
+        "license": "MIT",
+        "variant": "isnet-general-fp16",
+        "inputSize": 1024,
+        "normalization": "isnet"
+      },
+      "backend": "wasm",
+      "wasmPaths": "/onnxruntime/",
+      "onnxRuntimeWebVersion": "1.27.0"
+    },
+    "const": {
+      "model": {
+        "family": "isnet",
+        "sha256": "2eb4b5dda7ec41c617e59706e5aafa1f978c9a5f983d2518d9f0ae4d6eb04f20",
+        "source": "huggingface.co/imgly/isnet-general-onnx@440dea96dd4a3b06bbbf5abec3e26569dd7ec49f/onnx/model_fp16.onnx",
+        "license": "MIT",
+        "variant": "isnet-general-fp16",
+        "inputSize": 1024,
+        "normalization": "isnet"
+      },
+      "backend": "wasm",
+      "wasmPaths": "/onnxruntime/",
+      "onnxRuntimeWebVersion": "1.27.0"
+    }
+  },
+  "runtimeProfile": {
+    "kind": "browser.u2net.v1",
+    "version": 1,
+    "settings": {
+      "backend": "wasm",
+      "role": "subject_detect"
+    }
+  },
+  "artifactInputs": [
+    {
+      "role": "sourceArtifactId",
+      "pointer": "/sourceArtifactId",
+      "required": true,
+      "mediaTypes": ["image/png", "image/jpeg", "image/webp"]
+    }
+  ],
+  "executable": {
+    "kind": "built_in",
+    "packageKey": "kanvas.browser-image-runtime",
+    "packageVersion": "1.0.0",
+    "entrypoint": "first-party.image.subject-detect.isnet.browser.v1",
+    "releaseDigest": "sha256:94d4cfa6ae2f35f181d696df1204e19a4d56343231f33ee3f7bdab4535cb95fc"
+  }
+}

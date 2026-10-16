@@ -1,0 +1,285 @@
+{
+  "schemaVersion": "kanvas.capability-declaration-asset/v1",
+  "contract": {
+    "key": "image.canvas.expand",
+    "revision": 1,
+    "canonicalDigest": "sha256:fc9eaef48d0bcfc3bf7f40c3c66e2ff14d127590223cef1076a65ec51a218c44"
+  },
+  "declaration": {
+    "schemaVersion": "kanvas.capability-declaration/v1",
+    "catalog": {
+      "title": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "扩展画布",
+          "en-US": "Canvas expand"
+        }
+      },
+      "description": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "扩展图片边界并生成缺失区域。",
+          "en-US": "Expand image bounds and generate the missing region."
+        }
+      },
+      "category": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "图像生成",
+          "en-US": "Image generation"
+        }
+      },
+      "sourceKind": "built_in",
+      "tags": ["outpaint", "canvas", "image"],
+      "surfaces": ["workflow", "agent", "canvas"]
+    },
+    "parameters": [
+      {
+        "key": "prompt",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "处理说明",
+            "en-US": "Instructions"
+          }
+        },
+        "description": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "输入说明，键入 @ 可在任意位置插入流程输入或上游信息。",
+            "en-US": "Enter instructions and type @ to insert workflow or upstream values."
+          }
+        },
+        "semanticType": "prompt.rich",
+        "required": false,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["mixed_rich_text"],
+          "default": "mixed_rich_text"
+        },
+        "editor": "rich_prompt"
+      },
+      {
+        "key": "targetWidth",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "目标宽度",
+            "en-US": "Target width"
+          }
+        },
+        "semanticType": "number.scalar",
+        "required": true,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["constant", "workflow_input", "upstream"],
+          "default": "constant"
+        },
+        "editor": "enum"
+      },
+      {
+        "key": "targetHeight",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "目标高度",
+            "en-US": "Target height"
+          }
+        },
+        "semanticType": "number.scalar",
+        "required": true,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["constant", "workflow_input", "upstream"],
+          "default": "constant"
+        },
+        "editor": "enum"
+      },
+      {
+        "key": "generatedRegion",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "生成区域",
+            "en-US": "Generated region"
+          }
+        },
+        "semanticType": "layout.bounds",
+        "required": true,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["constant", "workflow_input", "upstream"],
+          "default": "constant"
+        },
+        "editor": "json"
+      },
+      {
+        "key": "sourcePlacement",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "原图位置",
+            "en-US": "Source placement"
+          }
+        },
+        "semanticType": "layout.placement",
+        "required": true,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["constant", "workflow_input", "upstream"],
+          "default": "constant"
+        },
+        "editor": "placement"
+      },
+      {
+        "key": "sourceArtifactId",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "源图片",
+            "en-US": "Source image"
+          }
+        },
+        "description": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "选择需要处理的流程输入或上游图片。",
+            "en-US": "Choose a workflow input or upstream image to process."
+          }
+        },
+        "semanticType": "artifact.image",
+        "required": true,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["workflow_input", "upstream"],
+          "default": "upstream"
+        },
+        "editor": "artifact_picker"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "expandedArtifactId",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "扩展结果图",
+            "en-US": "Expanded image"
+          }
+        },
+        "semanticType": "artifact.image",
+        "primary": true,
+        "visibility": "author"
+      },
+      {
+        "key": "targetHeight",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "目标高度",
+            "en-US": "Target height"
+          }
+        },
+        "semanticType": "number.scalar",
+        "primary": false,
+        "visibility": "author"
+      },
+      {
+        "key": "targetWidth",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "目标宽度",
+            "en-US": "Target width"
+          }
+        },
+        "semanticType": "number.scalar",
+        "primary": false,
+        "visibility": "author"
+      },
+      {
+        "key": "generatedRegion",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "生成区域",
+            "en-US": "Generated region"
+          }
+        },
+        "semanticType": "layout.bounds",
+        "primary": false,
+        "visibility": "advanced"
+      },
+      {
+        "key": "generatedRegionMaskArtifactId",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "生成区域蒙版",
+            "en-US": "Generated region mask"
+          }
+        },
+        "semanticType": "artifact.mask",
+        "primary": false,
+        "visibility": "advanced"
+      },
+      {
+        "key": "qualitySignals",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "质量信息",
+            "en-US": "Quality signals"
+          }
+        },
+        "semanticType": "quality.signals",
+        "primary": false,
+        "visibility": "advanced"
+      },
+      {
+        "key": "sourcePlacement",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "原图位置",
+            "en-US": "Source placement"
+          }
+        },
+        "semanticType": "layout.placement",
+        "primary": false,
+        "visibility": "advanced"
+      },
+      {
+        "key": "schemaVersion",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "结果版本",
+            "en-US": "Result version"
+          }
+        },
+        "semanticType": "value.any",
+        "primary": false,
+        "visibility": "hidden"
+      }
+    ]
+  }
+}

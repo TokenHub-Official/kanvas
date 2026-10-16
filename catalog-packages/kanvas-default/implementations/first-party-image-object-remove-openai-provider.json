@@ -1,0 +1,153 @@
+{
+  "schemaVersion": "kanvas.capability-implementation/v1",
+  "implementationKey": "first-party.image.object-remove.openai-provider",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "物体移除 · OpenAI 模型服务",
+      "en-US": "Object removal · OpenAI model service"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "通过 OpenAI 图片编辑模型服务执行区域修复。",
+      "en-US": "Repairs selected regions through an OpenAI image-edit model service."
+    }
+  },
+  "contract": {
+    "key": "image.object.remove",
+    "revision": 1,
+    "canonicalDigest": "sha256:b76f3bfd17fdf2fd4857ceac2149aa80e67beb4f710999fe524ae6fddccf5e1c"
+  },
+  "adapter": {
+    "adapterKey": "openai.image.object-remove.v1",
+    "revision": 1,
+    "canonicalDigest": "sha256:a493aa4b779093d753d7e529790cc6aa69a429099b111ddcb92b1c7eb399584f"
+  },
+  "source": {
+    "kind": "model_service",
+    "selector": {
+      "operation": "image.edit",
+      "apiSurface": "images.edits.v1"
+    }
+  },
+  "configuration": {
+    "protocol": "images.edits.v1",
+    "operation": "image.object.remove",
+    "dataEgress": "authorized_source_artifact",
+    "outputMaterialization": "trusted_storage"
+  },
+  "inputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "input",
+    "expression": {
+      "op": "source",
+      "root": "input",
+      "pointer": ""
+    }
+  },
+  "outputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "output",
+    "expression": {
+      "op": "source",
+      "root": "result",
+      "pointer": ""
+    }
+  },
+  "fixtures": [
+    {
+      "name": "region-based object removal",
+      "capabilityInput": {
+        "sourceArtifactId": "01K00000000000000000000001",
+        "regions": [
+          {
+            "points": [
+              {
+                "x": 0,
+                "y": 0
+              },
+              {
+                "x": 1,
+                "y": 0
+              },
+              {
+                "x": 1,
+                "y": 1
+              }
+            ]
+          }
+        ]
+      },
+      "configuration": {
+        "protocol": "images.edits.v1",
+        "operation": "image.object.remove",
+        "dataEgress": "authorized_source_artifact",
+        "outputMaterialization": "trusted_storage"
+      },
+      "expectedAdapterInput": {
+        "sourceArtifactId": "01K00000000000000000000001",
+        "regions": [
+          {
+            "points": [
+              {
+                "x": 0,
+                "y": 0
+              },
+              {
+                "x": 1,
+                "y": 0
+              },
+              {
+                "x": 1,
+                "y": 1
+              }
+            ]
+          }
+        ]
+      },
+      "adapterResult": {
+        "schemaVersion": "kanvas.image-object-remove-result/v1",
+        "repairedArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "repaired",
+          "outputIndex": 0
+        },
+        "removedRegionMaskArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "removed_region_mask",
+          "outputIndex": 1
+        },
+        "qualitySignals": {
+          "schemaVersion": "kanvas.image-object-remove-quality/v1",
+          "method": "generative_inpaint",
+          "generative": true,
+          "outsideMaskPixelsPreserved": true,
+          "removedPixelRatio": 0.1
+        }
+      },
+      "expectedCapabilityOutput": {
+        "schemaVersion": "kanvas.image-object-remove-result/v1",
+        "repairedArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "repaired",
+          "outputIndex": 0
+        },
+        "removedRegionMaskArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "removed_region_mask",
+          "outputIndex": 1
+        },
+        "qualitySignals": {
+          "schemaVersion": "kanvas.image-object-remove-quality/v1",
+          "method": "generative_inpaint",
+          "generative": true,
+          "outsideMaskPixelsPreserved": true,
+          "removedPixelRatio": 0.1
+        }
+      }
+    }
+  ]
+}

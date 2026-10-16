@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "kanvas.capability-binding/v1",
+  "bindingKey": "first-party.image.palette-extract.histogram.browser",
+  "contract": {
+    "key": "image.palette.extract",
+    "revision": 1,
+    "canonicalDigest": "sha256:9c3decb73bf3872b4581a3b025a1af843b2f870334036e2f80d7210014768626"
+  },
+  "implementation": {
+    "key": "first-party.image.palette-extract.histogram.browser",
+    "revision": 1,
+    "canonicalDigest": "sha256:bd7923f917b9b916b5bc7faf9e166e71a3d923cc1af0398624c481e95471e6b8"
+  },
+  "priority": 1,
+  "enabled": true,
+  "eligibility": {},
+  "fallbackOn": []
+}

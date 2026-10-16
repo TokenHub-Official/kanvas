@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "key": "image_edit",
+  "entryNodeKey": "edit",
+  "limits": {
+    "maxNodeRuns": 1,
+    "timeoutMs": 300000
+  },
+  "nodes": [
+    {
+      "key": "edit",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "image.edit",
+        "revision": 2,
+        "canonicalDigest": "sha256:6d9f3b13443acc7912ced9f2cab31d96e56b953a8ae80a7e2fa51794a70fb3cf"
+      },
+      "input": {
+        "$value": {
+          "source": "workflow_input",
+          "pointer": ""
+        }
+      },
+      "next": []
+    }
+  ],
+  "outputs": {
+    "schemaVersion": {
+      "required": true,
+      "value": "kanvas.image-edit-result/v1"
+    },
+    "imageArtifactId": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "edit",
+          "scope": "root",
+          "pointer": "/imageArtifactId"
+        }
+      }
+    },
+    "sourceArtifactId": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "edit",
+          "scope": "root",
+          "pointer": "/sourceArtifactId"
+        }
+      }
+    }
+  }
+}

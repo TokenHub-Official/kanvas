@@ -1,0 +1,75 @@
+{
+  "name": "@kanvas/contracts",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./api": {
+      "types": "./dist/api/index.d.ts",
+      "default": "./dist/api/index.js"
+    },
+    "./capability": {
+      "types": "./dist/capability/index.d.ts",
+      "default": "./dist/capability/index.js"
+    },
+    "./editor": {
+      "types": "./dist/editor/index.d.ts",
+      "default": "./dist/editor/index.js"
+    },
+    "./events": {
+      "types": "./dist/events/index.d.ts",
+      "default": "./dist/events/index.js"
+    },
+    "./primitives": {
+      "types": "./dist/primitives/index.d.ts",
+      "default": "./dist/primitives/index.js"
+    },
+    "./provider-model": {
+      "types": "./dist/provider-model/index.d.ts",
+      "default": "./dist/provider-model/index.js"
+    },
+    "./provider-definition": {
+      "types": "./dist/provider-definition/index.d.ts",
+      "default": "./dist/provider-definition/index.js"
+    },
+    "./provider-billing": {
+      "types": "./dist/provider-billing/index.d.ts",
+      "default": "./dist/provider-billing/index.js"
+    },
+    "./model-reference": {
+      "types": "./dist/model-reference/index.d.ts",
+      "default": "./dist/model-reference/index.js"
+    },
+    "./resource-source": {
+      "types": "./dist/resource-source/index.d.ts",
+      "default": "./dist/resource-source/index.js"
+    },
+    "./workflow": {
+      "types": "./dist/workflow/index.d.ts",
+      "default": "./dist/workflow/index.js"
+    },
+    "./workflow-authoring": {
+      "types": "./dist/workflow-authoring/index.d.ts",
+      "default": "./dist/workflow-authoring/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "check-types": "tsc --noEmit -p tsconfig.json",
+    "dev": "tsc -p tsconfig.build.json --watch --preserveWatchOutput",
+    "generate": "pnpm build && node scripts/generate-contracts.mjs",
+    "lint": "eslint src test scripts",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@sinclair/typebox": "catalog:",
+    "ajv": "catalog:",
+    "ajv-formats": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "license": "Apache-2.0"
+}

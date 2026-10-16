@@ -1,0 +1,45 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalPassThroughEnv": ["KANVAS_*", "VITE_KANVAS_*"],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", "tsconfig.json"],
+      "outputs": ["dist/**"]
+    },
+    "check-types": {
+      "dependsOn": ["^build"],
+      "outputs": []
+    },
+    "dev": {
+      "dependsOn": ["^build"],
+      "cache": false,
+      "persistent": true
+    },
+    "generate": {
+      "dependsOn": ["build"],
+      "cache": false
+    },
+    "generate:api": {
+      "dependsOn": ["@kanvas/contracts#generate"],
+      "cache": false
+    },
+    "lint": {
+      "outputs": []
+    },
+    "test": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", "vitest.config.ts"],
+      "outputs": []
+    },
+    "@kanvas/storage#check-types": {
+      "dependsOn": ["build"],
+      "outputs": []
+    },
+    "@kanvas/storage#test": {
+      "dependsOn": ["build"],
+      "inputs": ["$TURBO_DEFAULT$", "vitest.config.ts"],
+      "outputs": []
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "kanvas.skill-catalog-asset/v1",
+  "skillKey": "first-party.image-quality-assess",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "图片质量诊断",
+      "en-US": "Image quality assessment"
+    }
+  },
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "assess",
+      "displayName": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "诊断图片质量",
+          "en-US": "Image quality assessment"
+        }
+      },
+      "description": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "本地分析模糊、曝光、噪声、压缩与主体尺度，只返回质量事实。",
+          "en-US": "Assess blur, exposure, noise, compression, and subject scale without changing the image."
+        }
+      },
+      "category": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "图片分析",
+          "en-US": "Image analysis"
+        }
+      },
+      "outputPresentation": "board",
+      "workflow": {
+        "key": "image_quality_assess",
+        "revision": 1,
+        "canonicalDigest": "sha256:487499e66a0d7b6ddd357092d571285f73f58070fe9b3d66eeca767f6c5711e6"
+      }
+    }
+  ]
+}

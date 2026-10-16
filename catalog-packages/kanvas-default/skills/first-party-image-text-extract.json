@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "kanvas.skill-catalog-asset/v1",
+  "skillKey": "first-party.image-text-extract",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "提取文字",
+      "en-US": "Text extraction"
+    }
+  },
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "extract",
+      "displayName": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "提取文字",
+          "en-US": "Text extraction"
+        }
+      },
+      "description": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "返回文字、语言、方向、置信度和源图坐标 Polygon，不修改图片。",
+          "en-US": "Return text, language, direction, confidence, and source-coordinate polygons."
+        }
+      },
+      "category": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "内容提取",
+          "en-US": "Image analysis"
+        }
+      },
+      "outputPresentation": "single_review",
+      "workflow": {
+        "key": "image_text_extract",
+        "revision": 1,
+        "canonicalDigest": "sha256:eda544b700e105f5e3cbe4b1a003fab3d60397f631c662b08c514652dd5339de"
+      }
+    }
+  ]
+}

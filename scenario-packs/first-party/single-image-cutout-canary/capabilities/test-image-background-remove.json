@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "contractKey": "test.image.background.remove",
+  "revision": 1,
+  "inputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "kanvas.deterministic-image-input.v1",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "sourceArtifactId"
+    ],
+    "properties": {
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+      }
+    }
+  },
+  "outputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "kanvas.deterministic-image-result.v1",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "schemaVersion",
+      "imageArtifactId",
+      "sourceArtifactId",
+      "capabilityRunId"
+    ],
+    "properties": {
+      "schemaVersion": {
+        "const": "kanvas.deterministic-image-result/v1"
+      },
+      "imageArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+      },
+      "capabilityRunId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+      }
+    }
+  },
+  "idempotencyMode": "keyed",
+  "supportedInvokers": [
+    "workflow"
+  ]
+}

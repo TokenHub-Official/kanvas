@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "kanvas.capability-implementation/v1",
+  "implementationKey": "first-party.image.generate.gemini-provider",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "图片生成 · 模型服务",
+      "en-US": "Image generate · Model service"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "通过模型服务提供图片生成，上层只依赖固定公开契约。",
+      "en-US": "Provides Image generate through Model service behind the stable public contract."
+    }
+  },
+  "contract": {
+    "key": "image.generate",
+    "revision": 1,
+    "canonicalDigest": "sha256:60d1cc4a6436d3a4b1297d571b46e43a51d07c6ffb4f2487bd307679c7260377"
+  },
+  "adapter": {
+    "adapterKey": "gemini.generate-content.image.v1",
+    "revision": 2,
+    "canonicalDigest": "sha256:5bdfea90f237581281ba51f06bee62ec52ed00c38921e57fbe7e1e34595191bf"
+  },
+  "source": {
+    "kind": "model_service",
+    "selector": {
+      "operation": "image.generate",
+      "apiSurface": "generate-content.image.v1"
+    }
+  },
+  "configuration": {
+    "protocol": "generate-content.image.v1",
+    "promptTemplate": "{{prompt}}",
+    "outputMaterialization": "trusted_storage"
+  },
+  "inputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "input",
+    "expression": {
+      "op": "source",
+      "root": "input",
+      "pointer": ""
+    }
+  },
+  "outputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "output",
+    "expression": {
+      "op": "source",
+      "root": "result",
+      "pointer": ""
+    }
+  },
+  "fixtures": [
+    {
+      "name": "default contract mapping",
+      "capabilityInput": {
+        "prompt": "sample"
+      },
+      "configuration": {
+        "protocol": "generate-content.image.v1",
+        "promptTemplate": "{{prompt}}",
+        "outputMaterialization": "trusted_storage"
+      },
+      "expectedAdapterInput": {
+        "prompt": "sample"
+      },
+      "adapterResult": {
+        "schemaVersion": "kanvas.image-generate-result/v1",
+        "imageArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "sample",
+          "outputIndex": 0
+        }
+      },
+      "expectedCapabilityOutput": {
+        "schemaVersion": "kanvas.image-generate-result/v1",
+        "imageArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "sample",
+          "outputIndex": 0
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "key": "image_denoise",
+  "entryNodeKey": "denoise",
+  "limits": {
+    "maxNodeRuns": 1,
+    "timeoutMs": 180000
+  },
+  "nodes": [
+    {
+      "key": "denoise",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "image.denoise",
+        "revision": 1,
+        "canonicalDigest": "sha256:4313406ee16a394b710f240e662be4a933df653fdeb12488bc0ae832c260721a"
+      },
+      "input": {
+        "$value": {
+          "source": "workflow_input",
+          "pointer": ""
+        }
+      },
+      "next": []
+    }
+  ],
+  "outputs": {
+    "schemaVersion": {
+      "required": true,
+      "value": "kanvas.image-denoise-result/v1"
+    },
+    "imageArtifactId": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "denoise",
+          "scope": "root",
+          "pointer": "/imageArtifactId"
+        }
+      }
+    },
+    "noiseEstimate": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "denoise",
+          "scope": "root",
+          "pointer": "/noiseEstimate"
+        }
+      }
+    },
+    "method": {
+      "required": true,
+      "value": "median_blend"
+    },
+    "strength": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "denoise",
+          "scope": "root",
+          "pointer": "/strength"
+        }
+      }
+    },
+    "qualitySignals": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "denoise",
+          "scope": "root",
+          "pointer": "/qualitySignals"
+        }
+      }
+    }
+  }
+}

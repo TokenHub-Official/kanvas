@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "skillKey": "first-party.image-background-compose",
+  "displayName": "背景合成",
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "compose",
+      "displayName": "合成背景",
+      "description": "使用确定性几何和 Alpha 规则将前景放置到颜色或图片背景。",
+      "category": "图片编辑",
+      "outputPresentation": "board",
+      "workflowPath": "workflows/image-background-compose.json"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "key": "image_generate",
+  "entryNodeKey": "generate",
+  "limits": {
+    "maxNodeRuns": 1,
+    "timeoutMs": 300000
+  },
+  "nodes": [
+    {
+      "key": "generate",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "image.generate",
+        "revision": 1,
+        "canonicalDigest": "sha256:72f47781bd10c36283c6003cc3132fcf85d3658c9117e2b4703c4b4e605277c5"
+      },
+      "input": {
+        "$value": {
+          "source": "workflow_input",
+          "pointer": ""
+        }
+      },
+      "next": []
+    }
+  ],
+  "outputs": {
+    "schemaVersion": {
+      "required": true,
+      "value": "kanvas.image-generate-result/v1"
+    },
+    "imageArtifactId": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "generate",
+          "scope": "root",
+          "pointer": "/imageArtifactId"
+        }
+      }
+    }
+  }
+}

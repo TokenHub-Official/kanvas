@@ -1,0 +1,248 @@
+{
+  "schemaVersion": "kanvas.workflow-catalog-asset/v1",
+  "workflowKey": "image_light_enhance",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "光照增强",
+      "en-US": "Lighting enhancement"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "使用可追踪参数确定性调整曝光、阴影、高光和白平衡。",
+      "en-US": "Adjust exposure, shadows, highlights, and white balance with traceable parameters."
+    }
+  },
+  "category": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "画质修复",
+      "en-US": "Image enhancement"
+    }
+  },
+  "topology": {
+    "schemaVersion": 1,
+    "key": "image_light_enhance",
+    "entryNodeKey": "enhance",
+    "limits": {
+      "maxNodeRuns": 1,
+      "timeoutMs": 180000
+    },
+    "nodes": [
+      {
+        "key": "enhance",
+        "kind": "invoke",
+        "capability": {
+          "contractId": "image.light.enhance",
+          "revision": 1,
+          "canonicalDigest": "sha256:9be295245d7ed7b1c702c26e99c4eadcc6052a04d5e9c1d4fb0b381ad0d631b8"
+        },
+        "input": {
+          "$value": {
+            "source": "workflow_input",
+            "pointer": ""
+          }
+        },
+        "next": []
+      }
+    ],
+    "outputs": {
+      "schemaVersion": {
+        "required": true,
+        "value": "kanvas.image-light-enhance-result/v1"
+      },
+      "imageArtifactId": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "enhance",
+            "scope": "root",
+            "pointer": "/imageArtifactId"
+          }
+        }
+      },
+      "parameters": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "enhance",
+            "scope": "root",
+            "pointer": "/parameters"
+          }
+        }
+      },
+      "qualitySignals": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "enhance",
+            "scope": "root",
+            "pointer": "/qualitySignals"
+          }
+        }
+      }
+    }
+  },
+  "inputSchema": {
+    "$id": "kanvas.image-light-enhance-input.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["sourceArtifactId"],
+    "properties": {
+      "tint": {
+        "type": "number",
+        "default": 0,
+        "maximum": 1,
+        "minimum": -1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "shadows": {
+        "type": "number",
+        "default": 0,
+        "maximum": 1,
+        "minimum": -1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "highlights": {
+        "type": "number",
+        "default": 0,
+        "maximum": 1,
+        "minimum": -1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "temperature": {
+        "type": "number",
+        "default": 0,
+        "maximum": 1,
+        "minimum": -1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "exposureStops": {
+        "type": "number",
+        "default": 0,
+        "maximum": 2,
+        "minimum": -2,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "outputSchema": {
+    "$id": "kanvas.image-light-enhance-result.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "schemaVersion",
+      "imageArtifactId",
+      "parameters",
+      "qualitySignals"
+    ],
+    "properties": {
+      "parameters": {
+        "type": "object",
+        "required": [
+          "exposureStops",
+          "shadows",
+          "highlights",
+          "temperature",
+          "tint"
+        ],
+        "properties": {
+          "tint": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": -1
+          },
+          "shadows": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": -1
+          },
+          "highlights": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": -1
+          },
+          "temperature": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": -1
+          },
+          "exposureStops": {
+            "type": "number",
+            "maximum": 2,
+            "minimum": -2
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "schemaVersion": {
+        "const": "kanvas.image-light-enhance-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "required": [
+          "schemaVersion",
+          "method",
+          "generative",
+          "alphaPreserved",
+          "clippedLowRatio",
+          "clippedHighRatio"
+        ],
+        "properties": {
+          "method": {
+            "const": "deterministic_tone_curve"
+          },
+          "generative": {
+            "const": false
+          },
+          "schemaVersion": {
+            "const": "kanvas.image-light-enhance-quality/v1"
+          },
+          "alphaPreserved": {
+            "const": true
+          },
+          "clippedLowRatio": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0
+          },
+          "clippedHighRatio": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "quality.signals"
+      },
+      "imageArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "requiredCapabilities": [
+    {
+      "key": "image.light.enhance",
+      "revision": 1,
+      "canonicalDigest": "sha256:9be295245d7ed7b1c702c26e99c4eadcc6052a04d5e9c1d4fb0b381ad0d631b8"
+    }
+  ],
+  "canonicalDigest": "sha256:35fb026d0e124fc9b0fab8368f7a40e10f05b3a598ca48e533ce98ea920e98dd"
+}

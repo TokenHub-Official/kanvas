@@ -1,0 +1,16 @@
+{
+  "colors": [
+    {
+      "red": 220,
+      "green": 30,
+      "blue": 30,
+      "proportion": 0.6
+    },
+    {
+      "red": 20,
+      "green": 20,
+      "blue": 20,
+      "proportion": 0.4
+    }
+  ]
+}

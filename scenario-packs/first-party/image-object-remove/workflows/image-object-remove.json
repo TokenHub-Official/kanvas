@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "key": "image_object_remove",
+  "entryNodeKey": "remove",
+  "limits": {
+    "maxNodeRuns": 1,
+    "timeoutMs": 300000
+  },
+  "nodes": [
+    {
+      "key": "remove",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "image.object.remove",
+        "revision": 1,
+        "canonicalDigest": "sha256:17642c3a8100a24c4733bcd132c077874b72816ee1533ca79bf2e13bfac63535"
+      },
+      "input": {
+        "$value": {
+          "source": "workflow_input",
+          "pointer": ""
+        }
+      },
+      "next": []
+    }
+  ],
+  "outputs": {
+    "schemaVersion": {
+      "required": true,
+      "value": "kanvas.image-object-remove-result/v1"
+    },
+    "repairedArtifactId": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "remove",
+          "scope": "root",
+          "pointer": "/repairedArtifactId"
+        }
+      }
+    },
+    "removedRegionMaskArtifactId": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "remove",
+          "scope": "root",
+          "pointer": "/removedRegionMaskArtifactId"
+        }
+      }
+    },
+    "qualitySignals": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "remove",
+          "scope": "root",
+          "pointer": "/qualitySignals"
+        }
+      }
+    }
+  }
+}

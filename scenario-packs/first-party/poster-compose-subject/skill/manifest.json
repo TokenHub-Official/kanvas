@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "skillKey": "first-party.poster-compose-subject",
+  "displayName": "主体生成并融入背景",
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "compose",
+      "displayName": "主体生成并融入背景",
+      "description": "生成主体、提取透明前景和蒙版，再将主体合成到用户提供的背景图。",
+      "category": "海报制作",
+      "outputPresentation": "single_review",
+      "workflowPath": "workflows/poster-compose-subject.json"
+    }
+  ]
+}

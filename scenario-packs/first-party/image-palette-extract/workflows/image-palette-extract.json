@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "key": "image_palette_extract",
+  "entryNodeKey": "extract",
+  "limits": {
+    "maxNodeRuns": 1,
+    "timeoutMs": 120000
+  },
+  "nodes": [
+    {
+      "key": "extract",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "image.palette.extract",
+        "revision": 1,
+        "canonicalDigest": "sha256:df778e5035354f8c33ee860b6539a277fa6de374f6f141d274896123ec1ab90f"
+      },
+      "input": {
+        "$value": {
+          "source": "workflow_input",
+          "pointer": ""
+        }
+      },
+      "next": []
+    }
+  ],
+  "outputs": {
+    "schemaVersion": {
+      "required": true,
+      "value": "kanvas.image-palette-extract-result/v1"
+    },
+    "sourceWidth": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "extract",
+          "scope": "root",
+          "pointer": "/sourceWidth"
+        }
+      }
+    },
+    "sourceHeight": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "extract",
+          "scope": "root",
+          "pointer": "/sourceHeight"
+        }
+      }
+    },
+    "colorSpace": {
+      "required": true,
+      "value": "srgb"
+    },
+    "colors": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "extract",
+          "scope": "root",
+          "pointer": "/colors"
+        }
+      }
+    },
+    "transparentRatio": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "extract",
+          "scope": "root",
+          "pointer": "/transparentRatio"
+        }
+      }
+    },
+    "qualitySignals": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "extract",
+          "scope": "root",
+          "pointer": "/qualitySignals"
+        }
+      }
+    }
+  }
+}

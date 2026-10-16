@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "packId": "first-party.poster-compose-subject",
+  "displayName": "Generate subject and compose poster",
+  "workflows": [{ "path": "workflows/poster-compose-subject.json" }],
+  "skill": { "path": "skill/manifest.json" },
+  "capabilities": [],
+  "requiredCapabilities": [
+    {
+      "contractId": "image.generate",
+      "revision": 2,
+      "canonicalDigest": "sha256:ab27d66ae9e0ce75be370628477f388468a8330b2c7e864be026cf01b7851314"
+    },
+    {
+      "contractId": "image.background.remove",
+      "revision": 2,
+      "canonicalDigest": "sha256:225c8e45a50157aa201e94119857549a8eaa7c780c6635ff40f28d14c9811024"
+    },
+    {
+      "contractId": "image.background.compose",
+      "revision": 1,
+      "canonicalDigest": "sha256:12ad204a0ae4b2537d3103ffa8d9a4c3878ae774657ac99d823d75c1d6d040f9"
+    }
+  ]
+}

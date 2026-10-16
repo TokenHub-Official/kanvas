@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "packId": "first-party.image-quality-assess",
+  "displayName": "Image quality assess",
+  "workflows": [
+    {
+      "path": "workflows/image-quality-assess.json"
+    }
+  ],
+  "skill": {
+    "path": "skill/manifest.json"
+  },
+  "capabilities": [
+    {
+      "path": "capabilities/image-quality-assess.json"
+    }
+  ],
+  "requiredCapabilities": [
+    {
+      "contractId": "image.quality.assess",
+      "revision": 1,
+      "canonicalDigest": "sha256:63d124e91065b2e72af997ccfa1c834bc6595ec22f18aaae2e0037579088a398"
+    }
+  ]
+}

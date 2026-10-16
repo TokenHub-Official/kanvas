@@ -1,0 +1,170 @@
+{
+  "schemaVersion": "kanvas.capability-scenario-fixture/v1",
+  "key": "poster.complex",
+  "title": "主体生成并融入背景",
+  "templateInputs": [
+    {
+      "key": "backgroundImage",
+      "label": "背景图",
+      "semanticType": "artifact.background",
+      "required": true,
+      "editor": "file"
+    },
+    {
+      "key": "subjectPrompt",
+      "label": "主体描述",
+      "semanticType": "prompt.rich",
+      "required": true,
+      "editor": "rich_prompt"
+    }
+  ],
+  "nodes": [
+    {
+      "nodeId": "generate-subject",
+      "capability": { "key": "image.generate", "revision": 2 },
+      "bindings": [
+        {
+          "parameterKey": "prompt",
+          "sourceMode": "mixed_rich_text",
+          "value": {
+            "kind": "rich_text",
+            "segments": [
+              {
+                "kind": "text",
+                "text": "生成单一清晰主体，便于后续抠图。主体描述："
+              },
+              {
+                "kind": "reference",
+                "source": "workflow_input",
+                "fieldKey": "subjectPrompt"
+              }
+            ]
+          }
+        },
+        {
+          "parameterKey": "background",
+          "sourceMode": "constant",
+          "value": "transparent"
+        }
+      ]
+    },
+    {
+      "nodeId": "remove-subject-background",
+      "capability": { "key": "image.background.remove", "revision": 2 },
+      "bindings": [
+        {
+          "parameterKey": "sourceArtifactId",
+          "sourceMode": "upstream",
+          "source": {
+            "kind": "node_output",
+            "nodeId": "generate-subject",
+            "outputKey": "imageArtifactId"
+          }
+        },
+        {
+          "parameterKey": "refinement",
+          "sourceMode": "constant",
+          "value": "fine"
+        }
+      ],
+      "outputBundles": [
+        {
+          "key": "cutout_result",
+          "members": [
+            {
+              "outputKey": "foregroundArtifactId",
+              "semanticType": "artifact.foreground",
+              "role": "foreground"
+            },
+            {
+              "outputKey": "maskArtifactId",
+              "semanticType": "artifact.mask",
+              "role": "mask"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nodeId": "compose-on-background",
+      "capability": { "key": "image.background.compose", "revision": 1 },
+      "uiProfileKey": "background_compose",
+      "bindings": [
+        {
+          "parameterKey": "foregroundArtifactId",
+          "sourceMode": "upstream",
+          "source": {
+            "kind": "node_output",
+            "nodeId": "remove-subject-background",
+            "outputKey": "foregroundArtifactId"
+          }
+        },
+        {
+          "parameterKey": "maskArtifactId",
+          "sourceMode": "derived",
+          "derivation": {
+            "kind": "same_bundle_role",
+            "fromParameter": "foregroundArtifactId",
+            "role": "mask",
+            "optional": true
+          }
+        },
+        {
+          "parameterKey": "background",
+          "sourceMode": "workflow_input",
+          "fieldKey": "backgroundImage",
+          "compile": {
+            "kind": "background_artifact",
+            "fit": "cover"
+          }
+        },
+        {
+          "parameterKey": "canvas",
+          "sourceMode": "constant",
+          "value": { "width": 1024, "height": 1024 }
+        },
+        {
+          "parameterKey": "placement",
+          "sourceMode": "constant",
+          "value": {
+            "x": 128,
+            "y": 128,
+            "width": 768,
+            "height": 768,
+            "fit": "contain",
+            "opacity": 1
+          }
+        }
+      ]
+    }
+  ],
+  "workflowOutput": [
+    {
+      "key": "resultImage",
+      "semanticType": "artifact.image",
+      "source": {
+        "kind": "node_output",
+        "nodeId": "compose-on-background",
+        "outputKey": "imageArtifactId"
+      },
+      "primary": true
+    }
+  ],
+  "export": {
+    "declarationKey": "poster.compose.subject-on-background",
+    "sourceKind": "workflow",
+    "exposedInputs": ["backgroundImage", "subjectPrompt"],
+    "exposedOutputs": ["resultImage"]
+  },
+  "expectedAuthoring": {
+    "composeSections": ["画布", "前景", "背景"],
+    "foregroundLabel": "背景移除 / 透明前景",
+    "maskVisibility": "derived_summary",
+    "backgroundEditor": "background_source",
+    "placementEditor": "placement",
+    "rawJsonEditors": 0
+  },
+  "runtimeGaps": [
+    "Semantic bundle identity and same_bundle_role derivation are not persisted by the current runtime lineage. Authoring currently compiles the derived mask into an explicit node output reference."
+  ]
+}

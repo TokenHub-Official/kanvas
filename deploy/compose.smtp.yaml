@@ -1,0 +1,17 @@
+services:
+  kanvas:
+    environment:
+      KANVAS_AUTH_EMAIL_SMTP_HOST: ${KANVAS_AUTH_EMAIL_SMTP_HOST:?set the SMTP host}
+      KANVAS_AUTH_EMAIL_SMTP_PORT: ${KANVAS_AUTH_EMAIL_SMTP_PORT:-587}
+      KANVAS_AUTH_EMAIL_SMTP_SECURE: ${KANVAS_AUTH_EMAIL_SMTP_SECURE:-false}
+      KANVAS_AUTH_EMAIL_SMTP_REQUIRE_TLS: ${KANVAS_AUTH_EMAIL_SMTP_REQUIRE_TLS:-true}
+      KANVAS_AUTH_EMAIL_SMTP_USER: ${KANVAS_AUTH_EMAIL_SMTP_USER:?set the SMTP user}
+      KANVAS_AUTH_EMAIL_SMTP_PASSWORD_FILE: /run/secrets/kanvas_smtp_password
+      KANVAS_AUTH_EMAIL_FROM_ADDRESS: ${KANVAS_AUTH_EMAIL_FROM_ADDRESS:?set the verification-email sender address}
+      KANVAS_AUTH_EMAIL_FROM_NAME: ${KANVAS_AUTH_EMAIL_FROM_NAME:-Kanvas}
+    secrets:
+      - kanvas_smtp_password
+
+secrets:
+  kanvas_smtp_password:
+    file: ${KANVAS_SECRETS_DIR:-./secrets}/kanvas_smtp_password

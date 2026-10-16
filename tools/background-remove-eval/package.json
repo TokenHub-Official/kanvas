@@ -1,0 +1,29 @@
+{
+  "name": "@kanvas/background-remove-eval",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "check-types": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src test",
+    "prepare:public-candidate": "node scripts/prepare-public-candidate-corpus.mjs",
+    "render:contact-sheet": "node scripts/render-corpus-contact-sheet.mjs",
+    "render:result-sheet": "node scripts/render-result-contact-sheet.mjs",
+    "evaluate:subject-detect": "node scripts/evaluate-subject-detect.mjs",
+    "run:worker-candidate": "node scripts/run-worker-candidate.mjs",
+    "start": "node dist/cli.js",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "onnxruntime-node": "catalog:",
+    "sharp": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "license": "Apache-2.0"
+}

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "packId": "first-party.image-crop-suggest",
+  "displayName": "Image crop suggest",
+  "workflows": [
+    {
+      "path": "workflows/image-crop-suggest.json"
+    }
+  ],
+  "skill": {
+    "path": "skill/manifest.json"
+  },
+  "capabilities": [
+    {
+      "path": "capabilities/image-crop-suggest.json"
+    }
+  ],
+  "requiredCapabilities": [
+    {
+      "contractId": "image.crop.suggest",
+      "revision": 2,
+      "canonicalDigest": "sha256:051ebe3b9fbdd1205ed07af0079c91c55c3352e34c92fdc7a7bed6b0239286de"
+    }
+  ]
+}

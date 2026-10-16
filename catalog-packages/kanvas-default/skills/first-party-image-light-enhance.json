@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "kanvas.skill-catalog-asset/v1",
+  "skillKey": "first-party.image-light-enhance",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "光照增强",
+      "en-US": "Lighting enhancement"
+    }
+  },
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "enhance",
+      "displayName": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "光照增强",
+          "en-US": "Lighting enhancement"
+        }
+      },
+      "description": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "使用可追踪参数确定性调整曝光、阴影、高光和白平衡。",
+          "en-US": "Adjust exposure, shadows, highlights, and white balance with traceable parameters."
+        }
+      },
+      "category": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "画质修复",
+          "en-US": "Image enhancement"
+        }
+      },
+      "outputPresentation": "board",
+      "workflow": {
+        "key": "image_light_enhance",
+        "revision": 1,
+        "canonicalDigest": "sha256:35fb026d0e124fc9b0fab8368f7a40e10f05b3a598ca48e533ce98ea920e98dd"
+      }
+    }
+  ]
+}

@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "kanvas.capability-declaration-asset/v1",
+  "contract": {
+    "key": "image.denoise",
+    "revision": 1,
+    "canonicalDigest": "sha256:69d938542b5535de25f24a073641535b473f940bcccfeab8e95262e7ca8b22d4"
+  },
+  "declaration": {
+    "schemaVersion": "kanvas.capability-declaration/v1",
+    "catalog": {
+      "title": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "图像降噪",
+          "en-US": "Image denoise"
+        }
+      },
+      "description": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "降低图片噪点。",
+          "en-US": "Reduce image noise."
+        }
+      },
+      "category": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "图像处理",
+          "en-US": "Image processing"
+        }
+      },
+      "sourceKind": "built_in",
+      "tags": ["denoise", "quality"],
+      "surfaces": ["workflow", "agent", "canvas"]
+    },
+    "parameters": [
+      {
+        "key": "strength",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "降噪强度",
+            "en-US": "Denoise strength"
+          }
+        },
+        "semanticType": "number.scalar",
+        "required": false,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["constant", "workflow_input", "upstream"],
+          "default": "constant"
+        },
+        "editor": "number",
+        "defaultValue": 0.5
+      },
+      {
+        "key": "sourceArtifactId",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "源图片",
+            "en-US": "Source image"
+          }
+        },
+        "description": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "选择需要处理的流程输入或上游图片。",
+            "en-US": "Choose a workflow input or upstream image to process."
+          }
+        },
+        "semanticType": "artifact.image",
+        "required": true,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["workflow_input", "upstream", "canvas_selection"],
+          "default": "upstream"
+        },
+        "editor": "artifact_picker"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "imageArtifactId",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "结果图",
+            "en-US": "Result image"
+          }
+        },
+        "semanticType": "artifact.image",
+        "primary": true,
+        "visibility": "author"
+      },
+      {
+        "key": "method",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "处理方式",
+            "en-US": "Method"
+          }
+        },
+        "semanticType": "value.any",
+        "primary": false,
+        "visibility": "author"
+      },
+      {
+        "key": "noiseEstimate",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "噪声估计",
+            "en-US": "Noise estimate"
+          }
+        },
+        "semanticType": "number.scalar",
+        "primary": false,
+        "visibility": "author"
+      },
+      {
+        "key": "strength",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "降噪强度",
+            "en-US": "Denoise strength"
+          }
+        },
+        "semanticType": "number.scalar",
+        "primary": false,
+        "visibility": "author"
+      },
+      {
+        "key": "qualitySignals",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "质量信息",
+            "en-US": "Quality signals"
+          }
+        },
+        "semanticType": "quality.signals",
+        "primary": false,
+        "visibility": "advanced"
+      },
+      {
+        "key": "schemaVersion",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "结果版本",
+            "en-US": "Result version"
+          }
+        },
+        "semanticType": "value.any",
+        "primary": false,
+        "visibility": "hidden"
+      }
+    ],
+    "canvas": {
+      "actionGroup": "image.edit",
+      "interactionBehavior": "direct",
+      "completionBehavior": "review_required",
+      "outputModes": ["replace_content", "add_node", "asset_only"],
+      "order": 20
+    }
+  }
+}

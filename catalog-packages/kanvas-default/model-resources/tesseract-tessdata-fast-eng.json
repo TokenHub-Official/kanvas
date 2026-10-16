@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "kanvas.model-resource-catalog-asset/v1",
+  "resourceKey": "tesseract.tessdata-fast-eng",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "英文文字识别模型",
+      "en-US": "English text recognition model"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "识别图片中的英文文字，并返回可编辑文本和文字区域。",
+      "en-US": "Recognizes English text in images and returns editable text with its detected regions."
+    }
+  },
+  "family": "tesseract",
+  "variant": "tessdata-fast-eng",
+  "sourceUrl": "https://raw.githubusercontent.com/tesseract-ocr/tessdata_fast/87416418657359cb625c412a48b6e1d6d41c29bd/eng.traineddata",
+  "source": {
+    "kind": "https",
+    "url": "https://raw.githubusercontent.com/tesseract-ocr/tessdata_fast/87416418657359cb625c412a48b6e1d6d41c29bd/eng.traineddata"
+  },
+  "expectedSha256": "sha256:7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
+  "expectedByteSize": "4113088",
+  "format": "tesseract_data",
+  "mediaType": "application/octet-stream",
+  "license": {
+    "spdxId": "Apache-2.0",
+    "sourceUrl": "https://github.com/tesseract-ocr/tessdata_fast"
+  },
+  "nativeInterface": {
+    "protocol": "structured",
+    "inputSchema": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["image", "language"],
+      "properties": {
+        "image": {
+          "type": "string",
+          "x-kanvas-semantic-type": "artifact.image"
+        },
+        "language": {
+          "const": "en",
+          "x-kanvas-semantic-type": "text.language"
+        }
+      }
+    },
+    "outputSchema": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "blocks"],
+      "properties": {
+        "text": {
+          "type": "string",
+          "x-kanvas-semantic-type": "text.plain"
+        },
+        "blocks": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "x-kanvas-semantic-type": "value.any"
+        }
+      }
+    }
+  },
+  "executionTargets": ["worker"],
+  "revisionDigest": "sha256:812de0d025ac4742dc37cd99faace30cf38255ddfa0d6b8a054268db18b9833e"
+}

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "key": "poster_generate_simple",
+  "entryNodeKey": "generate_poster",
+  "limits": {
+    "maxNodeRuns": 1,
+    "timeoutMs": 300000
+  },
+  "nodes": [
+    {
+      "key": "generate_poster",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "image.generate",
+        "revision": 2,
+        "canonicalDigest": "sha256:ab27d66ae9e0ce75be370628477f388468a8330b2c7e864be026cf01b7851314"
+      },
+      "input": {
+        "prompt": {
+          "$string": [
+            "生成一张构图完整、视觉层级清晰、保留合理文字空间、适合商业投放的海报。用户额外需求：",
+            {
+              "$value": {
+                "source": "workflow_input",
+                "pointer": "/userPrompt"
+              }
+            }
+          ]
+        }
+      },
+      "next": []
+    }
+  ],
+  "outputs": {
+    "schemaVersion": {
+      "required": true,
+      "value": "kanvas.poster-generate-simple-result/v1"
+    },
+    "resultImageArtifactId": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "generate_poster",
+          "scope": "root",
+          "pointer": "/imageArtifactId"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,491 @@
+{
+  "schemaVersion": "kanvas.background-remove-eval-corpus/v1",
+  "corpusId": "atom-01-public-candidate-2026-08",
+  "anonymized": true,
+  "samples": [
+    {
+      "id": "dis-bag",
+      "categories": [
+        "product",
+        "large_image"
+      ],
+      "sourceFile": "sources/dis-bag.jpg",
+      "groundTruthMaskFile": "masks/dis-bag.png",
+      "annotation": {
+        "decision": "direct_use",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Reviewed as accurate enough for direct use in representative design work; no Mask rework required."
+      }
+    },
+    {
+      "id": "dis-eyeglasses",
+      "categories": [
+        "product",
+        "transparent_or_translucent"
+      ],
+      "sourceFile": "sources/dis-eyeglasses.jpg",
+      "groundTruthMaskFile": "masks/dis-eyeglasses.png",
+      "annotation": {
+        "decision": "direct_use",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Reviewed as accurate enough for direct use in representative design work; no Mask rework required."
+      }
+    },
+    {
+      "id": "dis-jewelry",
+      "categories": [
+        "product",
+        "small_subject"
+      ],
+      "sourceFile": "sources/dis-jewelry.jpg",
+      "groundTruthMaskFile": "masks/dis-jewelry.png",
+      "annotation": {
+        "decision": "direct_use",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Reviewed as accurate enough for direct use in representative design work; no Mask rework required."
+      }
+    },
+    {
+      "id": "dis-ring",
+      "categories": [
+        "product",
+        "small_subject"
+      ],
+      "sourceFile": "sources/dis-ring.jpg",
+      "groundTruthMaskFile": "masks/dis-ring.png",
+      "annotation": {
+        "decision": "direct_use",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Reviewed as accurate enough for direct use in representative design work; no Mask rework required."
+      }
+    },
+    {
+      "id": "dis-watch",
+      "categories": [
+        "product",
+        "small_subject"
+      ],
+      "sourceFile": "sources/dis-watch.jpg",
+      "groundTruthMaskFile": "masks/dis-watch.png",
+      "annotation": {
+        "decision": "direct_use",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Reviewed as accurate enough for direct use in representative design work; no Mask rework required."
+      }
+    },
+    {
+      "id": "dis-shoe",
+      "categories": [
+        "product",
+        "shadow"
+      ],
+      "sourceFile": "sources/dis-shoe.jpg",
+      "groundTruthMaskFile": "masks/dis-shoe.png",
+      "annotation": {
+        "decision": "direct_use",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Reviewed as accurate enough for direct use in representative design work; no Mask rework required."
+      }
+    },
+    {
+      "id": "dis-ladder",
+      "categories": [
+        "product",
+        "complex_background",
+        "large_image"
+      ],
+      "sourceFile": "sources/dis-ladder.jpg",
+      "groundTruthMaskFile": "masks/dis-ladder.png",
+      "annotation": {
+        "decision": "direct_use",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Reviewed as accurate enough for direct use in representative design work; no Mask rework required."
+      }
+    },
+    {
+      "id": "dis-table-chair",
+      "categories": [
+        "product",
+        "multiple_subjects",
+        "complex_background"
+      ],
+      "sourceFile": "sources/dis-table-chair.jpg",
+      "groundTruthMaskFile": "masks/dis-table-chair.png",
+      "annotation": {
+        "decision": "direct_use",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Reviewed as accurate enough for direct use in representative design work; no Mask rework required."
+      }
+    },
+    {
+      "id": "dis-skeleton",
+      "categories": [
+        "product",
+        "complex_background"
+      ],
+      "sourceFile": "sources/dis-skeleton.jpg",
+      "groundTruthMaskFile": "masks/dis-skeleton.png",
+      "annotation": {
+        "decision": "direct_use",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Reviewed as accurate enough for direct use in representative design work; no Mask rework required."
+      }
+    },
+    {
+      "id": "dis-butterfly",
+      "categories": [
+        "animal",
+        "hair_or_fur",
+        "small_subject"
+      ],
+      "sourceFile": "sources/dis-butterfly.jpg",
+      "groundTruthMaskFile": "masks/dis-butterfly.png",
+      "annotation": {
+        "decision": "direct_use",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Reviewed as accurate enough for direct use in representative design work; no Mask rework required."
+      }
+    },
+    {
+      "id": "dis-snake",
+      "categories": [
+        "animal",
+        "low_contrast"
+      ],
+      "sourceFile": "sources/dis-snake.jpg",
+      "groundTruthMaskFile": "masks/dis-snake.png",
+      "annotation": {
+        "decision": "direct_use",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Reviewed as accurate enough for direct use in representative design work; no Mask rework required."
+      }
+    },
+    {
+      "id": "dis-wine-glass",
+      "categories": [
+        "product",
+        "transparent_or_translucent",
+        "shadow",
+        "large_image"
+      ],
+      "sourceFile": "sources/dis-wine-glass.jpg",
+      "groundTruthMaskFile": "masks/dis-wine-glass.png",
+      "annotation": {
+        "decision": "direct_use",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Reviewed as accurate enough for direct use in representative design work; no Mask rework required."
+      }
+    },
+    {
+      "id": "dis-wire-whisk",
+      "categories": [
+        "product",
+        "complex_background"
+      ],
+      "sourceFile": "sources/dis-wire-whisk.jpg",
+      "groundTruthMaskFile": "masks/dis-wire-whisk.png",
+      "annotation": {
+        "decision": "direct_use",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Reviewed as accurate enough for direct use in representative design work; no Mask rework required."
+      }
+    },
+    {
+      "id": "dis-robot",
+      "categories": [
+        "product",
+        "small_subject"
+      ],
+      "sourceFile": "sources/dis-robot.jpg",
+      "groundTruthMaskFile": "masks/dis-robot.png",
+      "annotation": {
+        "decision": "direct_use",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Reviewed as accurate enough for direct use in representative design work; no Mask rework required."
+      }
+    },
+    {
+      "id": "dis-rock-climbing",
+      "categories": [
+        "person",
+        "multiple_subjects",
+        "complex_background",
+        "large_image"
+      ],
+      "sourceFile": "sources/dis-rock-climbing.jpg",
+      "groundTruthMaskFile": "masks/dis-rock-climbing.png",
+      "annotation": {
+        "decision": "direct_use",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Reviewed as accurate enough for direct use in representative design work; no Mask rework required."
+      }
+    },
+    {
+      "id": "dis-needle",
+      "categories": [
+        "product",
+        "small_subject"
+      ],
+      "sourceFile": "sources/dis-needle.jpg",
+      "groundTruthMaskFile": "masks/dis-needle.png",
+      "annotation": {
+        "decision": "direct_use",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Reviewed as accurate enough for direct use in representative design work; no Mask rework required."
+      }
+    },
+    {
+      "id": "dis-sailboat",
+      "categories": [
+        "multiple_subjects",
+        "complex_background",
+        "shadow"
+      ],
+      "sourceFile": "sources/dis-sailboat.jpg",
+      "groundTruthMaskFile": "masks/dis-sailboat.png",
+      "annotation": {
+        "decision": "direct_use",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Reviewed as accurate enough for direct use in representative design work; no Mask rework required."
+      }
+    },
+    {
+      "id": "dis-kite",
+      "categories": [
+        "small_subject",
+        "complex_background"
+      ],
+      "sourceFile": "sources/dis-kite.jpg",
+      "groundTruthMaskFile": "masks/dis-kite.png",
+      "annotation": {
+        "decision": "direct_use",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Reviewed as accurate enough for direct use in representative design work; no Mask rework required."
+      }
+    },
+    {
+      "id": "dis-sculpture",
+      "categories": [
+        "product",
+        "shadow",
+        "large_image"
+      ],
+      "sourceFile": "sources/dis-sculpture.jpg",
+      "groundTruthMaskFile": "masks/dis-sculpture.png",
+      "annotation": {
+        "decision": "direct_use",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Reviewed as accurate enough for direct use in representative design work; no Mask rework required."
+      }
+    },
+    {
+      "id": "p3m-person-01",
+      "categories": [
+        "person",
+        "hair_or_fur",
+        "complex_background",
+        "large_image"
+      ],
+      "sourceFile": "sources/p3m-person-01.jpg",
+      "groundTruthMaskFile": "masks/p3m-person-01.png",
+      "annotation": {
+        "decision": "direct_use",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Reviewed as accurate enough for direct use in representative design work; no Mask rework required."
+      }
+    },
+    {
+      "id": "p3m-person-02",
+      "categories": [
+        "person",
+        "hair_or_fur",
+        "complex_background",
+        "large_image"
+      ],
+      "sourceFile": "sources/p3m-person-02.jpg",
+      "groundTruthMaskFile": "masks/p3m-person-02.png",
+      "annotation": {
+        "decision": "direct_use",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Reviewed as accurate enough for direct use in representative design work; no Mask rework required."
+      }
+    },
+    {
+      "id": "p3m-person-03",
+      "categories": [
+        "person",
+        "hair_or_fur",
+        "complex_background",
+        "large_image"
+      ],
+      "sourceFile": "sources/p3m-person-03.jpg",
+      "groundTruthMaskFile": "masks/p3m-person-03.png",
+      "annotation": {
+        "decision": "direct_use",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Reviewed as accurate enough for direct use in representative design work; no Mask rework required."
+      }
+    },
+    {
+      "id": "p3m-person-04",
+      "categories": [
+        "person",
+        "hair_or_fur",
+        "complex_background",
+        "large_image"
+      ],
+      "sourceFile": "sources/p3m-person-04.jpg",
+      "groundTruthMaskFile": "masks/p3m-person-04.png",
+      "annotation": {
+        "decision": "direct_use",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Reviewed as accurate enough for direct use in representative design work; no Mask rework required."
+      }
+    },
+    {
+      "id": "p3m-person-05",
+      "categories": [
+        "person",
+        "hair_or_fur",
+        "complex_background",
+        "large_image"
+      ],
+      "sourceFile": "sources/p3m-person-05.jpg",
+      "groundTruthMaskFile": "masks/p3m-person-05.png",
+      "annotation": {
+        "decision": "direct_use",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Reviewed as accurate enough for direct use in representative design work; no Mask rework required."
+      }
+    },
+    {
+      "id": "camo-01",
+      "categories": [
+        "animal",
+        "low_contrast",
+        "complex_background"
+      ],
+      "sourceFile": "sources/camo-01.jpg",
+      "groundTruthMaskFile": "masks/camo-01.png",
+      "annotation": {
+        "decision": "fail_or_fallback",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Extreme camouflage differs materially from ground truth; reject or route to manual handling when encountered."
+      }
+    },
+    {
+      "id": "camo-02",
+      "categories": [
+        "animal",
+        "low_contrast",
+        "complex_background"
+      ],
+      "sourceFile": "sources/camo-02.jpg",
+      "groundTruthMaskFile": "masks/camo-02.png",
+      "annotation": {
+        "decision": "direct_use",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Reviewed as accurate enough for direct use in representative design work; no Mask rework required."
+      }
+    },
+    {
+      "id": "camo-03",
+      "categories": [
+        "animal",
+        "low_contrast",
+        "complex_background"
+      ],
+      "sourceFile": "sources/camo-03.jpg",
+      "groundTruthMaskFile": "masks/camo-03.png",
+      "annotation": {
+        "decision": "direct_use",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Reviewed as accurate enough for direct use in representative design work; no Mask rework required."
+      }
+    },
+    {
+      "id": "camo-04",
+      "categories": [
+        "animal",
+        "low_contrast",
+        "complex_background"
+      ],
+      "sourceFile": "sources/camo-04.jpg",
+      "groundTruthMaskFile": "masks/camo-04.png",
+      "annotation": {
+        "decision": "fail_or_fallback",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Extreme camouflage differs materially from ground truth; reject or route to manual handling when encountered."
+      }
+    },
+    {
+      "id": "camo-05",
+      "categories": [
+        "animal",
+        "low_contrast",
+        "complex_background"
+      ],
+      "sourceFile": "sources/camo-05.jpg",
+      "groundTruthMaskFile": "masks/camo-05.png",
+      "annotation": {
+        "decision": "fail_or_fallback",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Extreme camouflage differs materially from ground truth; reject or route to manual handling when encountered."
+      }
+    },
+    {
+      "id": "unsupported-animated-gif",
+      "categories": [
+        "unsupported_media"
+      ],
+      "sourceFile": "sources/unsupported-animated.gif",
+      "annotation": {
+        "decision": "fail_or_fallback",
+        "currentTool": "Kanvas IS-Net Browser and Worker comparison against benchmark ground truth",
+        "manualMinutes": 0,
+        "reworkReason": "Animated GIF is outside the supported static-image contract and must fail clearly."
+      }
+    }
+  ],
+  "thresholds": {
+    "approvedBy": "Kanvas product owner review",
+    "approvedAt": "2026-08-04T03:00:26.649Z",
+    "minimumMeanIou": 0.78,
+    "minimumMeanBoundaryF1": 0.68,
+    "maximumFailureRate": 0.04,
+    "maximumFallbackRate": 0.05,
+    "maximumP95LatencyMs": {
+      "browser": 15000,
+      "worker": 1200
+    }
+  }
+}

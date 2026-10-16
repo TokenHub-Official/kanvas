@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "skillKey": "first-party.image-palette-extract",
+  "displayName": "提取图片调色板",
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "extract",
+      "displayName": "提取调色板",
+      "description": "在浏览器本地确定性提取主色、比例与色彩角色。",
+      "category": "图片分析",
+      "outputPresentation": "board",
+      "workflowPath": "workflows/image-palette-extract.json"
+    }
+  ]
+}

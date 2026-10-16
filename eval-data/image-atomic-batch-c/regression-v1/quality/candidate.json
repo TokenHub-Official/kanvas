@@ -1,0 +1,12 @@
+{
+  "blurScore": 0,
+  "underExposureRatio": 0.4,
+  "overExposureRatio": 0,
+  "noiseScore": 0.131234,
+  "compressionScore": 0,
+  "subjectScaleRatio": 0.5,
+  "usability": "review",
+  "findings": [
+    "under_exposed"
+  ]
+}

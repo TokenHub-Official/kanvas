@@ -1,0 +1,100 @@
+title = "Kanvas secret scanning"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Non-secret deterministic test identifier"
+targetRules = ["generic-api-key"]
+condition = "AND"
+regexTarget = "line"
+paths = ['''(?:^|/)apps/server/test/workspace\-brand\.controller\.test\.ts$''']
+regexes = ['''^\s*idempotencyKey:\ "brand\-publish\-1",\s*$''']
+
+[[allowlists]]
+description = "Non-secret deterministic test identifier"
+targetRules = ["generic-api-key"]
+condition = "AND"
+regexTarget = "line"
+paths = ['''(?:^|/)apps/web/src/features/editor/canvas\-operation\-auto\-apply\-v1\.test\.ts$''']
+regexes = ['''^\s*idempotencyKey:\ "idempotency\-1",\s*$''']
+
+[[allowlists]]
+description = "Non-secret deterministic test identifier"
+targetRules = ["generic-api-key"]
+condition = "AND"
+regexTarget = "line"
+paths = ['''(?:^|/)apps/web/src/features/editor/canvas\-operation\-runtime\-v1\.test\.ts$''']
+regexes = ['''^\s*idempotencyKey:\ "idempotency\-1",\s*$''']
+
+[[allowlists]]
+description = "Public RFC 6455 WebSocket handshake nonce"
+targetRules = ["generic-api-key"]
+condition = "AND"
+regexTarget = "line"
+paths = ['''(?:^|/)deploy/runtime/container\-smoke\.mjs$''']
+regexes = ['''^\s*"GET\ /api/ws\ HTTP/1\.1\\r\\nHost:\ localhost\\r\\nUpgrade:\ websocket\\r\\nConnection:\ Upgrade\\r\\nSec\-WebSocket\-Key:\ dGhlIHNhbXBsZSBub25jZQ==\\r\\nSec\-WebSocket\-Version:\ 13\\r\\n\\r\\n",\s*$''']
+
+[[allowlists]]
+description = "Documented secret-file path, not a credential"
+targetRules = ["generic-api-key"]
+condition = "AND"
+regexTarget = "line"
+paths = ['''(?:^|/)docs/OAUTH\-LOGIN\.md$''']
+regexes = ['''^\s*"clientSecretFile":\ "secrets/company",\s*$''']
+
+[[allowlists]]
+description = "Non-secret deterministic test identifier"
+targetRules = ["generic-api-key"]
+condition = "AND"
+regexTarget = "line"
+paths = ['''(?:^|/)packages/application/test/workspace\-brand\.test\.ts$''']
+regexes = ['''^\s*idempotencyKey:\ "brand\-publish\-1",\s*$''']
+
+[[allowlists]]
+description = "Non-secret deterministic test identifier"
+targetRules = ["generic-api-key"]
+condition = "AND"
+regexTarget = "line"
+paths = ['''(?:^|/)packages/database/test/storage\-upload\-store\.integration\.test\.ts$''']
+regexes = ['''^\s*allocationRequestKey:\ "expiry\-boundary\.v1",\s*$''']
+
+[[allowlists]]
+description = "Non-secret deterministic test identifier"
+targetRules = ["generic-api-key"]
+condition = "AND"
+regexTarget = "line"
+paths = ['''(?:^|/)packages/database/test/workspace\-brand\-store\.test\.ts$''']
+regexes = ['''^\s*publicationRequestKey:\ "publish\-brand\-1",\s*$''']
+
+[[allowlists]]
+description = "Non-secret deterministic test identifier"
+targetRules = ["generic-api-key"]
+condition = "AND"
+regexTarget = "line"
+paths = ['''(?:^|/)packages/database/test/workspace\-brand\-store\.test\.ts$''']
+regexes = ['''^\s*idempotencyKey:\ "publish\-brand\-1",\s*$''']
+
+[[allowlists]]
+description = "Non-secret deterministic test identifier"
+targetRules = ["generic-api-key"]
+condition = "AND"
+regexTarget = "line"
+paths = ['''(?:^|/)packages/database/test/workspace\-brand\-store\.integration\.test\.ts$''']
+regexes = ['''^\s*idempotencyKey:\ "brand\-publish\-1",\s*$''']
+
+[[allowlists]]
+description = "Non-secret deterministic test identifier"
+targetRules = ["generic-api-key"]
+condition = "AND"
+regexTarget = "line"
+paths = ['''(?:^|/)packages/database/test/workspace\-brand\-store\.integration\.test\.ts$''']
+regexes = ['''^\s*idempotencyKey:\ "brand\-publish\-1",\s*$''']
+
+[[allowlists]]
+description = "Environment variable access, not a credential value"
+targetRules = ["generic-api-key"]
+condition = "AND"
+regexTarget = "line"
+paths = ['''(?:^|/)packages/storage/src/storage\-runtime\-config\.ts$''']
+regexes = ['''^\s*const\ keyPrefix\ =\ environment\.KANVAS_S3_KEY_PREFIX;\s*$''']

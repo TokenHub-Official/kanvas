@@ -1,0 +1,32 @@
+{
+  "name": "@kanvas/agent-runtime",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsc -p tsconfig.build.json --watch --preserveWatchOutput",
+    "check-types": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src test",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/json-schema": "7.0.15",
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "dependencies": {
+    "@ai-sdk/provider": "3.0.14",
+    "@kanvas/application": "workspace:*",
+    "@mastra/core": "1.63.2",
+    "@mastra/memory": "1.28.1"
+  },
+  "license": "Apache-2.0"
+}

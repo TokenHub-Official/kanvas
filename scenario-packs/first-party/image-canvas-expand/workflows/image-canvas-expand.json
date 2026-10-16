@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "key": "image_canvas_expand",
+  "entryNodeKey": "expand",
+  "limits": {
+    "maxNodeRuns": 1,
+    "timeoutMs": 300000
+  },
+  "nodes": [
+    {
+      "key": "expand",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "image.canvas.expand",
+        "revision": 1,
+        "canonicalDigest": "sha256:1d6c6649aba50dd38583b864e34b25891da12ae48ab9fe0935b0b846d3c0b76e"
+      },
+      "input": {
+        "$value": {
+          "source": "workflow_input",
+          "pointer": ""
+        }
+      },
+      "next": []
+    }
+  ],
+  "outputs": {
+    "schemaVersion": {
+      "required": true,
+      "value": "kanvas.image-canvas-expand-result/v1"
+    },
+    "expandedArtifactId": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "expand",
+          "scope": "root",
+          "pointer": "/expandedArtifactId"
+        }
+      }
+    },
+    "generatedRegionMaskArtifactId": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "expand",
+          "scope": "root",
+          "pointer": "/generatedRegionMaskArtifactId"
+        }
+      }
+    },
+    "targetWidth": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "expand",
+          "scope": "root",
+          "pointer": "/targetWidth"
+        }
+      }
+    },
+    "targetHeight": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "expand",
+          "scope": "root",
+          "pointer": "/targetHeight"
+        }
+      }
+    },
+    "sourcePlacement": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "expand",
+          "scope": "root",
+          "pointer": "/sourcePlacement"
+        }
+      }
+    },
+    "generatedRegion": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "expand",
+          "scope": "root",
+          "pointer": "/generatedRegion"
+        }
+      }
+    },
+    "qualitySignals": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "expand",
+          "scope": "root",
+          "pointer": "/qualitySignals"
+        }
+      }
+    }
+  }
+}

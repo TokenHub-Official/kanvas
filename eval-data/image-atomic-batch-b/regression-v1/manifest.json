@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "kanvas.image-atomic-batch-b-eval/v1",
+  "corpusId": "atom-batch-02-metric-regression-v1",
+  "evidenceClass": "metric_regression",
+  "anonymized": true,
+  "samples": [
+    {
+      "id": "denoise-isolated-impulse",
+      "capability": "image.denoise",
+      "target": "browser",
+      "implementationDigest": "sha256:1b6e9ad4a9a21c854756d4ad908e582ae7ee42176a3320702f363c3ede49c256",
+      "categories": [
+        "isolated-impulse",
+        "alpha"
+      ],
+      "sourceFile": "denoise/noisy.png",
+      "candidateFile": "denoise/candidate.png",
+      "expectedFile": "denoise/clean.png",
+      "thresholds": {
+        "psnrGain": {
+          "operator": "gte",
+          "value": 20
+        },
+        "edgeRetention": {
+          "operator": "eq",
+          "value": 1
+        },
+        "alphaExactRatio": {
+          "operator": "eq",
+          "value": 1
+        }
+      }
+    },
+    {
+      "id": "light-enhance-one-stop",
+      "capability": "image.light.enhance",
+      "target": "browser",
+      "implementationDigest": "sha256:36d21686d6aeb05d102641ec5e757d41cf9375c58f254a19ccba9db79c05797c",
+      "categories": [
+        "under-exposure",
+        "alpha"
+      ],
+      "sourceFile": "light-enhance/source.png",
+      "candidateFile": "light-enhance/candidate.png",
+      "expectedFile": "light-enhance/ground-truth.png",
+      "thresholds": {
+        "maeImprovement": {
+          "operator": "gte",
+          "value": 40
+        },
+        "luminanceMae": {
+          "operator": "eq",
+          "value": 0
+        },
+        "clippedRatio": {
+          "operator": "eq",
+          "value": 0
+        },
+        "alphaExactRatio": {
+          "operator": "eq",
+          "value": 1
+        }
+      }
+    }
+  ]
+}

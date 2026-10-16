@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "kanvas.capability-implementation/v1",
+  "implementationKey": "first-party.image.quality-assess.deterministic.worker",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "画质检测 · Worker 运行",
+      "en-US": "Quality assessment · Worker runtime"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "通过Worker 运行提供画质检测，上层只依赖固定公开契约。",
+      "en-US": "Provides Quality assessment through Worker runtime behind the stable public contract."
+    }
+  },
+  "contract": {
+    "key": "image.quality.assess",
+    "revision": 1,
+    "canonicalDigest": "sha256:ff70de4c7da3e30e8ac70a4a8fecc4ac7a8cc499de9ee6060779f7fbe112c3f8"
+  },
+  "adapter": {
+    "adapterKey": "first-party.image.quality-assess.deterministic.v1",
+    "revision": 1,
+    "canonicalDigest": "sha256:0da4cf938bc3b227dfc446a92fee422a67c9727db138584e45e83fdfa289ff0e"
+  },
+  "source": {
+    "kind": "plugin",
+    "plugin": {
+      "key": "kanvas.worker-image-runtime",
+      "revision": 1,
+      "canonicalDigest": "sha256:edcfc8c420e2f9ec08a8e484df6cf9497e2d7a4695476785cde638c2c36ec4fc"
+    }
+  },
+  "configuration": {
+    "operation": "image.quality.assess",
+    "colorSpace": "srgb",
+    "generative": false,
+    "providerCost": false,
+    "externalEgress": false,
+    "algorithmVersion": "batch-c-deterministic-rgba-v1",
+    "maximumSourcePixels": 32000000,
+    "outputArtifactCount": 0
+  },
+  "inputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "input",
+    "expression": {
+      "op": "source",
+      "root": "input",
+      "pointer": ""
+    }
+  },
+  "outputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "output",
+    "expression": {
+      "op": "source",
+      "root": "result",
+      "pointer": ""
+    }
+  },
+  "fixtures": [
+    {
+      "name": "default contract mapping",
+      "capabilityInput": {
+        "sampleSize": 256,
+        "sourceArtifactId": "01K00000000000000000000001"
+      },
+      "configuration": {
+        "operation": "image.quality.assess",
+        "colorSpace": "srgb",
+        "generative": false,
+        "providerCost": false,
+        "externalEgress": false,
+        "algorithmVersion": "batch-c-deterministic-rgba-v1",
+        "maximumSourcePixels": 32000000,
+        "outputArtifactCount": 0
+      },
+      "expectedAdapterInput": {
+        "sampleSize": 256,
+        "sourceArtifactId": "01K00000000000000000000001"
+      },
+      "adapterResult": {
+        "findings": [],
+        "blurScore": 0,
+        "usability": "good",
+        "noiseScore": 0,
+        "sourceWidth": 1,
+        "sourceHeight": 1,
+        "schemaVersion": "kanvas.image-quality-assess-result/v1",
+        "qualitySignals": {
+          "method": "deterministic_pixel_diagnostics",
+          "generative": false,
+          "schemaVersion": "kanvas.image-quality-assess-quality/v1",
+          "sourceModified": false,
+          "subjectBoundsProvided": true
+        },
+        "compressionScore": 0,
+        "overExposureRatio": 0,
+        "subjectScaleRatio": 0,
+        "underExposureRatio": 0
+      },
+      "expectedCapabilityOutput": {
+        "findings": [],
+        "blurScore": 0,
+        "usability": "good",
+        "noiseScore": 0,
+        "sourceWidth": 1,
+        "sourceHeight": 1,
+        "schemaVersion": "kanvas.image-quality-assess-result/v1",
+        "qualitySignals": {
+          "method": "deterministic_pixel_diagnostics",
+          "generative": false,
+          "schemaVersion": "kanvas.image-quality-assess-quality/v1",
+          "sourceModified": false,
+          "subjectBoundsProvided": true
+        },
+        "compressionScore": 0,
+        "overExposureRatio": 0,
+        "subjectScaleRatio": 0,
+        "underExposureRatio": 0
+      }
+    }
+  ]
+}

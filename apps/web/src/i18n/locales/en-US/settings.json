@@ -1,0 +1,1768 @@
+{
+  "shell": {
+    "title": "Team settings",
+    "navigation": "Team settings",
+    "sections": {
+      "team": "Team",
+      "infrastructure": "AI infrastructure",
+      "operations": "Cost and operations"
+    },
+    "items": {
+      "general": "General",
+      "people": "People and access",
+      "providers": "Model services",
+      "models": "Models",
+      "sources": "Resource sources",
+      "modelResources": "Model resources",
+      "capabilities": "Capabilities",
+      "usage": "Usage and limits",
+      "tasks": "Task records"
+    }
+  },
+  "interfaceSemantics": {
+    "text_plain": "Text",
+    "prompt_rich": "Rich prompt",
+    "artifact_image": "Image asset",
+    "artifact_file": "File asset",
+    "number_scalar": "Numeric value",
+    "boolean_flag": "On or off",
+    "value_object": "Structured object",
+    "quality_signals": "Quality information",
+    "canvas_geometry": "Canvas geometry",
+    "value_list": "List",
+    "artifact_image_list": "Image asset list",
+    "region_list": "Region list",
+    "tensor_image_rgb": "RGB image tensor",
+    "tensor_mask_alpha": "Alpha-mask tensor",
+    "value_any": "General data"
+  },
+  "modelResources": {
+    "title": "Model resources",
+    "opening": "Opening model resource settings",
+    "forbiddenTitle": "Model resources cannot be managed",
+    "forbiddenDescription": "Capability management permission is required.",
+    "add": "Import model resource",
+    "addCustom": "Add custom model",
+    "addTitle": "Add custom model",
+    "addRecommendedTitle": "Add recommended model",
+    "newRevisionTitle": "Update model",
+    "search": "Search models",
+    "reload": "Reload",
+    "loadError": "Model resources could not be loaded",
+    "loadErrorDescription": "Check the connection and reload.",
+    "empty": "No model resources configured",
+    "emptyInstalledTitle": "No models added",
+    "emptyInstalledDescription": "Choose the model you need from Recommended.",
+    "emptyRecommendationsTitle": "No recommended models",
+    "emptyRecommendationsDescription": "There are no recommended models to add.",
+    "viewRecommendations": "View recommended models",
+    "views": {
+      "installed": "Added {{count}}",
+      "recommendations": "Recommended {{count}}"
+    },
+    "save": "Publish",
+    "finish": "Finish adding",
+    "cancel": "Cancel",
+    "close": "Close",
+    "archiveTitle": "Archive this model resource?",
+    "archiveDescription": "It cannot be selected by new implementations. Historical runs pinned to this revision remain unchanged.",
+    "restoreTitle": "Restore this model resource?",
+    "restoreDescription": "It can be selected by new implementation revisions again.",
+    "columns": {
+      "model": "Model resource",
+      "target": "Execution target",
+      "format": "Format",
+      "size": "Size",
+      "version": "Version",
+      "usage": "Implementations",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "status": {
+      "active": "Ready",
+      "archived": "Archived",
+      "available": "Available",
+      "notAdded": "Not added"
+    },
+    "catalog": {
+      "import": "Add",
+      "importDescription": "Kanvas will download and check this recommended model.",
+      "downloadSize": "Download size",
+      "completing": "Checks passed. Adding the model now.",
+      "addFailed": "Model could not be added",
+      "addFailedDescription": "The model passed its checks but could not be saved. Try again.",
+      "retry": "Retry"
+    },
+    "targets": {
+      "browser": "Local browser",
+      "worker": "Cloud runtime",
+      "provider": "Server",
+      "unmatched": "No compatible runtime"
+    },
+    "actions": {
+      "newRevision": "Update model",
+      "createCapability": "Create capability",
+      "archive": "Archive",
+      "restore": "Restore",
+      "more": "More"
+    },
+    "fields": {
+      "key": "Model resource key",
+      "name": "Name (editable)",
+      "description": "Description (optional)",
+      "format": "Format",
+      "url": "Model file URL",
+      "file": "Model file",
+      "license": "License",
+      "licenseUrl": "License URL"
+    },
+    "placeholders": {
+      "url": "Paste a Hugging Face file page or stable HTTPS file URL",
+      "key": "For example, image.background-removal.isnet",
+      "name": "For example, ISNet general background removal"
+    },
+    "help": {
+      "file": "Choose the model file to check and add."
+    },
+    "compatibleAdapters": "Detected runtimes",
+    "runtimeMatch": {
+      "probable": "Needs verification"
+    },
+    "progress": {
+      "stages": {
+        "fetching": "Download",
+        "analyzing": "Check",
+        "saving": "Add"
+      },
+      "fetching": "Downloading the model file. Large files may take a few minutes; keep this page open.",
+      "fetchingSized": "Downloading the {{size}} model file. Large files may take a few minutes; keep this page open.",
+      "downloaded": "Downloaded {{downloaded}} / {{size}} ({{percent}}%)",
+      "analyzing": "Download complete. Checking the model format and integrity.",
+      "saving": "Checks passed. Adding the model to your list."
+    },
+    "import": {
+      "url": "Add from link",
+      "upload": "Upload model file",
+      "chooseFile": "Choose model file",
+      "continue": "Check model",
+      "retry": "Try again",
+      "cancelDownload": "Cancel download",
+      "cancelling": "Cancelling",
+      "cancelledTitle": "Download cancelled",
+      "cancelledDescription": "The model was not added. You can start again or close this window.",
+      "readyTitle": "Model checks passed",
+      "readyDescription": "Confirm the name and required information to finish adding it.",
+      "status": {
+        "fetching": "Downloading model",
+        "analyzing": "Checking model",
+        "saving": "Adding model",
+        "failed": "Model could not be checked"
+      },
+      "failures": {
+        "model_import_invalid_url": "The model file URL is invalid",
+        "model_import_dns_failed": "The model host is temporarily unavailable",
+        "model_import_private_address": "The URL points to a network that cannot be accessed",
+        "model_import_too_many_redirects": "The model file URL redirected too many times",
+        "model_import_http_failed": "The connection ended while downloading the model",
+        "model_import_http_status": "The model source is temporarily unavailable. Try again.",
+        "model_import_content_too_large": "The model file exceeds this deployment's size limit",
+        "model_import_deadline_exceeded": "The model file download timed out",
+        "model_import_analysis_failed": "This model file could not be identified",
+        "unknown": "Model resource analysis could not be completed"
+      }
+    },
+    "validation": {
+      "resolve": "Complete this field to publish.",
+      "url": "Enter the model file URL",
+      "file": "Choose a model file",
+      "key": "Use a lowercase segmented key, such as image.background-removal.isnet",
+      "name": "Enter a model name",
+      "license": "Confirm the model license",
+      "licenseUrl": "The license URL must use HTTPS"
+    },
+    "toast": {
+      "saved": "Model resource published",
+      "saveFailed": "Model resource could not be published",
+      "saveFailedDescription": "Check the review fields and current version, then try again.",
+      "cancelFailed": "Download could not be cancelled",
+      "cancelFailedDescription": "The download state may have changed. Try again in a moment.",
+      "importFailed": "Model resource analysis could not be started",
+      "importFailedDescription": "Make sure the file URL is reachable, or choose the local file again.",
+      "statusUpdated": "Model resource status updated",
+      "statusFailed": "Model resource status could not be updated",
+      "statusFailedDescription": "The resource may have changed. Reload and try again."
+    }
+  },
+  "capabilityDefinitions": {
+    "title": "Capabilities",
+    "opening": "Opening capability settings",
+    "forbiddenTitle": "Capabilities cannot be managed",
+    "forbiddenDescription": "Capability management permission is required.",
+    "editTitle": "Edit capability details",
+    "create": "Add capability",
+    "next": "Next",
+    "createCustom": "Create custom capability",
+    "createTitle": "Add capability",
+    "createDescription": "Create a custom capability only when the capability you need is not available to add.",
+    "openRoutes": "Manage run methods",
+    "search": "Search capabilities",
+    "reload": "Reload",
+    "loadError": "Capabilities could not be loaded",
+    "loadErrorDescription": "Check the connection and reload.",
+    "empty": "No capabilities configured",
+    "emptyInstalledTitle": "No capabilities installed",
+    "emptyInstalledDescription": "Choose the capability you need from Recommended.",
+    "emptyRecommendationsTitle": "No recommended capabilities",
+    "emptyRecommendationsDescription": "There are no recommended capabilities to install.",
+    "viewRecommendations": "View recommended capabilities",
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "inputCount": "{{count}} inputs",
+    "outputCount": "{{count}} outputs",
+    "archiveTitle": "Archive this capability?",
+    "archiveDescription": "It will stop appearing in new discovery and workflow authoring. Historical workflows and runs remain unchanged.",
+    "restoreTitle": "Restore this capability?",
+    "restoreDescription": "It will become available to allowed discovery and workflow authoring again.",
+    "columns": {
+      "capability": "Capability",
+      "category": "Category",
+      "contract": "Input and output",
+      "surfaces": "Available in",
+      "routes": "Run methods",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "status": {
+      "active": "Enabled",
+      "archived": "Archived",
+      "ready": "Ready",
+      "needsConfiguration": "Needs setup",
+      "notInstalled": "Available",
+      "installing": "Adding",
+      "failed": "Add failed"
+    },
+    "statusReasons": {
+      "noImplementation": "No implementation yet",
+      "implementationUnavailable": "Current implementation needs attention"
+    },
+    "views": {
+      "installed": "Added {{count}}",
+      "recommendations": "Available {{count}}",
+      "archived": "Archived {{count}}"
+    },
+    "emptyArchivedTitle": "No archived capabilities",
+    "runtime": {
+      "none": "Not configured"
+    },
+    "languages": {
+      "zh": "Chinese",
+      "en": "English"
+    },
+    "details": {
+      "back": "Back to capabilities",
+      "contract": "How to use it",
+      "inputs": "What it needs",
+      "outputs": "What it produces",
+      "required": "Required",
+      "optional": "Optional",
+      "primary": "Primary",
+      "none": "None",
+      "runMethods": "Implementations",
+      "runMethodsHint": "The first available implementation is used first."
+    },
+    "actions": {
+      "edit": "Edit details",
+      "archive": "Archive",
+      "restore": "Restore",
+      "more": "More actions",
+      "install": "Add",
+      "installing": "Adding",
+      "retryInstall": "Retry",
+      "configure": "Finish setup",
+      "manage": "View details"
+    },
+    "install": {
+      "title": "Add “{{name}}”",
+      "recommendedModelTitle": "Prepare the required model",
+      "recommendedModelDescription": "Kanvas will use an added compatible model when available, add the recommended model only when needed, and enable the capability when setup finishes.",
+      "readyDescription": "This capability will be ready to use as soon as it is added.",
+      "chooseModel": "Choose a model",
+      "modelServiceRequiredTitle": "Set up a model first",
+      "modelServiceRequiredDescription": "No configured model can provide this capability yet. Add and enable a compatible model in Model services first.",
+      "configureModels": "Open Model services",
+      "addModelAndInstall": "Prepare and add",
+      "confirm": "Add",
+      "completed": "Capability added and ready",
+      "started": "Preparing capability",
+      "startedDescription": "The capability will be enabled automatically when its model is ready.",
+      "failed": "Capability could not be added",
+      "failedDescription": "Check the related setup and try again."
+    },
+    "fields": {
+      "key": "Capability key",
+      "name": "Name",
+      "description": "Purpose (optional)",
+      "category": "Category",
+      "tags": "Tags",
+      "surfaces": "Available in"
+    },
+    "surfaces": {
+      "workflow": "Workflow",
+      "agent": "Agent",
+      "canvas": "Canvas"
+    },
+    "fieldTypes": {
+      "string": "Text",
+      "number": "Number",
+      "integer": "Integer",
+      "boolean": "Boolean",
+      "object": "Object",
+      "array": "Array",
+      "enum": "Enum"
+    },
+    "contentTypes": {
+      "text_plain": "Text",
+      "prompt_rich": "Text instructions",
+      "artifact_image": "Image",
+      "artifact_file": "File",
+      "number_scalar": "Number",
+      "boolean_flag": "Yes or no",
+      "value_object": "Structured information",
+      "value_list": "List",
+      "artifact_image_list": "Multiple images",
+      "region_list": "Image regions",
+      "quality_signals": "Quality information",
+      "canvas_geometry": "Canvas position",
+      "tensor_mask_alpha": "Mask"
+    },
+    "interface": {
+      "input": "What it needs",
+      "output": "What it produces",
+      "addField": "Add item",
+      "empty": "Add at least one item",
+      "contentType": "Content type",
+      "semanticType": "Data meaning",
+      "required": "Required",
+      "primary": "Primary"
+    },
+    "placeholders": {
+      "name": "For example, Background removal",
+      "category": "Choose a capability category",
+      "description": "Describe the task this capability is meant to complete",
+      "key": "For example, image.background-compose",
+      "tags": "Comma separated, for example image edit, composition",
+      "fieldKey": "Field name, for example foreground",
+      "semanticType": "Data meaning, for example artifact.image",
+      "label": "Field name",
+      "example": "Example value used for publication checks",
+      "enumValues": "Comma-separated enum values",
+      "defaultValue": "Default value (optional; use JSON for objects or arrays)",
+      "minimum": "Minimum (optional)",
+      "maximum": "Maximum (optional)"
+    },
+    "validation": {
+      "resolve": "Complete the current information to continue.",
+      "key": "Use a lowercase segmented key, such as image.background-compose",
+      "title": "Enter a name",
+      "description": "Enter a description or leave it empty",
+      "category": "Enter a category",
+      "surface": "Select at least one place where this capability is available",
+      "inputEmpty": "Define at least one public input",
+      "outputEmpty": "Define at least one public output",
+      "fieldKey": "Field names must start with a letter and use only letters, numbers, and underscores",
+      "fieldDuplicate": "Field names cannot be repeated in one interface",
+      "fieldLabel": "Enter a field name",
+      "fieldSemantic": "Enter a segmented data meaning for every field",
+      "fieldEnum": "Enter at least one value for each enum field",
+      "fieldExample": "Enter an example that matches the field type",
+      "fieldDefault": "The default must match the field type, enum, and range",
+      "fieldRange": "Minimum and maximum must be valid numbers, and minimum cannot exceed maximum",
+      "primary": "Select exactly one primary output",
+      "inputMapping": "Choose a new-interface source for every current input",
+      "outputMapping": "Choose a current-interface source for every new output"
+    },
+    "implementation": {
+      "add": "Add implementation",
+      "addTitle": "Add implementation",
+      "createTitle": "Choose an implementation",
+      "replaceTitle": "Replace implementation",
+      "create": "Create capability",
+      "name": "Run method name",
+      "description": "Description",
+      "source": "Choose a model or processing method",
+      "sourcePlaceholder": "Choose an added model, model service, or built-in processing",
+      "modelResourceOption": "Model · {{name}}",
+      "modelServiceOption": "Model service · {{provider}} · {{model}}",
+      "pluginOption": "Built-in processing · {{name}}",
+      "modelService": "Model service",
+      "builtIn": {
+        "browser": "Built-in processing · On this device",
+        "worker": "Built-in processing · Cloud",
+        "provider": "Built-in processing"
+      },
+      "runtime": "Processing method",
+      "runtimePlaceholder": "Choose a processing method",
+      "advanced": "Advanced settings",
+      "advancedHint": "Usually no changes needed",
+      "autoConfigured": "Configured automatically",
+      "autoConfiguredDescription": "Capability inputs and model parameters are matched.",
+      "noSourceTitle": "No model or built-in processing is available",
+      "noSourceDescription": "Go back and adjust what the capability needs and produces, or set up a model that supports this content.",
+      "configureModels": "Open Model services",
+      "configuration": "Runtime configuration",
+      "inputMapping": "Input field mapping",
+      "outputMapping": "Output field mapping",
+      "capabilityInput": "Capability input · {{name}}",
+      "configurationValue": "Runtime configuration · {{name}}",
+      "constant": "Fixed value",
+      "constantPlaceholder": "Enter a JSON value or text",
+      "priority": "Priority (lower runs first)",
+      "fallback": "Allow the next run method",
+      "fallbackReasons": {
+        "not_applicable": "Input is not applicable",
+        "unavailable": "Run method is unavailable",
+        "retry_exhausted": "Retries still fail"
+      },
+      "testReady": "Configuration is checked before publishing",
+      "testReadyDescription": "Inputs, outputs, and runtime configuration are validated.",
+      "publishHint": "Configuration is checked before publishing. Run a real test from the capability details afterward.",
+      "publish": "Publish implementation",
+      "validation": {
+        "resolve": "Complete the current selection to save.",
+        "name": "Enter a run method name",
+        "description": "Enter a description or leave it empty",
+        "source": "Choose an added model, model service, or built-in processing",
+        "adapter": "Choose a processing method",
+        "configuration": "Complete the runtime configuration",
+        "inputMapping": "Choose a source for every runtime input",
+        "outputMapping": "Choose a result field for every capability output",
+        "priority": "Priority must be a positive integer"
+      },
+      "toast": {
+        "published": "Run method published",
+        "failed": "Run method could not be published",
+        "failedDescription": "Check the underlying source, field mappings, and priority, then try again."
+      }
+    },
+    "test": {
+      "action": "Test capability",
+      "title": "Test “{{name}}”",
+      "description": "Run a real task with the currently enabled implementation.",
+      "start": "Run test",
+      "retry": "Run again",
+      "newTest": "New test",
+      "done": "Done",
+      "restoredTitle": "Existing test restored",
+      "restoring": "Loading its input and latest status.",
+      "restoredDescription": "This is the existing test and its original input. Choose New test before starting another.",
+      "restoreFailed": "This saved test could not be loaded. Choose New test to start separately.",
+      "chooseImage": "Choose an image",
+      "chooseImages": "Choose images",
+      "useDefault": "Use default",
+      "cancelRun": "Cancel test",
+      "cancelling": "Cancelling",
+      "running": "Running capability",
+      "result": "Result",
+      "currentInput": "Input for this test",
+      "failed": "Capability test failed",
+      "cancelled": "Test cancelled",
+      "cancelledDescription": "No new result was created. You can change the input and run the test again.",
+      "browser": {
+        "title": "Browser processing",
+        "connecting": "Connecting this device for the browser step. Keep this dialog open.",
+        "ready": "This device is connected and ready for this test's browser step. Keep this dialog open until the test finishes.",
+        "reconnecting": "This device lost its connection and is retrying. You can reconnect now.",
+        "unavailable": "This device cannot currently run this browser step. Reconnect to continue.",
+        "permissionRequired": "Your role can no longer run this test on this device.",
+        "failures": {
+          "manifest": "The approved browser runtime could not be loaded for this capability. Reconnect to retry.",
+          "probe": "This device could not start the local browser processor. Reconnect to retry.",
+          "register": "This device could not register its browser processor. Reconnect to retry.",
+          "runtime": "The browser processor connection was interrupted. Reconnect to continue."
+        },
+        "reconnect": "Reconnect"
+      },
+      "failures": {
+        "unavailable": "No run method is currently available. Check the run methods and try again.",
+        "budgetUnavailable": "The current budget is insufficient. Adjust it and run the test again.",
+        "timedOut": "This run timed out. Try again in a moment.",
+        "unknown": "This test did not finish. Check the input or run methods and try again."
+      },
+      "output": {
+        "items": "{{count}} results",
+        "fields": "{{count}} fields returned",
+        "empty": "No displayable content was returned",
+        "yes": "Yes",
+        "no": "No"
+      },
+      "noImageAssets": "No image is available to test",
+      "openAssets": "Add one in Assets"
+    },
+    "discard": {
+      "title": "Discard unsaved changes?",
+      "description": "Your changes have not been saved.",
+      "action": "Discard changes"
+    },
+    "toast": {
+      "created": "Capability created",
+      "createFailed": "Capability could not be created",
+      "createFailedDescription": "Check the public inputs, outputs, and basic details, then try again.",
+      "saved": "Capability details saved",
+      "saveFailed": "Capability details could not be saved",
+      "saveFailedDescription": "The capability may have changed. Reload and try again.",
+      "statusUpdated": "Capability status updated",
+      "statusFailed": "Capability status could not be updated",
+      "statusFailedDescription": "The capability status may have changed. Reload and try again."
+    },
+    "agentAvailability": {
+      "unavailable": "This capability is currently unavailable to Agents. Check its implementation and invocation settings.",
+      "deployment_policy_missing": "This capability is unavailable to Agents because deployment limits for model services are not configured. Contact your deployment administrator.",
+      "agent_not_exposed": "This capability is not exposed to Agents.",
+      "evaluation_failed": "Agent availability could not be verified. Refresh to try again.",
+      "schema_conflict": "Agent input parameters are incompatible with the current implementation. Review the implementation.",
+      "provider_unconfigured": "This capability is unavailable to Agents. Configure an available model service.",
+      "binding_unavailable": "This capability is unavailable to Agents. Add or enable an implementation.",
+      "budget_unavailable": "This capability is unavailable to Agents. Check the service budget."
+    }
+  },
+  "modelServices": {
+    "title": "Model services",
+    "navigation": "Model service configuration",
+    "tabs": {
+      "models": "Models",
+      "providers": "Providers"
+    }
+  },
+  "models": {
+    "parameters": {
+      "update": "Update parameters",
+      "review": "Review parameter changes",
+      "current": "Current parameters",
+      "next": "Updated parameters",
+      "preserved": "Preserved local changes: {{fields}}",
+      "draftOnly": "Apply updates the draft. Save the model to publish.",
+      "apply": "Apply update",
+      "keep": "Keep current parameters",
+      "upToDate": "Parameters are up to date",
+      "failed": "Could not update parameters"
+    },
+    "title": "Models",
+    "description": "Manage the models, providers, capabilities, and pricing available to the team.",
+    "opening": "Opening model settings",
+    "loading": "Loading models",
+    "configuredTitle": "Configured models",
+    "editTitle": "Edit model",
+    "save": "Save model",
+    "cancel": "Cancel",
+    "modalityFlow": "Input {{inputs}}; output {{outputs}}",
+    "forbiddenTitle": "Models cannot be managed",
+    "forbiddenDescription": "Model service management permission is required.",
+    "loadErrorTitle": "Models could not be loaded",
+    "listTitle": "Configured models",
+    "listDescription": "The same slug means the same model. Provider mappings and pricing are pinned to each Deployment.",
+    "add": "Add model",
+    "addUnavailable": "Refresh and enable a Provider with selectable models first.",
+    "addTitle": "Add model",
+    "addDescription": "Fill from the internal models.dev reference or create a canonical model manually, then map Provider models and pricing.",
+    "addSubmit": "Add model",
+    "emptyTitle": "No models configured",
+    "emptyDescription": "Add a model from the available models list.",
+    "providerRequiredTitle": "Connect a model service first",
+    "providerRequiredDescription": "Connect a Provider and fetch its models, then return here to add and assign an Agent model.",
+    "actions": {
+      "edit": "Edit",
+      "createCapability": "Create capability",
+      "viewAvailable": "View available models"
+    },
+    "operations": {
+      "text_generate": "Text generation",
+      "image_generate": "Image generation",
+      "image_edit": "Image editing",
+      "other": "Model operation"
+    },
+    "available": {
+      "loading": "Loading available models",
+      "providerModels": "Provider models",
+      "loadErrorTitle": "Available models could not be loaded",
+      "emptyTitle": "No models available",
+      "emptyDescription": "Add a Provider and fetch its models first."
+    },
+    "columns": {
+      "model": "Model",
+      "provider": "Provider",
+      "capabilities": "Capabilities",
+      "modalities": "Modalities",
+      "context": "Context",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "modalities": {
+      "text": "Text",
+      "image": "Image",
+      "audio": "Audio",
+      "video": "Video",
+      "pdf": "PDF"
+    },
+    "capabilities": {
+      "text": "Text generation",
+      "image": "Image"
+    },
+    "status": {
+      "ready": "Available",
+      "unavailable": "Unavailable",
+      "awaitingProvider": "Awaiting Provider",
+      "draft": "Draft"
+    },
+    "fields": {
+      "provider": "Provider",
+      "reference": "models.dev model",
+      "referencePlaceholder": "Search and fill model details",
+      "slug": "Canonical slug",
+      "displayName": "Display name",
+      "family": "Model family",
+      "description": "Description",
+      "contextWindow": "Context window",
+      "maximumOutputTokens": "Maximum output tokens",
+      "inputModalities": "Input modalities",
+      "outputModalities": "Output modalities",
+      "agentTextTransport": "Agent API format",
+      "reasoningSupport": "Reasoning-level support",
+      "webSearchSupport": "Web-search support",
+      "model": "Model",
+      "capability": "Capability",
+      "inputPrice": "Input price (USD / 1M tokens)",
+      "outputPrice": "Output price (USD / 1M tokens)",
+      "cachePrice": "Cache-read price (optional)",
+      "maximumCharge": "Maximum reservation per run (USD)",
+      "toolCall": "Tool calling"
+    },
+    "import": {
+      "action": "Import Provider models",
+      "title": "Provider models",
+      "description": "Import models from the Provider's current catalog, then map them to canonical slugs. Importing alone does not make a model available.",
+      "selectAll": "Select all unimported models",
+      "selected": "Import {{count}} models",
+      "canonicalModel": "Canonical model",
+      "selectCanonical": "Select an existing slug",
+      "notImported": "Not imported",
+      "map": "Map",
+      "publish": "Set pricing and enable",
+      "loadError": "Provider model catalog could not be loaded",
+      "error": "Provider models could not be imported"
+    },
+    "mapping": {
+      "error": "Model mapping could not be saved"
+    },
+    "pricing": {
+      "title": "Enable {{model}}",
+      "description": "Pricing is pinned to this Deployment and drives automatic settlement.",
+      "sectionTitle": "Billing configuration",
+      "mode": "Settlement mode",
+      "fixed": "Fixed successful-call charge",
+      "metered": "Token metering",
+      "providerReported": "Provider-reported actual charge",
+      "fixedCharge": "Successful-call charge (USD)",
+      "fields": {
+        "fixedCharge": "Successful-call charge (USD)",
+        "input": "Standard input / 1M tokens",
+        "cacheRead": "Cache read / 1M tokens (optional)",
+        "cacheWrite": "Cache write / 1M tokens (optional)",
+        "output": "Output / 1M tokens",
+        "maximumCharge": "Maximum charge per run",
+        "maximumChargeUsd": "Maximum charge per run (USD)"
+      },
+      "error": "Provider model could not be enabled"
+    },
+    "support": {
+      "supported": "Supported",
+      "unsupported": "Not supported"
+    },
+    "reasoningLevels": {
+      "off": "Off",
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High"
+    },
+    "webSearchModes": {
+      "off": "Off",
+      "auto": "Use when needed",
+      "required": "Always use"
+    },
+    "agentSettings": {
+      "title": "Agent settings",
+      "defaultModel": "Default model",
+      "fastModel": "Fast model",
+      "reasoningLevel": "Reasoning level",
+      "webSearch": "Web search",
+      "confirmActions": "Confirm before actions",
+      "confirmOn": "Required",
+      "confirmOff": "Run directly",
+      "save": "Save",
+      "unavailable": "Agent model settings are temporarily unavailable.",
+      "chooseModels": "Choose both a default model and a fast model.",
+      "noAvailableModels": "No models are ready for Agents.",
+      "noAvailableModelsPlaceholder": "No available models",
+      "toast": {
+        "updated": "Agent models updated",
+        "failed": "Agent models could not be updated"
+      },
+      "unavailableOption": "Needs configuration",
+      "reasons": {
+        "profile": "Publish the model profile",
+        "deployment": "Enable the model connection",
+        "endpoint": "Validate and activate the provider connection",
+        "credential": "Update the provider credential",
+        "pricing": "Publish effective fixed or metered pricing",
+        "budget": "Activate the budget and renew its period",
+        "tool_call": "Confirm tool calling support and republish",
+        "unknown": "Check model and provider configuration"
+      },
+      "configureModel": "Configure",
+      "toolCallUnconfirmed": "Tool calling unconfirmed",
+      "viewModels": "Review model setup",
+      "needsSetup": "Agent setup needed",
+      "shortReasons": {
+        "profile": "Model not published",
+        "deployment": "Connection disabled",
+        "endpoint": "Provider not verified",
+        "credential": "Credential unavailable",
+        "pricing": "Pricing not ready",
+        "budget": "Budget inactive or expired",
+        "tool_call": "Tool calling unconfirmed",
+        "unknown": "Review configuration"
+      }
+    },
+    "validation": {
+      "editorNotOpen": "Model configuration is not open.",
+      "model": "Choose a model.",
+      "provider": "Choose a Provider.",
+      "pricingMode": "This Provider model does not support Provider-reported pricing.",
+      "publishedProvider": "The selected Provider could not be found after model publication.",
+      "tokenLimits": "Sync model data or enter valid context and output limits from your provider. Unknown values are not filled automatically."
+    },
+    "providerStatus": {
+      "discovered": "Imported",
+      "mapped": "Mapped",
+      "active": "Available",
+      "disabled": "Disabled",
+      "removed": "Removed"
+    },
+    "pricingHelp": "Prices drive automatic settlement. The maximum reservation only protects the budget before a run.",
+    "reference": {
+      "action": "Use models.dev reference prices",
+      "applied": "Public reference prices from {{provider}} were filled in. Confirm them before saving.",
+      "unavailable": "No suitable reference model data was found for this Provider.",
+      "syncLatest": "Sync latest model data",
+      "synced": "Latest model data synced",
+      "syncedDescription": "Updated {{count}} fields. Review them before saving.",
+      "syncFailed": "Unable to sync model data",
+      "notFound": "No reference model data",
+      "pricingConflict": "Prices conflict across sources; current prices were retained.",
+      "metadataConflict": "Multiple different model records were found. Conflicting fields were not changed.",
+      "stale": "The latest data is temporarily unavailable. Local cached data was used; review it before saving.",
+      "sourceUnavailable": "models.dev is temporarily unavailable and no local model data is available.",
+      "updatedDraft": "Reference data applied to draft",
+      "noChanges": "No fields changed",
+      "missingFields": "No clear reference for {{fields}}. Existing values were retained; please review.",
+      "source": "Model metadata reference: {{source}}.",
+      "draftSummary": "{{count}} fields updated. Save to apply.",
+      "reviewDetails": "Sync details"
+    },
+    "defaults": {
+      "title": "Application defaults",
+      "description": "Applications select configured models without duplicating Provider or pricing settings.",
+      "agent": "Default Agent model",
+      "save": "Save default"
+    },
+    "toast": {
+      "addedTitle": "Model added",
+      "addedDescription": "The model can now be used by applications and capability configuration.",
+      "addErrorTitle": "Model could not be added",
+      "defaultUpdatedTitle": "Default model updated",
+      "defaultUpdatedDescription": "New Agent runs will use the selected model.",
+      "defaultErrorTitle": "Default model could not be updated",
+      "savedTitle": "Model saved",
+      "savedDescription": "The model configuration is now active.",
+      "saveErrorTitle": "Model could not be saved"
+    },
+    "toolCallHelp": "Required for Agents. Confirm provider support, then save the model.",
+    "toolCallStates": {
+      "unknown": "Not confirmed",
+      "supported": "Supported",
+      "unsupported": "Not supported"
+    }
+  },
+  "resourceSources": {
+    "title": "Resource sources",
+    "loading": "Loading",
+    "loadErrorTitle": "Could not load",
+    "reload": "Reload",
+    "forbiddenTitle": "Resource settings cannot be changed",
+    "forbiddenDescription": "This account does not have access.",
+    "configure": "Configure",
+    "completeConfiguration": "Complete configuration to enable",
+    "requiredField": "Required",
+    "empty": "No sources available",
+    "columns": {
+      "source": "Source",
+      "coverage": "Content",
+      "configure": "Configure",
+      "enabled": "Enable"
+    },
+    "allAvailable": "All",
+    "allKind": {
+      "image": "Images",
+      "vector": "Icons",
+      "font": "Fonts",
+      "art_text": "Art text"
+    },
+    "restrictedTo": "Only {{values}}",
+    "toggle": "Turn {{name}} on or off",
+    "checkAndEnable": "Save and enable",
+    "close": "Close",
+    "cancel": "Cancel",
+    "endpoint": "Service address",
+    "credential": "Access credential",
+    "toast": {
+      "enabled": "Enabled",
+      "enableFailed": "Could not enable",
+      "disabled": "Disabled",
+      "error": "Could not complete the action"
+    }
+  },
+  "gateway": {
+    "emptyTitle": "No team settings available",
+    "emptyDescription": "Your current role can still use the studio."
+  },
+  "general": {
+    "title": "General",
+    "identityTitle": "Workspace identity",
+    "forbiddenTitle": "Team information cannot be changed",
+    "forbiddenDescription": "Team administrator access is required.",
+    "loading": "Syncing team information",
+    "recheckPermission": "Check access again",
+    "reload": "Reload",
+    "forbiddenLoadTitle": "Team information cannot be changed",
+    "loadErrorTitle": "Team information could not be loaded",
+    "forbiddenLoadDescription": "Contact the team owner to update your access.",
+    "staleTitle": "This information may be out of date",
+    "staleDescription": "You can save again when the connection recovers.",
+    "refreshing": "Refreshing",
+    "refresh": "Fetch again",
+    "savedTitle": "General settings saved",
+    "savedDescription": "The team name was updated.",
+    "savedAfterRecovery": "The team name update was confirmed.",
+    "conflictTitle": "Team information changed",
+    "conflictDescription": "The latest name is shown. Review it before editing again.",
+    "confirmingTitle": "Confirming the team name",
+    "confirmingDescription": "Team information was fetched again.",
+    "leaveTitle": "Leave general settings?",
+    "leaveDescription": "Unsaved changes will be lost.",
+    "nameRequired": "Enter a team name.",
+    "nameLabel": "Team name",
+    "slugLabel": "Team identifier",
+    "slugDescription": "Used in team links and cannot be changed after creation.",
+    "save": "Save changes"
+  },
+  "people": {
+    "title": "People and access",
+    "forbiddenTitle": "People and invitations cannot be managed",
+    "forbiddenDescription": "Team administrator access is required.",
+    "loading": "Loading people and invitations",
+    "reload": "Reload",
+    "loadForbiddenTitle": "This team cannot be managed",
+    "loadErrorTitle": "People and invitations could not be loaded",
+    "loadErrorDescription": "Check your permission or connection and try again.",
+    "loadMoreErrorDescription": "The current list is preserved. Check your connection and try again.",
+    "leaveTitle": "Leave people and access?",
+    "leaveDescription": "The invitation draft will be cleared.",
+    "searchLabel": "Search people or invitations",
+    "searchPlaceholder": "Name, email, or role",
+    "searchPartial": "Only loaded content is searched. Load more to expand the results.",
+    "noSearchResults": "No matching members or invitations",
+    "moreSuffix": " · More available",
+    "table": {
+      "category": "Type",
+      "person": "Person",
+      "role": "Role",
+      "changeRoleLabel": "Change {{name}}'s role",
+      "status": "Status / expiry",
+      "actions": "Actions",
+      "memberType": "Member",
+      "invitationType": "Invited",
+      "awaitingAcceptance": "Waiting for the invitation to be accepted",
+      "invitationNotSelectable": "Invitation {{email}} is not included in member bulk actions",
+      "empty": "No members or pending invitations"
+    },
+    "status": {
+      "active": "Active",
+      "suspended": "Suspended",
+      "revoked": "Revoked"
+    },
+    "roles": {
+      "owner": {
+        "label": "Owner",
+        "description": "Manage the team and all settings"
+      },
+      "admin": {
+        "label": "Administrator",
+        "description": "Manage people and production settings"
+      },
+      "editor": {
+        "label": "Designer",
+        "description": "Create projects and produce content"
+      },
+      "operator": {
+        "label": "Operator",
+        "description": "Use Agents and published capabilities for business tasks"
+      },
+      "reviewer": {
+        "label": "Reviewer",
+        "description": "Review and approve results"
+      },
+      "viewer": {
+        "label": "Viewer",
+        "description": "View and download content"
+      }
+    },
+    "errors": {
+      "generic": "The operation did not finish. Check your connection and try again.",
+      "lastOwner": "The team must keep at least one active owner. Make another person an owner first.",
+      "conflict": "A person or invitation changed. Try again.",
+      "forbidden": "Your current role cannot perform this management action."
+    },
+    "toast": {
+      "resentTitle": "New invitation link created",
+      "resentDescription": "The earlier link is invalid. Share only the current link.",
+      "resendErrorTitle": "A new invitation link could not be created",
+      "revokedTitle": "Invitation revoked",
+      "revokedDescription": "The original invitation link can no longer be accepted.",
+      "revokeErrorTitle": "Invitation could not be revoked",
+      "memberUpdatedTitle": "Access updated",
+      "memberUpdatedDescription": "The new access is active.",
+      "memberErrorTitle": "Person could not be updated",
+      "batchUpdatedTitle": "People access updated",
+      "batchUpdatedDescription": "Access is now updated for {{count}} people.",
+      "batchErrorTitle": "Bulk action could not be completed",
+      "batchErrorDescription": "{{error}} No selected person was changed.",
+      "copiedTitle": "Invitation link copied",
+      "copiedDescription": "Send it privately to the invited person.",
+      "copyErrorTitle": "Invitation link could not be copied",
+      "copyErrorDescription": "Select the link and copy it manually."
+    },
+    "invite": {
+      "action": "Invite person",
+      "title": "Invite a new person",
+      "description": "The link expires in 7 days and works only for this email.",
+      "shareTitle": "Share invitation link",
+      "shareDescription": "The link is shown once. Copy it now.",
+      "created": "Invitation created",
+      "sharePrivately": "Send it privately through this work email.",
+      "copy": "Copy invitation link",
+      "done": "Done",
+      "email": "Work email",
+      "emailRequired": "Enter the invited person's work email.",
+      "role": "Team role",
+      "groups": {
+        "collaboration": "Production and collaboration",
+        "management": "Team management"
+      },
+      "ownerWarningTitle": "Owners have full access",
+      "ownerWarningDescription": "After joining, this person can manage people, invitations, and team settings, including your access.",
+      "ownerAcknowledge": "I confirm granting team ownership",
+      "errorTitle": "Invitation could not be created",
+      "cancel": "Cancel",
+      "submit": "Create invitation"
+    },
+    "members": {
+      "title": "People",
+      "searchCount": "{{visible}} / {{loaded}} loaded",
+      "activeCount": "{{active}} active · {{loaded}} loaded",
+      "noMatch": "No person matches",
+      "selectLabel": "Select {{name}}",
+      "you": "You",
+      "fallbackName": "Person {{id}}",
+      "ownerOnlyLabel": "Only an owner can manage {{name}}",
+      "manageLabel": "Manage {{name}}",
+      "changeRole": "Change role",
+      "suspend": "Suspend access",
+      "restore": "Restore access",
+      "loadMoreErrorTitle": "More people could not be loaded",
+      "loadMore": "Load more people"
+    },
+    "batch": {
+      "manage": "Manage in bulk",
+      "done": "Finish bulk mode",
+      "selected": "{{count}} people selected",
+      "description": "Select up to 100 people. Bulk actions never leave a partial result.",
+      "limitReached": "The per-action limit has been reached",
+      "selectCurrent": "Select current results",
+      "clear": "Clear",
+      "suspendSelected": "Suspend selected ({{count}})",
+      "restoreSelected": "Restore selected ({{count}})",
+      "confirmSuspend": "Confirm bulk suspension",
+      "confirmRestore": "Confirm bulk restore",
+      "suspendTitle": "Suspend {{count}} people?",
+      "restoreTitle": "Restore {{count}} people?",
+      "suspendDescription": "Selected people immediately lose team access. Current work is not deleted.",
+      "restoreDescription": "Selected people regain team access with their existing roles.",
+      "atomicDescription": "The action runs in one transaction. If any permission or version changed, everyone remains unchanged."
+    },
+    "invitations": {
+      "title": "Pending invitations",
+      "validCount": "{{count}} active",
+      "noMatch": "No pending invitation matches",
+      "empty": "No pending invitations",
+      "expiresAt": "Expires {{date}}",
+      "manage": "Manage invitation",
+      "resend": "Create new link",
+      "revoke": "Revoke invitation",
+      "loadMoreErrorTitle": "More invitations could not be loaded",
+      "loadMore": "Load more invitations"
+    },
+    "confirm": {
+      "changeRoleAction": "Confirm change",
+      "suspendAction": "Confirm suspension",
+      "restoreAction": "Confirm restore",
+      "revokeAction": "Confirm revoke",
+      "changeRoleTitle": "Change {{name}} to {{role}}?",
+      "suspendTitle": "Suspend {{name}}?",
+      "restoreTitle": "Restore {{name}}?",
+      "revokeTitle": "Revoke this invitation?",
+      "changeRoleDescription": "The current role is {{role}}. New access takes effect immediately; the last owner cannot be downgraded.",
+      "suspendDescription": "This person immediately loses access. Current work is not deleted. The last owner cannot be suspended.",
+      "restoreDescription": "This person regains team access with the {{role}} role.",
+      "revokeDescription": "The original link becomes invalid immediately. Create a new invitation if the person still needs access."
+    },
+    "addExisting": {
+      "action": "Add member",
+      "method": "How to add",
+      "existing": "Existing account",
+      "invite": "Invite to join",
+      "description": "Enter a verified account email to grant access to this workspace.",
+      "submit": "Add member",
+      "succeeded": "Member added",
+      "alreadyMember": "This account has a membership record. Update or restore it in the member list.",
+      "failed": "Could not add the account. Confirm the email is verified, or invite the person to join.",
+      "emailPlaceholder": "Enter account email"
+    }
+  },
+  "usage": {
+    "title": "Usage and limits",
+    "forbiddenTitle": "Usage and limits are unavailable",
+    "forbiddenDescription": "Team administrator access is required.",
+    "forbiddenLoadDescription": "Contact the team owner to update your access.",
+    "loadErrorTitle": "Usage and limits could not be loaded",
+    "loading": "Syncing usage and limits",
+    "recheckPermission": "Check access again",
+    "reload": "Reload",
+    "refreshing": "Refreshing",
+    "refresh": "Refresh",
+    "staleTitle": "This data may be out of date",
+    "staleDescription": "Fetch it again when the connection recovers.",
+    "holdsTitle_one": "Model cost awaiting confirmation · one item",
+    "holdsTitle_other": "Model costs awaiting confirmation · {{count}} items",
+    "holdsDescription": "The available records cannot confirm these costs, so their limits remain held.",
+    "holdsAction": "View unconfirmed costs",
+    "holdsSummary_one": "One cost awaits confirmation",
+    "holdsSummary_other": "{{count}} costs await confirmation",
+    "availableSummary_one": "One service limit is available",
+    "availableSummary_other": "{{count}} service limits are available",
+    "unavailableSummary_one": "One service limit is not in use.",
+    "unavailableSummary_other": "{{count}} service limits are not in use.",
+    "safeSummary": "No limits are frozen and no charges need review.",
+    "needsAttention": "Needs attention",
+    "safe": "No costs to review",
+    "availableBalance": "Available limit for active services",
+    "onlyAvailableServices": "Active services only",
+    "totals": {
+      "used": "Used",
+      "processing": "Processing",
+      "held": "Unconfirmed",
+      "remaining": "Available",
+      "limit": "Limit"
+    },
+    "budgetsTitle": "Service limits",
+    "pausedBudgetsTitle": "Paused services ({{count}})",
+    "noAvailableBudgetsTitle": "No service limit is currently available",
+    "noAvailableBudgetsDescription": "Enable a model service to make its available limit visible here.",
+    "updatedAt": "Updated {{date}}",
+    "emptyBudgetsTitle": "No active service limits",
+    "emptyBudgetsDescription": "Connect and enable a model service to set its cost limit here.",
+    "manageProviders": "Manage model services",
+    "columns": {
+      "provider": "Model service",
+      "status": "Status",
+      "consumed": "Used / limit",
+      "remaining": "Available",
+      "period": "Period",
+      "actions": "Actions"
+    },
+    "budgetStatus": {
+      "active": "Available",
+      "frozen": "Frozen",
+      "exhausted": "Limit reached",
+      "closed": "Closed",
+      "paused": "Part of the limit is held"
+    },
+    "unknownCharge": "Contains an unconfirmed cost",
+    "recordNormal": "Limit record is healthy",
+    "progressLabel": "{{name}} has used {{amount}}, {{percent}}% of its limit",
+    "readOnly": "Read-only",
+    "multipleCurrencies": "Multiple currencies",
+    "notLinked": "Not linked",
+    "viewRun": "View task details",
+    "opening": "Opening costs and limits",
+    "overviewLabel": "Team cost status",
+    "limit": {
+      "action": "Set limit",
+      "title": "Set limit for “{{name}}”",
+      "committed": "Currently committed",
+      "current": "Current limit",
+      "description": "Currency: {{currency}}.",
+      "label": "New limit",
+      "cancel": "Cancel",
+      "submit": "Save limit",
+      "errorTitle": "Limit could not be updated",
+      "updatedTitle": "Limit updated",
+      "updatedDescription": "The new limit applies immediately to new model tasks.",
+      "conflict": "Another administrator changed this limit. Close, refresh, and use the latest values.",
+      "belowCommitted": "The limit cannot be lower than the total already used, processing, or held for review.",
+      "genericError": "The limit was not saved. Check your connection and try again.",
+      "invalidAmount": "Enter a valid amount greater than or equal to 0.",
+      "minimumAmount": "The limit cannot be lower than the currently committed {{amount}}."
+    },
+    "holds": {
+      "title": "Unconfirmed costs",
+      "description": "The available records cannot confirm these costs automatically, so their limits remain held.",
+      "heldAt": "Became unconfirmed: {{date}}",
+      "status": "Status",
+      "reconciling": "Internal review required",
+      "localSubmission": "Kanvas submission (local)",
+      "noSubmittedAt": "Submission time not recorded",
+      "utc": "UTC reference",
+      "run": "Related task",
+      "externalTask": "External task",
+      "noExternalTask": "External task ID unavailable",
+      "contactAdmin": "Ask a model service administrator to review",
+      "provider": "Model service",
+      "heldAmount": "Current hold"
+    },
+    "resolve": {
+      "action": "Review and settle",
+      "waitingRefresh": "Settled; waiting for refresh",
+      "title": "Settle cost to review",
+      "warningTitle": "This action restores or deducts the team limit",
+      "warningDescription": "A local failure does not prove that no charge occurred. Check the external record first; keep the cost pending if uncertain.",
+      "evidenceTitle": "Review evidence",
+      "evidenceDescription": "Search by external task ID first. Without one, use the model service, precise time, and amount.",
+      "copyEvidence": "Copy review summary",
+      "reconciliationTime": "Review time",
+      "utcTime": "UTC reference: {{date}} UTC",
+      "viewRun": "View related task",
+      "copied": "Review summary copied. Paste it into the external task or billing search.",
+      "copyFailed": "Copy failed. Select the evidence above manually.",
+      "copyDescription": "The summary contains only review facts and no credentials.",
+      "externalRecord": "External record shows",
+      "chargedChoice": "A charge occurred",
+      "notChargedChoice": "No charge occurred",
+      "amountLabel": "Actual charge ({{currency}})",
+      "amountPlaceholder": "For example: 0.72",
+      "referenceLabel": "Review evidence",
+      "referenceDescription": "Use the precise time above to check the task or bill. Enter a short note an administrator can verify; do not enter an API key.",
+      "referencePlaceholder": "For example: Billing date, task ID, or review result",
+      "formErrorTitle": "Cost not settled",
+      "chargedSummary": "Settle the {{amount}} hold for {{provider}} using the entered actual charge.",
+      "releasedSummary": "Mark the {{amount}} hold for {{provider}} as not charged and release it.",
+      "auditDescription": "Submission writes an immutable audit record. Do not settle if the evidence is uncertain.",
+      "cancel": "Keep pending",
+      "submitCharged": "Settle actual charge",
+      "submitReleased": "Release pending limit",
+      "submit": "Choose settlement",
+      "leaveTitle": "Leave cost review?",
+      "leaveDescription": "The unsubmitted result and evidence will be cleared.",
+      "discardAction": "Discard review",
+      "discardTitle": "Discard the unsubmitted review?",
+      "discardDescription": "The settlement choice, actual charge, and evidence will be cleared. This cost remains pending.",
+      "refreshingTitle": "Cost settled; refreshing balance",
+      "refreshingDescription": "The result is recorded in the audit log and cannot be submitted again while the balance refreshes.",
+      "successTitle": "Cost settled",
+      "released_zero": "The limit was released from the external review result and the balance is updated.",
+      "released_other": "The limit was released and the balance is updated. {{count}} costs still need review.",
+      "charged_zero": "The actual charge of {{amount}} was recorded and the balance is updated.",
+      "charged_other": "The actual charge of {{amount}} was recorded and the balance is updated. {{count}} costs still need review.",
+      "refreshErrorTitle": "Cost settled; balance not refreshed",
+      "refreshErrorDescription": "The result is recorded, but the page may show the prior balance. Refresh to read it again; do not submit this cost twice.",
+      "conflict": "This record changed. Close, refresh, and review the latest state.",
+      "genericError": "This cost could not be settled. No limit changed. Check your connection and try again.",
+      "resolutionRequired": "Choose whether the billing record shows a charge.",
+      "amountInvalid": "Enter an actual charge greater than 0 and no more than {{amount}}.",
+      "evidenceRequired": "Enter a task, billing date, or note that can be verified."
+    },
+    "metrics": {
+      "title": "Usage in the last 30 days",
+      "tracked": "{{count}} attempts recorded in usage",
+      "tasks": "Tasks processed",
+      "taskValue": "{{count}} attempts",
+      "latestAt": "Last recorded {{date}}",
+      "unknown": "{{count}} usage values not returned",
+      "emptyTitle": "No usage in the last 30 days",
+      "emptyDescription": "Usage appears after browser, team runtime, or model service processing completes.",
+      "type": "Usage type",
+      "recorded": "Recorded",
+      "latest": "Latest record",
+      "unknownRow": "{{count}} values not returned; tracked separately from costs to review",
+      "recordedRow": "Recorded"
+    },
+    "metricLabels": {
+      "duration": "Processing time",
+      "inputTokens": "Input tokens",
+      "inputTextTokens": "Text input tokens",
+      "inputImageTokens": "Image input tokens",
+      "outputTokens": "Output tokens",
+      "totalTokens": "Total tokens",
+      "cost": "Model cost",
+      "other": "Other recorded usage"
+    },
+    "duration": {
+      "milliseconds": "{{value}} ms",
+      "hours": "{{value}} hr",
+      "minutes": "{{value}} min",
+      "seconds": "{{value}} sec"
+    },
+    "units": {
+      "milliseconds": "ms",
+      "seconds": "sec",
+      "tokens": "tokens",
+      "bytes": "bytes"
+    },
+    "evidence": {
+      "provider": "Model service: {{value}}",
+      "amount": "Held amount: {{value}}",
+      "run": "Kanvas run: {{value}}",
+      "externalTask": "External task: {{value}}",
+      "localTime": "Submission time (local): {{value}}",
+      "utcTime": "Submission time (UTC): {{value}}"
+    }
+  },
+  "providers": {
+    "title": "Model services",
+    "forbiddenTitle": "Model services cannot be managed",
+    "forbiddenDescription": "Team administrator access is required.",
+    "loading": "Syncing model services",
+    "reload": "Reload",
+    "loadErrorTitle": "Model services could not be loaded",
+    "leaveTitle": "Leave model services?",
+    "leaveDescription": "Unsaved connections or API keys will be cleared.",
+    "connect": "Connect service",
+    "activeSummary_one": "One service is available for new tasks",
+    "activeSummary_other": "{{count}} services are available for new tasks",
+    "noActiveSummary": "No services are available for new tasks",
+    "attentionSummary": "{{attention}} need attention and {{inactive}} are not in use.",
+    "attentionDescription": "Check services that failed or still need verification before using them.",
+    "inactiveSummary_one": "One is not in use. No configuration issues found.",
+    "inactiveSummary_other": "{{count}} are not in use. No configuration issues found.",
+    "viewRoutes": "View capabilities using these services",
+    "storageErrorTitle": "A new service cannot be connected",
+    "storageErrorDescription": "Model service connections are temporarily unavailable.",
+    "staleTitle": "Service status may be out of date",
+    "staleDescription": "Fetch it again when the connection recovers.",
+    "emptyTitle": "Connect your first model service",
+    "emptyDescription": "Then assign its models to production capabilities.",
+    "listTitle": "Service connections",
+    "configuredCount_one": "One configured service",
+    "configuredCount_other": "{{count}} configured services",
+    "directory": {
+      "allServices": "All service types",
+      "filterLabel": "Filter model services by type",
+      "searchPlaceholder": "Search service name or model",
+      "noMatches": "No model services match these filters",
+      "columns": {
+        "budgetUsage": "Budget and usage"
+      },
+      "lifecycle": {
+        "active": "Enabled",
+        "disabled": "Paused",
+        "draft": "Not enabled",
+        "revoked": "Unavailable"
+      },
+      "budget": {
+        "missing": "No budget yet",
+        "consumed": "{{amount}} used",
+        "held": "{{amount}} pending reconciliation"
+      },
+      "storage": {
+        "encrypted_database": "Stored encrypted in the Kanvas database.",
+        "plaintext_database": "Stored in the Kanvas database without encryption."
+      },
+      "remove": {
+        "action": "Delete service",
+        "title": "Delete {{name}}?",
+        "description": "After deletion, this service will no longer provide models.",
+        "cancel": "Cancel",
+        "submit": "Delete"
+      },
+      "create": {
+        "basicsTitle": "Connection details",
+        "basicsDescription": "Choose the service and enter its connection information.",
+        "budgetLabel": "Service budget limit (USD)",
+        "budgetDescription": "New model calls stop at this limit. You can adjust it later from the service list.",
+        "budgetPlaceholder": "For example: 20.00",
+        "modelsTitle": "Available models",
+        "modelsDescription": "Choose the models this connection will make available to the team.",
+        "searchModels": "Search models",
+        "selectAll": "Select all",
+        "clear": "Clear",
+        "selectModel": "Select {{name}}",
+        "providerModel": "Service model",
+        "modelIdentifier": "Model identifier",
+        "modelIdentifierFor": "Model identifier for {{name}}",
+        "modelsEmptyTitle": "Fetch the service models first",
+        "modelsEmptyDescription": "Enter an API key, then fetch the models available through this connection.",
+        "saveAndContinue": "Save and continue"
+      },
+      "errors": {
+        "editorClosed": "Open the model service connection again.",
+        "invalidBudget": "Enter a service budget limit greater than zero.",
+        "modelMissing": "Model {{model}} is no longer in the current catalog.",
+        "invalidIdentifier": "Model {{model}} needs an identifier using letters, numbers, dots, underscores, slashes, or hyphens, up to 160 characters.",
+        "importIncomplete": "The service did not return every selected model. Fetch the catalog and try again."
+      },
+      "toast": {
+        "createdTitle": "Model service added",
+        "createdDescription": "The connection, models, and budget were saved. Continue by configuring model billing.",
+        "removedTitle": "Model service deleted",
+        "removeErrorTitle": "Model service could not be deleted"
+      }
+    },
+    "columns": {
+      "service": "Service",
+      "provider": "Service type",
+      "models": "Added models",
+      "status": "Status",
+      "validation": "Connection check",
+      "actions": "Actions"
+    },
+    "validationLabels": {
+      "passed": "Verified",
+      "failed": "Verification failed",
+      "pending": "Needs verification"
+    },
+    "validationAt": "{{status}} · {{date}}",
+    "modelCount_one": "One model",
+    "modelCount_other": "{{count}} models",
+    "notChecked": "Not checked",
+    "credentialSuffix": "Credential ····{{suffix}}",
+    "credentialManaged": "Credential managed",
+    "recheck": "Verify again",
+    "check": "Verify connection",
+    "manage": "Manage {{name}}",
+    "rotateKey": "Update API key",
+    "refreshCatalog": "Refresh model catalog",
+    "reviewCatalog": "Review model changes",
+    "disable": "Pause new tasks",
+    "overviewLabel": "Model service status",
+    "listLabel": "Configured model services",
+    "actions": {
+      "activate": "Enable",
+      "reactivate": "Enable again"
+    },
+    "activation": {
+      "title": "Set costs for {{name}}",
+      "description": "Choose how each model settles automatically. Successful tasks use these rules; work proven not to have started is released automatically.",
+      "mode": "Settlement method",
+      "fixedMode": "Fixed cost per call",
+      "reportedMode": "Use the service's actual cost",
+      "fixedAmount": "Cost per successful call (USD)",
+      "maximumAmount": "Maximum cost per call (USD)",
+      "fixedHelp": "This amount is settled only after a successful call.",
+      "reportedHelp": "The service reports the actual cost. Costs above this limit pause automatic settlement for internal review.",
+      "invalidAmount": "Enter a valid amount greater than zero.",
+      "submit": "Confirm and enable"
+    },
+    "agentModel": {
+      "title": "Default Agent model",
+      "description": "New conversations and responses use this model. Runs already in progress keep the version pinned when they started.",
+      "label": "Default model",
+      "save": "Save default model",
+      "updatedTitle": "Default Agent model updated",
+      "updatedDescription": "New Agent runs use the selected model. Runs already in progress are unchanged.",
+      "updateErrorTitle": "Default Agent model could not be updated",
+      "loadErrorTitle": "Agent models are temporarily unavailable",
+      "emptyTitle": "No Agent model is ready",
+      "emptyDescription": "Connect and publish a text-generation model with automatic settlement first.",
+      "publish": "Publish Agent model",
+      "publishTitle": "Publish an Agent text model",
+      "publishDescription": "Choose a model discovered from the Provider and enter its published prices. Usage is then settled automatically from the model's token counts.",
+      "providerLabel": "Provider service",
+      "modelLabel": "Model",
+      "inputPrice": "Input price (USD / 1M tokens)",
+      "outputPrice": "Output price (USD / 1M tokens)",
+      "cachePrice": "Cache-read price (optional)",
+      "maximumCharge": "Maximum reservation per run (USD)",
+      "pricingHelp": "Prices drive automatic settlement. The maximum reservation protects the budget before a run; it is not a fixed charge.",
+      "publishSubmit": "Publish model",
+      "publishSuccessTitle": "Agent model published",
+      "publishSuccessDescription": "It can now be selected as the default Agent model.",
+      "publishErrorTitle": "Agent model could not be published"
+    },
+    "statusLabels": {
+      "active": "In use",
+      "inactive": "Not enabled",
+      "revoked": "Unavailable",
+      "failed": "Configuration confirmation failed",
+      "ready": "Ready to enable",
+      "disabled": "Paused",
+      "pending": "Needs verification"
+    },
+    "fields": {
+      "invalidApiKey": "Enter a new valid API key."
+    },
+    "catalog": {
+      "meta": "Catalog r{{revision}} · {{date}}",
+      "pendingReview": "Capability changes found; calls still use adopted r{{revision}}"
+    },
+    "catalogReview": {
+      "title": "Review model changes for {{name}}",
+      "description": "This compares stored immutable catalogs only. Before adoption, Kanvas reconnects to the provider, verifies the models, and atomically switches models and routes for new tasks. Running tasks continue on their pinned version.",
+      "revisions": "Current calls use adopted r{{activated}}; latest catalog awaiting adoption is r{{current}}.",
+      "notActivated": "not enabled",
+      "blockersTitle": "These changes cannot be adopted",
+      "noBlockers": "Checks passed. This catalog can be adopted.",
+      "noChanges": "No invocation capability changes are visible for the selected models.",
+      "changes": {
+        "unchanged": "Unchanged",
+        "added": "Added",
+        "removed": "Removed",
+        "changed": "Changed"
+      },
+      "operations": {
+        "image.generate": "Image generation",
+        "image.edit": "Image editing"
+      },
+      "surfacesAdded": "API added: {{values}}",
+      "surfacesRemoved": "API removed: {{values}}",
+      "parameterChange": "Parameter {{key}}: {{change}} ({{fields}})",
+      "blockers": {
+        "not_activated": "This service has not been enabled. Use the initial enable flow to adopt its first catalog.",
+        "no_pending_changes": "No catalog changes are waiting for adoption.",
+        "selected_model_removed": "Selected model {{model}} disappeared from the latest catalog. Choose a replacement model or disable its routes first.",
+        "selected_model_identity_only": "Model {{model}} currently has identity evidence only; its image capability is unproven.",
+        "selected_model_no_image_output": "Model {{model}} no longer declares image output.",
+        "selected_model_no_image_operation": "Model {{model}} no longer provides image generation or editing.",
+        "selected_model_operation_removed": "The {{capability}} operation was removed from model {{model}}.",
+        "selected_model_unsupported_route": "Model {{model}} has no available adapter for {{capability}} API {{apiSurface}}."
+      },
+      "loading": "Reading catalog differences…",
+      "loadErrorTitle": "Model changes could not be read",
+      "adoptErrorTitle": "Model catalog could not be adopted",
+      "cancel": "Keep current version",
+      "adopt": "Adopt catalog r{{revision}}"
+    },
+    "validation": {
+      "requiredApiKey": "Enter an API key.",
+      "trimApiKey": "The API key cannot start or end with spaces.",
+      "invalidApiKeyFormat": "The API key must contain no more than 4096 printable ASCII characters.",
+      "requiredBaseUrl": "Enter a model service URL.",
+      "longBaseUrl": "The model service URL cannot exceed 2048 characters.",
+      "invalidBaseUrl": "Enter a complete HTTPS model service URL.",
+      "unsafeBaseUrl": "The service URL must use HTTPS and cannot contain credentials, query parameters, or fragments.",
+      "requiredName": "Enter a service name.",
+      "invalidName": "The service name cannot exceed 160 characters or contain control characters.",
+      "requiredModel": "Enter at least one model ID.",
+      "tooManyModels": "Configure no more than 32 model IDs at once.",
+      "duplicateModels": "Model IDs cannot be repeated.",
+      "invalidModel": "Each model ID must be 255 characters or fewer and cannot contain control characters."
+    },
+    "toast": {
+      "createdTitle": "Model service verified and added",
+      "createdDescription": "The API key and configured model access were verified. The service is ready to enable.",
+      "checkedTitle": "Connection verified",
+      "checkedDescription": "The API key is valid and the configured image models are accessible.",
+      "checkErrorTitle": "Connection verification failed",
+      "reactivatedTitle": "Model service enabled again",
+      "activatedTitle": "Model service enabled",
+      "activatedDescription": "Confirm which production capabilities use this service in execution routes.",
+      "activateErrorTitle": "Model service could not be enabled",
+      "rotatedTitle": "API key updated",
+      "rotatedDescription": "New tasks use the new key. Submitted tasks keep a 15-minute transition window; refresh the model catalog when needed.",
+      "catalogRefreshedTitle": "Model catalog refreshed",
+      "catalogRefreshedDescription": "The selected models' invocation capabilities are unchanged. Current execution configuration remains in use.",
+      "catalogChangesPendingDescription": "Capability changes were found and saved for review. Current tasks still use the existing execution configuration.",
+      "catalogRefreshErrorTitle": "Model catalog could not be refreshed",
+      "catalogAdoptedTitle": "Model catalog adopted",
+      "catalogAdoptedDescription": "New tasks now use the reviewed model capabilities and routes. Running tasks continue on their pinned version.",
+      "disabledTitle": "New tasks paused",
+      "disabledDescription": "New tasks stop using this service while submitted tasks can still reconcile.",
+      "disableErrorTitle": "Model service could not be paused"
+    },
+    "rotate": {
+      "title": "Update the API key for {{name}}",
+      "description": "After saving, new tasks immediately use the new key.",
+      "noTarget": "Choose a model service to update.",
+      "apiKey": "New API key",
+      "transitionNote": "The old key remains available to submitted tasks for 15 minutes. Kanvas does not revoke it with the provider.",
+      "errorTitle": "API key could not be updated",
+      "submit": "Save update"
+    },
+    "validationDialog": {
+      "title": "Verify {{name}}",
+      "description": "Kanvas calls the provider's read-only model endpoint with the current key. It does not generate images or incur model charges.",
+      "apiKey": "Current API key",
+      "submit": "Verify connection"
+    },
+    "discard": {
+      "action": "Discard changes",
+      "rotationTitle": "Discard the API key update?",
+      "createTitle": "Discard the model service connection?",
+      "description": "The information entered in this draft will be cleared."
+    },
+    "disableDialog": {
+      "action": "Pause new tasks",
+      "title": "Pause new tasks for {{name}}?",
+      "description": "New tasks stop selecting this service while submitted tasks continue to reconcile. Without another candidate, the production capability is temporarily unavailable."
+    },
+    "errors": {
+      "generic": "The operation did not finish. Reload the page and try again.",
+      "conflict": "The configuration changed. Refresh and try again.",
+      "invalid": "Check the marked fields.",
+      "forbidden": "Your current role cannot manage model services.",
+      "unavailable": "Model service connections are temporarily unavailable.",
+      "policyNotInitialized": "Model service setup is incomplete. Ask the instance administrator to complete initialization, then try again."
+    },
+    "status": {
+      "active": "Configuration verified and available to execution routes",
+      "activePending": "Service enabled and waiting to be checked again",
+      "revoked": "Credential revoked and cannot be restored",
+      "failed": "Configuration or credential check failed",
+      "inactive": "Disabled and can be enabled when needed",
+      "ready": "Check passed and ready for first use",
+      "pending": "Check the configuration and credential first"
+    },
+    "create": {
+      "title": "Connect model service",
+      "service": "Service type",
+      "selectPreset": "Choose a service",
+      "presets": {
+        "openai": "OpenAI image models",
+        "newapi": "Team-hosted service",
+        "tokenhub": "TokenHub image models"
+      },
+      "name": "Connection name",
+      "namePlaceholder": "For example: Primary image service",
+      "apiKey": "API key",
+      "apiKeyPlaceholder": "Enter the service key",
+      "baseUrl": "Service URL",
+      "baseUrlPlaceholder": "https://newapi.example.com",
+      "baseUrlDescription": "Enter an HTTPS URL.",
+      "models": "Models",
+      "modelsPlaceholder": "Select one or more image models",
+      "modelsBeforeDiscoveryPlaceholder": "Fetch available models first",
+      "modelsBeforeDiscovery": "Verify the connection and fetch its catalog before selecting models.",
+      "modelsDescription": "Only models with evidenced image generation or editing capabilities can be selected.",
+      "discoverModels": "Fetch available models",
+      "discoveryErrorTitle": "Model catalog could not be fetched",
+      "noSelectableModelsTitle": "No selectable image models",
+      "noSelectableModelsDescription": "The returned models only have identity evidence or do not yet have trusted image generation or editing capability evidence.",
+      "capabilityUnknown": "Image capabilities are unverified; unavailable for selection",
+      "capabilities": {
+        "image": {
+          "generate": "Image generation",
+          "edit": "Image editing"
+        }
+      },
+      "catalogAfterCreate": "Saving validates the connection and synchronizes its model catalog. Import and map models from the Models tab.",
+      "errorTitle": "Model service could not be saved",
+      "cancel": "Cancel",
+      "submit": "Verify and add"
+    },
+    "management": {
+      "models": "Manage models",
+      "modelsTitle": "Manage {{name}} models",
+      "addSelected": "Add selected models ({{count}})",
+      "refresh": "Refresh catalog",
+      "refreshUnavailable": "This connection cannot refresh its catalog. Check the service status first.",
+      "failed": "Could not complete the operation",
+      "retryHint": "Models already added are kept. Submit again to continue adding the remaining models.",
+      "retry": "Retry",
+      "added": "Models added",
+      "nextStep": "Configure model parameters and pricing, then save and publish. Added models are not necessarily callable. For an existing model, edit it and choose the new provider.",
+      "configure": "Configure models",
+      "empty": "No models in this catalog. Try refreshing it.",
+      "model": "Provider model",
+      "identifier": "Model identifier",
+      "identifierFor": "Model identifier for {{name}}",
+      "rename": "Rename",
+      "renamed": "Service renamed",
+      "save": "Save name",
+      "close": "Close",
+      "status": {
+        "discovered": "Not mapped",
+        "mapped": "Added · Needs configuration",
+        "active": "Published",
+        "disabled": "Disabled",
+        "removed": "Removed"
+      },
+      "errors": {
+        "empty": "Select at least one model.",
+        "missing": "A selected model is no longer in the current catalog. Refresh and select again.",
+        "identifier": "Check the selected model identifiers: up to 160 letters, digits, dots, underscores, slashes or hyphens, starting with a letter or digit.",
+        "unavailable": "The service or selected model is no longer available. Close this window and check its current status."
+      },
+      "selectModel": "Select {{name}}"
+    }
+  },
+  "execution": {
+    "leaveTitle": "Leave capability configuration?",
+    "leaveDescription": "Unpublished route or implementation changes will be cleared.",
+    "needsReview": "Needs review",
+    "runnable": "Runnable",
+    "emptyTitle": "No execution routes to manage",
+    "emptyDescription": "Candidate routes appear here after a production capability and implementation are published.",
+    "errors": {
+      "confirmingTitle": "Confirming the execution route",
+      "confirmingDescription": "The connection was interrupted. The page will reload team settings without submitting again.",
+      "conflictTitle": "The execution route changed",
+      "conflictDescription": "The latest order is now shown. Try the action again from the current state.",
+      "forbiddenTitle": "Management permission changed",
+      "forbiddenDescription": "The page will check team permissions again. The unsaved action was not applied.",
+      "genericTitle": "Execution route could not be updated",
+      "genericDescription": "Check your connection and try again."
+    },
+    "toast": {
+      "resumedTitle": "Execution route resumed",
+      "pausedTitle": "Execution route paused",
+      "statusDescription": "The update affects only new tasks. Running tasks keep their current route.",
+      "orderTitle": "Execution order updated",
+      "orderDescription": "New tasks will use the updated candidate order.",
+      "configurationTitle": "Capability configuration updated",
+      "configurationDescription": "New tasks will use the new model route."
+    },
+    "pause": {
+      "action": "Pause execution route",
+      "lastRouteTitle": "Pausing this route makes “{{name}}” unavailable",
+      "title": "Pause “{{name}}”?",
+      "description": "New tasks will stop selecting this route. Running tasks and prior results are not affected.",
+      "lastRouteDescription": "This is the only enabled candidate. New tasks cannot use this production capability after confirmation."
+    },
+    "discard": {
+      "action": "Discard changes",
+      "title": "Discard unpublished configuration?",
+      "description": "Changes to the model route, prompt, or parameters will be cleared."
+    },
+    "edit": {
+      "action": "Reorder",
+      "cancel": "Cancel",
+      "save": "Save order",
+      "preferred": "First"
+    },
+    "binding": {
+      "configure": "Configure model",
+      "replace": "Replace",
+      "moveUpLabel": "Move {{name}} up",
+      "moveDownLabel": "Move {{name}} down",
+      "pause": "Pause",
+      "resume": "Resume",
+      "status": {
+        "enabled": "Enabled",
+        "paused": "Paused",
+        "retired": "Retired"
+      }
+    },
+    "targets": {
+      "browser": "Local",
+      "worker": "Cloud",
+      "provider": "API service"
+    },
+    "availability": {
+      "ready": {
+        "label": "Runnable",
+        "description": "Dependencies are ready for new tasks."
+      },
+      "contract_unavailable": {
+        "label": "Production capability unavailable",
+        "description": "The capability is unavailable, so this run method cannot be resumed."
+      },
+      "implementation_unavailable": {
+        "label": "Implementation unavailable",
+        "description": "The current implementation is not published, so this route cannot be resumed."
+      },
+      "provider_unconfigured": {
+        "label": "Model service not linked",
+        "description": "Link a published model service route first."
+      },
+      "provider_unavailable": {
+        "label": "Model service unavailable",
+        "description": "The model service is disabled or has not passed its configuration check."
+      },
+      "credential_unavailable": {
+        "label": "Credential unavailable",
+        "description": "The model service has no available credential."
+      },
+      "budget_unavailable": {
+        "label": "Limit unavailable",
+        "description": "The current model service limit is inactive, frozen, or exhausted."
+      }
+    },
+    "configure": {
+      "title": "Configure “{{name}}”",
+      "notSelected": "Not selected",
+      "modelTitle": "API service",
+      "routesLabel": "Available model routes",
+      "availableBudget": "${{amount}} available",
+      "budgetUnavailable": "Limit currently unavailable",
+      "providerUnavailable": "Model service currently unavailable",
+      "current": "Current",
+      "noCompatibleTitle": "No compatible model route",
+      "noCompatiblePrefix": "Add and enable a compatible model in",
+      "noCompatibleSuffix": "for {{surface}}.",
+      "protocol": "this protocol",
+      "advanced": "Prompt and parameters",
+      "promptAdvanced": "Underlying prompt",
+      "promptLabel": "Prompt template",
+      "restorePrompt": "Restore default",
+      "modelParametersTitle": "Model call parameters",
+      "modelParametersDescription": "Control whether each call from a Workflow or canvas may provide a parameter. Optional parameters may also have a route default.",
+      "noModelParametersTitle": "This model has no configurable parameters",
+      "noModelParametersDescription": "The selected model operation publishes no configurable parameters, so no parameter policy is required.",
+      "parameterCallerPolicy": "Call policy",
+      "parameterEnabled": "Allow parameter",
+      "parameterEnabledAria": "Allow the {{name}} parameter",
+      "parameterAlwaysEnabled": "Required by model",
+      "parameterDefault": "Default value",
+      "parameterDefaultAria": "Default value for {{name}}",
+      "parameterDefaultPlaceholder": "No default value",
+      "parameterAddDefault": "Set a default",
+      "parameterClearDefault": "Clear default",
+      "parameterRequiredDescription": "A Workflow or canvas must provide this value for each call; the route provides no default.",
+      "parameterPolicies": {
+        "optional": "Caller may provide",
+        "fixed": "Fixed",
+        "required": "Caller must provide"
+      },
+      "parameterErrors": {
+        "policy_required": "Choose a call policy.",
+        "required_disabled": "A model-required parameter cannot be disabled.",
+        "fixed_default_required": "A fixed parameter requires a value.",
+        "required_default_forbidden": "A caller-required parameter cannot have a default.",
+        "policy_outside_model": "This policy exceeds the values or range published by the model.",
+        "default_outside_model": "The default is outside the values or range published by the model."
+      },
+      "variables": {
+        "action": "View available variables",
+        "title": "Available variables",
+        "default": "Dynamic content supplied by the current execution implementation.",
+        "prompt": "The prompt entered for this task.",
+        "promptBlock": "The task prompt with context; empty when no prompt is provided.",
+        "guidance": "Additional instructions entered for this task.",
+        "guidanceBlock": "Additional instructions with context; empty when none are provided.",
+        "scaleFactor": "The enlargement factor for this task.",
+        "targetWidth": "Target canvas width in pixels.",
+        "targetHeight": "Target canvas height in pixels."
+      },
+      "cancel": "Cancel",
+      "submit": "Apply to new tasks"
+    }
+  }
+}

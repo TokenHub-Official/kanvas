@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "packId": "first-party.image-object-remove",
+  "displayName": "Image object remove",
+  "workflows": [
+    {
+      "path": "workflows/image-object-remove.json"
+    }
+  ],
+  "skill": {
+    "path": "skill/manifest.json"
+  },
+  "capabilities": [
+    {
+      "path": "capabilities/image-object-remove.json"
+    }
+  ],
+  "requiredCapabilities": [
+    {
+      "contractId": "image.object.remove",
+      "revision": 1,
+      "canonicalDigest": "sha256:17642c3a8100a24c4733bcd132c077874b72816ee1533ca79bf2e13bfac63535"
+    }
+  ]
+}

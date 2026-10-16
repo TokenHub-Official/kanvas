@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "contractKey": "image.text.extract",
+  "revision": 1,
+  "inputSchema": {
+    "$id": "kanvas.image-text-extract-input.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["sourceArtifactId"],
+    "properties": {
+      "languages": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$"
+        },
+        "maxItems": 8,
+        "minItems": 1,
+        "uniqueItems": true,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "granularity": {
+        "enum": ["line", "word"],
+        "type": "string",
+        "default": "line",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      },
+      "minimumConfidence": {
+        "type": "number",
+        "default": 0.5,
+        "maximum": 1,
+        "minimum": 0,
+        "x-kanvas-semantic-type": "number.scalar"
+      }
+    },
+    "additionalProperties": false
+  },
+  "outputSchema": {
+    "$id": "kanvas.image-text-extract-result.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "schemaVersion",
+      "sourceArtifactId",
+      "sourceWidth",
+      "sourceHeight",
+      "text",
+      "language",
+      "direction",
+      "confidence",
+      "blocks",
+      "regions",
+      "qualitySignals"
+    ],
+    "properties": {
+      "text": {
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "blocks": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["level", "text", "confidence", "polygon"],
+          "properties": {
+            "text": {
+              "type": "string",
+              "minLength": 1
+            },
+            "level": {
+              "enum": ["line", "word"],
+              "type": "string"
+            },
+            "polygon": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["x", "y"],
+                "properties": {
+                  "x": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "y": {
+                    "type": "number",
+                    "minimum": 0
+                  }
+                },
+                "additionalProperties": false
+              },
+              "maxItems": 4,
+              "minItems": 4
+            },
+            "confidence": {
+              "type": "number",
+              "maximum": 1,
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        },
+        "maxItems": 10000,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "regions": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["points"],
+          "properties": {
+            "points": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["x", "y"],
+                "properties": {
+                  "x": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "y": {
+                    "type": "number",
+                    "minimum": 0
+                  }
+                },
+                "additionalProperties": false
+              },
+              "maxItems": 4,
+              "minItems": 4
+            }
+          },
+          "additionalProperties": false
+        },
+        "maxItems": 10000,
+        "x-kanvas-semantic-type": "region.list"
+      },
+      "language": {
+        "type": ["string", "null"],
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "direction": {
+        "enum": ["ltr", "rtl", "ttb", "unknown"],
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "confidence": {
+        "type": "number",
+        "maximum": 1,
+        "minimum": 0,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "sourceWidth": {
+        "type": "integer",
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "sourceHeight": {
+        "type": "integer",
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "schemaVersion": {
+        "const": "kanvas.image-text-extract-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "required": ["schemaVersion", "method", "generative", "lowConfidence"],
+        "properties": {
+          "method": {
+            "type": "string"
+          },
+          "generative": {
+            "const": false
+          },
+          "lowConfidence": {
+            "type": "boolean"
+          },
+          "schemaVersion": {
+            "const": "kanvas.image-text-extract-quality/v1"
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "quality.signals"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "idempotencyMode": "keyed",
+  "supportedInvokers": ["user", "workflow", "agent"]
+}

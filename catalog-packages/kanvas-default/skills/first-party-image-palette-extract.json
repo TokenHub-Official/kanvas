@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "kanvas.skill-catalog-asset/v1",
+  "skillKey": "first-party.image-palette-extract",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "提取图片调色板",
+      "en-US": "Palette extraction"
+    }
+  },
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "extract",
+      "displayName": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "提取调色板",
+          "en-US": "Palette extraction"
+        }
+      },
+      "description": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "在浏览器本地确定性提取主色、比例与色彩角色。",
+          "en-US": "Extract dominant colors, ratios, and color roles locally in the browser."
+        }
+      },
+      "category": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "图片分析",
+          "en-US": "Image analysis"
+        }
+      },
+      "outputPresentation": "board",
+      "workflow": {
+        "key": "image_palette_extract",
+        "revision": 1,
+        "canonicalDigest": "sha256:63f22b5bd28bb3df92f8824008dee2182df93dbe5a73676fd121a44c032d8e1f"
+      }
+    }
+  ]
+}

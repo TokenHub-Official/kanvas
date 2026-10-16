@@ -1,0 +1,216 @@
+{
+  "schemaVersion": "kanvas.runtime-adapter-definition/v1",
+  "adapterKey": "openai.image.upscale.reconstructive.v1",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "画质增强 · 模型服务",
+      "en-US": "Image upscale · Model service"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "将画质增强的公开输入输出转换为模型服务运行协议。",
+      "en-US": "Adapts the public Image upscale contract to the Model service runtime protocol."
+    }
+  },
+  "executionTarget": "provider",
+  "sourceKinds": ["model_service"],
+  "supportedModelFormats": [],
+  "invocationInputSchema": {
+    "$id": "kanvas.image-upscale-input.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["sourceArtifactId", "qualityIntent"],
+    "properties": {
+      "guidance": {
+        "type": "string",
+        "maxLength": 1000,
+        "minLength": 1,
+        "x-kanvas-semantic-type": "prompt.rich"
+      },
+      "scaleFactor": {
+        "const": 2,
+        "default": 2,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "qualityIntent": {
+        "enum": ["faithful", "reconstructive"],
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "invocationOutputSchema": {
+    "$id": "kanvas.image-upscale-result.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "schemaVersion",
+      "imageArtifactId",
+      "qualityIntent",
+      "scaleFactor",
+      "sourceWidth",
+      "sourceHeight",
+      "outputWidth",
+      "outputHeight",
+      "qualitySignals"
+    ],
+    "properties": {
+      "outputWidth": {
+        "type": ["integer", "null"],
+        "minimum": 1,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "scaleFactor": {
+        "const": 2,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "sourceWidth": {
+        "type": ["integer", "null"],
+        "minimum": 1,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "outputHeight": {
+        "type": ["integer", "null"],
+        "minimum": 1,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "sourceHeight": {
+        "type": ["integer", "null"],
+        "minimum": 1,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "qualityIntent": {
+        "enum": ["faithful", "reconstructive"],
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "schemaVersion": {
+        "const": "kanvas.image-upscale-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "required": [
+          "schemaVersion",
+          "method",
+          "generative",
+          "resamplingKernel"
+        ],
+        "properties": {
+          "method": {
+            "enum": ["deterministic_resample", "generative_reconstruction"],
+            "type": "string"
+          },
+          "generative": {
+            "type": "boolean"
+          },
+          "schemaVersion": {
+            "const": "kanvas.image-upscale-quality/v1"
+          },
+          "resamplingKernel": {
+            "enum": ["lanczos3", null],
+            "type": ["string", "null"]
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "quality.signals"
+      },
+      "imageArtifactId": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["$kanvas", "outputRole", "outputIndex"],
+        "properties": {
+          "$kanvas": {
+            "const": "attempt-output-artifact/v1"
+          },
+          "outputRole": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "outputIndex": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          }
+        },
+        "x-kanvas-attempt-output-artifact": true,
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "configurationSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "default": {
+      "protocol": "images.edits.v1",
+      "dataEgress": "authorized_source_artifact",
+      "scaleFactor": 2,
+      "outputFormat": "png",
+      "qualityIntent": "reconstructive",
+      "promptTemplate": "Reconstruct this image at higher visual fidelity. Preserve the original composition, subjects, identity, text, colors, proportions, and geometry. Do not add, remove, crop, or reposition content.{{guidanceBlock}}",
+      "outputMaterialization": "trusted_storage"
+    },
+    "const": {
+      "protocol": "images.edits.v1",
+      "dataEgress": "authorized_source_artifact",
+      "scaleFactor": 2,
+      "outputFormat": "png",
+      "qualityIntent": "reconstructive",
+      "promptTemplate": "Reconstruct this image at higher visual fidelity. Preserve the original composition, subjects, identity, text, colors, proportions, and geometry. Do not add, remove, crop, or reposition content.{{guidanceBlock}}",
+      "outputMaterialization": "trusted_storage"
+    }
+  },
+  "modelServiceSelector": {
+    "operation": "image.edit",
+    "apiSurface": "images.edits.v1"
+  },
+  "usageMetrics": [
+    {
+      "metricKey": "input_tokens",
+      "unitCode": "token"
+    },
+    {
+      "metricKey": "output_tokens",
+      "unitCode": "token"
+    },
+    {
+      "metricKey": "total_tokens",
+      "unitCode": "token"
+    },
+    {
+      "metricKey": "input_text_tokens",
+      "unitCode": "token"
+    },
+    {
+      "metricKey": "input_image_tokens",
+      "unitCode": "token"
+    }
+  ],
+  "artifactInputs": [
+    {
+      "role": "sourceArtifactId",
+      "pointer": "/sourceArtifactId",
+      "required": true,
+      "mediaTypes": ["image/png", "image/jpeg", "image/webp"]
+    }
+  ],
+  "executable": {
+    "kind": "built_in",
+    "packageKey": "kanvas.provider-image-runtime",
+    "packageVersion": "1.0.0",
+    "entrypoint": "openai.image.upscale.reconstructive.v1",
+    "releaseDigest": "sha256:4b8a701233a796d8c84178ea678e59e2ae22a0cd7992329948513050d2d081b5"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "key": "image_subject_detect",
+  "entryNodeKey": "detect_subjects",
+  "limits": {
+    "maxNodeRuns": 1,
+    "timeoutMs": 300000
+  },
+  "nodes": [
+    {
+      "key": "detect_subjects",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "image.subject.detect",
+        "revision": 1,
+        "canonicalDigest": "sha256:fbce4aebf4673485b62dcf8a25e42cdf343839534d454fd95670062367cc6de5"
+      },
+      "input": {
+        "$value": {
+          "source": "workflow_input",
+          "pointer": ""
+        }
+      },
+      "next": []
+    }
+  ],
+  "outputs": {
+    "schemaVersion": {
+      "required": true,
+      "value": "kanvas.image-subject-detect-result/v1"
+    },
+    "sourceWidth": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "detect_subjects",
+          "scope": "root",
+          "pointer": "/sourceWidth"
+        }
+      }
+    },
+    "sourceHeight": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "detect_subjects",
+          "scope": "root",
+          "pointer": "/sourceHeight"
+        }
+      }
+    },
+    "candidates": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "detect_subjects",
+          "scope": "root",
+          "pointer": "/candidates"
+        }
+      }
+    },
+    "maskArtifactId": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "detect_subjects",
+          "scope": "root",
+          "pointer": "/maskArtifactId"
+        }
+      }
+    },
+    "qualitySignals": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "detect_subjects",
+          "scope": "root",
+          "pointer": "/qualitySignals"
+        }
+      }
+    }
+  }
+}

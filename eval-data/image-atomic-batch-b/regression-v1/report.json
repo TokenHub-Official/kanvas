@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "kanvas.image-atomic-batch-b-eval-report/v1",
+  "corpusId": "atom-batch-02-metric-regression-v1",
+  "evidenceClass": "metric_regression",
+  "generatedAt": "2026-08-04T11:10:02.651Z",
+  "sampleCount": 2,
+  "passedCount": 2,
+  "failedCount": 0,
+  "passed": true,
+  "samples": [
+    {
+      "id": "denoise-isolated-impulse",
+      "capability": "image.denoise",
+      "target": "browser",
+      "implementationDigest": "sha256:1b6e9ad4a9a21c854756d4ad908e582ae7ee42176a3320702f363c3ede49c256",
+      "categories": [
+        "isolated-impulse",
+        "alpha"
+      ],
+      "metrics": {
+        "candidatePsnr": 99,
+        "baselinePsnr": 18.027804,
+        "psnrGain": 80.972196,
+        "edgeRetention": 1,
+        "alphaExactRatio": 1
+      },
+      "thresholds": {
+        "psnrGain": {
+          "operator": "gte",
+          "value": 20
+        },
+        "edgeRetention": {
+          "operator": "eq",
+          "value": 1
+        },
+        "alphaExactRatio": {
+          "operator": "eq",
+          "value": 1
+        }
+      },
+      "inputDigests": {
+        "denoise/candidate.png": "sha256:f997c0736af6a8b7525142a64b50d2620c868bb10dc5f62128428ec8a91fa32a",
+        "denoise/clean.png": "sha256:f997c0736af6a8b7525142a64b50d2620c868bb10dc5f62128428ec8a91fa32a",
+        "denoise/noisy.png": "sha256:136b37af9a3a145e3cbbfa5b7f4c2adcb607f624552f8387bff2ab32b67dc4ff"
+      },
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "light-enhance-one-stop",
+      "capability": "image.light.enhance",
+      "target": "browser",
+      "implementationDigest": "sha256:36d21686d6aeb05d102641ec5e757d41cf9375c58f254a19ccba9db79c05797c",
+      "categories": [
+        "under-exposure",
+        "alpha"
+      ],
+      "metrics": {
+        "candidateMae": 0,
+        "baselineMae": 40,
+        "maeImprovement": 40,
+        "luminanceMae": 0,
+        "clippedRatio": 0,
+        "alphaExactRatio": 1
+      },
+      "thresholds": {
+        "maeImprovement": {
+          "operator": "gte",
+          "value": 40
+        },
+        "luminanceMae": {
+          "operator": "eq",
+          "value": 0
+        },
+        "clippedRatio": {
+          "operator": "eq",
+          "value": 0
+        },
+        "alphaExactRatio": {
+          "operator": "eq",
+          "value": 1
+        }
+      },
+      "inputDigests": {
+        "light-enhance/candidate.png": "sha256:82ab146f93a50680f6564df4ef3839f9acd0ad60d1907fd2cf6c45e4285e03be",
+        "light-enhance/ground-truth.png": "sha256:82ab146f93a50680f6564df4ef3839f9acd0ad60d1907fd2cf6c45e4285e03be",
+        "light-enhance/source.png": "sha256:6e9ca65e81a0e14ef8317edf27d13b3ea8524b61785f1353f8e248a59b64d663"
+      },
+      "passed": true,
+      "failures": []
+    }
+  ]
+}

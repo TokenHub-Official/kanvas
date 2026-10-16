@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "contractKey": "image.object.remove",
+  "revision": 1,
+  "inputSchema": {
+    "$id": "kanvas.image-object-remove-input.v1",
+    "type": "object",
+    "oneOf": [
+      {
+        "required": ["maskArtifactId"]
+      },
+      {
+        "required": ["regions"]
+      }
+    ],
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["sourceArtifactId"],
+    "properties": {
+      "regions": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["points"],
+          "properties": {
+            "points": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["x", "y"],
+                "properties": {
+                  "x": {
+                    "type": "number",
+                    "maximum": 16384,
+                    "minimum": 0
+                  },
+                  "y": {
+                    "type": "number",
+                    "maximum": 16384,
+                    "minimum": 0
+                  }
+                },
+                "additionalProperties": false
+              },
+              "maxItems": 64,
+              "minItems": 3
+            }
+          },
+          "additionalProperties": false
+        },
+        "maxItems": 128,
+        "minItems": 1,
+        "x-kanvas-semantic-type": "region.list"
+      },
+      "guidance": {
+        "type": "string",
+        "maxLength": 4000,
+        "minLength": 1,
+        "x-kanvas-semantic-type": "prompt.rich"
+      },
+      "maskArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.mask"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "outputSchema": {
+    "$id": "kanvas.image-object-remove-result.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "schemaVersion",
+      "repairedArtifactId",
+      "removedRegionMaskArtifactId",
+      "qualitySignals"
+    ],
+    "properties": {
+      "schemaVersion": {
+        "const": "kanvas.image-object-remove-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "required": [
+          "schemaVersion",
+          "method",
+          "generative",
+          "outsideMaskPixelsPreserved",
+          "removedPixelRatio"
+        ],
+        "properties": {
+          "method": {
+            "const": "generative_inpaint"
+          },
+          "generative": {
+            "const": true
+          },
+          "schemaVersion": {
+            "const": "kanvas.image-object-remove-quality/v1"
+          },
+          "removedPixelRatio": {
+            "type": "number",
+            "exclusiveMaximum": 1,
+            "exclusiveMinimum": 0
+          },
+          "outsideMaskPixelsPreserved": {
+            "const": true
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "quality.signals"
+      },
+      "repairedArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      },
+      "removedRegionMaskArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.mask"
+      }
+    },
+    "additionalProperties": false
+  },
+  "idempotencyMode": "keyed",
+  "supportedInvokers": ["user", "workflow", "agent", "canvas"]
+}

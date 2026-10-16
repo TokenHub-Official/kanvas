@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "skillKey": "first-party.image-edit",
+  "displayName": "图片编辑",
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "edit",
+      "displayName": "编辑图片",
+      "description": "根据设计指令编辑现有图片并保留来源关系。",
+      "category": "生成与编辑",
+      "outputPresentation": "board",
+      "inputUiSchema": {
+        "schemaVersion": "kanvas.entrypoint-ui/v0",
+        "canvasTool": {
+          "surface": "canvas.image",
+          "operationId": "image.edit",
+          "order": 300,
+          "source": {
+            "parameterKey": "sourceArtifactId",
+            "value": "artifact_id"
+          },
+          "parameters": [
+            {
+              "key": "prompt",
+              "label": "编辑要求",
+              "control": "text",
+              "required": true,
+              "maxLength": 8000
+            }
+          ],
+          "result": {
+            "artifactPath": [
+              "imageArtifactId"
+            ],
+            "outputModes": [
+              "add_node",
+              "replace_content",
+              "asset_only"
+            ]
+          }
+        }
+      },
+      "workflowPath": "workflows/image-edit.json"
+    }
+  ]
+}

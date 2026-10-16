@@ -1,0 +1,30 @@
+name: Feature request
+description: Propose a user outcome or maintainer capability for Kanvas.
+title: "[Feature]: "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What user or maintainer problem is not adequately solved today?
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+      description: Describe the observable result without prescribing an implementation.
+    validations:
+      required: true
+  - type: textarea
+    id: boundaries
+    attributes:
+      label: Boundaries and alternatives
+      description: Note affected workflows, rejected workarounds and anything that must remain unchanged.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched existing issues and the roadmap for this request.
+          required: true

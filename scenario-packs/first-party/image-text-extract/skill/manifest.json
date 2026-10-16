@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "skillKey": "first-party.image-text-extract",
+  "displayName": "提取文字",
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "extract",
+      "displayName": "提取文字",
+      "description": "返回文字、语言、方向、置信度和源图坐标 Polygon，不修改图片。",
+      "category": "内容提取",
+      "outputPresentation": "single_review",
+      "workflowPath": "workflows/image-text-extract.json"
+    }
+  ]
+}

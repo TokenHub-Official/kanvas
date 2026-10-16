@@ -1,0 +1,197 @@
+{
+  "schemaVersion": "kanvas.runtime-adapter-definition/v1",
+  "adapterKey": "first-party.image.background-remove.isnet.webp-lossless.v2",
+  "revision": 2,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "背景移除 · Worker",
+      "en-US": "Background removal · Worker"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "将背景移除的公开输入输出转换为Worker运行协议。",
+      "en-US": "Adapts the public Background removal contract to the Worker runtime protocol."
+    }
+  },
+  "executionTarget": "worker",
+  "sourceKinds": ["model_resource"],
+  "supportedModelFormats": ["onnx"],
+  "modelResourceInterfaceDigest": "sha256:c3a88630834b92c6b6798e3c0b80f68290e61225f2ba5fafdaac231c83ab839c",
+  "invocationInputSchema": {
+    "$id": "kanvas.image-background-remove-input.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["sourceArtifactId", "refinement"],
+    "properties": {
+      "refinement": {
+        "enum": ["standard", "fine"],
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "subjectHint": {
+        "type": "string",
+        "maxLength": 240,
+        "minLength": 1,
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "invocationOutputSchema": {
+    "$id": "kanvas.image-background-remove-result.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "schemaVersion",
+      "foregroundArtifactId",
+      "maskArtifactId",
+      "qualitySignals"
+    ],
+    "properties": {
+      "schemaVersion": {
+        "const": "kanvas.image-background-remove-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "maskArtifactId": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["$kanvas", "outputRole", "outputIndex"],
+        "properties": {
+          "$kanvas": {
+            "const": "attempt-output-artifact/v1"
+          },
+          "outputRole": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "outputIndex": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          }
+        },
+        "x-kanvas-attempt-output-artifact": true,
+        "x-kanvas-semantic-type": "artifact.mask"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "required": [
+          "schemaVersion",
+          "foregroundRatio",
+          "uncertainEdgeRatio",
+          "modelVariant",
+          "modelDigest",
+          "refinement"
+        ],
+        "properties": {
+          "refinement": {
+            "enum": ["standard", "fine"],
+            "type": "string"
+          },
+          "modelDigest": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          },
+          "modelVariant": {
+            "enum": ["u2net", "u2netp", "isnet-general", "isnet-general-fp16"],
+            "type": "string"
+          },
+          "schemaVersion": {
+            "const": "kanvas.image-background-remove-quality/v1"
+          },
+          "foregroundRatio": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0
+          },
+          "uncertainEdgeRatio": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "quality.signals"
+      },
+      "foregroundArtifactId": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["$kanvas", "outputRole", "outputIndex"],
+        "properties": {
+          "$kanvas": {
+            "const": "attempt-output-artifact/v1"
+          },
+          "outputRole": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "outputIndex": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          }
+        },
+        "x-kanvas-attempt-output-artifact": true,
+        "x-kanvas-semantic-type": "artifact.foreground"
+      }
+    },
+    "additionalProperties": false
+  },
+  "configurationSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "default": {
+      "model": {
+        "family": "isnet",
+        "sha256": "cc2c9f5c1751b9737cb81e708ff0c5e9542c2205daed22418a4fd2ab5d4c481a",
+        "source": "huggingface.co/imgly/isnet-general-onnx@440dea96dd4a3b06bbbf5abec3e26569dd7ec49f/onnx/model.onnx",
+        "license": "MIT",
+        "variant": "isnet-general",
+        "inputSize": 1024,
+        "normalization": "isnet"
+      },
+      "sharpVersion": "0.35.3",
+      "foregroundEncoding": "webp-lossless-effort-3",
+      "onnxRuntimeNodeVersion": "1.27.0"
+    },
+    "const": {
+      "model": {
+        "family": "isnet",
+        "sha256": "cc2c9f5c1751b9737cb81e708ff0c5e9542c2205daed22418a4fd2ab5d4c481a",
+        "source": "huggingface.co/imgly/isnet-general-onnx@440dea96dd4a3b06bbbf5abec3e26569dd7ec49f/onnx/model.onnx",
+        "license": "MIT",
+        "variant": "isnet-general",
+        "inputSize": 1024,
+        "normalization": "isnet"
+      },
+      "sharpVersion": "0.35.3",
+      "foregroundEncoding": "webp-lossless-effort-3",
+      "onnxRuntimeNodeVersion": "1.27.0"
+    }
+  },
+  "artifactInputs": [
+    {
+      "role": "sourceArtifactId",
+      "pointer": "/sourceArtifactId",
+      "required": true,
+      "mediaTypes": ["image/png", "image/jpeg", "image/webp"]
+    }
+  ],
+  "executable": {
+    "kind": "built_in",
+    "packageKey": "kanvas.worker-image-runtime",
+    "packageVersion": "1.0.0",
+    "entrypoint": "first-party.image.background-remove.isnet.webp-lossless.v2",
+    "releaseDigest": "sha256:08045d33aaee12f0b83cbee7bd2da9d5ccd7bf688a8db6994ae3f23b28d858ae"
+  }
+}

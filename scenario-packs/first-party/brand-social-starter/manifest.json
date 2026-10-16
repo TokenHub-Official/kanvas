@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "packId": "first-party.brand-social-starter",
+  "displayName": "Brand social starter",
+  "workflows": [{ "path": "workflows/brand-social-starter.json" }],
+  "skill": { "path": "skill/manifest.json" },
+  "capabilities": [],
+  "requiredCapabilities": [
+    {
+      "contractId": "image.background.compose",
+      "revision": 1,
+      "canonicalDigest": "sha256:8592a0c5793194f8824f6a6d2a907bdd4e72d65b7ef761920302e0907c637b99"
+    }
+  ]
+}

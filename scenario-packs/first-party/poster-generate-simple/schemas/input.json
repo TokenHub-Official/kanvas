@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kanvas.poster-generate-simple-input.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["userPrompt"],
+  "properties": {
+    "userPrompt": {
+      "title": "海报需求",
+      "description": "描述主题、风格、氛围、配色和希望保留的文字空间。",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
+    }
+  }
+}

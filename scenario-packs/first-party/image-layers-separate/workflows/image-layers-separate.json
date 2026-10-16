@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 1,
+  "key": "image_layers_separate",
+  "entryNodeKey": "detect_subjects",
+  "limits": {
+    "maxNodeRuns": 3,
+    "timeoutMs": 600000
+  },
+  "nodes": [
+    {
+      "key": "detect_subjects",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "image.subject.detect",
+        "revision": 1,
+        "canonicalDigest": "sha256:fbce4aebf4673485b62dcf8a25e42cdf343839534d454fd95670062367cc6de5"
+      },
+      "input": {
+        "sourceArtifactId": {
+          "$value": {
+            "source": "workflow_input",
+            "pointer": "/sourceArtifactId"
+          }
+        },
+        "maxSubjects": 8,
+        "includeMask": true
+      },
+      "next": [
+        "extract_foreground"
+      ]
+    },
+    {
+      "key": "extract_foreground",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "image.background.remove",
+        "revision": 2,
+        "canonicalDigest": "sha256:225c8e45a50157aa201e94119857549a8eaa7c780c6635ff40f28d14c9811024"
+      },
+      "input": {
+        "sourceArtifactId": {
+          "$value": {
+            "source": "workflow_input",
+            "pointer": "/sourceArtifactId"
+          }
+        },
+        "refinement": "fine"
+      },
+      "next": [
+        "extract_text"
+      ]
+    },
+    {
+      "key": "extract_text",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "image.text.extract",
+        "revision": 1,
+        "canonicalDigest": "sha256:5b4077c57b11c288d5324c5148f48a3c6c420b835b4ca0829fb6fe3edc171b72"
+      },
+      "input": {
+        "sourceArtifactId": {
+          "$value": {
+            "source": "workflow_input",
+            "pointer": "/sourceArtifactId"
+          }
+        },
+        "granularity": "line",
+        "minimumConfidence": 0.5
+      },
+      "next": []
+    }
+  ],
+  "outputs": {
+    "schemaVersion": {
+      "required": true,
+      "value": "kanvas.image-layers-separate-result/v1"
+    },
+    "foregroundArtifactId": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "extract_foreground",
+          "scope": "root",
+          "pointer": "/foregroundArtifactId"
+        }
+      }
+    },
+    "subjectMaskArtifactId": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "extract_foreground",
+          "scope": "root",
+          "pointer": "/maskArtifactId"
+        }
+      }
+    },
+    "subjectCandidates": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "detect_subjects",
+          "scope": "root",
+          "pointer": "/candidates"
+        }
+      }
+    },
+    "textBlocks": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "extract_text",
+          "scope": "root",
+          "pointer": "/blocks"
+        }
+      }
+    },
+    "textRegions": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "extract_text",
+          "scope": "root",
+          "pointer": "/regions"
+        }
+      }
+    },
+    "subjectQualitySignals": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "extract_foreground",
+          "scope": "root",
+          "pointer": "/qualitySignals"
+        }
+      }
+    },
+    "textQualitySignals": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "extract_text",
+          "scope": "root",
+          "pointer": "/qualitySignals"
+        }
+      }
+    }
+  }
+}

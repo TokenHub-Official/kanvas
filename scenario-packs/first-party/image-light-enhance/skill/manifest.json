@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "skillKey": "first-party.image-light-enhance",
+  "displayName": "光照增强",
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "enhance",
+      "displayName": "光照增强",
+      "description": "使用可追踪参数确定性调整曝光、阴影、高光和白平衡。",
+      "category": "画质修复",
+      "outputPresentation": "board",
+      "workflowPath": "workflows/image-light-enhance.json"
+    }
+  ]
+}

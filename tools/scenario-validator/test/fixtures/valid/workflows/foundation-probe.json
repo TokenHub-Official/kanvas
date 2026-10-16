@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "key": "foundation_probe",
+  "entryNodeKey": "validate",
+  "limits": {
+    "maxNodeRuns": 1,
+    "timeoutMs": 60000
+  },
+  "nodes": [
+    {
+      "key": "validate",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "foundation.validate",
+        "revision": 1,
+        "canonicalDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "input": {},
+      "next": []
+    }
+  ],
+  "outputs": {}
+}

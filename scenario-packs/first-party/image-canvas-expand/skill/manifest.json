@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "skillKey": "first-party.image-canvas-expand",
+  "displayName": "扩图",
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "expand",
+      "displayName": "扩图",
+      "description": "在固定目标画布中生成原图之外的区域，并保留原图区像素与 Generated Region Mask。",
+      "category": "构图",
+      "outputPresentation": "board",
+      "workflowPath": "workflows/image-canvas-expand.json"
+    }
+  ]
+}

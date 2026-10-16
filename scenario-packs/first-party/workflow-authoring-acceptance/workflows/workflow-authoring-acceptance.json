@@ -1,0 +1,248 @@
+{
+  "schemaVersion": 1,
+  "key": "workflow_authoring_acceptance",
+  "entryNodeKey": "detect_subject",
+  "limits": {
+    "maxNodeRuns": 6,
+    "timeoutMs": 900000
+  },
+  "nodes": [
+    {
+      "key": "detect_subject",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "image.subject.detect",
+        "revision": 1,
+        "canonicalDigest": "sha256:fbce4aebf4673485b62dcf8a25e42cdf343839534d454fd95670062367cc6de5"
+      },
+      "input": {
+        "sourceArtifactId": {
+          "$value": {
+            "source": "workflow_input",
+            "pointer": "/sourceArtifactId"
+          }
+        },
+        "includeMask": true
+      },
+      "next": [
+        "remove_background",
+        "assess_quality"
+      ]
+    },
+    {
+      "key": "remove_background",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "image.background.remove",
+        "revision": 2,
+        "canonicalDigest": "sha256:225c8e45a50157aa201e94119857549a8eaa7c780c6635ff40f28d14c9811024"
+      },
+      "input": {
+        "sourceArtifactId": {
+          "$value": {
+            "source": "workflow_input",
+            "pointer": "/sourceArtifactId"
+          }
+        },
+        "refinement": {
+          "$value": {
+            "source": "workflow_input",
+            "pointer": "/refinement"
+          }
+        }
+      },
+      "next": [
+        "quality_gate"
+      ]
+    },
+    {
+      "key": "assess_quality",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "image.quality.assess",
+        "revision": 1,
+        "canonicalDigest": "sha256:63d124e91065b2e72af997ccfa1c834bc6595ec22f18aaae2e0037579088a398"
+      },
+      "input": {
+        "sourceArtifactId": {
+          "$value": {
+            "source": "workflow_input",
+            "pointer": "/sourceArtifactId"
+          }
+        }
+      },
+      "next": [
+        "quality_gate"
+      ]
+    },
+    {
+      "key": "quality_gate",
+      "kind": "switch",
+      "joinPolicy": "all_success",
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "assess_quality",
+          "scope": "root",
+          "pointer": "/usability"
+        }
+      },
+      "cases": [
+        {
+          "when": {
+            "operator": "equals",
+            "value": "good"
+          },
+          "next": [
+            "review_result"
+          ]
+        }
+      ],
+      "defaultNext": [
+        "enhance_light"
+      ]
+    },
+    {
+      "key": "enhance_light",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "image.light.enhance",
+        "revision": 1,
+        "canonicalDigest": "sha256:b98b1d0d90e0f1b4124ee29c2343030a5d807f6ec78675495bfc6665003a8b80"
+      },
+      "input": {
+        "sourceArtifactId": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "remove_background",
+            "scope": "root",
+            "pointer": "/foregroundArtifactId"
+          }
+        },
+        "exposureStops": 0.25,
+        "shadows": 0.2,
+        "highlights": -0.1,
+        "temperature": 0,
+        "tint": 0
+      },
+      "next": [
+        "review_result"
+      ]
+    },
+    {
+      "key": "review_result",
+      "kind": "approval",
+      "joinPolicy": "all_success",
+      "request": {
+        "sourceArtifactId": {
+          "$value": {
+            "source": "workflow_input",
+            "pointer": "/sourceArtifactId"
+          }
+        },
+        "foregroundArtifactId": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "remove_background",
+            "scope": "root",
+            "pointer": "/foregroundArtifactId"
+          }
+        },
+        "qualityUsability": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "assess_quality",
+            "scope": "root",
+            "pointer": "/usability"
+          }
+        },
+        "qualityFindings": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "assess_quality",
+            "scope": "root",
+            "pointer": "/findings"
+          }
+        }
+      },
+      "decisionSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "decision"
+        ],
+        "properties": {
+          "decision": {
+            "type": "string",
+            "enum": [
+              "accept",
+              "reject"
+            ]
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 500
+          }
+        }
+      },
+      "next": []
+    }
+  ],
+  "outputs": {
+    "foregroundArtifactId": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "remove_background",
+          "scope": "root",
+          "pointer": "/foregroundArtifactId"
+        }
+      }
+    },
+    "maskArtifactId": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "remove_background",
+          "scope": "root",
+          "pointer": "/maskArtifactId"
+        }
+      }
+    },
+    "enhancedArtifactId": {
+      "required": false,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "enhance_light",
+          "scope": "root",
+          "pointer": "/imageArtifactId"
+        }
+      }
+    },
+    "qualityUsability": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "assess_quality",
+          "scope": "root",
+          "pointer": "/usability"
+        }
+      }
+    },
+    "decision": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "review_result",
+          "scope": "root",
+          "pointer": ""
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "kanvas.capability-binding/v1",
+  "bindingKey": "first-party.image.background-remove.isnet-general.browser.r2",
+  "contract": {
+    "key": "image.background.remove",
+    "revision": 1,
+    "canonicalDigest": "sha256:85e608e6977c5a84b51856c768f914784d4fc79e9fa5babecd70bb3e6b3c7c5d"
+  },
+  "implementation": {
+    "key": "first-party.image.background-remove.isnet-general.browser",
+    "revision": 2,
+    "canonicalDigest": "sha256:aafd41dca39aeee8859ea0bc3df5a9f289e0f6fdb1982af210b13f5c68ea8e9f"
+  },
+  "priority": 2,
+  "enabled": true,
+  "eligibility": {},
+  "fallbackOn": []
+}

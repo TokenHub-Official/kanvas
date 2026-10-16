@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "kanvas.capability-implementation/v1",
+  "implementationKey": "first-party.image.upscale.lanczos3.worker",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "画质增强 · Worker 运行",
+      "en-US": "Image upscale · Worker runtime"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "通过Worker 运行提供画质增强，上层只依赖固定公开契约。",
+      "en-US": "Provides Image upscale through Worker runtime behind the stable public contract."
+    }
+  },
+  "contract": {
+    "key": "image.upscale",
+    "revision": 1,
+    "canonicalDigest": "sha256:d570660767b9971cda6f0b0b83407424c936a99db381d881cb424d87fb0d2f7b"
+  },
+  "adapter": {
+    "adapterKey": "kanvas.image.resize.sharp.v1",
+    "revision": 1,
+    "canonicalDigest": "sha256:b43019f1979c312f69060c9c6f4793d380c769f5f7839e6fb5ccbfbf9e6d20a8"
+  },
+  "source": {
+    "kind": "plugin",
+    "plugin": {
+      "key": "kanvas.worker-image-runtime",
+      "revision": 1,
+      "canonicalDigest": "sha256:c4c51b61a036016d7a93a58b04bcc0ee0cd1f526ce6bbdad0836df25ac042a4e"
+    }
+  },
+  "configuration": {
+    "scaleFactor": 2,
+    "outputFormat": "png",
+    "sharpVersion": "0.35.3",
+    "qualityIntent": "faithful",
+    "resamplingKernel": "lanczos3",
+    "maximumOutputPixels": 64000000,
+    "maximumSourcePixels": 16000000
+  },
+  "inputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "input",
+    "expression": {
+      "op": "source",
+      "root": "input",
+      "pointer": ""
+    }
+  },
+  "outputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "output",
+    "expression": {
+      "op": "source",
+      "root": "result",
+      "pointer": ""
+    }
+  },
+  "fixtures": [
+    {
+      "name": "default contract mapping",
+      "capabilityInput": {
+        "scaleFactor": 2,
+        "qualityIntent": "faithful",
+        "sourceArtifactId": "01K00000000000000000000001"
+      },
+      "configuration": {
+        "scaleFactor": 2,
+        "outputFormat": "png",
+        "sharpVersion": "0.35.3",
+        "qualityIntent": "faithful",
+        "resamplingKernel": "lanczos3",
+        "maximumOutputPixels": 64000000,
+        "maximumSourcePixels": 16000000
+      },
+      "expectedAdapterInput": {
+        "scaleFactor": 2,
+        "qualityIntent": "faithful",
+        "sourceArtifactId": "01K00000000000000000000001"
+      },
+      "adapterResult": {
+        "outputWidth": 1,
+        "scaleFactor": 2,
+        "sourceWidth": 1,
+        "outputHeight": 1,
+        "sourceHeight": 1,
+        "qualityIntent": "faithful",
+        "schemaVersion": "kanvas.image-upscale-result/v1",
+        "qualitySignals": {
+          "method": "deterministic_resample",
+          "generative": true,
+          "schemaVersion": "kanvas.image-upscale-quality/v1",
+          "resamplingKernel": "lanczos3"
+        },
+        "imageArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "sample",
+          "outputIndex": 0
+        }
+      },
+      "expectedCapabilityOutput": {
+        "outputWidth": 1,
+        "scaleFactor": 2,
+        "sourceWidth": 1,
+        "outputHeight": 1,
+        "sourceHeight": 1,
+        "qualityIntent": "faithful",
+        "schemaVersion": "kanvas.image-upscale-result/v1",
+        "qualitySignals": {
+          "method": "deterministic_resample",
+          "generative": true,
+          "schemaVersion": "kanvas.image-upscale-quality/v1",
+          "resamplingKernel": "lanczos3"
+        },
+        "imageArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "sample",
+          "outputIndex": 0
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "packId": "first-party.poster-generate-complete",
+  "displayName": "Complete poster generation",
+  "workflows": [{ "path": "workflows/poster-generate-complete.json" }],
+  "skill": { "path": "skill/manifest.json" },
+  "capabilities": [],
+  "requiredCapabilities": [
+    {
+      "contractId": "image.generate",
+      "revision": 2,
+      "canonicalDigest": "sha256:ab27d66ae9e0ce75be370628477f388468a8330b2c7e864be026cf01b7851314"
+    },
+    {
+      "contractId": "image.edit",
+      "revision": 2,
+      "canonicalDigest": "sha256:6d9f3b13443acc7912ced9f2cab31d96e56b953a8ae80a7e2fa51794a70fb3cf"
+    }
+  ]
+}

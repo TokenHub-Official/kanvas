@@ -1,0 +1,314 @@
+{
+  "schemaVersion": "kanvas.capability-declaration-asset/v1",
+  "contract": {
+    "key": "image.generate",
+    "revision": 1,
+    "canonicalDigest": "sha256:72f47781bd10c36283c6003cc3132fcf85d3658c9117e2b4703c4b4e605277c5"
+  },
+  "declaration": {
+    "schemaVersion": "kanvas.capability-declaration/v1",
+    "catalog": {
+      "title": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "图片生成",
+          "en-US": "Image generate"
+        }
+      },
+      "description": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "根据提示词和可选参考图片生成图片。",
+          "en-US": "Generate an image from a prompt and optional references."
+        }
+      },
+      "category": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "图像生成",
+          "en-US": "Image generation"
+        }
+      },
+      "sourceKind": "built_in",
+      "tags": ["generate", "image", "prompt"],
+      "surfaces": ["workflow", "agent", "canvas"]
+    },
+    "parameters": [
+      {
+        "key": "prompt",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "处理说明",
+            "en-US": "Instructions"
+          }
+        },
+        "description": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "输入说明，键入 @ 可在任意位置插入流程输入或上游信息。",
+            "en-US": "Enter instructions and type @ to insert workflow or upstream values."
+          }
+        },
+        "semanticType": "prompt.rich",
+        "required": true,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["mixed_rich_text"],
+          "default": "mixed_rich_text"
+        },
+        "editor": "rich_prompt"
+      },
+      {
+        "key": "referenceArtifactIds",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "参考图片",
+            "en-US": "Reference images"
+          }
+        },
+        "description": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "选择一张或多张流程输入或上游图片作为参考。",
+            "en-US": "Choose one or more workflow inputs or upstream images as references."
+          }
+        },
+        "semanticType": "artifact.image_list",
+        "required": false,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["workflow_input", "upstream"],
+          "default": "upstream"
+        },
+        "editor": "artifact_list_picker"
+      },
+      {
+        "key": "aspectRatio",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "宽高比",
+            "en-US": "Aspect ratio"
+          }
+        },
+        "semanticType": "text.plain",
+        "required": false,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["constant", "workflow_input", "upstream"],
+          "default": "constant"
+        },
+        "editor": "enum"
+      },
+      {
+        "key": "resolution",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "分辨率",
+            "en-US": "Resolution"
+          }
+        },
+        "semanticType": "text.plain",
+        "required": false,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["constant", "workflow_input", "upstream"],
+          "default": "constant"
+        },
+        "editor": "enum"
+      },
+      {
+        "key": "size",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "输出尺寸",
+            "en-US": "Output size"
+          }
+        },
+        "semanticType": "text.plain",
+        "required": false,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["constant", "workflow_input", "upstream"],
+          "default": "constant"
+        },
+        "editor": "enum"
+      },
+      {
+        "key": "quality",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "质量",
+            "en-US": "Quality"
+          }
+        },
+        "semanticType": "text.plain",
+        "required": false,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["constant", "workflow_input", "upstream"],
+          "default": "constant"
+        },
+        "editor": "enum",
+        "defaultValue": "high"
+      },
+      {
+        "key": "outputFormat",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "输出格式",
+            "en-US": "Output format"
+          }
+        },
+        "semanticType": "text.plain",
+        "required": false,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["constant", "workflow_input", "upstream"],
+          "default": "constant"
+        },
+        "editor": "enum"
+      },
+      {
+        "key": "background",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "背景",
+            "en-US": "Background"
+          }
+        },
+        "semanticType": "text.plain",
+        "required": false,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["constant", "workflow_input", "upstream"],
+          "default": "constant"
+        },
+        "editor": "enum"
+      },
+      {
+        "key": "outputCompression",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "压缩质量",
+            "en-US": "Compression quality"
+          }
+        },
+        "semanticType": "number.scalar",
+        "required": false,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["constant", "workflow_input", "upstream"],
+          "default": "constant"
+        },
+        "editor": "number"
+      },
+      {
+        "key": "numberOfImages",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "生成数量",
+            "en-US": "Number of images"
+          }
+        },
+        "semanticType": "number.scalar",
+        "required": false,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["constant", "workflow_input", "upstream"],
+          "default": "constant"
+        },
+        "editor": "number",
+        "defaultValue": 1
+      },
+      {
+        "key": "seed",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "随机种子",
+            "en-US": "Seed"
+          }
+        },
+        "semanticType": "number.scalar",
+        "required": false,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["constant", "workflow_input", "upstream"],
+          "default": "constant"
+        },
+        "editor": "number"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "imageArtifactId",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "结果图",
+            "en-US": "Result image"
+          }
+        },
+        "semanticType": "artifact.image",
+        "primary": true,
+        "visibility": "author"
+      },
+      {
+        "key": "schemaVersion",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "结果版本",
+            "en-US": "Result version"
+          }
+        },
+        "semanticType": "value.any",
+        "primary": false,
+        "visibility": "hidden"
+      }
+    ]
+  }
+}

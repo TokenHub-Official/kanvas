@@ -1,0 +1,16 @@
+.agents/
+.codex/
+.pnpm-store/
+.turbo/
+artifacts/
+coverage/
+dist/
+eval-data/
+node_modules/
+output/
+prototypes/
+scenario-packs/
+**/generated/
+apps/web/public/models/
+apps/web/public/onnxruntime/
+pnpm-lock.yaml

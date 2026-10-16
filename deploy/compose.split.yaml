@@ -1,0 +1,290 @@
+name: kanvas
+
+x-app-common: &app-common
+  init: true
+  user: "10001:10001"
+  read_only: true
+  cap_drop:
+    - ALL
+  security_opt:
+    - no-new-privileges:true
+  tmpfs:
+    - /tmp:size=256m,mode=1777
+  environment: &app-environment
+    KANVAS_ENVIRONMENT: production
+    KANVAS_INSTANCE_ID: ${KANVAS_INSTANCE_ID:?set KANVAS_INSTANCE_ID}
+    KANVAS_RELEASE_VERSION: ${KANVAS_RELEASE_VERSION:-0.0.0-development}
+    KANVAS_DATABASE_HOST: mysql
+    KANVAS_DATABASE_PORT: "3306"
+    KANVAS_DATABASE_NAME: ${KANVAS_DATABASE_NAME:-kanvas}
+    KANVAS_DATABASE_USER: ${KANVAS_DATABASE_USER:-kanvas}
+    KANVAS_DATABASE_PASSWORD_FILE: /run/secrets/mysql_password
+    KANVAS_REDIS_HOST: redis
+    KANVAS_REDIS_PORT: "6379"
+    KANVAS_REDIS_DB: ${KANVAS_REDIS_DB:-0}
+    KANVAS_REDIS_PASSWORD_FILE: /run/secrets/redis_password
+    KANVAS_STORAGE_KIND: ${KANVAS_STORAGE_KIND:-local}
+    KANVAS_LOCAL_STORAGE_ROOT: /var/lib/kanvas/objects
+    KANVAS_LOCAL_STORAGE_PROFILE_ID: ${KANVAS_LOCAL_STORAGE_PROFILE_ID:?set one stable Local Storage profile ULID}
+    KANVAS_LOCAL_STORAGE_TRUSTED_ROOT_ACK: I_ACKNOWLEDGE_SINGLE_NODE_TRUSTED_STORAGE_ROOT
+    KANVAS_STORAGE_USER_IMPORT_TTL_MS: ${KANVAS_STORAGE_USER_IMPORT_TTL_MS:-3600000}
+    KANVAS_STORAGE_GC_POLL_INTERVAL_MS: ${KANVAS_STORAGE_GC_POLL_INTERVAL_MS:-5000}
+    KANVAS_STORAGE_GC_CLAIM_LEASE_MS: ${KANVAS_STORAGE_GC_CLAIM_LEASE_MS:-30000}
+    KANVAS_STORAGE_GC_BASE_RETRY_MS: ${KANVAS_STORAGE_GC_BASE_RETRY_MS:-5000}
+    KANVAS_STORAGE_GC_MAX_RETRY_MS: ${KANVAS_STORAGE_GC_MAX_RETRY_MS:-300000}
+    KANVAS_ARTIFACT_PREVIEW_MODE: ${KANVAS_ARTIFACT_PREVIEW_MODE:-on_demand}
+    KANVAS_ARTIFACT_PREVIEW_FALLBACK_ON_MISS: ${KANVAS_ARTIFACT_PREVIEW_FALLBACK_ON_MISS:-true}
+    KANVAS_ARTIFACT_PREVIEW_WORKER_CONCURRENCY: ${KANVAS_ARTIFACT_PREVIEW_WORKER_CONCURRENCY:-2}
+    KANVAS_ARTIFACT_PREVIEW_GENERATION_ATTEMPTS: ${KANVAS_ARTIFACT_PREVIEW_GENERATION_ATTEMPTS:-3}
+    KANVAS_ARTIFACT_PREVIEW_GENERATION_RETRY_MS: ${KANVAS_ARTIFACT_PREVIEW_GENERATION_RETRY_MS:-5000}
+    KANVAS_LOG_LEVEL: ${KANVAS_LOG_LEVEL:-info}
+    OTEL_EXPORTER_OTLP_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT:-}
+  secrets:
+    - mysql_password
+    - redis_password
+  volumes:
+    - type: bind
+      source: ${KANVAS_LOCAL_STORAGE_HOST_ROOT:?set an absolute host Local Storage root}
+      target: /var/lib/kanvas/objects
+  networks:
+    - backend
+
+services:
+  mysql:
+    image: ${KANVAS_MYSQL_IMAGE:?set KANVAS_MYSQL_IMAGE to an exact MySQL 8.0 image digest}
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${KANVAS_DATABASE_NAME:-kanvas}
+      MYSQL_USER: ${KANVAS_DATABASE_USER:-kanvas}
+      MYSQL_PASSWORD_FILE: /run/secrets/mysql_password
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
+    command:
+      - --log-bin-trust-function-creators=ON
+    secrets:
+      - mysql_password
+      - mysql_root_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - backend
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - MYSQL_PWD="$$(cat /run/secrets/mysql_root_password)" mysqladmin ping --host=127.0.0.1 --user=root --silent
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+    stop_grace_period: 2m
+
+  redis:
+    image: ${KANVAS_REDIS_IMAGE:?set KANVAS_REDIS_IMAGE to an exact image digest}
+    restart: unless-stopped
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    command:
+      - sh
+      - -ec
+      - exec redis-server --save "" --appendonly no --requirepass "$$(cat /run/secrets/redis_password)"
+    secrets:
+      - redis_password
+    networks:
+      - backend
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - redis-cli --no-auth-warning -a "$$(cat /run/secrets/redis_password)" ping | grep -q PONG
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+    stop_grace_period: 30s
+
+  migrate:
+    <<: *app-common
+    image: ${KANVAS_SERVER_IMAGE:-kanvas-server:local}
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      target: server
+    profiles:
+      - tools
+    restart: "no"
+    command:
+      - node
+      - node_modules/@kanvas/database/dist/cli/main.js
+    environment:
+      <<: *app-environment
+    secrets:
+      - mysql_password
+    volumes: []
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  bootstrap-admin:
+    <<: *app-common
+    image: ${KANVAS_SERVER_IMAGE:-kanvas-server:local}
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      target: server
+    profiles:
+      - tools
+    restart: "no"
+    entrypoint:
+      - node
+      - node_modules/@kanvas/database/dist/cli/bootstrap-admin.js
+    command: []
+    environment:
+      <<: *app-environment
+      KANVAS_AUTH_BASE_URL: ${KANVAS_AUTH_BASE_URL:?set the public HTTPS origin}
+    secrets:
+      - mysql_password
+    volumes: []
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  server:
+    <<: *app-common
+    image: ${KANVAS_SERVER_IMAGE:-kanvas-server:local}
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      target: server
+    restart: unless-stopped
+    command:
+      - node
+      - dist/main.js
+    environment:
+      <<: *app-environment
+      KANVAS_HTTP_HOST: 0.0.0.0
+      KANVAS_HTTP_PORT: "3000"
+      KANVAS_HTTP_TRUSTED_PROXY_HOPS: ${KANVAS_HTTP_TRUSTED_PROXY_HOPS:-1}
+      KANVAS_HTTP_TRUSTED_PROXY_CIDRS: ${KANVAS_HTTP_TRUSTED_PROXY_CIDRS:-127.0.0.1/32,::1/128}
+      KANVAS_AUTH_BASE_URL: ${KANVAS_AUTH_BASE_URL:?set the public HTTPS origin}
+      KANVAS_AUTH_SECRET_FILE: /run/secrets/kanvas_auth_secret
+    secrets:
+      - mysql_password
+      - kanvas_auth_secret
+    expose:
+      - "3000"
+    networks:
+      - backend
+      - egress
+    depends_on:
+      mysql:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - --input-type=module
+        - --eval
+        - "const response = await fetch('http://127.0.0.1:3000/health/live'); process.exit(response.ok ? 0 : 1)"
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    stop_grace_period: 1m
+
+  worker:
+    <<: *app-common
+    image: ${KANVAS_WORKER_IMAGE:-kanvas-worker:local}
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      target: worker
+    restart: unless-stopped
+    command:
+      - node
+      - dist/main.js
+      - --roles=orchestration,execution,outbox-relay,scheduler,reconciler,maintenance
+    environment:
+      <<: *app-environment
+      KANVAS_WORKER_HEALTH_HOST: 0.0.0.0
+      KANVAS_WORKER_HEALTH_PORT: "3001"
+    networks:
+      - backend
+      - egress
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - --input-type=module
+        - --eval
+        - "const response = await fetch('http://127.0.0.1:3001/health/live'); process.exit(response.ok ? 0 : 1)"
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    stop_grace_period: ${KANVAS_WORKER_STOP_GRACE_PERIOD:-10m}
+
+  web:
+    image: ${KANVAS_WEB_IMAGE:-kanvas-web:local}
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      target: web
+    init: true
+    user: "10001:10001"
+    read_only: true
+    restart: unless-stopped
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+      - /var/run:size=16m,mode=0755
+    ports:
+      - "${KANVAS_HTTP_PORT:-8080}:8080"
+    networks:
+      - edge
+      - backend
+    depends_on:
+      server:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - wget
+        - --quiet
+        - --tries=1
+        - --spider
+        - http://127.0.0.1:8080/health/live
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    stop_grace_period: 30s
+
+secrets:
+  mysql_password:
+    file: ${KANVAS_SECRETS_DIR:-./secrets}/mysql_password
+  mysql_root_password:
+    file: ${KANVAS_SECRETS_DIR:-./secrets}/mysql_root_password
+  redis_password:
+    file: ${KANVAS_SECRETS_DIR:-./secrets}/redis_password
+  kanvas_auth_secret:
+    file: ${KANVAS_SECRETS_DIR:-./secrets}/kanvas_auth_secret
+
+volumes:
+  mysql_data:
+
+networks:
+  edge:
+  backend:
+    internal: true
+  egress:

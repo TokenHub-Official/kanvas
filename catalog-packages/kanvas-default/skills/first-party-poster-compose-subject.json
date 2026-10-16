@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "kanvas.skill-catalog-asset/v1",
+  "skillKey": "first-party.poster-compose-subject",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "主体生成并融入背景",
+      "en-US": "Generate and compose subject"
+    }
+  },
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "compose",
+      "displayName": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "主体生成并融入背景",
+          "en-US": "Generate and compose subject"
+        }
+      },
+      "description": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "生成主体、提取透明前景和蒙版，再将主体合成到用户提供的背景图。",
+          "en-US": "Generate a subject, extract its foreground and mask, then compose it onto a supplied background."
+        }
+      },
+      "category": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "海报制作",
+          "en-US": "Poster creation"
+        }
+      },
+      "outputPresentation": "single_review",
+      "workflow": {
+        "key": "poster_compose_subject",
+        "revision": 1,
+        "canonicalDigest": "sha256:6b96383facf57921b2014cbc536af3548ff6c476ba3891412022c8ed5738c09d"
+      }
+    }
+  ]
+}

@@ -1,0 +1,268 @@
+{
+  "schemaVersion": "kanvas.capability-declaration-asset/v1",
+  "contract": {
+    "key": "image.quality.assess",
+    "revision": 1,
+    "canonicalDigest": "sha256:9b7128ddcdcbd73f0a7291360af72102c5ff7c65902e92571c989a74e984a7f9"
+  },
+  "declaration": {
+    "schemaVersion": "kanvas.capability-declaration/v1",
+    "catalog": {
+      "title": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "画质检测",
+          "en-US": "Quality assessment"
+        }
+      },
+      "description": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "检测模糊、曝光、噪点与主体比例。",
+          "en-US": "Assess blur, exposure, noise and subject scale."
+        }
+      },
+      "category": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "图像分析",
+          "en-US": "Image analysis"
+        }
+      },
+      "sourceKind": "built_in",
+      "tags": ["quality", "inspect"],
+      "surfaces": ["workflow", "agent", "canvas"]
+    },
+    "parameters": [
+      {
+        "key": "sampleSize",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "采样尺寸",
+            "en-US": "Sample size"
+          }
+        },
+        "semanticType": "number.scalar",
+        "required": false,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["constant", "workflow_input", "upstream"],
+          "default": "constant"
+        },
+        "editor": "number",
+        "defaultValue": 256
+      },
+      {
+        "key": "subjectBounds",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "主体位置",
+            "en-US": "Subject bounds"
+          }
+        },
+        "semanticType": "layout.bounds",
+        "required": false,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["constant", "workflow_input", "upstream"],
+          "default": "constant"
+        },
+        "editor": "json"
+      },
+      {
+        "key": "sourceArtifactId",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "源图片",
+            "en-US": "Source image"
+          }
+        },
+        "description": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "选择需要处理的流程输入或上游图片。",
+            "en-US": "Choose a workflow input or upstream image to process."
+          }
+        },
+        "semanticType": "artifact.image",
+        "required": true,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["workflow_input", "upstream"],
+          "default": "upstream"
+        },
+        "editor": "artifact_picker"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "blurScore",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "模糊程度",
+            "en-US": "Blur score"
+          }
+        },
+        "semanticType": "number.scalar",
+        "primary": true,
+        "visibility": "author"
+      },
+      {
+        "key": "compressionScore",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "压缩痕迹",
+            "en-US": "Compression score"
+          }
+        },
+        "semanticType": "number.scalar",
+        "primary": false,
+        "visibility": "author"
+      },
+      {
+        "key": "findings",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "检测发现",
+            "en-US": "Findings"
+          }
+        },
+        "semanticType": "value.any",
+        "primary": false,
+        "visibility": "author"
+      },
+      {
+        "key": "noiseScore",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "噪声程度",
+            "en-US": "Noise score"
+          }
+        },
+        "semanticType": "number.scalar",
+        "primary": false,
+        "visibility": "author"
+      },
+      {
+        "key": "overExposureRatio",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "过曝占比",
+            "en-US": "Overexposure ratio"
+          }
+        },
+        "semanticType": "number.scalar",
+        "primary": false,
+        "visibility": "author"
+      },
+      {
+        "key": "subjectScaleRatio",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "主体占比",
+            "en-US": "Subject scale ratio"
+          }
+        },
+        "semanticType": "value.any",
+        "primary": false,
+        "visibility": "author"
+      },
+      {
+        "key": "underExposureRatio",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "欠曝占比",
+            "en-US": "Underexposure ratio"
+          }
+        },
+        "semanticType": "number.scalar",
+        "primary": false,
+        "visibility": "author"
+      },
+      {
+        "key": "usability",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "可用性",
+            "en-US": "Usability"
+          }
+        },
+        "semanticType": "text.plain",
+        "primary": false,
+        "visibility": "author"
+      },
+      {
+        "key": "qualitySignals",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "质量信息",
+            "en-US": "Quality signals"
+          }
+        },
+        "semanticType": "quality.signals",
+        "primary": false,
+        "visibility": "advanced"
+      },
+      {
+        "key": "sourceHeight",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "原图高度",
+            "en-US": "Source height"
+          }
+        },
+        "semanticType": "number.scalar",
+        "primary": false,
+        "visibility": "advanced"
+      },
+      {
+        "key": "sourceWidth",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "原图宽度",
+            "en-US": "Source width"
+          }
+        },
+        "semanticType": "number.scalar",
+        "primary": false,
+        "visibility": "advanced"
+      },
+      {
+        "key": "schemaVersion",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "结果版本",
+            "en-US": "Result version"
+          }
+        },
+        "semanticType": "value.any",
+        "primary": false,
+        "visibility": "hidden"
+      }
+    ]
+  }
+}

@@ -1,0 +1,371 @@
+{
+  "schemaVersion": "kanvas.workflow-catalog-asset/v1",
+  "workflowKey": "image_text_extract",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "提取文字",
+      "en-US": "Text extraction"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "返回文字、语言、方向、置信度和源图坐标 Polygon，不修改图片。",
+      "en-US": "Return text, language, direction, confidence, and source-coordinate polygons."
+    }
+  },
+  "category": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "内容提取",
+      "en-US": "Image analysis"
+    }
+  },
+  "topology": {
+    "schemaVersion": 1,
+    "key": "image_text_extract",
+    "entryNodeKey": "extract",
+    "limits": {
+      "maxNodeRuns": 1,
+      "timeoutMs": 180000
+    },
+    "nodes": [
+      {
+        "key": "extract",
+        "kind": "invoke",
+        "capability": {
+          "contractId": "image.text.extract",
+          "revision": 1,
+          "canonicalDigest": "sha256:03f89dc7869def6ef351da6272742ca4c39d99716b129b68b6d7c42b7a673b12"
+        },
+        "input": {
+          "$value": {
+            "source": "workflow_input",
+            "pointer": ""
+          }
+        },
+        "next": []
+      }
+    ],
+    "outputs": {
+      "schemaVersion": {
+        "required": true,
+        "value": "kanvas.image-text-extract-result/v1"
+      },
+      "sourceArtifactId": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "extract",
+            "scope": "root",
+            "pointer": "/sourceArtifactId"
+          }
+        }
+      },
+      "sourceWidth": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "extract",
+            "scope": "root",
+            "pointer": "/sourceWidth"
+          }
+        }
+      },
+      "sourceHeight": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "extract",
+            "scope": "root",
+            "pointer": "/sourceHeight"
+          }
+        }
+      },
+      "text": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "extract",
+            "scope": "root",
+            "pointer": "/text"
+          }
+        }
+      },
+      "language": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "extract",
+            "scope": "root",
+            "pointer": "/language"
+          }
+        }
+      },
+      "direction": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "extract",
+            "scope": "root",
+            "pointer": "/direction"
+          }
+        }
+      },
+      "confidence": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "extract",
+            "scope": "root",
+            "pointer": "/confidence"
+          }
+        }
+      },
+      "blocks": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "extract",
+            "scope": "root",
+            "pointer": "/blocks"
+          }
+        }
+      },
+      "regions": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "extract",
+            "scope": "root",
+            "pointer": "/regions"
+          }
+        }
+      },
+      "qualitySignals": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "extract",
+            "scope": "root",
+            "pointer": "/qualitySignals"
+          }
+        }
+      }
+    }
+  },
+  "inputSchema": {
+    "$id": "kanvas.image-text-extract-input.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["sourceArtifactId"],
+    "properties": {
+      "languages": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$"
+        },
+        "maxItems": 8,
+        "minItems": 1,
+        "uniqueItems": true,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "granularity": {
+        "enum": ["line", "word"],
+        "type": "string",
+        "default": "line",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      },
+      "minimumConfidence": {
+        "type": "number",
+        "default": 0.5,
+        "maximum": 1,
+        "minimum": 0,
+        "x-kanvas-semantic-type": "number.scalar"
+      }
+    },
+    "additionalProperties": false
+  },
+  "outputSchema": {
+    "$id": "kanvas.image-text-extract-result.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "schemaVersion",
+      "sourceArtifactId",
+      "sourceWidth",
+      "sourceHeight",
+      "text",
+      "language",
+      "direction",
+      "confidence",
+      "blocks",
+      "regions",
+      "qualitySignals"
+    ],
+    "properties": {
+      "text": {
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "blocks": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["level", "text", "confidence", "polygon"],
+          "properties": {
+            "text": {
+              "type": "string",
+              "minLength": 1
+            },
+            "level": {
+              "enum": ["line", "word"],
+              "type": "string"
+            },
+            "polygon": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["x", "y"],
+                "properties": {
+                  "x": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "y": {
+                    "type": "number",
+                    "minimum": 0
+                  }
+                },
+                "additionalProperties": false
+              },
+              "maxItems": 4,
+              "minItems": 4
+            },
+            "confidence": {
+              "type": "number",
+              "maximum": 1,
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        },
+        "maxItems": 10000,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "regions": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["points"],
+          "properties": {
+            "points": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["x", "y"],
+                "properties": {
+                  "x": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "y": {
+                    "type": "number",
+                    "minimum": 0
+                  }
+                },
+                "additionalProperties": false
+              },
+              "maxItems": 4,
+              "minItems": 4
+            }
+          },
+          "additionalProperties": false
+        },
+        "maxItems": 10000,
+        "x-kanvas-semantic-type": "region.list"
+      },
+      "language": {
+        "type": ["string", "null"],
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "direction": {
+        "enum": ["ltr", "rtl", "ttb", "unknown"],
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "confidence": {
+        "type": "number",
+        "maximum": 1,
+        "minimum": 0,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "sourceWidth": {
+        "type": "integer",
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "sourceHeight": {
+        "type": "integer",
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "schemaVersion": {
+        "const": "kanvas.image-text-extract-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "required": ["schemaVersion", "method", "generative", "lowConfidence"],
+        "properties": {
+          "method": {
+            "type": "string"
+          },
+          "generative": {
+            "const": false
+          },
+          "lowConfidence": {
+            "type": "boolean"
+          },
+          "schemaVersion": {
+            "const": "kanvas.image-text-extract-quality/v1"
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "quality.signals"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "requiredCapabilities": [
+    {
+      "key": "image.text.extract",
+      "revision": 1,
+      "canonicalDigest": "sha256:03f89dc7869def6ef351da6272742ca4c39d99716b129b68b6d7c42b7a673b12"
+    }
+  ],
+  "canonicalDigest": "sha256:eda544b700e105f5e3cbe4b1a003fab3d60397f631c662b08c514652dd5339de"
+}

@@ -1,0 +1,170 @@
+{
+  "schemaVersion": "kanvas.capability-scenario-fixture/v1",
+  "key": "poster.complete",
+  "title": "完整海报生成",
+  "templateInputs": [
+    {
+      "key": "requirements",
+      "label": "额外需求",
+      "semanticType": "prompt.rich",
+      "required": true,
+      "editor": "rich_prompt"
+    },
+    {
+      "key": "referenceImages",
+      "label": "参考图片",
+      "semanticType": "artifact.image_list",
+      "required": false,
+      "editor": "file_list",
+      "constraints": { "maxItems": 14 }
+    },
+    {
+      "key": "quality",
+      "label": "生成质量",
+      "semanticType": "enum.image_quality",
+      "required": true,
+      "editor": "enum",
+      "options": ["medium", "high"],
+      "default": "high"
+    },
+    {
+      "key": "numberOfImages",
+      "label": "生成数量",
+      "semanticType": "count.image",
+      "required": true,
+      "editor": "number",
+      "constraints": { "minimum": 1, "maximum": 4 },
+      "default": 1
+    }
+  ],
+  "nodes": [
+    {
+      "nodeId": "has-reference",
+      "kind": "condition",
+      "condition": {
+        "source": "workflow_input",
+        "fieldKey": "referenceImages",
+        "operator": "exists"
+      },
+      "branches": ["edit-from-reference", "generate-without-reference"]
+    },
+    {
+      "nodeId": "generate-without-reference",
+      "capability": { "key": "image.generate", "revision": 2 },
+      "bindings": [
+        {
+          "parameterKey": "prompt",
+          "sourceMode": "mixed_rich_text",
+          "value": {
+            "kind": "rich_text",
+            "segments": [
+              { "kind": "text", "text": "生成完整商业海报。额外要求：" },
+              {
+                "kind": "reference",
+                "source": "workflow_input",
+                "fieldKey": "requirements"
+              }
+            ]
+          }
+        },
+        {
+          "parameterKey": "quality",
+          "sourceMode": "workflow_input",
+          "fieldKey": "quality"
+        },
+        {
+          "parameterKey": "numberOfImages",
+          "sourceMode": "workflow_input",
+          "fieldKey": "numberOfImages"
+        }
+      ]
+    },
+    {
+      "nodeId": "edit-from-reference",
+      "capability": { "key": "image.edit", "revision": 2 },
+      "bindings": [
+        {
+          "parameterKey": "sourceArtifactId",
+          "sourceMode": "derived",
+          "derivation": {
+            "kind": "first_item",
+            "source": "workflow_input",
+            "fieldKey": "referenceImages"
+          }
+        },
+        {
+          "parameterKey": "prompt",
+          "sourceMode": "mixed_rich_text",
+          "value": {
+            "kind": "rich_text",
+            "segments": [
+              {
+                "kind": "text",
+                "text": "基于参考图编辑为完整商业海报。额外要求："
+              },
+              {
+                "kind": "reference",
+                "source": "workflow_input",
+                "fieldKey": "requirements"
+              }
+            ]
+          }
+        },
+        {
+          "parameterKey": "quality",
+          "sourceMode": "workflow_input",
+          "fieldKey": "quality"
+        },
+        {
+          "parameterKey": "numberOfImages",
+          "sourceMode": "workflow_input",
+          "fieldKey": "numberOfImages"
+        }
+      ]
+    }
+  ],
+  "workflowOutput": [
+    {
+      "key": "resultImages",
+      "semanticType": "artifact.image_list",
+      "source": {
+        "kind": "coalesce",
+        "candidates": [
+          {
+            "nodeId": "generate-without-reference",
+            "outputKey": "imageArtifactId"
+          },
+          {
+            "nodeId": "edit-from-reference",
+            "outputKey": "imageArtifactId"
+          }
+        ],
+        "normalize": "single_to_list"
+      },
+      "primary": true
+    }
+  ],
+  "export": {
+    "declarationKey": "poster.generate.complete",
+    "sourceKind": "workflow",
+    "exposedInputs": [
+      "requirements",
+      "referenceImages",
+      "quality",
+      "numberOfImages"
+    ],
+    "exposedOutputs": ["resultImages"]
+  },
+  "expectedAuthoring": {
+    "qualityEditor": "enum",
+    "qualityDefault": "high",
+    "referenceEditor": "file_list",
+    "branchLabels": ["有参考图片", "无参考图片"],
+    "outputLabel": "生成结果"
+  },
+  "runtimeGaps": [
+    "The current image.generate and image.edit contracts return one imageArtifactId even when numberOfImages is greater than one.",
+    "A bounded first_item derivation is not part of Workflow V0.",
+    "The current coalesce result remains a single artifact and cannot normalize multiple generated artifacts into artifact.image_list."
+  ]
+}

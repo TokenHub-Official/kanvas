@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "packId": "first-party.image-denoise",
+  "displayName": "Image denoise",
+  "workflows": [
+    {
+      "path": "workflows/image-denoise.json"
+    }
+  ],
+  "skill": {
+    "path": "skill/manifest.json"
+  },
+  "capabilities": [
+    {
+      "path": "capabilities/image-denoise.json"
+    }
+  ],
+  "requiredCapabilities": [
+    {
+      "contractId": "image.denoise",
+      "revision": 1,
+      "canonicalDigest": "sha256:4313406ee16a394b710f240e662be4a933df653fdeb12488bc0ae832c260721a"
+    }
+  ]
+}

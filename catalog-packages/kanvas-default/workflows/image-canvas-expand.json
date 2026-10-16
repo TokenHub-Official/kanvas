@@ -1,0 +1,393 @@
+{
+  "schemaVersion": "kanvas.workflow-catalog-asset/v1",
+  "workflowKey": "image_canvas_expand",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "扩图",
+      "en-US": "Canvas expansion"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "在固定目标画布中生成原图之外的区域，并保留原图区像素与 Generated Region Mask。",
+      "en-US": "Generate content outside the original image while preserving the source pixels and expansion mask."
+    }
+  },
+  "category": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "构图",
+      "en-US": "Image editing"
+    }
+  },
+  "topology": {
+    "schemaVersion": 1,
+    "key": "image_canvas_expand",
+    "entryNodeKey": "expand",
+    "limits": {
+      "maxNodeRuns": 1,
+      "timeoutMs": 300000
+    },
+    "nodes": [
+      {
+        "key": "expand",
+        "kind": "invoke",
+        "capability": {
+          "contractId": "image.canvas.expand",
+          "revision": 1,
+          "canonicalDigest": "sha256:1d6c6649aba50dd38583b864e34b25891da12ae48ab9fe0935b0b846d3c0b76e"
+        },
+        "input": {
+          "$value": {
+            "source": "workflow_input",
+            "pointer": ""
+          }
+        },
+        "next": []
+      }
+    ],
+    "outputs": {
+      "schemaVersion": {
+        "required": true,
+        "value": "kanvas.image-canvas-expand-result/v1"
+      },
+      "expandedArtifactId": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "expand",
+            "scope": "root",
+            "pointer": "/expandedArtifactId"
+          }
+        }
+      },
+      "generatedRegionMaskArtifactId": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "expand",
+            "scope": "root",
+            "pointer": "/generatedRegionMaskArtifactId"
+          }
+        }
+      },
+      "targetWidth": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "expand",
+            "scope": "root",
+            "pointer": "/targetWidth"
+          }
+        }
+      },
+      "targetHeight": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "expand",
+            "scope": "root",
+            "pointer": "/targetHeight"
+          }
+        }
+      },
+      "sourcePlacement": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "expand",
+            "scope": "root",
+            "pointer": "/sourcePlacement"
+          }
+        }
+      },
+      "generatedRegion": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "expand",
+            "scope": "root",
+            "pointer": "/generatedRegion"
+          }
+        }
+      },
+      "qualitySignals": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "expand",
+            "scope": "root",
+            "pointer": "/qualitySignals"
+          }
+        }
+      }
+    }
+  },
+  "inputSchema": {
+    "$id": "kanvas.image-canvas-expand-input.v1",
+    "type": "object",
+    "allOf": [
+      {
+        "if": {
+          "required": ["targetWidth"],
+          "properties": {
+            "targetWidth": {
+              "const": 1536
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "targetHeight": {
+              "const": 1024
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "required": ["targetHeight"],
+          "properties": {
+            "targetHeight": {
+              "const": 1536
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "targetWidth": {
+              "const": 1024
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "required": ["targetWidth", "targetHeight"],
+          "properties": {
+            "targetWidth": {
+              "const": 1024
+            },
+            "targetHeight": {
+              "const": 1024
+            }
+          }
+        },
+        "then": {
+          "properties": {}
+        }
+      }
+    ],
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "sourceArtifactId",
+      "targetWidth",
+      "targetHeight",
+      "sourcePlacement",
+      "generatedRegion"
+    ],
+    "properties": {
+      "prompt": {
+        "type": "string",
+        "maxLength": 4000,
+        "minLength": 1,
+        "x-kanvas-semantic-type": "prompt.rich"
+      },
+      "targetWidth": {
+        "enum": [1024, 1536],
+        "type": "integer",
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "targetHeight": {
+        "enum": [1024, 1536],
+        "type": "integer",
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "generatedRegion": {
+        "type": "object",
+        "required": ["left", "top", "right", "bottom"],
+        "properties": {
+          "top": {
+            "type": "integer",
+            "maximum": 1535,
+            "minimum": 0
+          },
+          "left": {
+            "type": "integer",
+            "maximum": 1535,
+            "minimum": 0
+          },
+          "right": {
+            "type": "integer",
+            "maximum": 1535,
+            "minimum": 0
+          },
+          "bottom": {
+            "type": "integer",
+            "maximum": 1535,
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "layout.bounds"
+      },
+      "sourcePlacement": {
+        "type": "object",
+        "required": ["x", "y"],
+        "properties": {
+          "x": {
+            "type": "integer",
+            "maximum": 1535,
+            "minimum": 0
+          },
+          "y": {
+            "type": "integer",
+            "maximum": 1535,
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "layout.placement"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "outputSchema": {
+    "$id": "kanvas.image-canvas-expand-result.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "schemaVersion",
+      "expandedArtifactId",
+      "generatedRegionMaskArtifactId",
+      "targetWidth",
+      "targetHeight",
+      "sourcePlacement",
+      "generatedRegion",
+      "qualitySignals"
+    ],
+    "properties": {
+      "targetWidth": {
+        "type": "integer",
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "targetHeight": {
+        "type": "integer",
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "schemaVersion": {
+        "const": "kanvas.image-canvas-expand-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "required": [
+          "schemaVersion",
+          "method",
+          "generative",
+          "originalPixelsPreserved"
+        ],
+        "properties": {
+          "method": {
+            "const": "generative_outpaint"
+          },
+          "generative": {
+            "const": true
+          },
+          "schemaVersion": {
+            "const": "kanvas.image-canvas-expand-quality/v1"
+          },
+          "originalPixelsPreserved": {
+            "const": true
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "quality.signals"
+      },
+      "generatedRegion": {
+        "type": "object",
+        "required": ["left", "top", "right", "bottom"],
+        "properties": {
+          "top": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "left": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "right": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "bottom": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "layout.bounds"
+      },
+      "sourcePlacement": {
+        "type": "object",
+        "required": ["x", "y", "width", "height"],
+        "properties": {
+          "x": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "y": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "width": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "height": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "layout.placement"
+      },
+      "expandedArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      },
+      "generatedRegionMaskArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.mask"
+      }
+    },
+    "additionalProperties": false
+  },
+  "requiredCapabilities": [
+    {
+      "key": "image.canvas.expand",
+      "revision": 1,
+      "canonicalDigest": "sha256:1d6c6649aba50dd38583b864e34b25891da12ae48ab9fe0935b0b846d3c0b76e"
+    }
+  ],
+  "canonicalDigest": "sha256:fc35e786001083fd9a1ff3b72d3e68faf892d7bf943f738a752be9cd09c55e18"
+}

@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 1,
+  "key": "image_text_extract",
+  "entryNodeKey": "extract",
+  "limits": {
+    "maxNodeRuns": 1,
+    "timeoutMs": 180000
+  },
+  "nodes": [
+    {
+      "key": "extract",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "image.text.extract",
+        "revision": 1,
+        "canonicalDigest": "sha256:5b4077c57b11c288d5324c5148f48a3c6c420b835b4ca0829fb6fe3edc171b72"
+      },
+      "input": {
+        "$value": {
+          "source": "workflow_input",
+          "pointer": ""
+        }
+      },
+      "next": []
+    }
+  ],
+  "outputs": {
+    "schemaVersion": {
+      "required": true,
+      "value": "kanvas.image-text-extract-result/v1"
+    },
+    "sourceArtifactId": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "extract",
+          "scope": "root",
+          "pointer": "/sourceArtifactId"
+        }
+      }
+    },
+    "sourceWidth": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "extract",
+          "scope": "root",
+          "pointer": "/sourceWidth"
+        }
+      }
+    },
+    "sourceHeight": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "extract",
+          "scope": "root",
+          "pointer": "/sourceHeight"
+        }
+      }
+    },
+    "text": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "extract",
+          "scope": "root",
+          "pointer": "/text"
+        }
+      }
+    },
+    "language": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "extract",
+          "scope": "root",
+          "pointer": "/language"
+        }
+      }
+    },
+    "direction": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "extract",
+          "scope": "root",
+          "pointer": "/direction"
+        }
+      }
+    },
+    "confidence": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "extract",
+          "scope": "root",
+          "pointer": "/confidence"
+        }
+      }
+    },
+    "blocks": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "extract",
+          "scope": "root",
+          "pointer": "/blocks"
+        }
+      }
+    },
+    "regions": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "extract",
+          "scope": "root",
+          "pointer": "/regions"
+        }
+      }
+    },
+    "qualitySignals": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "extract",
+          "scope": "root",
+          "pointer": "/qualitySignals"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "kanvas.capability-binding/v1",
+  "bindingKey": "first-party.image.edit.gemini-provider",
+  "contract": {
+    "key": "image.edit",
+    "revision": 1,
+    "canonicalDigest": "sha256:d20582a665923b4a0f8fa4b5ed133a1ee35bce10e5a2aa4160eef8b50c1a31f1"
+  },
+  "implementation": {
+    "key": "first-party.image.edit.gemini-provider",
+    "revision": 1,
+    "canonicalDigest": "sha256:a51f9c2ede284187d0ac084f180d599edfd7877136befdb5d13470e280b748b2"
+  },
+  "priority": 2,
+  "enabled": true,
+  "eligibility": {},
+  "fallbackOn": ["not_applicable", "unavailable", "retry_exhausted"]
+}

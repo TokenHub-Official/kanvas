@@ -1,0 +1,38 @@
+{
+  "name": "@kanvas/storage",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "check-types": "tsc --noEmit -p tsconfig.json",
+    "dev": "tsc -p tsconfig.build.json --watch --preserveWatchOutput",
+    "lint": "eslint src test",
+    "test": "vitest run",
+    "test:integration:s3": "vitest run test/s3-compatible-adapter.integration.test.ts"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "3.1095.0",
+    "@kanvas/application": "workspace:*",
+    "@kanvas/database": "workspace:*",
+    "@smithy/signature-v4": "5.6.10",
+    "ali-oss": "6.23.0",
+    "mammoth": "1.13.0",
+    "pdfjs-dist": "6.4.299",
+    "yauzl": "3.4.0"
+  },
+  "devDependencies": {
+    "@types/ali-oss": "^6.23.3",
+    "@types/node": "catalog:",
+    "@types/yauzl": "3.4.0",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "license": "Apache-2.0"
+}

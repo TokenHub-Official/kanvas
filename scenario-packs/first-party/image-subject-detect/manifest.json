@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "packId": "first-party.image-subject-detect",
+  "displayName": "Image subject detection",
+  "workflows": [
+    {
+      "path": "workflows/image-subject-detect.json"
+    }
+  ],
+  "skill": {
+    "path": "skill/manifest.json"
+  },
+  "capabilities": [
+    {
+      "path": "capabilities/image-subject-detect.json"
+    }
+  ],
+  "requiredCapabilities": [
+    {
+      "contractId": "image.subject.detect",
+      "revision": 1,
+      "canonicalDigest": "sha256:fbce4aebf4673485b62dcf8a25e42cdf343839534d454fd95670062367cc6de5"
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "kanvas.capability-scenario-fixture/v1",
+  "key": "poster.simple",
+  "title": "基础海报生成",
+  "templateInputs": [
+    {
+      "key": "userPrompt",
+      "label": "海报需求",
+      "semanticType": "prompt.rich",
+      "required": true,
+      "editor": "rich_prompt",
+      "constraints": { "minLength": 1, "maxLength": 2000 }
+    }
+  ],
+  "nodes": [
+    {
+      "nodeId": "generate-poster",
+      "capability": { "key": "image.generate", "revision": 2 },
+      "bindings": [
+        {
+          "parameterKey": "prompt",
+          "sourceMode": "mixed_rich_text",
+          "value": {
+            "kind": "rich_text",
+            "segments": [
+              {
+                "kind": "text",
+                "text": "生成一张构图完整、文字留白清晰、适合商业投放的海报。额外需求："
+              },
+              {
+                "kind": "reference",
+                "source": "workflow_input",
+                "fieldKey": "userPrompt"
+              }
+            ]
+          }
+        },
+        {
+          "parameterKey": "numberOfImages",
+          "sourceMode": "constant",
+          "value": 1,
+          "origin": "workflow_author"
+        }
+      ]
+    }
+  ],
+  "workflowOutput": [
+    {
+      "key": "resultImage",
+      "semanticType": "artifact.image",
+      "source": {
+        "kind": "node_output",
+        "nodeId": "generate-poster",
+        "outputKey": "imageArtifactId"
+      },
+      "primary": true
+    }
+  ],
+  "export": {
+    "declarationKey": "poster.generate.simple",
+    "sourceKind": "workflow",
+    "exposedInputs": ["userPrompt"],
+    "exposedOutputs": ["resultImage"]
+  },
+  "expectedAuthoring": {
+    "nodeSummary": "生成海报 · 需求来自流程输入 · 1 张",
+    "parameterEditors": {
+      "prompt": "rich_prompt",
+      "numberOfImages": "number"
+    },
+    "hiddenTechnicalFields": [
+      "contractDigest",
+      "provider",
+      "credential",
+      "attempt"
+    ]
+  },
+  "runtimeGaps": []
+}

@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "skillKey": "first-party.poster-generate-simple",
+  "displayName": "基础海报生成",
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "generate",
+      "displayName": "基础海报生成",
+      "description": "输入海报需求，流程组合内置商业海报提示词并生成一张结果图。",
+      "category": "海报制作",
+      "outputPresentation": "single_review",
+      "workflowPath": "workflows/poster-generate-simple.json"
+    }
+  ]
+}

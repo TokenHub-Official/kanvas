@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "kanvas.skill-catalog-asset/v1",
+  "skillKey": "first-party.image-background-compose",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "背景合成",
+      "en-US": "Background composition"
+    }
+  },
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "compose",
+      "displayName": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "合成背景",
+          "en-US": "Background composition"
+        }
+      },
+      "description": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "使用确定性几何和 Alpha 规则将前景放置到颜色或图片背景。",
+          "en-US": "Place a foreground subject onto a color or image background using deterministic geometry and alpha rules."
+        }
+      },
+      "category": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "图片编辑",
+          "en-US": "Image composition"
+        }
+      },
+      "outputPresentation": "board",
+      "workflow": {
+        "key": "image_background_compose",
+        "revision": 1,
+        "canonicalDigest": "sha256:63a205c1cd447cf2f1a2edced230e76c55290906651cae8083364332cec4deb7"
+      }
+    }
+  ]
+}

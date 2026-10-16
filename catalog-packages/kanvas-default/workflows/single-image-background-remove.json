@@ -1,0 +1,193 @@
+{
+  "schemaVersion": "kanvas.workflow-catalog-asset/v1",
+  "workflowKey": "single_image_background_remove",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "单图去背景",
+      "en-US": "Single-image background removal"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "从当前图片生成透明底前景，并保留可审查的蒙版产物。",
+      "en-US": "Create a transparent foreground and retain a reviewable mask."
+    }
+  },
+  "category": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "图片清理",
+      "en-US": "Image cleanup"
+    }
+  },
+  "topology": {
+    "schemaVersion": 1,
+    "key": "single_image_background_remove",
+    "entryNodeKey": "remove_background",
+    "limits": {
+      "maxNodeRuns": 1,
+      "timeoutMs": 300000
+    },
+    "nodes": [
+      {
+        "key": "remove_background",
+        "kind": "invoke",
+        "capability": {
+          "contractId": "image.background.remove",
+          "revision": 1,
+          "canonicalDigest": "sha256:85e608e6977c5a84b51856c768f914784d4fc79e9fa5babecd70bb3e6b3c7c5d"
+        },
+        "input": {
+          "$value": {
+            "source": "workflow_input",
+            "pointer": ""
+          }
+        },
+        "next": []
+      }
+    ],
+    "outputs": {
+      "schemaVersion": {
+        "required": true,
+        "value": "kanvas.image-background-remove-result/v1"
+      },
+      "foregroundArtifactId": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "remove_background",
+            "scope": "root",
+            "pointer": "/foregroundArtifactId"
+          }
+        }
+      },
+      "maskArtifactId": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "remove_background",
+            "scope": "root",
+            "pointer": "/maskArtifactId"
+          }
+        }
+      },
+      "qualitySignals": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "remove_background",
+            "scope": "root",
+            "pointer": "/qualitySignals"
+          }
+        }
+      }
+    }
+  },
+  "inputSchema": {
+    "$id": "kanvas.image-background-remove-input.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["sourceArtifactId", "refinement"],
+    "properties": {
+      "refinement": {
+        "enum": ["standard", "fine"],
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "subjectHint": {
+        "type": "string",
+        "maxLength": 240,
+        "minLength": 1,
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "outputSchema": {
+    "$id": "kanvas.image-background-remove-result.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "schemaVersion",
+      "foregroundArtifactId",
+      "maskArtifactId",
+      "qualitySignals"
+    ],
+    "properties": {
+      "schemaVersion": {
+        "const": "kanvas.image-background-remove-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "maskArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.mask"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "required": [
+          "schemaVersion",
+          "foregroundRatio",
+          "uncertainEdgeRatio",
+          "modelVariant",
+          "modelDigest",
+          "refinement"
+        ],
+        "properties": {
+          "refinement": {
+            "enum": ["standard", "fine"],
+            "type": "string"
+          },
+          "modelDigest": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          },
+          "modelVariant": {
+            "enum": ["u2net", "u2netp", "isnet-general", "isnet-general-fp16"],
+            "type": "string"
+          },
+          "schemaVersion": {
+            "const": "kanvas.image-background-remove-quality/v1"
+          },
+          "foregroundRatio": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0
+          },
+          "uncertainEdgeRatio": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "quality.signals"
+      },
+      "foregroundArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.foreground"
+      }
+    },
+    "additionalProperties": false
+  },
+  "requiredCapabilities": [
+    {
+      "key": "image.background.remove",
+      "revision": 1,
+      "canonicalDigest": "sha256:85e608e6977c5a84b51856c768f914784d4fc79e9fa5babecd70bb3e6b3c7c5d"
+    }
+  ],
+  "canonicalDigest": "sha256:2e14593d5bbe69230ce3e990cc28d02a1df8c6c423f0e5d42db3c5129fa561f2"
+}

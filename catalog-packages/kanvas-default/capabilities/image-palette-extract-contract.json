@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 1,
+  "contractKey": "image.palette.extract",
+  "revision": 1,
+  "inputSchema": {
+    "$id": "kanvas.image-palette-extract-input.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["sourceArtifactId"],
+    "properties": {
+      "colorCount": {
+        "type": "integer",
+        "default": 6,
+        "maximum": 12,
+        "minimum": 2,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "sampleSize": {
+        "type": "integer",
+        "default": 128,
+        "maximum": 512,
+        "minimum": 32,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "alphaThreshold": {
+        "type": "integer",
+        "default": 16,
+        "maximum": 255,
+        "minimum": 0,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "outputSchema": {
+    "$id": "kanvas.image-palette-extract-result.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "schemaVersion",
+      "sourceWidth",
+      "sourceHeight",
+      "colorSpace",
+      "colors",
+      "transparentRatio",
+      "qualitySignals"
+    ],
+    "properties": {
+      "colors": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "rank",
+            "hex",
+            "red",
+            "green",
+            "blue",
+            "proportion",
+            "luminance",
+            "role"
+          ],
+          "properties": {
+            "hex": {
+              "type": "string",
+              "pattern": "^#[0-9A-F]{6}$"
+            },
+            "red": {
+              "type": "integer",
+              "maximum": 255,
+              "minimum": 0
+            },
+            "blue": {
+              "type": "integer",
+              "maximum": 255,
+              "minimum": 0
+            },
+            "rank": {
+              "type": "integer",
+              "maximum": 12,
+              "minimum": 1
+            },
+            "role": {
+              "enum": ["dominant", "accent", "neutral"],
+              "type": "string"
+            },
+            "green": {
+              "type": "integer",
+              "maximum": 255,
+              "minimum": 0
+            },
+            "luminance": {
+              "type": "number",
+              "maximum": 1,
+              "minimum": 0
+            },
+            "proportion": {
+              "type": "number",
+              "maximum": 1,
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        },
+        "maxItems": 12,
+        "minItems": 1,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "colorSpace": {
+        "const": "srgb",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "sourceWidth": {
+        "type": "integer",
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "sourceHeight": {
+        "type": "integer",
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "schemaVersion": {
+        "const": "kanvas.image-palette-extract-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "required": [
+          "schemaVersion",
+          "generative",
+          "sourceModified",
+          "deterministic",
+          "quantizationBits",
+          "sampledPixelCount"
+        ],
+        "properties": {
+          "generative": {
+            "const": false
+          },
+          "deterministic": {
+            "const": true
+          },
+          "schemaVersion": {
+            "const": "kanvas.image-palette-extract-quality/v1"
+          },
+          "sourceModified": {
+            "const": false
+          },
+          "quantizationBits": {
+            "const": 5
+          },
+          "sampledPixelCount": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "quality.signals"
+      },
+      "transparentRatio": {
+        "type": "number",
+        "maximum": 1,
+        "minimum": 0,
+        "x-kanvas-semantic-type": "number.scalar"
+      }
+    },
+    "additionalProperties": false
+  },
+  "idempotencyMode": "keyed",
+  "supportedInvokers": ["user", "workflow", "agent", "canvas"]
+}

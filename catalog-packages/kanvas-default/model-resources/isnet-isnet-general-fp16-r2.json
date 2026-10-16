@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "kanvas.model-resource-catalog-asset/v1",
+  "resourceKey": "isnet.isnet-general-fp16",
+  "revision": 2,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "快速背景移除模型",
+      "en-US": "Fast background removal model"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "快速识别图片主体并移除背景，适合人物、商品和常见物体。",
+      "en-US": "Quickly detects the main subject and removes the background from people, products, and common objects."
+    }
+  },
+  "family": "isnet",
+  "variant": "isnet-general-fp16",
+  "sourceUrl": "https://huggingface.co/imgly/isnet-general-onnx/resolve/440dea96dd4a3b06bbbf5abec3e26569dd7ec49f/onnx/model_fp16.onnx",
+  "source": {
+    "kind": "hugging_face",
+    "repository": "imgly/isnet-general-onnx",
+    "revision": "440dea96dd4a3b06bbbf5abec3e26569dd7ec49f",
+    "filePath": "onnx/model_fp16.onnx"
+  },
+  "expectedSha256": "sha256:2eb4b5dda7ec41c617e59706e5aafa1f978c9a5f983d2518d9f0ae4d6eb04f20",
+  "expectedByteSize": "88152708",
+  "format": "onnx",
+  "mediaType": "application/octet-stream",
+  "license": {
+    "spdxId": "MIT",
+    "sourceUrl": "https://huggingface.co/imgly/isnet-general-onnx"
+  },
+  "nativeInterface": {
+    "protocol": "tensor",
+    "inputSchema": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["input"],
+      "properties": {
+        "input": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3145728,
+          "maxItems": 3145728,
+          "x-kanvas-tensor": {
+            "dataType": "float32",
+            "shape": [1, 3, 1024, 1024]
+          }
+        }
+      }
+    },
+    "outputSchema": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["output"],
+      "properties": {
+        "output": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 1048576,
+          "maxItems": 1048576,
+          "x-kanvas-tensor": {
+            "dataType": "float32",
+            "shape": [1, 1, 1024, 1024]
+          }
+        }
+      }
+    }
+  },
+  "executionTargets": ["browser"],
+  "revisionDigest": "sha256:067cbdb65aaa3d734e61754ea345e4f851337263e1ec6fb8fd5427ef26d987bd"
+}

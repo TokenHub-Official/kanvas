@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "key": "image_crop_suggest",
+  "entryNodeKey": "suggest",
+  "limits": {
+    "maxNodeRuns": 1,
+    "timeoutMs": 180000
+  },
+  "nodes": [
+    {
+      "key": "suggest",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "image.crop.suggest",
+        "revision": 2,
+        "canonicalDigest": "sha256:051ebe3b9fbdd1205ed07af0079c91c55c3352e34c92fdc7a7bed6b0239286de"
+      },
+      "input": {
+        "$value": {
+          "source": "workflow_input",
+          "pointer": ""
+        }
+      },
+      "next": []
+    }
+  ],
+  "outputs": {
+    "schemaVersion": {
+      "required": true,
+      "value": "kanvas.image-crop-suggest-result/v1"
+    },
+    "sourceWidth": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "suggest",
+          "scope": "root",
+          "pointer": "/sourceWidth"
+        }
+      }
+    },
+    "sourceHeight": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "suggest",
+          "scope": "root",
+          "pointer": "/sourceHeight"
+        }
+      }
+    },
+    "suggestions": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "suggest",
+          "scope": "root",
+          "pointer": "/suggestions"
+        }
+      }
+    },
+    "qualitySignals": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "suggest",
+          "scope": "root",
+          "pointer": "/qualitySignals"
+        }
+      }
+    }
+  }
+}

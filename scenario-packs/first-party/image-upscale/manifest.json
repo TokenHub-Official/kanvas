@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "packId": "first-party.image-upscale",
+  "displayName": "Image upscale",
+  "workflows": [
+    {
+      "path": "workflows/image-upscale.json"
+    }
+  ],
+  "skill": {
+    "path": "skill/manifest.json"
+  },
+  "capabilities": [
+    {
+      "path": "capabilities/image-upscale.json"
+    }
+  ],
+  "requiredCapabilities": [
+    {
+      "contractId": "image.upscale",
+      "revision": 1,
+      "canonicalDigest": "sha256:8cb7edcd88a078c80014a146d85dca7ca41eca2b7f12a348e696ff2e8122f6ff"
+    }
+  ]
+}

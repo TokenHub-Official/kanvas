@@ -1,0 +1,180 @@
+{
+  "schemaVersion": 1,
+  "contractKey": "image.quality.assess",
+  "revision": 1,
+  "inputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "kanvas.image-quality-assess-input.v1",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "sourceArtifactId"
+    ],
+    "properties": {
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+      },
+      "subjectBounds": {
+        "type": "array",
+        "maxItems": 16,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "x",
+            "y",
+            "width",
+            "height"
+          ],
+          "properties": {
+            "x": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "y": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "width": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "height": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        }
+      },
+      "sampleSize": {
+        "type": "integer",
+        "minimum": 64,
+        "maximum": 1024,
+        "default": 256
+      }
+    }
+  },
+  "outputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "kanvas.image-quality-assess-result.v1",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "schemaVersion",
+      "sourceWidth",
+      "sourceHeight",
+      "blurScore",
+      "underExposureRatio",
+      "overExposureRatio",
+      "noiseScore",
+      "compressionScore",
+      "subjectScaleRatio",
+      "usability",
+      "findings",
+      "qualitySignals"
+    ],
+    "properties": {
+      "schemaVersion": {
+        "const": "kanvas.image-quality-assess-result/v1"
+      },
+      "sourceWidth": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "sourceHeight": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "blurScore": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+      },
+      "underExposureRatio": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+      },
+      "overExposureRatio": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+      },
+      "noiseScore": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+      },
+      "compressionScore": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+      },
+      "subjectScaleRatio": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "minimum": 0,
+        "maximum": 1
+      },
+      "usability": {
+        "type": "string",
+        "enum": [
+          "good",
+          "review",
+          "poor"
+        ]
+      },
+      "findings": {
+        "type": "array",
+        "uniqueItems": true,
+        "maxItems": 6,
+        "items": {
+          "type": "string",
+          "enum": [
+            "blur",
+            "under_exposed",
+            "over_exposed",
+            "noise",
+            "compression",
+            "subject_too_small"
+          ]
+        }
+      },
+      "qualitySignals": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schemaVersion",
+          "generative",
+          "sourceModified",
+          "method",
+          "subjectBoundsProvided"
+        ],
+        "properties": {
+          "schemaVersion": {
+            "const": "kanvas.image-quality-assess-quality/v1"
+          },
+          "generative": {
+            "const": false
+          },
+          "sourceModified": {
+            "const": false
+          },
+          "method": {
+            "const": "deterministic_pixel_diagnostics"
+          },
+          "subjectBoundsProvided": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  },
+  "idempotencyMode": "keyed",
+  "supportedInvokers": [
+    "workflow"
+  ]
+}

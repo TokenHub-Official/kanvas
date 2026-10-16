@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "contractKey": "image.upscale",
+  "revision": 1,
+  "inputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "kanvas.image-upscale-input.v1",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "sourceArtifactId",
+      "qualityIntent"
+    ],
+    "properties": {
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      },
+      "qualityIntent": {
+        "type": "string",
+        "enum": [
+          "faithful",
+          "reconstructive"
+        ],
+        "x-kanvas-semantic-type": "image.upscale-quality-intent"
+      },
+      "scaleFactor": {
+        "const": 2,
+        "default": 2,
+        "x-kanvas-semantic-type": "image.scale-factor"
+      },
+      "guidance": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 1000,
+        "x-kanvas-semantic-type": "text.guidance"
+      }
+    }
+  },
+  "outputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "kanvas.image-upscale-result.v1",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "schemaVersion",
+      "imageArtifactId",
+      "qualityIntent",
+      "scaleFactor",
+      "sourceWidth",
+      "sourceHeight",
+      "outputWidth",
+      "outputHeight",
+      "qualitySignals"
+    ],
+    "properties": {
+      "schemaVersion": {
+        "const": "kanvas.image-upscale-result/v1"
+      },
+      "imageArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      },
+      "qualityIntent": {
+        "type": "string",
+        "enum": [
+          "faithful",
+          "reconstructive"
+        ],
+        "x-kanvas-semantic-type": "image.upscale-quality-intent"
+      },
+      "scaleFactor": {
+        "const": 2,
+        "x-kanvas-semantic-type": "image.scale-factor"
+      },
+      "sourceWidth": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "minimum": 1,
+        "x-kanvas-semantic-type": "image.source-width-px"
+      },
+      "sourceHeight": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "minimum": 1,
+        "x-kanvas-semantic-type": "image.source-height-px"
+      },
+      "outputWidth": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "minimum": 1,
+        "x-kanvas-semantic-type": "image.output-width-px"
+      },
+      "outputHeight": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "minimum": 1,
+        "x-kanvas-semantic-type": "image.output-height-px"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schemaVersion",
+          "method",
+          "generative",
+          "resamplingKernel"
+        ],
+        "properties": {
+          "schemaVersion": {
+            "const": "kanvas.image-upscale-quality/v1"
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "deterministic_resample",
+              "generative_reconstruction"
+            ]
+          },
+          "generative": {
+            "type": "boolean"
+          },
+          "resamplingKernel": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "lanczos3",
+              null
+            ]
+          }
+        },
+        "x-kanvas-semantic-type": "quality.signals"
+      }
+    }
+  },
+  "idempotencyMode": "keyed",
+  "supportedInvokers": [
+    "workflow",
+    "agent",
+    "user"
+  ]
+}

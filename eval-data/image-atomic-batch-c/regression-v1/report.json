@@ -1,0 +1,161 @@
+{
+  "schemaVersion": "kanvas.image-atomic-batch-c-eval-report/v1",
+  "corpusId": "atom-batch-03-metric-regression-v1",
+  "evidenceClass": "metric_regression",
+  "generatedAt": "2026-08-04T11:10:03.215Z",
+  "sampleCount": 4,
+  "passedCount": 4,
+  "failedCount": 0,
+  "passed": true,
+  "samples": [
+    {
+      "id": "crop-off-center-subject",
+      "capability": "image.crop.suggest",
+      "target": "browser",
+      "implementationDigest": "sha256:d28502069cb368e73e92600aca2dc86639fe36894c0a3b20cd765b2cc1e8c351",
+      "categories": [
+        "off-center-subject",
+        "square"
+      ],
+      "metrics": {
+        "meanTopOneIou": 1,
+        "topThreeHitRate": 1,
+        "meanSubjectRetention": 1
+      },
+      "thresholds": {
+        "meanTopOneIou": {
+          "operator": "eq",
+          "value": 1
+        },
+        "topThreeHitRate": {
+          "operator": "eq",
+          "value": 1
+        },
+        "meanSubjectRetention": {
+          "operator": "eq",
+          "value": 1
+        }
+      },
+      "inputDigests": {
+        "crop/candidate.json": "sha256:41d03921d0c68f57c2ce30beea4108fb72090bcd18fa4a43a4e2560e58258d9a",
+        "crop/ground-truth.json": "sha256:368713f9b7cf1b2fbab649ded6e0072fdcab7a41026cb08693bc2808e2bc775b"
+      },
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "palette-alpha-and-accent",
+      "capability": "image.palette.extract",
+      "target": "browser",
+      "implementationDigest": "sha256:a7328b321ee171692c912b216754b9c8db4a151b3476f3edfc468c094073b614",
+      "categories": [
+        "dominant-accent",
+        "transparency"
+      ],
+      "metrics": {
+        "weightedColorDistance": 0,
+        "weightedProportionError": 0,
+        "paletteCoverage": 1
+      },
+      "thresholds": {
+        "weightedColorDistance": {
+          "operator": "eq",
+          "value": 0
+        },
+        "weightedProportionError": {
+          "operator": "eq",
+          "value": 0
+        },
+        "paletteCoverage": {
+          "operator": "eq",
+          "value": 1
+        }
+      },
+      "inputDigests": {
+        "palette/ground-truth.json": "sha256:cfa54b5a4abf2602d5b8dc3fdde69fd298b30c62071b0e9c4a59396b4beabc83",
+        "palette/candidate.json": "sha256:17d0abedc8e693c1ca53e5a29ea676e8820bc22e6fc571084898167e6e2bfa50"
+      },
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "quality-controlled-source",
+      "capability": "image.quality.assess",
+      "target": "browser",
+      "implementationDigest": "sha256:1bb161eeaac77c23da04d3f67e2dd21238e88d83725909ebb6861ca4e91a8433",
+      "categories": [
+        "controlled-source",
+        "subject-scale"
+      ],
+      "metrics": {
+        "scoreMae": 0,
+        "findingPrecision": 1,
+        "findingRecall": 1,
+        "findingF1": 1,
+        "usabilityMatch": 1
+      },
+      "thresholds": {
+        "scoreMae": {
+          "operator": "eq",
+          "value": 0
+        },
+        "findingF1": {
+          "operator": "eq",
+          "value": 1
+        },
+        "usabilityMatch": {
+          "operator": "eq",
+          "value": 1
+        }
+      },
+      "inputDigests": {
+        "quality/candidate.json": "sha256:8ffd90dd8f0a293132e77719a2b7284bea3cf96123cdf0561204665d38460729",
+        "quality/ground-truth.json": "sha256:8ffd90dd8f0a293132e77719a2b7284bea3cf96123cdf0561204665d38460729"
+      },
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "compose-partial-alpha",
+      "capability": "image.background.compose",
+      "target": "browser",
+      "implementationDigest": "sha256:13b7f5179254b8e9d888badf31bbae67d0e5ed8fa565fbc5bd45a1cc05f36abb",
+      "categories": [
+        "partial-alpha",
+        "contain"
+      ],
+      "metrics": {
+        "pixelExactRatio": 1,
+        "channelMae": 0,
+        "alphaExactRatio": 1,
+        "compositionMaskIou": 1
+      },
+      "thresholds": {
+        "pixelExactRatio": {
+          "operator": "eq",
+          "value": 1
+        },
+        "channelMae": {
+          "operator": "eq",
+          "value": 0
+        },
+        "alphaExactRatio": {
+          "operator": "eq",
+          "value": 1
+        },
+        "compositionMaskIou": {
+          "operator": "eq",
+          "value": 1
+        }
+      },
+      "inputDigests": {
+        "compose/candidate.png": "sha256:91b42aaaa92bdd13bab7abc997e1016d06f2b529a74ba8fa33f9ac274963e2ca",
+        "compose/candidate-mask.png": "sha256:7c99fb652fc5e091c845cead294d6b1ed4332722ff097a76be37cf0c2ced32ee",
+        "compose/ground-truth-mask.png": "sha256:7c99fb652fc5e091c845cead294d6b1ed4332722ff097a76be37cf0c2ced32ee",
+        "compose/ground-truth.png": "sha256:91b42aaaa92bdd13bab7abc997e1016d06f2b529a74ba8fa33f9ac274963e2ca"
+      },
+      "passed": true,
+      "failures": []
+    }
+  ]
+}

@@ -1,0 +1,256 @@
+{
+  "schemaVersion": 1,
+  "contractKey": "image.canvas.expand",
+  "revision": 1,
+  "inputSchema": {
+    "$id": "kanvas.image-canvas-expand-input.v1",
+    "type": "object",
+    "allOf": [
+      {
+        "if": {
+          "required": ["targetWidth"],
+          "properties": {
+            "targetWidth": {
+              "const": 1536
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "targetHeight": {
+              "const": 1024
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "required": ["targetHeight"],
+          "properties": {
+            "targetHeight": {
+              "const": 1536
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "targetWidth": {
+              "const": 1024
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "required": ["targetWidth", "targetHeight"],
+          "properties": {
+            "targetWidth": {
+              "const": 1024
+            },
+            "targetHeight": {
+              "const": 1024
+            }
+          }
+        },
+        "then": {
+          "properties": {}
+        }
+      }
+    ],
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "sourceArtifactId",
+      "targetWidth",
+      "targetHeight",
+      "sourcePlacement",
+      "generatedRegion"
+    ],
+    "properties": {
+      "prompt": {
+        "type": "string",
+        "maxLength": 4000,
+        "minLength": 1,
+        "x-kanvas-semantic-type": "prompt.rich"
+      },
+      "targetWidth": {
+        "enum": [1024, 1536],
+        "type": "integer",
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "targetHeight": {
+        "enum": [1024, 1536],
+        "type": "integer",
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "generatedRegion": {
+        "type": "object",
+        "required": ["left", "top", "right", "bottom"],
+        "properties": {
+          "top": {
+            "type": "integer",
+            "maximum": 1535,
+            "minimum": 0
+          },
+          "left": {
+            "type": "integer",
+            "maximum": 1535,
+            "minimum": 0
+          },
+          "right": {
+            "type": "integer",
+            "maximum": 1535,
+            "minimum": 0
+          },
+          "bottom": {
+            "type": "integer",
+            "maximum": 1535,
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "layout.bounds"
+      },
+      "sourcePlacement": {
+        "type": "object",
+        "required": ["x", "y"],
+        "properties": {
+          "x": {
+            "type": "integer",
+            "maximum": 1535,
+            "minimum": 0
+          },
+          "y": {
+            "type": "integer",
+            "maximum": 1535,
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "layout.placement"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "outputSchema": {
+    "$id": "kanvas.image-canvas-expand-result.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "schemaVersion",
+      "expandedArtifactId",
+      "generatedRegionMaskArtifactId",
+      "targetWidth",
+      "targetHeight",
+      "sourcePlacement",
+      "generatedRegion",
+      "qualitySignals"
+    ],
+    "properties": {
+      "targetWidth": {
+        "type": "integer",
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "targetHeight": {
+        "type": "integer",
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "schemaVersion": {
+        "const": "kanvas.image-canvas-expand-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "required": [
+          "schemaVersion",
+          "method",
+          "generative",
+          "originalPixelsPreserved"
+        ],
+        "properties": {
+          "method": {
+            "const": "generative_outpaint"
+          },
+          "generative": {
+            "const": true
+          },
+          "schemaVersion": {
+            "const": "kanvas.image-canvas-expand-quality/v1"
+          },
+          "originalPixelsPreserved": {
+            "const": true
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "quality.signals"
+      },
+      "generatedRegion": {
+        "type": "object",
+        "required": ["left", "top", "right", "bottom"],
+        "properties": {
+          "top": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "left": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "right": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "bottom": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "layout.bounds"
+      },
+      "sourcePlacement": {
+        "type": "object",
+        "required": ["x", "y", "width", "height"],
+        "properties": {
+          "x": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "y": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "width": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "height": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "layout.placement"
+      },
+      "expandedArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      },
+      "generatedRegionMaskArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.mask"
+      }
+    },
+    "additionalProperties": false
+  },
+  "idempotencyMode": "keyed",
+  "supportedInvokers": ["user", "workflow", "agent", "canvas"]
+}

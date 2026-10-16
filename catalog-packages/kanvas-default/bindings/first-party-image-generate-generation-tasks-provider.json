@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "kanvas.capability-binding/v1",
+  "bindingKey": "first-party.image.generate.generation-tasks-provider",
+  "contract": {
+    "key": "image.generate",
+    "revision": 1,
+    "canonicalDigest": "sha256:72f47781bd10c36283c6003cc3132fcf85d3658c9117e2b4703c4b4e605277c5"
+  },
+  "implementation": {
+    "key": "first-party.image.generate.generation-tasks-provider",
+    "revision": 1,
+    "canonicalDigest": "sha256:e8a9e280f288091a1ea78934e505af7945a9ee36211c19a6c096ad5e6d709143"
+  },
+  "priority": 3,
+  "enabled": true,
+  "eligibility": {},
+  "fallbackOn": []
+}

@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "kanvas.capability-implementation/v1",
+  "implementationKey": "first-party.image.canvas-expand.openai-provider",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "扩展画布 · 模型服务",
+      "en-US": "Canvas expand · Model service"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "通过模型服务提供扩展画布，上层只依赖固定公开契约。",
+      "en-US": "Provides Canvas expand through Model service behind the stable public contract."
+    }
+  },
+  "contract": {
+    "key": "image.canvas.expand",
+    "revision": 1,
+    "canonicalDigest": "sha256:fc9eaef48d0bcfc3bf7f40c3c66e2ff14d127590223cef1076a65ec51a218c44"
+  },
+  "adapter": {
+    "adapterKey": "openai.image.canvas-expand.v1",
+    "revision": 1,
+    "canonicalDigest": "sha256:2dbf96c04da58e022310dc710bdc2f638fffe01d6810e23f3d102bc4fd58ddee"
+  },
+  "source": {
+    "kind": "model_service",
+    "selector": {
+      "operation": "image.edit",
+      "apiSurface": "images.edits.v1"
+    }
+  },
+  "configuration": {
+    "method": "generative_outpaint",
+    "protocol": "images.edits.v1",
+    "dataEgress": "authorized_source_artifact",
+    "outputFormat": "png",
+    "providerInput": "transparent_canvas_and_edit_mask",
+    "promptTemplate": "Outpaint the transparent canvas into one coherent image. Preserve the opaque source region exactly in its current position, scale, composition, identity, text, colors, lighting, and geometry. Generate content only in the transparent region and continue edges naturally.{{promptBlock}}",
+    "outputMaterialization": "trusted_storage",
+    "originalPixelRestoration": "source_blend"
+  },
+  "inputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "input",
+    "expression": {
+      "op": "source",
+      "root": "input",
+      "pointer": ""
+    }
+  },
+  "outputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "output",
+    "expression": {
+      "op": "source",
+      "root": "result",
+      "pointer": ""
+    }
+  },
+  "fixtures": [
+    {
+      "name": "default contract mapping",
+      "capabilityInput": {
+        "targetWidth": 1024,
+        "targetHeight": 1024,
+        "generatedRegion": {
+          "top": 0,
+          "left": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "sourcePlacement": {
+          "x": 0,
+          "y": 0
+        },
+        "sourceArtifactId": "01K00000000000000000000001"
+      },
+      "configuration": {
+        "method": "generative_outpaint",
+        "protocol": "images.edits.v1",
+        "dataEgress": "authorized_source_artifact",
+        "outputFormat": "png",
+        "providerInput": "transparent_canvas_and_edit_mask",
+        "promptTemplate": "Outpaint the transparent canvas into one coherent image. Preserve the opaque source region exactly in its current position, scale, composition, identity, text, colors, lighting, and geometry. Generate content only in the transparent region and continue edges naturally.{{promptBlock}}",
+        "outputMaterialization": "trusted_storage",
+        "originalPixelRestoration": "source_blend"
+      },
+      "expectedAdapterInput": {
+        "targetWidth": 1024,
+        "targetHeight": 1024,
+        "generatedRegion": {
+          "top": 0,
+          "left": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "sourcePlacement": {
+          "x": 0,
+          "y": 0
+        },
+        "sourceArtifactId": "01K00000000000000000000001"
+      },
+      "adapterResult": {
+        "targetWidth": 1,
+        "targetHeight": 1,
+        "schemaVersion": "kanvas.image-canvas-expand-result/v1",
+        "qualitySignals": {
+          "method": "generative_outpaint",
+          "generative": true,
+          "schemaVersion": "kanvas.image-canvas-expand-quality/v1",
+          "originalPixelsPreserved": true
+        },
+        "generatedRegion": {
+          "top": 0,
+          "left": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "sourcePlacement": {
+          "x": 0,
+          "y": 0,
+          "width": 1,
+          "height": 1
+        },
+        "expandedArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "sample",
+          "outputIndex": 0
+        },
+        "generatedRegionMaskArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "sample",
+          "outputIndex": 0
+        }
+      },
+      "expectedCapabilityOutput": {
+        "targetWidth": 1,
+        "targetHeight": 1,
+        "schemaVersion": "kanvas.image-canvas-expand-result/v1",
+        "qualitySignals": {
+          "method": "generative_outpaint",
+          "generative": true,
+          "schemaVersion": "kanvas.image-canvas-expand-quality/v1",
+          "originalPixelsPreserved": true
+        },
+        "generatedRegion": {
+          "top": 0,
+          "left": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "sourcePlacement": {
+          "x": 0,
+          "y": 0,
+          "width": 1,
+          "height": 1
+        },
+        "expandedArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "sample",
+          "outputIndex": 0
+        },
+        "generatedRegionMaskArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "sample",
+          "outputIndex": 0
+        }
+      }
+    }
+  ]
+}

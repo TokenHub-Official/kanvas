@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 1,
+  "contractKey": "image.light.enhance",
+  "revision": 1,
+  "inputSchema": {
+    "$id": "kanvas.image-light-enhance-input.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["sourceArtifactId"],
+    "properties": {
+      "tint": {
+        "type": "number",
+        "default": 0,
+        "maximum": 1,
+        "minimum": -1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "shadows": {
+        "type": "number",
+        "default": 0,
+        "maximum": 1,
+        "minimum": -1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "highlights": {
+        "type": "number",
+        "default": 0,
+        "maximum": 1,
+        "minimum": -1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "temperature": {
+        "type": "number",
+        "default": 0,
+        "maximum": 1,
+        "minimum": -1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "exposureStops": {
+        "type": "number",
+        "default": 0,
+        "maximum": 2,
+        "minimum": -2,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "outputSchema": {
+    "$id": "kanvas.image-light-enhance-result.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "schemaVersion",
+      "imageArtifactId",
+      "parameters",
+      "qualitySignals"
+    ],
+    "properties": {
+      "parameters": {
+        "type": "object",
+        "required": [
+          "exposureStops",
+          "shadows",
+          "highlights",
+          "temperature",
+          "tint"
+        ],
+        "properties": {
+          "tint": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": -1
+          },
+          "shadows": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": -1
+          },
+          "highlights": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": -1
+          },
+          "temperature": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": -1
+          },
+          "exposureStops": {
+            "type": "number",
+            "maximum": 2,
+            "minimum": -2
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "schemaVersion": {
+        "const": "kanvas.image-light-enhance-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "required": [
+          "schemaVersion",
+          "method",
+          "generative",
+          "alphaPreserved",
+          "clippedLowRatio",
+          "clippedHighRatio"
+        ],
+        "properties": {
+          "method": {
+            "const": "deterministic_tone_curve"
+          },
+          "generative": {
+            "const": false
+          },
+          "schemaVersion": {
+            "const": "kanvas.image-light-enhance-quality/v1"
+          },
+          "alphaPreserved": {
+            "const": true
+          },
+          "clippedLowRatio": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0
+          },
+          "clippedHighRatio": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "quality.signals"
+      },
+      "imageArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "idempotencyMode": "keyed",
+  "supportedInvokers": ["user", "workflow", "agent", "canvas"]
+}

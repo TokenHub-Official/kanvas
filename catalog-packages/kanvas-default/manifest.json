@@ -1,0 +1,684 @@
+{
+  "schemaVersion": "kanvas.catalog-package/v1",
+  "packageKey": "kanvas.default-catalog",
+  "version": "2.1.1",
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "Kanvas 官方能力推荐",
+      "en-US": "Kanvas official capability recommendations"
+    }
+  },
+  "dependencies": [],
+  "assets": [
+    {
+      "assetKey": "adapter.first-party-image-text-extract-tesseract-v1.r2",
+      "kind": "runtime_adapter",
+      "path": "runtime-adapters/first-party-image-text-extract-tesseract-v1-r2.json",
+      "contentDigest": "sha256:4b3c90579f40bb379ffc5db2bd42977227df85a3dc68e5ec8fe01b8bbde5c935",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "model.tesseract.tessdata-fast-eng",
+      "kind": "model_resource",
+      "path": "model-resources/tesseract-tessdata-fast-eng.json",
+      "contentDigest": "sha256:e0ef1986af70f4f576b7c35581253bc0b059b638354ded2ec0d4dbaebba7da5e",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "implementation.first-party-image-text-extract-tesseract-eng-worker.r2",
+      "kind": "capability_implementation",
+      "path": "implementations/first-party-image-text-extract-tesseract-eng-worker-r2.json",
+      "contentDigest": "sha256:ca3c066da7f008e1fce6289821ef6d9e9e0d413c8de34a2b090d314a7c8a55b3",
+      "dependsOn": [
+        "contract.image.text.extract",
+        "declaration.image.text.extract",
+        "adapter.first-party-image-text-extract-tesseract-v1.r2",
+        "model.tesseract.tessdata-fast-eng"
+      ]
+    },
+    {
+      "assetKey": "binding.first-party-image-text-extract-tesseract-eng-worker.r2",
+      "kind": "capability_binding",
+      "path": "bindings/first-party-image-text-extract-tesseract-eng-worker-r2.json",
+      "contentDigest": "sha256:fd93f4cd9924261003467cb38966085290a6d06e2ec04d3833e2aaacec0c0379",
+      "dependsOn": [
+        "implementation.first-party-image-text-extract-tesseract-eng-worker.r2"
+      ]
+    },
+    {
+      "assetKey": "adapter.openai-image-object-remove-v1.r1",
+      "kind": "runtime_adapter",
+      "path": "runtime-adapters/openai-image-object-remove-v1-r1.json",
+      "contentDigest": "sha256:a493aa4b779093d753d7e529790cc6aa69a429099b111ddcb92b1c7eb399584f",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "implementation.first-party-image-object-remove-openai-provider",
+      "kind": "capability_implementation",
+      "path": "implementations/first-party-image-object-remove-openai-provider.json",
+      "contentDigest": "sha256:56204b8b9d2b77db4f7e66960e55c8f2cdb6b76b173c5a4851fd8149e8d922c9",
+      "dependsOn": [
+        "contract.image.object.remove",
+        "declaration.image.object.remove",
+        "adapter.openai-image-object-remove-v1.r1"
+      ]
+    },
+    {
+      "assetKey": "binding.first-party-image-object-remove-openai-provider",
+      "kind": "capability_binding",
+      "path": "bindings/first-party-image-object-remove-openai-provider.json",
+      "contentDigest": "sha256:a5faba4bedc126ab3d65d66e7f2cb367d6f05bb4c29cab3475c8d9786ffa5df7",
+      "dependsOn": [
+        "implementation.first-party-image-object-remove-openai-provider"
+      ]
+    },
+    {
+      "assetKey": "adapter.browser-image-background-compose-deterministic-v1.r1",
+      "kind": "runtime_adapter",
+      "path": "runtime-adapters/browser-image-background-compose-deterministic-v1-r1.json",
+      "contentDigest": "sha256:9f13d0c6932f423387bdee90cdfb800f242d56184826e044de55b5b0b8d99404",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "adapter.browser-image-crop-suggest-deterministic-v1.r1",
+      "kind": "runtime_adapter",
+      "path": "runtime-adapters/browser-image-crop-suggest-deterministic-v1-r1.json",
+      "contentDigest": "sha256:a486875f93baae94e684bba37c489737c8aaae3666373a55f808bb88cf5d7d0e",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "adapter.browser-image-palette-extract-histogram-v1.r1",
+      "kind": "runtime_adapter",
+      "path": "runtime-adapters/browser-image-palette-extract-histogram-v1-r1.json",
+      "contentDigest": "sha256:353b18a4d814302c308705e0836b7375456008e887ef7e86c46bea1adb7b7874",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "adapter.browser-image-quality-assess-deterministic-v1.r1",
+      "kind": "runtime_adapter",
+      "path": "runtime-adapters/browser-image-quality-assess-deterministic-v1-r1.json",
+      "contentDigest": "sha256:bb34c6b0b4d2746c158a8cdf4c0f9aa1315296d61a09fb72c89da7cb41d56bc0",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "adapter.first-party-image-background-remove-isnet-webp-lossless-v2.r2",
+      "kind": "runtime_adapter",
+      "path": "runtime-adapters/first-party-image-background-remove-isnet-webp-lossless-v2-r2.json",
+      "contentDigest": "sha256:2f4f88653801fdf9fc2b3c8db955a312b8d022c47ba6dc47f54ba343c9948a24",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "adapter.first-party-image-denoise-median-blend-v1.r1",
+      "kind": "runtime_adapter",
+      "path": "runtime-adapters/first-party-image-denoise-median-blend-v1-r1.json",
+      "contentDigest": "sha256:3e055ae8e828d9bd404fc13e6f1653a555ddf79b8bfd3e752b3b126e6cd213af",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "adapter.first-party-image-light-enhance-deterministic-v1.r1",
+      "kind": "runtime_adapter",
+      "path": "runtime-adapters/first-party-image-light-enhance-deterministic-v1-r1.json",
+      "contentDigest": "sha256:bfc743592a2b40581887319fc2f74669ed6ca0870c37f6ad4b5abf8c28a13973",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "adapter.first-party-image-subject-detect-isnet-browser-v1.r2",
+      "kind": "runtime_adapter",
+      "path": "runtime-adapters/first-party-image-subject-detect-isnet-browser-v1-r2.json",
+      "contentDigest": "sha256:c02af683e2a5267cd24da611e93d88937c19de32aa917df7a81e157973ce66b6",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "adapter.kanvas-image-resize-sharp-v1.r1",
+      "kind": "runtime_adapter",
+      "path": "runtime-adapters/kanvas-image-resize-sharp-v1-r1.json",
+      "contentDigest": "sha256:b43019f1979c312f69060c9c6f4793d380c769f5f7839e6fb5ccbfbf9e6d20a8",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "adapter.openai-image-canvas-expand-v1.r1",
+      "kind": "runtime_adapter",
+      "path": "runtime-adapters/openai-image-canvas-expand-v1-r1.json",
+      "contentDigest": "sha256:2dbf96c04da58e022310dc710bdc2f638fffe01d6810e23f3d102bc4fd58ddee",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "binding.first-party-image-background-compose-deterministic-browser",
+      "kind": "capability_binding",
+      "path": "bindings/first-party-image-background-compose-deterministic-browser.json",
+      "contentDigest": "sha256:1b808d613893f9996536cffc926d21eb02343c5f3d9392877c4abe5de4420fa8",
+      "dependsOn": [
+        "implementation.first-party-image-background-compose-deterministic-browser"
+      ]
+    },
+    {
+      "assetKey": "binding.first-party-image-background-remove-isnet-general-worker.r2",
+      "kind": "capability_binding",
+      "path": "bindings/first-party-image-background-remove-isnet-general-worker-r2.json",
+      "contentDigest": "sha256:5bfedc2762d8549d3b44097b1d6b43db9139924d7c849d98a6f503afb646c8d6",
+      "dependsOn": [
+        "implementation.first-party-image-background-remove-isnet-general-worker.r2"
+      ]
+    },
+    {
+      "assetKey": "binding.first-party-image-canvas-expand-openai-provider",
+      "kind": "capability_binding",
+      "path": "bindings/first-party-image-canvas-expand-openai-provider.json",
+      "contentDigest": "sha256:6541a2a3d2f6eb458f74e85cb7519dcbd7a8f558cd8b6f1fb3a6b39623ef4b87",
+      "dependsOn": [
+        "implementation.first-party-image-canvas-expand-openai-provider"
+      ]
+    },
+    {
+      "assetKey": "binding.first-party-image-crop-suggest-deterministic-browser",
+      "kind": "capability_binding",
+      "path": "bindings/first-party-image-crop-suggest-deterministic-browser.json",
+      "contentDigest": "sha256:2086d71f8722eee99e608c557489f63df7bdcdce62172b0d4f2ebfd000bb23ab",
+      "dependsOn": [
+        "implementation.first-party-image-crop-suggest-deterministic-browser"
+      ]
+    },
+    {
+      "assetKey": "binding.first-party-image-denoise-median-blend-worker",
+      "kind": "capability_binding",
+      "path": "bindings/first-party-image-denoise-median-blend-worker.json",
+      "contentDigest": "sha256:515c19831b424305e82bea393b35917df25f0a3f51f895b9bde6d0eec7384b02",
+      "dependsOn": [
+        "implementation.first-party-image-denoise-median-blend-worker"
+      ]
+    },
+    {
+      "assetKey": "binding.first-party-image-light-enhance-deterministic-worker",
+      "kind": "capability_binding",
+      "path": "bindings/first-party-image-light-enhance-deterministic-worker.json",
+      "contentDigest": "sha256:7c7df9e327fc557216fc69b65bfa435c5510eb80e96f4d3c5e33785dacfde015",
+      "dependsOn": [
+        "implementation.first-party-image-light-enhance-deterministic-worker"
+      ]
+    },
+    {
+      "assetKey": "binding.first-party-image-palette-extract-histogram-browser",
+      "kind": "capability_binding",
+      "path": "bindings/first-party-image-palette-extract-histogram-browser.json",
+      "contentDigest": "sha256:b40110384302c93dad7892c159179b14bbc2e5e718a9b807ebb3e894c6c4ee9c",
+      "dependsOn": [
+        "implementation.first-party-image-palette-extract-histogram-browser"
+      ]
+    },
+    {
+      "assetKey": "binding.first-party-image-quality-assess-deterministic-browser",
+      "kind": "capability_binding",
+      "path": "bindings/first-party-image-quality-assess-deterministic-browser.json",
+      "contentDigest": "sha256:03621e89144721cd71f2c56d6b4e57dbc932a5d5fcc4c85da101cafe205a63b5",
+      "dependsOn": [
+        "implementation.first-party-image-quality-assess-deterministic-browser"
+      ]
+    },
+    {
+      "assetKey": "binding.first-party-image-subject-detect-isnet-general-browser.r2",
+      "kind": "capability_binding",
+      "path": "bindings/first-party-image-subject-detect-isnet-general-browser-r2.json",
+      "contentDigest": "sha256:a4a78b8b0b6324bcae3eb90699f4b3582ce3695f4207557775875d8ee8d1d2db",
+      "dependsOn": [
+        "implementation.first-party-image-subject-detect-isnet-general-browser.r2"
+      ]
+    },
+    {
+      "assetKey": "binding.first-party-image-upscale-lanczos3-worker",
+      "kind": "capability_binding",
+      "path": "bindings/first-party-image-upscale-lanczos3-worker.json",
+      "contentDigest": "sha256:c51bda4b5bcfa6fa36d1793528f031f3bd13798b58b48f69f1e7748927bc90e9",
+      "dependsOn": ["implementation.first-party-image-upscale-lanczos3-worker"]
+    },
+    {
+      "assetKey": "contract.image.background.compose",
+      "kind": "capability_contract",
+      "path": "capabilities/image-background-compose-contract.json",
+      "contentDigest": "sha256:8592a0c5793194f8824f6a6d2a907bdd4e72d65b7ef761920302e0907c637b99",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "contract.image.background.remove",
+      "kind": "capability_contract",
+      "path": "capabilities/image-background-remove-contract.json",
+      "contentDigest": "sha256:bb01ecde8691522de0ddd8f90f8d2a14ab042fc50c7d62e73289c05710a73966",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "contract.image.canvas.expand",
+      "kind": "capability_contract",
+      "path": "capabilities/image-canvas-expand-contract.json",
+      "contentDigest": "sha256:fc9eaef48d0bcfc3bf7f40c3c66e2ff14d127590223cef1076a65ec51a218c44",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "contract.image.crop.suggest",
+      "kind": "capability_contract",
+      "path": "capabilities/image-crop-suggest-contract.json",
+      "contentDigest": "sha256:a16b6a9f160d7f33591891805d78cb71928ae7d540ae7610776a23d612240f49",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "contract.image.denoise",
+      "kind": "capability_contract",
+      "path": "capabilities/image-denoise-contract.json",
+      "contentDigest": "sha256:69d938542b5535de25f24a073641535b473f940bcccfeab8e95262e7ca8b22d4",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "contract.image.edit",
+      "kind": "capability_contract",
+      "path": "capabilities/image-edit-contract.json",
+      "contentDigest": "sha256:749ee1483f197e5a11b73cbae2e6e20311f8499c7e9d6a356575ff6794ddebf1",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "contract.image.generate",
+      "kind": "capability_contract",
+      "path": "capabilities/image-generate-contract.json",
+      "contentDigest": "sha256:72f47781bd10c36283c6003cc3132fcf85d3658c9117e2b4703c4b4e605277c5",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "contract.image.light.enhance",
+      "kind": "capability_contract",
+      "path": "capabilities/image-light-enhance-contract.json",
+      "contentDigest": "sha256:28ca3b4530dea3e906278c46c26555b5cc6dfa5a5cf9aae3056e5719570bde6f",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "contract.image.object.remove",
+      "kind": "capability_contract",
+      "path": "capabilities/image-object-remove-contract.json",
+      "contentDigest": "sha256:b76f3bfd17fdf2fd4857ceac2149aa80e67beb4f710999fe524ae6fddccf5e1c",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "contract.image.palette.extract",
+      "kind": "capability_contract",
+      "path": "capabilities/image-palette-extract-contract.json",
+      "contentDigest": "sha256:9c3decb73bf3872b4581a3b025a1af843b2f870334036e2f80d7210014768626",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "contract.image.quality.assess",
+      "kind": "capability_contract",
+      "path": "capabilities/image-quality-assess-contract.json",
+      "contentDigest": "sha256:9b7128ddcdcbd73f0a7291360af72102c5ff7c65902e92571c989a74e984a7f9",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "contract.image.subject.detect",
+      "kind": "capability_contract",
+      "path": "capabilities/image-subject-detect-contract.json",
+      "contentDigest": "sha256:2c3a0832762b13ee4f5a5a0ed1c999010975af9e065e6a132ce875abd8491bf6",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "contract.image.text.extract",
+      "kind": "capability_contract",
+      "path": "capabilities/image-text-extract-contract.json",
+      "contentDigest": "sha256:03f89dc7869def6ef351da6272742ca4c39d99716b129b68b6d7c42b7a673b12",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "contract.image.upscale",
+      "kind": "capability_contract",
+      "path": "capabilities/image-upscale-contract.json",
+      "contentDigest": "sha256:d570660767b9971cda6f0b0b83407424c936a99db381d881cb424d87fb0d2f7b",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "declaration.image.background.compose",
+      "kind": "capability_declaration",
+      "path": "capabilities/image-background-compose-declaration.json",
+      "contentDigest": "sha256:092cf5e916a2db697756274da84b6e2d26b3e5fd4078c67d06d3e2dd0ea70f9c",
+      "dependsOn": ["contract.image.background.compose"]
+    },
+    {
+      "assetKey": "declaration.image.background.remove",
+      "kind": "capability_declaration",
+      "path": "capabilities/image-background-remove-declaration.json",
+      "contentDigest": "sha256:f8471f185d7b00bc480d39ca9b5e3fc9e15afb25010d82590d0a5e73b2a57602",
+      "dependsOn": ["contract.image.background.remove"]
+    },
+    {
+      "assetKey": "declaration.image.canvas.expand",
+      "kind": "capability_declaration",
+      "path": "capabilities/image-canvas-expand-declaration.json",
+      "contentDigest": "sha256:fb6bfb34c17e82969350cdbbb04eda13c3a33b0a33f8b3a6eb7d56751bf66e9f",
+      "dependsOn": ["contract.image.canvas.expand"]
+    },
+    {
+      "assetKey": "declaration.image.crop.suggest",
+      "kind": "capability_declaration",
+      "path": "capabilities/image-crop-suggest-declaration.json",
+      "contentDigest": "sha256:6ae45bf942f4992eec7bc802e6aa9664567ae2952692cbebf1365c5eec340715",
+      "dependsOn": ["contract.image.crop.suggest"]
+    },
+    {
+      "assetKey": "declaration.image.denoise",
+      "kind": "capability_declaration",
+      "path": "capabilities/image-denoise-declaration.json",
+      "contentDigest": "sha256:a3aa0f1a49acbd2a27978e369542406532a550d3a49003b9cbf430466ab91298",
+      "dependsOn": ["contract.image.denoise"]
+    },
+    {
+      "assetKey": "declaration.image.edit",
+      "kind": "capability_declaration",
+      "path": "capabilities/image-edit-declaration.json",
+      "contentDigest": "sha256:0c3c2f426332e4c25faa09fb6a2e630f268673badc40bf17f1c1478a34d1b743",
+      "dependsOn": ["contract.image.edit"]
+    },
+    {
+      "assetKey": "declaration.image.generate",
+      "kind": "capability_declaration",
+      "path": "capabilities/image-generate-declaration.json",
+      "contentDigest": "sha256:3ed32f33d7cd04a3b9e6d7f625eebc4a244cf707a7cad5e3a9d635915ce98121",
+      "dependsOn": ["contract.image.generate"]
+    },
+    {
+      "assetKey": "declaration.image.light.enhance",
+      "kind": "capability_declaration",
+      "path": "capabilities/image-light-enhance-declaration.json",
+      "contentDigest": "sha256:58d2596c9e3926ba6beb88e94402f4bef454d6323d11344ba4e0429fd8726b5f",
+      "dependsOn": ["contract.image.light.enhance"]
+    },
+    {
+      "assetKey": "declaration.image.object.remove",
+      "kind": "capability_declaration",
+      "path": "capabilities/image-object-remove-declaration.json",
+      "contentDigest": "sha256:1b7219b4c1cf1c43e651a6b3fc3c5115449277962e6124b6ddf20232dc26c307",
+      "dependsOn": ["contract.image.object.remove"]
+    },
+    {
+      "assetKey": "declaration.image.palette.extract",
+      "kind": "capability_declaration",
+      "path": "capabilities/image-palette-extract-declaration.json",
+      "contentDigest": "sha256:ae2ebbf42a1ef35e4a3478c9b0c32c1b6ca50ec4b565adfe351e755c55d1629a",
+      "dependsOn": ["contract.image.palette.extract"]
+    },
+    {
+      "assetKey": "declaration.image.quality.assess",
+      "kind": "capability_declaration",
+      "path": "capabilities/image-quality-assess-declaration.json",
+      "contentDigest": "sha256:edd478d2f09c4535d94fca5112c04a114589bb25a89adf4565d15ad134ea07b2",
+      "dependsOn": ["contract.image.quality.assess"]
+    },
+    {
+      "assetKey": "declaration.image.subject.detect",
+      "kind": "capability_declaration",
+      "path": "capabilities/image-subject-detect-declaration.json",
+      "contentDigest": "sha256:a743d9f758d8407e29b39736e1a1b2d71fbcfa0ebb6f82edf624c6e013d75b09",
+      "dependsOn": ["contract.image.subject.detect"]
+    },
+    {
+      "assetKey": "declaration.image.text.extract",
+      "kind": "capability_declaration",
+      "path": "capabilities/image-text-extract-declaration.json",
+      "contentDigest": "sha256:2e944ee80d2618cd22ef024610af309d86c0cc1a8f9f1c341f5b5f4af99a0a2e",
+      "dependsOn": ["contract.image.text.extract"]
+    },
+    {
+      "assetKey": "declaration.image.upscale",
+      "kind": "capability_declaration",
+      "path": "capabilities/image-upscale-declaration.json",
+      "contentDigest": "sha256:2c61ad5a5ae6d7a5447666045a6d5f8d1e09b7a65705375f59d4c38a6343215d",
+      "dependsOn": ["contract.image.upscale"]
+    },
+    {
+      "assetKey": "implementation.first-party-image-background-compose-deterministic-browser",
+      "kind": "capability_implementation",
+      "path": "implementations/first-party-image-background-compose-deterministic-browser.json",
+      "contentDigest": "sha256:851e6f3f5e7465221673175f753b98c5b6894ab9434b489ffd0560557854772c",
+      "dependsOn": [
+        "contract.image.background.compose",
+        "declaration.image.background.compose",
+        "adapter.browser-image-background-compose-deterministic-v1.r1"
+      ]
+    },
+    {
+      "assetKey": "implementation.first-party-image-background-remove-isnet-general-worker.r2",
+      "kind": "capability_implementation",
+      "path": "implementations/first-party-image-background-remove-isnet-general-worker-r2.json",
+      "contentDigest": "sha256:40c0ebb5e78cdf690dc261f9a6f3c93c7fdc25e7c5227cb528f4213245c9408a",
+      "dependsOn": [
+        "contract.image.background.remove",
+        "declaration.image.background.remove",
+        "adapter.first-party-image-background-remove-isnet-webp-lossless-v2.r2",
+        "model.isnet.isnet-general.r2"
+      ]
+    },
+    {
+      "assetKey": "implementation.first-party-image-canvas-expand-openai-provider",
+      "kind": "capability_implementation",
+      "path": "implementations/first-party-image-canvas-expand-openai-provider.json",
+      "contentDigest": "sha256:70d0af57abb33f6c06552af37426991b2e383575b9036f52b7409d7b1dddbc28",
+      "dependsOn": [
+        "contract.image.canvas.expand",
+        "declaration.image.canvas.expand",
+        "adapter.openai-image-canvas-expand-v1.r1"
+      ]
+    },
+    {
+      "assetKey": "implementation.first-party-image-crop-suggest-deterministic-browser",
+      "kind": "capability_implementation",
+      "path": "implementations/first-party-image-crop-suggest-deterministic-browser.json",
+      "contentDigest": "sha256:3a3bee5d74820f14f44636021df5da91a03660cdff7491b01f2644b008fc0c47",
+      "dependsOn": [
+        "contract.image.crop.suggest",
+        "declaration.image.crop.suggest",
+        "adapter.browser-image-crop-suggest-deterministic-v1.r1"
+      ]
+    },
+    {
+      "assetKey": "implementation.first-party-image-denoise-median-blend-worker",
+      "kind": "capability_implementation",
+      "path": "implementations/first-party-image-denoise-median-blend-worker.json",
+      "contentDigest": "sha256:6d61c12ddcbd49aa085a9e29ce9eaf84b6104177a6c4c750e6a5d9a6b49cc02c",
+      "dependsOn": [
+        "contract.image.denoise",
+        "declaration.image.denoise",
+        "adapter.first-party-image-denoise-median-blend-v1.r1"
+      ]
+    },
+    {
+      "assetKey": "implementation.first-party-image-light-enhance-deterministic-worker",
+      "kind": "capability_implementation",
+      "path": "implementations/first-party-image-light-enhance-deterministic-worker.json",
+      "contentDigest": "sha256:fd5d0401bc1ee803a067625af69aef65399ab4f540c44fd566ac859f2cb7f7b4",
+      "dependsOn": [
+        "contract.image.light.enhance",
+        "declaration.image.light.enhance",
+        "adapter.first-party-image-light-enhance-deterministic-v1.r1"
+      ]
+    },
+    {
+      "assetKey": "implementation.first-party-image-palette-extract-histogram-browser",
+      "kind": "capability_implementation",
+      "path": "implementations/first-party-image-palette-extract-histogram-browser.json",
+      "contentDigest": "sha256:bd7923f917b9b916b5bc7faf9e166e71a3d923cc1af0398624c481e95471e6b8",
+      "dependsOn": [
+        "contract.image.palette.extract",
+        "declaration.image.palette.extract",
+        "adapter.browser-image-palette-extract-histogram-v1.r1"
+      ]
+    },
+    {
+      "assetKey": "implementation.first-party-image-quality-assess-deterministic-browser",
+      "kind": "capability_implementation",
+      "path": "implementations/first-party-image-quality-assess-deterministic-browser.json",
+      "contentDigest": "sha256:464aaa6083a5eaafd8af5f2a7589c239929bfcc96d396023767657636fef2d04",
+      "dependsOn": [
+        "contract.image.quality.assess",
+        "declaration.image.quality.assess",
+        "adapter.browser-image-quality-assess-deterministic-v1.r1"
+      ]
+    },
+    {
+      "assetKey": "implementation.first-party-image-subject-detect-isnet-general-browser.r2",
+      "kind": "capability_implementation",
+      "path": "implementations/first-party-image-subject-detect-isnet-general-browser-r2.json",
+      "contentDigest": "sha256:48d999244c91d538443a5c7e440a5a63b687ca5923f767e6aba932514ebb7337",
+      "dependsOn": [
+        "contract.image.subject.detect",
+        "declaration.image.subject.detect",
+        "adapter.first-party-image-subject-detect-isnet-browser-v1.r2",
+        "model.isnet.isnet-general-fp16.r2"
+      ]
+    },
+    {
+      "assetKey": "implementation.first-party-image-upscale-lanczos3-worker",
+      "kind": "capability_implementation",
+      "path": "implementations/first-party-image-upscale-lanczos3-worker.json",
+      "contentDigest": "sha256:7a391b0ba1eb9563c8e88b2fd3ad3a20f94d954a422a27ff3e337e2ccbf560c5",
+      "dependsOn": [
+        "contract.image.upscale",
+        "declaration.image.upscale",
+        "adapter.kanvas-image-resize-sharp-v1.r1"
+      ]
+    },
+    {
+      "assetKey": "model.isnet.isnet-general.r2",
+      "kind": "model_resource",
+      "path": "model-resources/isnet-isnet-general-r2.json",
+      "contentDigest": "sha256:fc1bc820ab4ddb1a82ba90fc8bff3ca584f579e61ab0a7573729c2403b2879f4",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "model.isnet.isnet-general-fp16.r2",
+      "kind": "model_resource",
+      "path": "model-resources/isnet-isnet-general-fp16-r2.json",
+      "contentDigest": "sha256:40f8d4924bca7425be0f8ee741be24981960f58726ee76a5299473991e8d7f4e",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "adapter.generation-tasks-image-generate-v1.r1",
+      "kind": "runtime_adapter",
+      "path": "runtime-adapters/generation-tasks-image-generate-v1-r1.json",
+      "contentDigest": "sha256:6570c9018d58eeb0c6f622abe35998558598d7143c7877a37697b4a4bea6f08c",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "implementation.first-party-image-generate-generation-tasks-provider",
+      "kind": "capability_implementation",
+      "path": "implementations/first-party-image-generate-generation-tasks-provider.json",
+      "contentDigest": "sha256:e8a9e280f288091a1ea78934e505af7945a9ee36211c19a6c096ad5e6d709143",
+      "dependsOn": [
+        "contract.image.generate",
+        "declaration.image.generate",
+        "adapter.generation-tasks-image-generate-v1.r1"
+      ]
+    },
+    {
+      "assetKey": "binding.first-party-image-generate-generation-tasks-provider",
+      "kind": "capability_binding",
+      "path": "bindings/first-party-image-generate-generation-tasks-provider.json",
+      "contentDigest": "sha256:c409429116b0c25d38dfc0986f1df9fcd5816d5cdc7ee2793d1f640a236e1a8d",
+      "dependsOn": [
+        "implementation.first-party-image-generate-generation-tasks-provider"
+      ]
+    },
+    {
+      "assetKey": "adapter.generation-tasks-image-edit-v1.r1",
+      "kind": "runtime_adapter",
+      "path": "runtime-adapters/generation-tasks-image-edit-v1-r1.json",
+      "contentDigest": "sha256:91b18e669a99293677d79cbdf7171d49e94c8724fe58e0f5fd6bac70cadcc8e5",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "implementation.first-party-image-edit-generation-tasks-provider",
+      "kind": "capability_implementation",
+      "path": "implementations/first-party-image-edit-generation-tasks-provider.json",
+      "contentDigest": "sha256:5d6519888390c82f9c20f6109079c0c16792bfc590b271cae7646527765b0d6c",
+      "dependsOn": [
+        "contract.image.edit",
+        "declaration.image.edit",
+        "adapter.generation-tasks-image-edit-v1.r1"
+      ]
+    },
+    {
+      "assetKey": "binding.first-party-image-edit-generation-tasks-provider",
+      "kind": "capability_binding",
+      "path": "bindings/first-party-image-edit-generation-tasks-provider.json",
+      "contentDigest": "sha256:fe3d13b423beefd41eaef56be4bc8095204e891d354f5d044586b061a913e940",
+      "dependsOn": [
+        "implementation.first-party-image-edit-generation-tasks-provider"
+      ]
+    },
+    {
+      "assetKey": "adapter.generation-tasks-image-edit-v1.r2",
+      "kind": "runtime_adapter",
+      "path": "runtime-adapters/generation-tasks-image-edit-v1-r2.json",
+      "contentDigest": "sha256:63588a9f1fa8c7e8f1ebcb3080eeb85279450f7e1fe3057d22df9dd47a173ff0",
+      "dependsOn": []
+    },
+    {
+      "assetKey": "adapter.generation-tasks-image-edit-v1.r3",
+      "kind": "runtime_adapter",
+      "path": "runtime-adapters/generation-tasks-image-edit-v1-r3.json",
+      "contentDigest": "sha256:5f8464435dea421e1f82bbb6ed42a0a3646f049d38c5d09a342bbbe3ceb91451",
+      "dependsOn": []
+    }
+  ],
+  "contentDigest": "sha256:dbf0db63392d95ce08e9ddc67048606ea086741ddd6e414193d9e8ac23549e1a",
+  "recommendations": [
+    {
+      "recommendationKey": "recommendation.image.background.compose",
+      "defaultBindingAssetKey": "binding.first-party-image-background-compose-deterministic-browser"
+    },
+    {
+      "recommendationKey": "recommendation.image.background.remove",
+      "defaultBindingAssetKey": "binding.first-party-image-background-remove-isnet-general-worker.r2"
+    },
+    {
+      "recommendationKey": "recommendation.image.canvas.expand",
+      "defaultBindingAssetKey": "binding.first-party-image-canvas-expand-openai-provider"
+    },
+    {
+      "recommendationKey": "recommendation.image.crop.suggest",
+      "defaultBindingAssetKey": "binding.first-party-image-crop-suggest-deterministic-browser"
+    },
+    {
+      "recommendationKey": "recommendation.image.denoise",
+      "defaultBindingAssetKey": "binding.first-party-image-denoise-median-blend-worker"
+    },
+    {
+      "recommendationKey": "recommendation.image.edit",
+      "defaultBindingAssetKey": "binding.first-party-image-edit-generation-tasks-provider"
+    },
+    {
+      "recommendationKey": "recommendation.image.generate",
+      "defaultBindingAssetKey": "binding.first-party-image-generate-generation-tasks-provider"
+    },
+    {
+      "recommendationKey": "recommendation.image.light.enhance",
+      "defaultBindingAssetKey": "binding.first-party-image-light-enhance-deterministic-worker"
+    },
+    {
+      "recommendationKey": "recommendation.image.object.remove",
+      "defaultBindingAssetKey": "binding.first-party-image-object-remove-openai-provider"
+    },
+    {
+      "recommendationKey": "recommendation.image.palette.extract",
+      "defaultBindingAssetKey": "binding.first-party-image-palette-extract-histogram-browser"
+    },
+    {
+      "recommendationKey": "recommendation.image.quality.assess",
+      "defaultBindingAssetKey": "binding.first-party-image-quality-assess-deterministic-browser"
+    },
+    {
+      "recommendationKey": "recommendation.image.subject.detect",
+      "defaultBindingAssetKey": "binding.first-party-image-subject-detect-isnet-general-browser.r2"
+    },
+    {
+      "recommendationKey": "recommendation.image.text.extract",
+      "defaultBindingAssetKey": "binding.first-party-image-text-extract-tesseract-eng-worker.r2"
+    },
+    {
+      "recommendationKey": "recommendation.image.upscale",
+      "defaultBindingAssetKey": "binding.first-party-image-upscale-lanczos3-worker"
+    }
+  ]
+}

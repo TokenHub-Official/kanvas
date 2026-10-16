@@ -1,0 +1,17 @@
+diff --git a/lib/base/connection.js b/lib/base/connection.js
+index 19c0c6b652f7a4e1203f7d2551130b3f7d284b25..d41cab63e2aa8bcfd104c07f439d272b17931ddd 100644
+--- a/lib/base/connection.js
++++ b/lib/base/connection.js
+@@ -414,10 +414,10 @@ class BaseConnection extends EventEmitter {
+       () => {
+         secureEstablished = true;
+         if (rejectUnauthorized) {
+-          if (typeof servername === 'string' && verifyIdentity) {
++          if (typeof this.config.host === 'string' && verifyIdentity) {
+             const cert = secureSocket.getPeerCertificate(true);
+             const serverIdentityCheckError = Tls.checkServerIdentity(
+-              servername,
++              this.config.host,
+               cert
+             );
+             if (serverIdentityCheckError) {

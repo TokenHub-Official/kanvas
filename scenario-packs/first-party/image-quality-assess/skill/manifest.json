@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "skillKey": "first-party.image-quality-assess",
+  "displayName": "图片质量诊断",
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "assess",
+      "displayName": "诊断图片质量",
+      "description": "本地分析模糊、曝光、噪声、压缩与主体尺度，只返回质量事实。",
+      "category": "图片分析",
+      "outputPresentation": "board",
+      "workflowPath": "workflows/image-quality-assess.json"
+    }
+  ]
+}

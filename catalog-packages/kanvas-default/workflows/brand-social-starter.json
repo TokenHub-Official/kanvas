@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "kanvas.workflow-catalog-asset/v1",
+  "workflowKey": "brand_social_starter",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "品牌社媒视觉制作",
+      "en-US": "Brand background composition"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "将已确认的品牌 Logo 合成到纯色方形底图；这是中间图片，不包含完整海报排版。",
+      "en-US": "Compose an approved brand logo onto a square color background."
+    }
+  },
+  "category": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "品牌创作",
+      "en-US": "Brand creation"
+    }
+  },
+  "topology": {
+    "schemaVersion": 1,
+    "key": "brand_social_starter",
+    "entryNodeKey": "compose_brand_background",
+    "limits": {
+      "maxNodeRuns": 1,
+      "timeoutMs": 180000
+    },
+    "nodes": [
+      {
+        "key": "compose_brand_background",
+        "kind": "invoke",
+        "capability": {
+          "contractId": "image.background.compose",
+          "revision": 1,
+          "canonicalDigest": "sha256:47cb3d93380ec07f1d7ef997cee934b077a37635af2d7f362b0f92f970eed5cd"
+        },
+        "input": {
+          "foregroundArtifactId": {
+            "$value": {
+              "source": "workflow_input",
+              "pointer": "/logoArtifactId"
+            }
+          },
+          "background": {
+            "kind": "color",
+            "color": {
+              "$value": {
+                "source": "workflow_input",
+                "pointer": "/backgroundColor"
+              }
+            }
+          },
+          "canvas": {
+            "width": 1080,
+            "height": 1080
+          },
+          "placement": {
+            "x": 300,
+            "y": 260,
+            "width": 480,
+            "height": 480,
+            "fit": "contain",
+            "opacity": 1
+          }
+        },
+        "next": []
+      }
+    ],
+    "outputs": {
+      "schemaVersion": {
+        "required": true,
+        "value": "kanvas.brand-social-starter-result/v1"
+      },
+      "resultImageArtifactId": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "compose_brand_background",
+            "scope": "root",
+            "pointer": "/imageArtifactId"
+          }
+        }
+      },
+      "canvas": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "compose_brand_background",
+            "scope": "root",
+            "pointer": "/canvas"
+          }
+        }
+      }
+    }
+  },
+  "inputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "kanvas.brand-social-starter-input.v1",
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["headline", "logoArtifactId", "backgroundColor"],
+    "properties": {
+      "headline": {
+        "title": "主标题",
+        "description": "写下这次内容最希望用户记住的一句话。",
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 120
+      },
+      "logoArtifactId": {
+        "title": "Logo",
+        "description": "使用品牌 Logo，也可以为本次作品上传其他图片。",
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+      },
+      "backgroundColor": {
+        "title": "背景颜色",
+        "description": "从品牌颜色中选择，也可以为本次作品自定义。",
+        "type": "string",
+        "pattern": "^#[0-9A-Fa-f]{8}$",
+        "maxLength": 9
+      }
+    }
+  },
+  "outputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "kanvas.brand-social-starter-result.v1",
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["schemaVersion", "resultImageArtifactId", "canvas"],
+    "properties": {
+      "schemaVersion": {
+        "const": "kanvas.brand-social-starter-result/v1"
+      },
+      "resultImageArtifactId": {
+        "title": "品牌底图",
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+      },
+      "canvas": {
+        "type": "object",
+        "required": ["width", "height"],
+        "properties": {
+          "width": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 8192
+          },
+          "height": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 8192
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "requiredCapabilities": [
+    {
+      "key": "image.background.compose",
+      "revision": 1,
+      "canonicalDigest": "sha256:47cb3d93380ec07f1d7ef997cee934b077a37635af2d7f362b0f92f970eed5cd"
+    }
+  ],
+  "canonicalDigest": "sha256:b351a713d4243d3f49d3809c72e331731708654693bda17a0942b39e551b8d71"
+}

@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "kanvas.image-atomic-batch-b-eval/v1",
+  "corpusId": "atom-batch-02-template-v1",
+  "evidenceClass": "template",
+  "anonymized": true,
+  "samples": [
+    {
+      "id": "object-remove-001",
+      "capability": "image.object.remove",
+      "target": "provider",
+      "implementationDigest": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "categories": [
+        "texture-continuation",
+        "thin-boundary"
+      ],
+      "sourceFile": "object-remove/source-001.png",
+      "candidateFile": "object-remove/candidate-001.png",
+      "expectedFile": "object-remove/ground-truth-001.png",
+      "maskFile": "object-remove/mask-001.png",
+      "thresholds": {
+        "outsideMaskExactRatio": {
+          "operator": "eq",
+          "value": 1
+        },
+        "insideMaskPsnr": {
+          "operator": "gte",
+          "value": 24
+        },
+        "seamMae": {
+          "operator": "lte",
+          "value": 12
+        }
+      }
+    },
+    {
+      "id": "denoise-001",
+      "capability": "image.denoise",
+      "target": "worker",
+      "implementationDigest": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "categories": [
+        "text-ui",
+        "alpha"
+      ],
+      "sourceFile": "denoise/noisy-001.png",
+      "candidateFile": "denoise/candidate-001.png",
+      "expectedFile": "denoise/clean-001.png",
+      "thresholds": {
+        "psnrGain": {
+          "operator": "gte",
+          "value": 0
+        },
+        "edgeRetention": {
+          "operator": "gte",
+          "value": 0.85
+        },
+        "alphaExactRatio": {
+          "operator": "eq",
+          "value": 1
+        }
+      }
+    },
+    {
+      "id": "light-enhance-001",
+      "capability": "image.light.enhance",
+      "target": "browser",
+      "implementationDigest": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "categories": [
+        "under-exposure",
+        "product-color"
+      ],
+      "sourceFile": "light-enhance/source-001.png",
+      "candidateFile": "light-enhance/candidate-001.png",
+      "expectedFile": "light-enhance/ground-truth-001.png",
+      "thresholds": {
+        "maeImprovement": {
+          "operator": "gte",
+          "value": 0
+        },
+        "luminanceMae": {
+          "operator": "lte",
+          "value": 15
+        },
+        "clippedRatio": {
+          "operator": "lte",
+          "value": 0.02
+        },
+        "alphaExactRatio": {
+          "operator": "eq",
+          "value": 1
+        }
+      }
+    },
+    {
+      "id": "text-extract-001",
+      "capability": "image.text.extract",
+      "target": "worker",
+      "implementationDigest": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "categories": [
+        "multilingual",
+        "small-type"
+      ],
+      "candidateFile": "text-extract/candidate-001.json",
+      "expectedFile": "text-extract/ground-truth-001.json",
+      "thresholds": {
+        "characterErrorRate": {
+          "operator": "lte",
+          "value": 0.05
+        },
+        "wordErrorRate": {
+          "operator": "lte",
+          "value": 0.1
+        },
+        "meanPolygonIou": {
+          "operator": "gte",
+          "value": 0.75
+        },
+        "confidenceBrierScore": {
+          "operator": "lte",
+          "value": 0.15
+        }
+      }
+    }
+  ]
+}

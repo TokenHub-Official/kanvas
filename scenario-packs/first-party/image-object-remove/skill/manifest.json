@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "skillKey": "first-party.image-object-remove",
+  "displayName": "物体移除",
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "remove",
+      "displayName": "移除物体",
+      "description": "根据显式区域 Mask 生成修复结果，同时保留规范 Removed Region Mask。",
+      "category": "清理与隔离",
+      "outputPresentation": "board",
+      "workflowPath": "workflows/image-object-remove.json"
+    }
+  ]
+}

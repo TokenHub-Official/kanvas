@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "skillKey": "first-party.skill-creator",
+  "displayName": "创建图片工作 Skill",
+  "nonProduction": false,
+  "agent": {
+    "surfaceKinds": ["agent_workspace"],
+    "toolFamilies": ["query", "skill_command"],
+    "summary": "把当前会话中已经产生真实图片结果的稳定做法整理为可编辑 Skill Draft，不跨会话检索，也不自动发布。",
+    "exampleRequests": [
+      "把刚才制作这张海报的方法保存成 Skill",
+      "将当前会话跑通的图片流程整理成可复用技能"
+    ],
+    "instructionResourcePath": "SKILL.md"
+  },
+  "entrypoints": []
+}

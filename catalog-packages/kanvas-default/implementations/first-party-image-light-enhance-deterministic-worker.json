@@ -1,0 +1,138 @@
+{
+  "schemaVersion": "kanvas.capability-implementation/v1",
+  "implementationKey": "first-party.image.light-enhance.deterministic.worker",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "光线增强 · Worker 运行",
+      "en-US": "Light enhance · Worker runtime"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "通过Worker 运行提供光线增强，上层只依赖固定公开契约。",
+      "en-US": "Provides Light enhance through Worker runtime behind the stable public contract."
+    }
+  },
+  "contract": {
+    "key": "image.light.enhance",
+    "revision": 1,
+    "canonicalDigest": "sha256:28ca3b4530dea3e906278c46c26555b5cc6dfa5a5cf9aae3056e5719570bde6f"
+  },
+  "adapter": {
+    "adapterKey": "first-party.image.light-enhance.deterministic.v1",
+    "revision": 1,
+    "canonicalDigest": "sha256:bfc743592a2b40581887319fc2f74669ed6ca0870c37f6ad4b5abf8c28a13973"
+  },
+  "source": {
+    "kind": "plugin",
+    "plugin": {
+      "key": "kanvas.worker-image-runtime",
+      "revision": 1,
+      "canonicalDigest": "sha256:7138faffa143c1ff78f24a12fadf21c72c7c448c50d1ddd1e13b97501ba36c5f"
+    }
+  },
+  "configuration": {
+    "method": "deterministic_tone_curve",
+    "generative": false,
+    "outputFormat": "png",
+    "sharpVersion": "0.35.3",
+    "alphaPreserved": true,
+    "maximumSourcePixels": 32000000
+  },
+  "inputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "input",
+    "expression": {
+      "op": "source",
+      "root": "input",
+      "pointer": ""
+    }
+  },
+  "outputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "output",
+    "expression": {
+      "op": "source",
+      "root": "result",
+      "pointer": ""
+    }
+  },
+  "fixtures": [
+    {
+      "name": "default contract mapping",
+      "capabilityInput": {
+        "tint": 0,
+        "shadows": 0,
+        "highlights": 0,
+        "temperature": 0,
+        "exposureStops": 0,
+        "sourceArtifactId": "01K00000000000000000000001"
+      },
+      "configuration": {
+        "method": "deterministic_tone_curve",
+        "generative": false,
+        "outputFormat": "png",
+        "sharpVersion": "0.35.3",
+        "alphaPreserved": true,
+        "maximumSourcePixels": 32000000
+      },
+      "expectedAdapterInput": {
+        "tint": 0,
+        "shadows": 0,
+        "highlights": 0,
+        "temperature": 0,
+        "exposureStops": 0,
+        "sourceArtifactId": "01K00000000000000000000001"
+      },
+      "adapterResult": {
+        "parameters": {
+          "tint": -1,
+          "shadows": -1,
+          "highlights": -1,
+          "temperature": -1,
+          "exposureStops": -2
+        },
+        "schemaVersion": "kanvas.image-light-enhance-result/v1",
+        "qualitySignals": {
+          "method": "deterministic_tone_curve",
+          "generative": false,
+          "schemaVersion": "kanvas.image-light-enhance-quality/v1",
+          "alphaPreserved": true,
+          "clippedLowRatio": 0,
+          "clippedHighRatio": 0
+        },
+        "imageArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "sample",
+          "outputIndex": 0
+        }
+      },
+      "expectedCapabilityOutput": {
+        "parameters": {
+          "tint": -1,
+          "shadows": -1,
+          "highlights": -1,
+          "temperature": -1,
+          "exposureStops": -2
+        },
+        "schemaVersion": "kanvas.image-light-enhance-result/v1",
+        "qualitySignals": {
+          "method": "deterministic_tone_curve",
+          "generative": false,
+          "schemaVersion": "kanvas.image-light-enhance-quality/v1",
+          "alphaPreserved": true,
+          "clippedLowRatio": 0,
+          "clippedHighRatio": 0
+        },
+        "imageArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "sample",
+          "outputIndex": 0
+        }
+      }
+    }
+  ]
+}

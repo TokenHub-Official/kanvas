@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "skillKey": "first-party.single-image-cutout-canary",
+  "displayName": "Single-image cutout deterministic canary",
+  "nonProduction": true,
+  "entrypoints": [
+    {
+      "entrypointKey": "generate",
+      "displayName": "单图透明底验证",
+      "description": "验证动态制作方案、真实图片字节和结果确认链路。",
+      "category": "开发验证",
+      "outputPresentation": "single_review",
+      "inputUiSchema": {
+        "schemaVersion": "kanvas.entrypoint-ui/v0",
+        "source": {
+          "kind": "single_image",
+          "label": "原始图片",
+          "parameterKey": "sourceArtifactId",
+          "accept": [
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+          ]
+        }
+      },
+      "workflowPath": "workflows/single-image-cutout.json"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "key": "image_light_enhance",
+  "entryNodeKey": "enhance",
+  "limits": {
+    "maxNodeRuns": 1,
+    "timeoutMs": 180000
+  },
+  "nodes": [
+    {
+      "key": "enhance",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "image.light.enhance",
+        "revision": 1,
+        "canonicalDigest": "sha256:b98b1d0d90e0f1b4124ee29c2343030a5d807f6ec78675495bfc6665003a8b80"
+      },
+      "input": {
+        "$value": {
+          "source": "workflow_input",
+          "pointer": ""
+        }
+      },
+      "next": []
+    }
+  ],
+  "outputs": {
+    "schemaVersion": {
+      "required": true,
+      "value": "kanvas.image-light-enhance-result/v1"
+    },
+    "imageArtifactId": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "enhance",
+          "scope": "root",
+          "pointer": "/imageArtifactId"
+        }
+      }
+    },
+    "parameters": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "enhance",
+          "scope": "root",
+          "pointer": "/parameters"
+        }
+      }
+    },
+    "qualitySignals": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "enhance",
+          "scope": "root",
+          "pointer": "/qualitySignals"
+        }
+      }
+    }
+  }
+}

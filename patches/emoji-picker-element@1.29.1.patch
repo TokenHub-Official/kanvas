@@ -1,0 +1,12 @@
+diff --git a/database.js b/database.js
+--- a/database.js
++++ b/database.js
+@@ -209,1 +209,1 @@
+-const MIN_SEARCH_TEXT_LENGTH = 2;
++const MIN_SEARCH_TEXT_LENGTH = 1;
+diff --git a/picker.js b/picker.js
+--- a/picker.js
++++ b/picker.js
+@@ -19,1 +19,1 @@
+-const MIN_SEARCH_TEXT_LENGTH = 2;
++const MIN_SEARCH_TEXT_LENGTH = 1;

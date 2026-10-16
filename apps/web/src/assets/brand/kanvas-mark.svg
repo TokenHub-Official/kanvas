@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
+  <defs>
+    <clipPath id="mark-clip">
+      <rect width="28" height="28" rx="9" />
+    </clipPath>
+  </defs>
+  <g clip-path="url(#mark-clip)" transform="rotate(-2 14 14)">
+    <rect width="28" height="28" rx="9" fill="#3048f5" />
+    <circle cx="24" cy="5" r="9" fill="#d4ff4f" />
+    <rect x="5" y="17" width="17" height="6" rx="3" fill="#fff" transform="rotate(-36 13.5 20)" />
+  </g>
+</svg>

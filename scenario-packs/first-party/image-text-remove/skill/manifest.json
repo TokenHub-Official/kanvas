@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "skillKey": "first-party.image-text-remove",
+  "displayName": "移除文字",
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "remove-text",
+      "displayName": "移除文字",
+      "description": "先提取文字 Polygon，再将显式区域交给物体移除能力生成修复结果。",
+      "category": "清理与隔离",
+      "outputPresentation": "board",
+      "workflowPath": "workflows/image-text-remove.json"
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "kanvas.skill-catalog-asset/v1",
+  "skillKey": "first-party.image-subject-detect",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "图片主体检测",
+      "en-US": "Subject detection"
+    }
+  },
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "detect-subjects",
+      "displayName": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "检测主体",
+          "en-US": "Subject detection"
+        }
+      },
+      "description": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "识别图片中的视觉主体候选并返回边界、置信度与可审查蒙版，不修改原图。",
+          "en-US": "Detect visual subjects, bounds, confidence, and a reviewable mask."
+        }
+      },
+      "category": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "图片分析",
+          "en-US": "Image analysis"
+        }
+      },
+      "outputPresentation": "board",
+      "inputUiSchema": {
+        "schemaVersion": "kanvas.entrypoint-ui/v0",
+        "canvasTool": {
+          "surface": "canvas.image",
+          "operationId": "image.subject.detect",
+          "order": 110,
+          "costNotice": "浏览器本地模型优先，不产生外部模型调用费用；浏览器不可用时固定回退 Worker。",
+          "source": {
+            "parameterKey": "sourceArtifactId",
+            "value": "artifact_id"
+          },
+          "parameters": [],
+          "result": {
+            "artifactPath": ["maskArtifactId"],
+            "maskArtifactPath": ["maskArtifactId"],
+            "outputModes": ["add_node", "asset_only"]
+          }
+        }
+      },
+      "inputUiSchemaByLocale": {
+        "zh-CN": {
+          "schemaVersion": "kanvas.entrypoint-ui/v0",
+          "canvasTool": {
+            "surface": "canvas.image",
+            "operationId": "image.subject.detect",
+            "order": 110,
+            "costNotice": "浏览器本地模型优先，不产生外部模型调用费用；浏览器不可用时固定回退 Worker。",
+            "source": {
+              "parameterKey": "sourceArtifactId",
+              "value": "artifact_id"
+            },
+            "parameters": [],
+            "result": {
+              "artifactPath": ["maskArtifactId"],
+              "maskArtifactPath": ["maskArtifactId"],
+              "outputModes": ["add_node", "asset_only"]
+            }
+          }
+        },
+        "en-US": {
+          "schemaVersion": "kanvas.entrypoint-ui/v0",
+          "canvasTool": {
+            "surface": "canvas.image",
+            "operationId": "image.subject.detect",
+            "order": 110,
+            "costNotice": "Execution follows the configured capability priority and may use local compute or a model service.",
+            "source": {
+              "parameterKey": "sourceArtifactId",
+              "value": "artifact_id"
+            },
+            "parameters": [],
+            "result": {
+              "artifactPath": ["maskArtifactId"],
+              "maskArtifactPath": ["maskArtifactId"],
+              "outputModes": ["add_node", "asset_only"]
+            }
+          }
+        }
+      },
+      "workflow": {
+        "key": "image_subject_detect",
+        "revision": 1,
+        "canonicalDigest": "sha256:4b95ef494cec44a1cbcda296ad739da05c5acf6e3feb3f20c3f93184eb2ae7f2"
+      }
+    }
+  ]
+}

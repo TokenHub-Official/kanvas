@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "packId": "first-party.image-background-compose",
+  "displayName": "Image background compose",
+  "workflows": [
+    {
+      "path": "workflows/image-background-compose.json"
+    }
+  ],
+  "skill": {
+    "path": "skill/manifest.json"
+  },
+  "capabilities": [
+    {
+      "path": "capabilities/image-background-compose.json"
+    }
+  ],
+  "requiredCapabilities": [
+    {
+      "contractId": "image.background.compose",
+      "revision": 1,
+      "canonicalDigest": "sha256:12ad204a0ae4b2537d3103ffa8d9a4c3878ae774657ac99d823d75c1d6d040f9"
+    }
+  ]
+}

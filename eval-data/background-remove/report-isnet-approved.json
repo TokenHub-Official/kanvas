@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "kanvas.background-remove-eval-report/v1",
+  "corpusId": "atom-01-public-candidate-2026-08",
+  "generatedAt": "2026-08-04T03:03:28.767Z",
+  "designerBaseline": {
+    "directUseCount": 26,
+    "maskRepairCount": 0,
+    "failOrFallbackCount": 4,
+    "totalManualMinutes": 0
+  },
+  "browser": {
+    "target": "browser",
+    "implementationDigest": "sha256:b6311c4fd0aab668ec707812dd0cdec65504c3787f5b86c23695f256c431ca45",
+    "modelDigest": "sha256:2eb4b5dda7ec41c617e59706e5aafa1f978c9a5f983d2518d9f0ae4d6eb04f20",
+    "sampleCount": 30,
+    "succeededCount": 29,
+    "failedCount": 1,
+    "fallbackCount": 0,
+    "failureRate": 0.03333333333333333,
+    "fallbackRate": 0,
+    "meanForegroundIou": 0.8150220121349526,
+    "meanBoundaryF1": 0.7148849753954455,
+    "p95LatencyMs": 11935.5,
+    "maximumPeakMemoryBytes": 197941212
+  },
+  "worker": {
+    "target": "worker",
+    "implementationDigest": "sha256:a7f9573a94de41247d12e8452eeba86f58c3eac11820f3367c87c4ad866e87d0",
+    "modelDigest": "sha256:cc2c9f5c1751b9737cb81e708ff0c5e9542c2205daed22418a4fd2ab5d4c481a",
+    "sampleCount": 30,
+    "succeededCount": 29,
+    "failedCount": 1,
+    "fallbackCount": 0,
+    "failureRate": 0.03333333333333333,
+    "fallbackRate": 0,
+    "meanForegroundIou": 0.8094285967422384,
+    "meanBoundaryF1": 0.7078342167493156,
+    "p95LatencyMs": 767.9036660000002,
+    "maximumPeakMemoryBytes": 1582956544
+  },
+  "acceptance": {
+    "status": "passed",
+    "approvedBy": "Kanvas product owner review",
+    "approvedAt": "2026-08-04T03:00:26.649Z",
+    "failures": []
+  }
+}

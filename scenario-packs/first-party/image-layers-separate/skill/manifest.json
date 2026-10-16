@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "skillKey": "first-party.image-layers-separate",
+  "displayName": "图片分层",
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "separate",
+      "displayName": "分析并分离图层",
+      "description": "组合主体检测、透明前景提取和 OCR，返回可审查的前景、Mask、主体与文字区域。",
+      "category": "图片分析",
+      "outputPresentation": "board",
+      "workflowPath": "workflows/image-layers-separate.json"
+    }
+  ]
+}

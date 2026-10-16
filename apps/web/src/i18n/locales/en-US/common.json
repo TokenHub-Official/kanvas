@@ -1,0 +1,143 @@
+{
+  "skipToContent": "Skip to main content",
+  "account": "Signed in as {{name}}",
+  "back": "Back",
+  "cancel": "Cancel",
+  "checkConnection": "Check your connection and try again.",
+  "returnHome": "Return to Kanvas",
+  "retry": "Reconnect",
+  "switchAccount": "Use another account",
+  "switchingAccount": "Switching account",
+  "feedback": {
+    "loading": "Preparing workspace",
+    "retrying": "Retrying"
+  },
+  "appShell": {
+    "returnToWorkbench": "Back to conversations",
+    "nav": {
+      "primary": "Primary navigation",
+      "workbench": "Conversations",
+      "agents": "Agents",
+      "skills": "Skills",
+      "assets": "Assets",
+      "brand": "Brand",
+      "create": "Create",
+      "settings": "Team settings",
+      "tools": "Tools",
+      "libraries": "Resource libraries"
+    },
+    "roles": {
+      "owner": "Owner",
+      "admin": "Administrator",
+      "editor": "Design member",
+      "operator": "Operator",
+      "reviewer": "Review member",
+      "viewer": "View member"
+    },
+    "workspace": {
+      "trigger": "Switch workspace, currently {{name}}",
+      "drawerTitle": "Workspace",
+      "settings": "Team settings",
+      "switch": "Switch workspace",
+      "searchLabel": "Search workspaces",
+      "searchPlaceholder": "Search name or organization",
+      "noResults": "No matching workspace"
+    },
+    "account": {
+      "open": "Open {{name}}'s account menu",
+      "language": "Language",
+      "languages": {
+        "zh-CN": "Simplified Chinese",
+        "en-US": "English"
+      },
+      "signOut": "Sign out",
+      "signingOut": "Signing out",
+      "signOutErrorTitle": "Unable to sign out",
+      "signOutErrorDescription": "Your current session is still active. Check your connection and try again."
+    },
+    "createDialog": {
+      "title": "Start creating",
+      "openImage": "Open image",
+      "blankCanvas": "Blank canvas",
+      "readOnly": "This workspace is read-only, so new content cannot be created."
+    },
+    "boundary": {
+      "reconnect": "Reconnect",
+      "starting": "Kanvas is starting. This page will continue automatically.",
+      "loadErrorTitle": "Unable to load workspaces",
+      "loadErrorDescription": "Check your connection and try again. Work in progress will not be interrupted.",
+      "noAccessTitle": "You cannot access this workspace",
+      "noAccessDescription": "Your access may have changed. Return to the entry point to choose from the workspaces currently available to you.",
+      "chooseWorkspace": "Choose an available workspace"
+    }
+  },
+  "opening": {
+    "agent": "Opening Agent",
+    "asset": "Opening asset",
+    "assets": "Opening asset library",
+    "brand": "Opening brand",
+    "execution": "Opening execution routes",
+    "creation": "Opening creation",
+    "invite": "Opening team invitation",
+    "operations": "Opening run diagnostics",
+    "people": "Opening people management",
+    "providers": "Opening model services",
+    "settings": "Opening team settings",
+    "setup": "Opening setup",
+    "skills": "Opening team capabilities",
+    "work": "Opening production work",
+    "workflowEditor": "Opening workflow editor",
+    "workflowTemplate": "Opening template",
+    "workflowTemplates": "Opening workflow templates",
+    "workflows": "Opening workflows",
+    "workspace": "Opening workspace"
+  },
+  "dialog": {
+    "close": "Close dialog",
+    "closeWhenReady": "The dialog can be closed when the operation finishes"
+  },
+  "network": {
+    "offlineTitle": "You are offline",
+    "offlineDescription": "Online actions are paused. Keep this page open and continue when the connection returns.",
+    "restoredTitle": "Connection restored",
+    "restoredDescription": "Pages and actions that need a connection can now continue."
+  },
+  "coverPicker": {
+    "title": "Choose cover",
+    "apply": "Use cover",
+    "cancel": "Cancel",
+    "search": "Search images",
+    "upload": "Upload image",
+    "retry": "Retry",
+    "remove": "Remove cover",
+    "selected": "One image selected",
+    "noCover": "No cover",
+    "empty": "No images available",
+    "noMatches": "No matching images",
+    "uploadError": "Image upload failed. Please retry.",
+    "invalidImage": "This image could not be read. Choose a valid PNG, JPEG or WebP image.",
+    "tooLarge": "This image exceeds the upload limit. Choose a smaller image.",
+    "permissionError": "You do not have upload permission. Check your sign-in or contact an administrator."
+  },
+  "visualPicker": {
+    "search": "Search image names",
+    "selected": "Selected: {{name}}",
+    "choose": "Choose an image",
+    "locate": "Locate selected",
+    "retry": "Retry",
+    "loading": "Loading images",
+    "items": "Image assets",
+    "preview": "Enlarge {{name}}",
+    "empty": "No images available",
+    "noResults": "No matching images",
+    "clearSearch": "Clear search",
+    "moreFailed": "More images could not load. Existing images remain available.",
+    "loadMore": "Load more",
+    "closePreview": "Close preview",
+    "applyFailed": "Could not apply. Retry or choose another image.",
+    "unavailable": "This asset is unavailable or access was removed. Choose another image.",
+    "previewBackground": "Preview background",
+    "light": "Light",
+    "dark": "Dark"
+  }
+}

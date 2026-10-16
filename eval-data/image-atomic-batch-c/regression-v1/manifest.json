@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "kanvas.image-atomic-batch-c-eval/v1",
+  "corpusId": "atom-batch-03-metric-regression-v1",
+  "evidenceClass": "metric_regression",
+  "anonymized": true,
+  "samples": [
+    {
+      "id": "crop-off-center-subject",
+      "capability": "image.crop.suggest",
+      "target": "browser",
+      "implementationDigest": "sha256:d28502069cb368e73e92600aca2dc86639fe36894c0a3b20cd765b2cc1e8c351",
+      "categories": [
+        "off-center-subject",
+        "square"
+      ],
+      "candidateFile": "crop/candidate.json",
+      "expectedFile": "crop/ground-truth.json",
+      "thresholds": {
+        "meanTopOneIou": {
+          "operator": "eq",
+          "value": 1
+        },
+        "topThreeHitRate": {
+          "operator": "eq",
+          "value": 1
+        },
+        "meanSubjectRetention": {
+          "operator": "eq",
+          "value": 1
+        }
+      }
+    },
+    {
+      "id": "palette-alpha-and-accent",
+      "capability": "image.palette.extract",
+      "target": "browser",
+      "implementationDigest": "sha256:a7328b321ee171692c912b216754b9c8db4a151b3476f3edfc468c094073b614",
+      "categories": [
+        "dominant-accent",
+        "transparency"
+      ],
+      "candidateFile": "palette/candidate.json",
+      "expectedFile": "palette/ground-truth.json",
+      "thresholds": {
+        "weightedColorDistance": {
+          "operator": "eq",
+          "value": 0
+        },
+        "weightedProportionError": {
+          "operator": "eq",
+          "value": 0
+        },
+        "paletteCoverage": {
+          "operator": "eq",
+          "value": 1
+        }
+      }
+    },
+    {
+      "id": "quality-controlled-source",
+      "capability": "image.quality.assess",
+      "target": "browser",
+      "implementationDigest": "sha256:1bb161eeaac77c23da04d3f67e2dd21238e88d83725909ebb6861ca4e91a8433",
+      "categories": [
+        "controlled-source",
+        "subject-scale"
+      ],
+      "candidateFile": "quality/candidate.json",
+      "expectedFile": "quality/ground-truth.json",
+      "thresholds": {
+        "scoreMae": {
+          "operator": "eq",
+          "value": 0
+        },
+        "findingF1": {
+          "operator": "eq",
+          "value": 1
+        },
+        "usabilityMatch": {
+          "operator": "eq",
+          "value": 1
+        }
+      }
+    },
+    {
+      "id": "compose-partial-alpha",
+      "capability": "image.background.compose",
+      "target": "browser",
+      "implementationDigest": "sha256:13b7f5179254b8e9d888badf31bbae67d0e5ed8fa565fbc5bd45a1cc05f36abb",
+      "categories": [
+        "partial-alpha",
+        "contain"
+      ],
+      "candidateFile": "compose/candidate.png",
+      "expectedFile": "compose/ground-truth.png",
+      "candidateMaskFile": "compose/candidate-mask.png",
+      "expectedMaskFile": "compose/ground-truth-mask.png",
+      "thresholds": {
+        "pixelExactRatio": {
+          "operator": "eq",
+          "value": 1
+        },
+        "channelMae": {
+          "operator": "eq",
+          "value": 0
+        },
+        "alphaExactRatio": {
+          "operator": "eq",
+          "value": 1
+        },
+        "compositionMaskIou": {
+          "operator": "eq",
+          "value": 1
+        }
+      }
+    }
+  ]
+}

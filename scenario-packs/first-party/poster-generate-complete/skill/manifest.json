@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "skillKey": "first-party.poster-generate-complete",
+  "displayName": "完整海报生成",
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "generate",
+      "displayName": "完整海报生成",
+      "description": "可选参考图；有参考图时进入图片编辑，没有参考图时直接生成，最终返回统一结果图。",
+      "category": "海报制作",
+      "outputPresentation": "single_review",
+      "workflowPath": "workflows/poster-generate-complete.json"
+    }
+  ]
+}

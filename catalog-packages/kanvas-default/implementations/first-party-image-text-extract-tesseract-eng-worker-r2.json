@@ -1,0 +1,134 @@
+{
+  "schemaVersion": "kanvas.capability-implementation/v1",
+  "implementationKey": "first-party.image.text-extract.tesseract-eng.worker",
+  "revision": 2,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "文字提取 · 英文 Worker",
+      "en-US": "Text extraction · English Worker"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "使用已导入的英文语言模型执行离线文字识别。",
+      "en-US": "Runs offline text recognition with the imported English language model."
+    }
+  },
+  "contract": {
+    "key": "image.text.extract",
+    "revision": 1,
+    "canonicalDigest": "sha256:03f89dc7869def6ef351da6272742ca4c39d99716b129b68b6d7c42b7a673b12"
+  },
+  "adapter": {
+    "adapterKey": "first-party.image.text-extract.tesseract.v1",
+    "revision": 2,
+    "canonicalDigest": "sha256:4b3c90579f40bb379ffc5db2bd42977227df85a3dc68e5ec8fe01b8bbde5c935"
+  },
+  "source": {
+    "kind": "model_resource",
+    "resource": {
+      "key": "tesseract.tessdata-fast-eng",
+      "revision": 1,
+      "canonicalDigest": "sha256:812de0d025ac4742dc37cd99faace30cf38255ddfa0d6b8a054268db18b9833e"
+    }
+  },
+  "configuration": {
+    "model": {
+      "family": "tesseract",
+      "variant": "tessdata-fast-eng",
+      "languageTag": "en",
+      "modelCode": "eng",
+      "sha256": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
+      "license": "Apache-2.0"
+    },
+    "engineVersion": "7.0.0",
+    "maximumSourceBytes": 67108864,
+    "maximumSourcePixels": 32000000
+  },
+  "inputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "input",
+    "expression": {
+      "op": "source",
+      "root": "input",
+      "pointer": ""
+    }
+  },
+  "outputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "output",
+    "expression": {
+      "op": "source",
+      "root": "result",
+      "pointer": ""
+    }
+  },
+  "fixtures": [
+    {
+      "name": "English line extraction",
+      "capabilityInput": {
+        "languages": ["en"],
+        "granularity": "line",
+        "sourceArtifactId": "01K00000000000000000000001",
+        "minimumConfidence": 0.5
+      },
+      "configuration": {
+        "model": {
+          "family": "tesseract",
+          "variant": "tessdata-fast-eng",
+          "languageTag": "en",
+          "modelCode": "eng",
+          "sha256": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
+          "license": "Apache-2.0"
+        },
+        "engineVersion": "7.0.0",
+        "maximumSourceBytes": 67108864,
+        "maximumSourcePixels": 32000000
+      },
+      "expectedAdapterInput": {
+        "languages": ["en"],
+        "granularity": "line",
+        "sourceArtifactId": "01K00000000000000000000001",
+        "minimumConfidence": 0.5
+      },
+      "adapterResult": {
+        "schemaVersion": "kanvas.image-text-extract-result/v1",
+        "sourceArtifactId": "01K00000000000000000000001",
+        "sourceWidth": 1,
+        "sourceHeight": 1,
+        "text": "Sample",
+        "language": "en",
+        "direction": "ltr",
+        "confidence": 1,
+        "blocks": [],
+        "regions": [],
+        "qualitySignals": {
+          "schemaVersion": "kanvas.image-text-extract-quality/v1",
+          "method": "tesseract_wasm_lstm",
+          "generative": false,
+          "lowConfidence": false
+        }
+      },
+      "expectedCapabilityOutput": {
+        "schemaVersion": "kanvas.image-text-extract-result/v1",
+        "sourceArtifactId": "01K00000000000000000000001",
+        "sourceWidth": 1,
+        "sourceHeight": 1,
+        "text": "Sample",
+        "language": "en",
+        "direction": "ltr",
+        "confidence": 1,
+        "blocks": [],
+        "regions": [],
+        "qualitySignals": {
+          "schemaVersion": "kanvas.image-text-extract-quality/v1",
+          "method": "tesseract_wasm_lstm",
+          "generative": false,
+          "lowConfidence": false
+        }
+      }
+    }
+  ]
+}

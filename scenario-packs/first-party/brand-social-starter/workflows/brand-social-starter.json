@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "key": "brand_social_starter",
+  "entryNodeKey": "compose_brand_background",
+  "limits": {
+    "maxNodeRuns": 1,
+    "timeoutMs": 180000
+  },
+  "nodes": [
+    {
+      "key": "compose_brand_background",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "image.background.compose",
+        "revision": 1,
+        "canonicalDigest": "sha256:8592a0c5793194f8824f6a6d2a907bdd4e72d65b7ef761920302e0907c637b99"
+      },
+      "input": {
+        "foregroundArtifactId": {
+          "$value": {
+            "source": "workflow_input",
+            "pointer": "/logoArtifactId"
+          }
+        },
+        "background": {
+          "kind": "color",
+          "color": {
+            "$value": {
+              "source": "workflow_input",
+              "pointer": "/backgroundColor"
+            }
+          }
+        },
+        "canvas": {
+          "width": 1080,
+          "height": 1080
+        },
+        "placement": {
+          "x": 300,
+          "y": 260,
+          "width": 480,
+          "height": 480,
+          "fit": "contain",
+          "opacity": 1
+        }
+      },
+      "next": []
+    }
+  ],
+  "outputs": {
+    "schemaVersion": {
+      "required": true,
+      "value": "kanvas.brand-social-starter-result/v1"
+    },
+    "resultImageArtifactId": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "compose_brand_background",
+          "scope": "root",
+          "pointer": "/imageArtifactId"
+        }
+      }
+    },
+    "canvas": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "compose_brand_background",
+          "scope": "root",
+          "pointer": "/canvas"
+        }
+      }
+    }
+  }
+}

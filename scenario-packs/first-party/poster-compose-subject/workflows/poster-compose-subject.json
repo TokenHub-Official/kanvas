@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "key": "poster_compose_subject",
+  "entryNodeKey": "generate_subject",
+  "limits": {
+    "maxNodeRuns": 3,
+    "timeoutMs": 600000
+  },
+  "nodes": [
+    {
+      "key": "generate_subject",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "image.generate",
+        "revision": 2,
+        "canonicalDigest": "sha256:ab27d66ae9e0ce75be370628477f388468a8330b2c7e864be026cf01b7851314"
+      },
+      "input": {
+        "prompt": {
+          "$string": [
+            "生成单一、边缘清晰、适合抠图和海报合成的主体。主体描述：",
+            {
+              "$value": {
+                "source": "workflow_input",
+                "pointer": "/subjectPrompt"
+              }
+            }
+          ]
+        }
+      },
+      "next": [
+        "remove_subject_background"
+      ]
+    },
+    {
+      "key": "remove_subject_background",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "image.background.remove",
+        "revision": 2,
+        "canonicalDigest": "sha256:225c8e45a50157aa201e94119857549a8eaa7c780c6635ff40f28d14c9811024"
+      },
+      "input": {
+        "sourceArtifactId": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "generate_subject",
+            "scope": "root",
+            "pointer": "/imageArtifactId"
+          }
+        },
+        "refinement": "fine"
+      },
+      "next": [
+        "compose_poster"
+      ]
+    },
+    {
+      "key": "compose_poster",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "image.background.compose",
+        "revision": 1,
+        "canonicalDigest": "sha256:12ad204a0ae4b2537d3103ffa8d9a4c3878ae774657ac99d823d75c1d6d040f9"
+      },
+      "input": {
+        "foregroundArtifactId": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "remove_subject_background",
+            "scope": "root",
+            "pointer": "/foregroundArtifactId"
+          }
+        },
+        "maskArtifactId": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "remove_subject_background",
+            "scope": "root",
+            "pointer": "/maskArtifactId"
+          }
+        },
+        "background": {
+          "kind": "artifact",
+          "artifactId": {
+            "$value": {
+              "source": "workflow_input",
+              "pointer": "/backgroundArtifactId"
+            }
+          },
+          "fit": "cover"
+        },
+        "canvas": {
+          "width": 1024,
+          "height": 1024
+        },
+        "placement": {
+          "x": 128,
+          "y": 128,
+          "width": 768,
+          "height": 768,
+          "fit": "contain",
+          "opacity": 1
+        }
+      },
+      "next": []
+    }
+  ],
+  "outputs": {
+    "schemaVersion": {
+      "required": true,
+      "value": "kanvas.poster-compose-subject-result/v1"
+    },
+    "resultImageArtifactId": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "compose_poster",
+          "scope": "root",
+          "pointer": "/imageArtifactId"
+        }
+      }
+    }
+  }
+}

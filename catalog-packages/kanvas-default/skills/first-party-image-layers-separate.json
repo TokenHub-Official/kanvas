@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "kanvas.skill-catalog-asset/v1",
+  "skillKey": "first-party.image-layers-separate",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "图片分层",
+      "en-US": "Layer separation"
+    }
+  },
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "separate",
+      "displayName": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "分析并分离图层",
+          "en-US": "Layer separation"
+        }
+      },
+      "description": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "组合主体检测、透明前景提取和 OCR，返回可审查的前景、Mask、主体与文字区域。",
+          "en-US": "Combine subject detection, foreground extraction, and OCR into reviewable layers and regions."
+        }
+      },
+      "category": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "图片分析",
+          "en-US": "Image analysis"
+        }
+      },
+      "outputPresentation": "board",
+      "workflow": {
+        "key": "image_layers_separate",
+        "revision": 1,
+        "canonicalDigest": "sha256:572e550f8e5fcd135913fc91ebb3144087f33c7f9dc4c9c137b0d3b40f70d378"
+      }
+    }
+  ]
+}

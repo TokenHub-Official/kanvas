@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "packId": "first-party.image-palette-extract",
+  "displayName": "Image palette extract",
+  "workflows": [
+    {
+      "path": "workflows/image-palette-extract.json"
+    }
+  ],
+  "skill": {
+    "path": "skill/manifest.json"
+  },
+  "capabilities": [
+    {
+      "path": "capabilities/image-palette-extract.json"
+    }
+  ],
+  "requiredCapabilities": [
+    {
+      "contractId": "image.palette.extract",
+      "revision": 1,
+      "canonicalDigest": "sha256:df778e5035354f8c33ee860b6539a277fa6de374f6f141d274896123ec1ab90f"
+    }
+  ]
+}

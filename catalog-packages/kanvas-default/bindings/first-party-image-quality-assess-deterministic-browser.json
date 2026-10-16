@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "kanvas.capability-binding/v1",
+  "bindingKey": "first-party.image.quality-assess.deterministic.browser",
+  "contract": {
+    "key": "image.quality.assess",
+    "revision": 1,
+    "canonicalDigest": "sha256:9b7128ddcdcbd73f0a7291360af72102c5ff7c65902e92571c989a74e984a7f9"
+  },
+  "implementation": {
+    "key": "first-party.image.quality-assess.deterministic.browser",
+    "revision": 1,
+    "canonicalDigest": "sha256:464aaa6083a5eaafd8af5f2a7589c239929bfcc96d396023767657636fef2d04"
+  },
+  "priority": 1,
+  "enabled": true,
+  "eligibility": {},
+  "fallbackOn": ["not_applicable", "unavailable", "retry_exhausted"]
+}

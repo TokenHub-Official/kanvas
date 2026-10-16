@@ -1,0 +1,277 @@
+{
+  "schemaVersion": "kanvas.capability-declaration-asset/v1",
+  "contract": {
+    "key": "image.text.extract",
+    "revision": 1,
+    "canonicalDigest": "sha256:03f89dc7869def6ef351da6272742ca4c39d99716b129b68b6d7c42b7a673b12"
+  },
+  "declaration": {
+    "schemaVersion": "kanvas.capability-declaration/v1",
+    "catalog": {
+      "title": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "文字提取",
+          "en-US": "Text extract"
+        }
+      },
+      "description": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "识别图片中的文字和区域。",
+          "en-US": "Extract text and regions from an image."
+        }
+      },
+      "category": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "图像分析",
+          "en-US": "Image analysis"
+        }
+      },
+      "sourceKind": "built_in",
+      "tags": ["ocr", "text", "extract"],
+      "surfaces": ["workflow", "agent"]
+    },
+    "parameters": [
+      {
+        "key": "languages",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "识别语言",
+            "en-US": "Languages"
+          }
+        },
+        "semanticType": "value.any",
+        "required": false,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["constant", "workflow_input", "upstream"],
+          "default": "constant"
+        },
+        "editor": "json"
+      },
+      {
+        "key": "granularity",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "识别粒度",
+            "en-US": "Granularity"
+          }
+        },
+        "semanticType": "text.plain",
+        "required": false,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["constant", "workflow_input", "upstream"],
+          "default": "constant"
+        },
+        "editor": "enum",
+        "defaultValue": "line"
+      },
+      {
+        "key": "sourceArtifactId",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "源图片",
+            "en-US": "Source image"
+          }
+        },
+        "description": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "选择需要处理的流程输入或上游图片。",
+            "en-US": "Choose a workflow input or upstream image to process."
+          }
+        },
+        "semanticType": "artifact.image",
+        "required": true,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["workflow_input", "upstream"],
+          "default": "upstream"
+        },
+        "editor": "artifact_picker"
+      },
+      {
+        "key": "minimumConfidence",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "最低置信度",
+            "en-US": "Minimum confidence"
+          }
+        },
+        "semanticType": "number.scalar",
+        "required": false,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["constant", "workflow_input", "upstream"],
+          "default": "constant"
+        },
+        "editor": "number",
+        "defaultValue": 0.5
+      }
+    ],
+    "outputs": [
+      {
+        "key": "blocks",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "文字块",
+            "en-US": "Text blocks"
+          }
+        },
+        "semanticType": "value.any",
+        "primary": false,
+        "visibility": "author"
+      },
+      {
+        "key": "confidence",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "置信度",
+            "en-US": "Confidence"
+          }
+        },
+        "semanticType": "number.scalar",
+        "primary": false,
+        "visibility": "author"
+      },
+      {
+        "key": "direction",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "文字方向",
+            "en-US": "Text direction"
+          }
+        },
+        "semanticType": "text.plain",
+        "primary": false,
+        "visibility": "author"
+      },
+      {
+        "key": "language",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "识别语言",
+            "en-US": "Language"
+          }
+        },
+        "semanticType": "value.any",
+        "primary": false,
+        "visibility": "author"
+      },
+      {
+        "key": "regions",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "文字区域",
+            "en-US": "Text regions"
+          }
+        },
+        "semanticType": "region.list",
+        "primary": false,
+        "visibility": "author"
+      },
+      {
+        "key": "text",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "识别文字",
+            "en-US": "Extracted text"
+          }
+        },
+        "semanticType": "text.plain",
+        "primary": true,
+        "visibility": "author"
+      },
+      {
+        "key": "qualitySignals",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "质量信息",
+            "en-US": "Quality signals"
+          }
+        },
+        "semanticType": "quality.signals",
+        "primary": false,
+        "visibility": "advanced"
+      },
+      {
+        "key": "sourceArtifactId",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "源图片",
+            "en-US": "Source image"
+          }
+        },
+        "semanticType": "artifact.image",
+        "primary": false,
+        "visibility": "advanced"
+      },
+      {
+        "key": "sourceHeight",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "原图高度",
+            "en-US": "Source height"
+          }
+        },
+        "semanticType": "number.scalar",
+        "primary": false,
+        "visibility": "advanced"
+      },
+      {
+        "key": "sourceWidth",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "原图宽度",
+            "en-US": "Source width"
+          }
+        },
+        "semanticType": "number.scalar",
+        "primary": false,
+        "visibility": "advanced"
+      },
+      {
+        "key": "schemaVersion",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "结果版本",
+            "en-US": "Result version"
+          }
+        },
+        "semanticType": "value.any",
+        "primary": false,
+        "visibility": "hidden"
+      }
+    ]
+  }
+}

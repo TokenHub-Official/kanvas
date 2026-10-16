@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "key": "image_text_remove",
+  "entryNodeKey": "extract",
+  "limits": {
+    "maxNodeRuns": 2,
+    "timeoutMs": 480000
+  },
+  "nodes": [
+    {
+      "key": "extract",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "image.text.extract",
+        "revision": 1,
+        "canonicalDigest": "sha256:5b4077c57b11c288d5324c5148f48a3c6c420b835b4ca0829fb6fe3edc171b72"
+      },
+      "input": {
+        "sourceArtifactId": {
+          "$value": {
+            "source": "workflow_input",
+            "pointer": "/sourceArtifactId"
+          }
+        },
+        "granularity": "line",
+        "minimumConfidence": 0.5
+      },
+      "next": [
+        "remove"
+      ]
+    },
+    {
+      "key": "remove",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "image.object.remove",
+        "revision": 1,
+        "canonicalDigest": "sha256:db47b01a412805b6e888cab50abc1aab6a28864174faf6fd34971cf1a0771022"
+      },
+      "input": {
+        "sourceArtifactId": {
+          "$value": {
+            "source": "workflow_input",
+            "pointer": "/sourceArtifactId"
+          }
+        },
+        "regions": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "extract",
+            "scope": "root",
+            "pointer": "/regions"
+          }
+        },
+        "guidance": "Remove only the detected text and reconstruct the original background without introducing new words, symbols, logos, or objects."
+      },
+      "next": []
+    }
+  ],
+  "outputs": {
+    "schemaVersion": {
+      "required": true,
+      "value": "kanvas.image-object-remove-result/v1"
+    },
+    "repairedArtifactId": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "remove",
+          "scope": "root",
+          "pointer": "/repairedArtifactId"
+        }
+      }
+    },
+    "removedRegionMaskArtifactId": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "remove",
+          "scope": "root",
+          "pointer": "/removedRegionMaskArtifactId"
+        }
+      }
+    },
+    "qualitySignals": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "remove",
+          "scope": "root",
+          "pointer": "/qualitySignals"
+        }
+      }
+    }
+  }
+}

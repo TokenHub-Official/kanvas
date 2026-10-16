@@ -1,0 +1,238 @@
+{
+  "schemaVersion": 1,
+  "contractKey": "image.subject.detect",
+  "revision": 1,
+  "inputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "kanvas.image-subject-detect-input.v1",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "sourceArtifactId"
+    ],
+    "properties": {
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+      },
+      "maxSubjects": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 16,
+        "default": 8
+      },
+      "minimumAreaRatio": {
+        "type": "number",
+        "minimum": 0.00001,
+        "maximum": 0.5,
+        "default": 0.001
+      },
+      "minimumConfidence": {
+        "type": "number",
+        "minimum": 0.05,
+        "maximum": 0.95,
+        "default": 0.35
+      },
+      "includeMask": {
+        "type": "boolean",
+        "default": true
+      }
+    }
+  },
+  "outputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "kanvas.image-subject-detect-result.v1",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "schemaVersion",
+      "sourceWidth",
+      "sourceHeight",
+      "candidates",
+      "maskArtifactId",
+      "qualitySignals"
+    ],
+    "properties": {
+      "schemaVersion": {
+        "const": "kanvas.image-subject-detect-result/v1"
+      },
+      "sourceWidth": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "sourceHeight": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "candidates": {
+        "type": "array",
+        "maxItems": 16,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "subjectId",
+            "rank",
+            "category",
+            "confidence",
+            "areaRatio",
+            "bounds",
+            "normalizedBounds"
+          ],
+          "properties": {
+            "subjectId": {
+              "type": "string",
+              "pattern": "^subject-[1-9][0-9]*$"
+            },
+            "rank": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 16
+            },
+            "category": {
+              "const": "visual_subject"
+            },
+            "confidence": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "areaRatio": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "bounds": {
+              "$ref": "#/$defs/pixelBounds"
+            },
+            "normalizedBounds": {
+              "$ref": "#/$defs/normalizedBounds"
+            }
+          }
+        }
+      },
+      "maskArtifactId": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schemaVersion",
+          "candidateCount",
+          "foregroundRatio",
+          "uncertainEdgeRatio",
+          "taxonomy",
+          "modelVariant",
+          "modelDigest"
+        ],
+        "properties": {
+          "schemaVersion": {
+            "const": "kanvas.image-subject-detect-quality/v1"
+          },
+          "candidateCount": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 16
+          },
+          "foregroundRatio": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "uncertainEdgeRatio": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "taxonomy": {
+            "const": "class_agnostic_isnet"
+          },
+          "modelVariant": {
+            "type": "string",
+            "enum": [
+              "u2net",
+              "u2netp",
+              "isnet-general",
+              "isnet-general-fp16"
+            ]
+          },
+          "modelDigest": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "$defs": {
+      "pixelBounds": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "x",
+          "y",
+          "width",
+          "height"
+        ],
+        "properties": {
+          "x": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "y": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "width": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "height": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "normalizedBounds": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "x",
+          "y",
+          "width",
+          "height"
+        ],
+        "properties": {
+          "x": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "y": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "width": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "maximum": 1
+          },
+          "height": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "maximum": 1
+          }
+        }
+      }
+    }
+  },
+  "idempotencyMode": "keyed",
+  "supportedInvokers": [
+    "workflow"
+  ]
+}

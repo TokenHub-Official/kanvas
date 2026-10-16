@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "kanvas.skill-catalog-asset/v1",
+  "skillKey": "first-party.image-text-remove",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "移除文字",
+      "en-US": "Text removal"
+    }
+  },
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "remove-text",
+      "displayName": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "移除文字",
+          "en-US": "Text removal"
+        }
+      },
+      "description": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "先提取文字 Polygon，再将显式区域交给物体移除能力生成修复结果。",
+          "en-US": "Extract text polygons and pass explicit regions to object removal for repair."
+        }
+      },
+      "category": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "清理与隔离",
+          "en-US": "Image cleanup"
+        }
+      },
+      "outputPresentation": "board",
+      "workflow": {
+        "key": "image_text_remove",
+        "revision": 1,
+        "canonicalDigest": "sha256:417c264186ad53327320d1beb9e508d87082702f9104f774fe33b805fa5180f0"
+      }
+    }
+  ]
+}

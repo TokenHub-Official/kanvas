@@ -1,0 +1,31 @@
+{
+  "name": "@kanvas/image-atomic-eval",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "check-types": "tsc --noEmit -p tsconfig.json",
+    "generate:regression-corpus": "tsx scripts/generate-regression-corpus.ts",
+    "generate:designer-review": "tsx scripts/generate-designer-review-packet.ts",
+    "eval:provider-canaries": "tsx scripts/evaluate-provider-canaries.ts",
+    "verify:designer-review": "tsx scripts/verify-designer-review-packet.ts",
+    "eval:batch-b": "tsx src/cli.ts",
+    "eval:batch-c": "tsx src/batch-c-cli.ts",
+    "lint": "eslint src test scripts",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@kanvas/database": "workspace:*",
+    "@kanvas/image-atomic-core": "workspace:*",
+    "@kanvas/storage": "workspace:*",
+    "sharp": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "license": "Apache-2.0"
+}

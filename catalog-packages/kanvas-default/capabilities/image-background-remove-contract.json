@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "contractKey": "image.background.remove",
+  "revision": 1,
+  "inputSchema": {
+    "$id": "kanvas.image-background-remove-input.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["sourceArtifactId", "refinement"],
+    "properties": {
+      "refinement": {
+        "enum": ["standard", "fine"],
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "subjectHint": {
+        "type": "string",
+        "maxLength": 240,
+        "minLength": 1,
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "outputSchema": {
+    "$id": "kanvas.image-background-remove-result.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "schemaVersion",
+      "foregroundArtifactId",
+      "maskArtifactId",
+      "qualitySignals"
+    ],
+    "properties": {
+      "schemaVersion": {
+        "const": "kanvas.image-background-remove-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "maskArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.mask"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "required": [
+          "schemaVersion",
+          "foregroundRatio",
+          "uncertainEdgeRatio",
+          "modelVariant",
+          "modelDigest",
+          "refinement"
+        ],
+        "properties": {
+          "refinement": {
+            "enum": ["standard", "fine"],
+            "type": "string"
+          },
+          "modelDigest": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          },
+          "modelVariant": {
+            "enum": ["u2net", "u2netp", "isnet-general", "isnet-general-fp16"],
+            "type": "string"
+          },
+          "schemaVersion": {
+            "const": "kanvas.image-background-remove-quality/v1"
+          },
+          "foregroundRatio": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0
+          },
+          "uncertainEdgeRatio": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "quality.signals"
+      },
+      "foregroundArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.foreground"
+      }
+    },
+    "additionalProperties": false
+  },
+  "idempotencyMode": "keyed",
+  "supportedInvokers": ["user", "workflow", "agent", "canvas"]
+}

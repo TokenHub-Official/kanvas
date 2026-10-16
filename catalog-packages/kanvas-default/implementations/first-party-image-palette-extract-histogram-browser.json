@@ -1,0 +1,146 @@
+{
+  "schemaVersion": "kanvas.capability-implementation/v1",
+  "implementationKey": "first-party.image.palette-extract.histogram.browser",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "色板提取 · 浏览器运行",
+      "en-US": "Palette extract · Browser runtime"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "通过浏览器运行提供色板提取，上层只依赖固定公开契约。",
+      "en-US": "Provides Palette extract through Browser runtime behind the stable public contract."
+    }
+  },
+  "contract": {
+    "key": "image.palette.extract",
+    "revision": 1,
+    "canonicalDigest": "sha256:9c3decb73bf3872b4581a3b025a1af843b2f870334036e2f80d7210014768626"
+  },
+  "adapter": {
+    "adapterKey": "browser.image.palette-extract.histogram.v1",
+    "revision": 1,
+    "canonicalDigest": "sha256:353b18a4d814302c308705e0836b7375456008e887ef7e86c46bea1adb7b7874"
+  },
+  "source": {
+    "kind": "plugin",
+    "plugin": {
+      "key": "kanvas.browser-image-runtime",
+      "revision": 1,
+      "canonicalDigest": "sha256:6dfd29075c38a2e57de02e13b94114e799610d590d870ae300a62c0f158a1e15"
+    }
+  },
+  "configuration": {
+    "operation": "image.palette.extract",
+    "colorSpace": "srgb",
+    "generative": false,
+    "providerCost": false,
+    "externalEgress": false,
+    "algorithmVersion": "batch-c-deterministic-rgba-v1",
+    "maximumSourcePixels": 32000000,
+    "outputArtifactCount": 0
+  },
+  "inputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "input",
+    "expression": {
+      "op": "source",
+      "root": "input",
+      "pointer": ""
+    }
+  },
+  "outputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "output",
+    "expression": {
+      "op": "source",
+      "root": "result",
+      "pointer": ""
+    }
+  },
+  "fixtures": [
+    {
+      "name": "default contract mapping",
+      "capabilityInput": {
+        "colorCount": 6,
+        "sampleSize": 128,
+        "alphaThreshold": 16,
+        "sourceArtifactId": "01K00000000000000000000001"
+      },
+      "configuration": {
+        "operation": "image.palette.extract",
+        "colorSpace": "srgb",
+        "generative": false,
+        "providerCost": false,
+        "externalEgress": false,
+        "algorithmVersion": "batch-c-deterministic-rgba-v1",
+        "maximumSourcePixels": 32000000,
+        "outputArtifactCount": 0
+      },
+      "expectedAdapterInput": {
+        "colorCount": 6,
+        "sampleSize": 128,
+        "alphaThreshold": 16,
+        "sourceArtifactId": "01K00000000000000000000001"
+      },
+      "adapterResult": {
+        "colors": [
+          {
+            "hex": "sample",
+            "red": 0,
+            "blue": 0,
+            "rank": 1,
+            "role": "dominant",
+            "green": 0,
+            "luminance": 0,
+            "proportion": 0
+          }
+        ],
+        "colorSpace": "srgb",
+        "sourceWidth": 1,
+        "sourceHeight": 1,
+        "schemaVersion": "kanvas.image-palette-extract-result/v1",
+        "qualitySignals": {
+          "generative": false,
+          "deterministic": true,
+          "schemaVersion": "kanvas.image-palette-extract-quality/v1",
+          "sourceModified": false,
+          "quantizationBits": 5,
+          "sampledPixelCount": 0
+        },
+        "transparentRatio": 0
+      },
+      "expectedCapabilityOutput": {
+        "colors": [
+          {
+            "hex": "sample",
+            "red": 0,
+            "blue": 0,
+            "rank": 1,
+            "role": "dominant",
+            "green": 0,
+            "luminance": 0,
+            "proportion": 0
+          }
+        ],
+        "colorSpace": "srgb",
+        "sourceWidth": 1,
+        "sourceHeight": 1,
+        "schemaVersion": "kanvas.image-palette-extract-result/v1",
+        "qualitySignals": {
+          "generative": false,
+          "deterministic": true,
+          "schemaVersion": "kanvas.image-palette-extract-quality/v1",
+          "sourceModified": false,
+          "quantizationBits": 5,
+          "sampledPixelCount": 0
+        },
+        "transparentRatio": 0
+      }
+    }
+  ]
+}

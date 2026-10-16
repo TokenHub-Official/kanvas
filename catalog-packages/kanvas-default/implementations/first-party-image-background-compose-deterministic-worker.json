@@ -1,0 +1,180 @@
+{
+  "schemaVersion": "kanvas.capability-implementation/v1",
+  "implementationKey": "first-party.image.background-compose.deterministic.worker",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "背景合成 · Worker 运行",
+      "en-US": "Background compose · Worker runtime"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "通过Worker 运行提供背景合成，上层只依赖固定公开契约。",
+      "en-US": "Provides Background compose through Worker runtime behind the stable public contract."
+    }
+  },
+  "contract": {
+    "key": "image.background.compose",
+    "revision": 1,
+    "canonicalDigest": "sha256:47cb3d93380ec07f1d7ef997cee934b077a37635af2d7f362b0f92f970eed5cd"
+  },
+  "adapter": {
+    "adapterKey": "first-party.image.background-compose.deterministic.v1",
+    "revision": 1,
+    "canonicalDigest": "sha256:fd116665867d26bb09e50dda1a3687f34c7631a617ef598ff602e5663f871135"
+  },
+  "source": {
+    "kind": "plugin",
+    "plugin": {
+      "key": "kanvas.worker-image-runtime",
+      "revision": 1,
+      "canonicalDigest": "sha256:f754e109633d3bdadf7b0c992fb7070879907641b5a8d00c88d134d90af9ef57"
+    }
+  },
+  "configuration": {
+    "operation": "image.background.compose",
+    "colorSpace": "srgb",
+    "generative": false,
+    "providerCost": false,
+    "externalEgress": false,
+    "algorithmVersion": "batch-c-deterministic-rgba-v1",
+    "maximumSourcePixels": 32000000,
+    "outputArtifactCount": 2
+  },
+  "inputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "input",
+    "expression": {
+      "op": "source",
+      "root": "input",
+      "pointer": ""
+    }
+  },
+  "outputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "output",
+    "expression": {
+      "op": "source",
+      "root": "result",
+      "pointer": ""
+    }
+  },
+  "fixtures": [
+    {
+      "name": "default contract mapping",
+      "capabilityInput": {
+        "canvas": {
+          "width": 1,
+          "height": 1
+        },
+        "placement": {
+          "x": 0,
+          "y": 0,
+          "fit": "contain",
+          "width": 1,
+          "height": 1,
+          "opacity": 1
+        },
+        "background": {
+          "kind": "color",
+          "color": "#FFFFFFFF"
+        },
+        "foregroundArtifactId": "01K00000000000000000000001"
+      },
+      "configuration": {
+        "operation": "image.background.compose",
+        "colorSpace": "srgb",
+        "generative": false,
+        "providerCost": false,
+        "externalEgress": false,
+        "algorithmVersion": "batch-c-deterministic-rgba-v1",
+        "maximumSourcePixels": 32000000,
+        "outputArtifactCount": 2
+      },
+      "expectedAdapterInput": {
+        "canvas": {
+          "width": 1,
+          "height": 1
+        },
+        "placement": {
+          "x": 0,
+          "y": 0,
+          "fit": "contain",
+          "width": 1,
+          "height": 1,
+          "opacity": 1
+        },
+        "background": {
+          "kind": "color",
+          "color": "#FFFFFFFF"
+        },
+        "foregroundArtifactId": "01K00000000000000000000001"
+      },
+      "adapterResult": {
+        "canvas": {
+          "width": 1,
+          "height": 1
+        },
+        "schemaVersion": "kanvas.image-background-compose-result/v1",
+        "qualitySignals": {
+          "colorSpace": "srgb",
+          "generative": false,
+          "deterministic": true,
+          "schemaVersion": "kanvas.image-background-compose-quality/v1",
+          "alphaComposited": true
+        },
+        "imageArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "sample",
+          "outputIndex": 0
+        },
+        "inputArtifactIds": ["01K00000000000000000000001"],
+        "resolvedPlacement": {
+          "x": 0,
+          "y": 0,
+          "width": 1,
+          "height": 1
+        },
+        "compositionMaskArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "sample",
+          "outputIndex": 0
+        }
+      },
+      "expectedCapabilityOutput": {
+        "canvas": {
+          "width": 1,
+          "height": 1
+        },
+        "schemaVersion": "kanvas.image-background-compose-result/v1",
+        "qualitySignals": {
+          "colorSpace": "srgb",
+          "generative": false,
+          "deterministic": true,
+          "schemaVersion": "kanvas.image-background-compose-quality/v1",
+          "alphaComposited": true
+        },
+        "imageArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "sample",
+          "outputIndex": 0
+        },
+        "inputArtifactIds": ["01K00000000000000000000001"],
+        "resolvedPlacement": {
+          "x": 0,
+          "y": 0,
+          "width": 1,
+          "height": 1
+        },
+        "compositionMaskArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "sample",
+          "outputIndex": 0
+        }
+      }
+    }
+  ]
+}

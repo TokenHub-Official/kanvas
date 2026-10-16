@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "kanvas.capability-implementation/v1",
+  "implementationKey": "first-party.image.upscale.reconstructive.openai-provider",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "画质增强 · 模型服务",
+      "en-US": "Image upscale · Model service"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "通过模型服务提供画质增强，上层只依赖固定公开契约。",
+      "en-US": "Provides Image upscale through Model service behind the stable public contract."
+    }
+  },
+  "contract": {
+    "key": "image.upscale",
+    "revision": 1,
+    "canonicalDigest": "sha256:60c6e7350194d500038b75edfc41473deaecd7b145191a43a4d10061c35b359d"
+  },
+  "adapter": {
+    "adapterKey": "openai.image.upscale.reconstructive.v1",
+    "revision": 1,
+    "canonicalDigest": "sha256:e7189f9193c04ab4bc131f98204f8aedcca7b83f3292149e6424638b9d09c6cb"
+  },
+  "source": {
+    "kind": "model_service",
+    "selector": {
+      "operation": "image.edit",
+      "apiSurface": "images.edits.v1"
+    }
+  },
+  "configuration": {
+    "protocol": "images.edits.v1",
+    "dataEgress": "authorized_source_artifact",
+    "scaleFactor": 2,
+    "outputFormat": "png",
+    "qualityIntent": "reconstructive",
+    "promptTemplate": "Reconstruct this image at higher visual fidelity. Preserve the original composition, subjects, identity, text, colors, proportions, and geometry. Do not add, remove, crop, or reposition content.{{guidanceBlock}}",
+    "outputMaterialization": "trusted_storage"
+  },
+  "inputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "input",
+    "expression": {
+      "op": "source",
+      "root": "input",
+      "pointer": ""
+    }
+  },
+  "outputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "output",
+    "expression": {
+      "op": "source",
+      "root": "result",
+      "pointer": ""
+    }
+  },
+  "fixtures": [
+    {
+      "name": "default contract mapping",
+      "capabilityInput": {
+        "scaleFactor": 2,
+        "qualityIntent": "reconstructive",
+        "sourceArtifactId": "01K00000000000000000000001"
+      },
+      "configuration": {
+        "protocol": "images.edits.v1",
+        "dataEgress": "authorized_source_artifact",
+        "scaleFactor": 2,
+        "outputFormat": "png",
+        "qualityIntent": "reconstructive",
+        "promptTemplate": "Reconstruct this image at higher visual fidelity. Preserve the original composition, subjects, identity, text, colors, proportions, and geometry. Do not add, remove, crop, or reposition content.{{guidanceBlock}}",
+        "outputMaterialization": "trusted_storage"
+      },
+      "expectedAdapterInput": {
+        "scaleFactor": 2,
+        "qualityIntent": "reconstructive",
+        "sourceArtifactId": "01K00000000000000000000001"
+      },
+      "adapterResult": {
+        "outputWidth": 1,
+        "scaleFactor": 2,
+        "sourceWidth": 1,
+        "outputHeight": 1,
+        "sourceHeight": 1,
+        "qualityIntent": "faithful",
+        "schemaVersion": "kanvas.image-upscale-result/v1",
+        "qualitySignals": {
+          "method": "deterministic_resample",
+          "generative": true,
+          "schemaVersion": "kanvas.image-upscale-quality/v1",
+          "resamplingKernel": "lanczos3"
+        },
+        "imageArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "sample",
+          "outputIndex": 0
+        }
+      },
+      "expectedCapabilityOutput": {
+        "outputWidth": 1,
+        "scaleFactor": 2,
+        "sourceWidth": 1,
+        "outputHeight": 1,
+        "sourceHeight": 1,
+        "qualityIntent": "faithful",
+        "schemaVersion": "kanvas.image-upscale-result/v1",
+        "qualitySignals": {
+          "method": "deterministic_resample",
+          "generative": true,
+          "schemaVersion": "kanvas.image-upscale-quality/v1",
+          "resamplingKernel": "lanczos3"
+        },
+        "imageArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "sample",
+          "outputIndex": 0
+        }
+      }
+    }
+  ]
+}

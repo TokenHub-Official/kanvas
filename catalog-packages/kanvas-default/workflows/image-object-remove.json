@@ -1,0 +1,227 @@
+{
+  "schemaVersion": "kanvas.workflow-catalog-asset/v1",
+  "workflowKey": "image_object_remove",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "物体移除",
+      "en-US": "Object removal"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "根据显式区域 Mask 生成修复结果，同时保留规范 Removed Region Mask。",
+      "en-US": "Repair explicitly selected regions while preserving a normalized removal mask."
+    }
+  },
+  "category": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "清理与隔离",
+      "en-US": "Image cleanup"
+    }
+  },
+  "topology": {
+    "schemaVersion": 1,
+    "key": "image_object_remove",
+    "entryNodeKey": "remove",
+    "limits": {
+      "maxNodeRuns": 1,
+      "timeoutMs": 300000
+    },
+    "nodes": [
+      {
+        "key": "remove",
+        "kind": "invoke",
+        "capability": {
+          "contractId": "image.object.remove",
+          "revision": 1,
+          "canonicalDigest": "sha256:17642c3a8100a24c4733bcd132c077874b72816ee1533ca79bf2e13bfac63535"
+        },
+        "input": {
+          "$value": {
+            "source": "workflow_input",
+            "pointer": ""
+          }
+        },
+        "next": []
+      }
+    ],
+    "outputs": {
+      "schemaVersion": {
+        "required": true,
+        "value": "kanvas.image-object-remove-result/v1"
+      },
+      "repairedArtifactId": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "remove",
+            "scope": "root",
+            "pointer": "/repairedArtifactId"
+          }
+        }
+      },
+      "removedRegionMaskArtifactId": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "remove",
+            "scope": "root",
+            "pointer": "/removedRegionMaskArtifactId"
+          }
+        }
+      },
+      "qualitySignals": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "remove",
+            "scope": "root",
+            "pointer": "/qualitySignals"
+          }
+        }
+      }
+    }
+  },
+  "inputSchema": {
+    "$id": "kanvas.image-object-remove-input.v1",
+    "type": "object",
+    "oneOf": [
+      {
+        "required": ["maskArtifactId"]
+      },
+      {
+        "required": ["regions"]
+      }
+    ],
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["sourceArtifactId"],
+    "properties": {
+      "regions": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["points"],
+          "properties": {
+            "points": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["x", "y"],
+                "properties": {
+                  "x": {
+                    "type": "number",
+                    "maximum": 16384,
+                    "minimum": 0
+                  },
+                  "y": {
+                    "type": "number",
+                    "maximum": 16384,
+                    "minimum": 0
+                  }
+                },
+                "additionalProperties": false
+              },
+              "maxItems": 64,
+              "minItems": 3
+            }
+          },
+          "additionalProperties": false
+        },
+        "maxItems": 128,
+        "minItems": 1,
+        "x-kanvas-semantic-type": "region.list"
+      },
+      "guidance": {
+        "type": "string",
+        "maxLength": 4000,
+        "minLength": 1,
+        "x-kanvas-semantic-type": "prompt.rich"
+      },
+      "maskArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.mask"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "outputSchema": {
+    "$id": "kanvas.image-object-remove-result.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "schemaVersion",
+      "repairedArtifactId",
+      "removedRegionMaskArtifactId",
+      "qualitySignals"
+    ],
+    "properties": {
+      "schemaVersion": {
+        "const": "kanvas.image-object-remove-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "required": [
+          "schemaVersion",
+          "method",
+          "generative",
+          "outsideMaskPixelsPreserved",
+          "removedPixelRatio"
+        ],
+        "properties": {
+          "method": {
+            "const": "generative_inpaint"
+          },
+          "generative": {
+            "const": true
+          },
+          "schemaVersion": {
+            "const": "kanvas.image-object-remove-quality/v1"
+          },
+          "removedPixelRatio": {
+            "type": "number",
+            "exclusiveMaximum": 1,
+            "exclusiveMinimum": 0
+          },
+          "outsideMaskPixelsPreserved": {
+            "const": true
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "quality.signals"
+      },
+      "repairedArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      },
+      "removedRegionMaskArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.mask"
+      }
+    },
+    "additionalProperties": false
+  },
+  "requiredCapabilities": [
+    {
+      "key": "image.object.remove",
+      "revision": 1,
+      "canonicalDigest": "sha256:17642c3a8100a24c4733bcd132c077874b72816ee1533ca79bf2e13bfac63535"
+    }
+  ],
+  "canonicalDigest": "sha256:92919dc4a9f55e303ad8de23455ef51868db7b55d175520e43ec36785b827af0"
+}

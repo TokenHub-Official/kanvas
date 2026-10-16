@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "skillKey": "first-party.image-denoise",
+  "displayName": "图片去噪",
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "denoise",
+      "displayName": "去噪",
+      "description": "使用不生成新内容的确定性 Worker 算法降低局部噪声。",
+      "category": "画质修复",
+      "outputPresentation": "board",
+      "inputUiSchema": {
+        "schemaVersion": "kanvas.entrypoint-ui/v0",
+        "canvasTool": {
+          "surface": "canvas.image",
+          "completionBehavior": "auto_replace_safe",
+          "interactionBehavior": "direct",
+          "operationId": "image.denoise",
+          "order": 210,
+          "costNotice": "由 Worker 确定性执行，不发送到外部模型，不产生 Provider 费用。",
+          "source": {
+            "parameterKey": "sourceArtifactId",
+            "value": "artifact_id"
+          },
+          "parameters": [
+            {
+              "key": "strength",
+              "label": "强度",
+              "control": "select",
+              "required": false,
+              "defaultValue": 0.5,
+              "options": [
+                {
+                  "value": 0.25,
+                  "label": "轻"
+                },
+                {
+                  "value": 0.5,
+                  "label": "中"
+                },
+                {
+                  "value": 0.85,
+                  "label": "强"
+                }
+              ]
+            }
+          ],
+          "result": {
+            "artifactPath": [
+              "imageArtifactId"
+            ],
+            "outputModes": [
+              "add_node",
+              "replace_content",
+              "asset_only"
+            ]
+          }
+        }
+      },
+      "workflowPath": "workflows/image-denoise.json"
+    }
+  ]
+}

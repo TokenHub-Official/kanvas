@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "kanvas.skill-catalog-asset/v1",
+  "skillKey": "first-party.image-crop-suggest",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "智能裁剪建议",
+      "en-US": "Smart crop suggestions"
+    }
+  },
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "suggest",
+      "displayName": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "生成裁剪建议",
+          "en-US": "Smart crop suggestions"
+        }
+      },
+      "description": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "按目标比例生成有序裁切区域，只返回建议，不修改图片。",
+          "en-US": "Return ordered crop regions for a target aspect ratio without modifying the image."
+        }
+      },
+      "category": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "图片分析",
+          "en-US": "Image analysis"
+        }
+      },
+      "outputPresentation": "board",
+      "workflow": {
+        "key": "image_crop_suggest",
+        "revision": 1,
+        "canonicalDigest": "sha256:cf852d7f97afd671f41d9a6540f3e3d5a9a217d8e66dba5ffed9a8cc05463380"
+      }
+    }
+  ]
+}

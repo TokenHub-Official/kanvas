@@ -1,0 +1,59 @@
+{
+  "name": "@kanvas/server",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "bootstrap:agent-foundation": "node dist/cli/bootstrap-agent-foundation.js",
+    "bootstrap:agent-text-binding": "node dist/cli/bootstrap-agent-text-binding.js",
+    "bootstrap:dev": "node dist/cli/bootstrap-dev.js",
+    "build": "tsc -p tsconfig.build.json",
+    "check-types": "tsc --noEmit -p tsconfig.json",
+    "dev": "node --env-file-if-exists=../../.env.local --env-file-if-exists=.env.local ../../tools/development/watch-typescript-service.mjs",
+    "lint": "eslint src test",
+    "start": "node dist/main.js",
+    "sync:model-reference": "node dist/cli/sync-model-reference.js",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@kanvas/agent-runtime": "workspace:*",
+    "@kanvas/application": "workspace:*",
+    "@kanvas/contracts": "workspace:*",
+    "@kanvas/database": "workspace:*",
+    "@kanvas/secrets": "workspace:*",
+    "@kanvas/storage": "workspace:*",
+    "@nestjs/common": "catalog:",
+    "@nestjs/core": "catalog:",
+    "@nestjs/platform-fastify": "catalog:",
+    "@opentelemetry/exporter-metrics-otlp-http": "catalog:",
+    "@opentelemetry/exporter-trace-otlp-http": "catalog:",
+    "@opentelemetry/sdk-metrics": "catalog:",
+    "@opentelemetry/sdk-node": "catalog:",
+    "@sinclair/typebox": "catalog:",
+    "acorn": "8.17.0",
+    "ajv": "catalog:",
+    "ajv-formats": "catalog:",
+    "better-auth": "1.6.25",
+    "fastify": "catalog:",
+    "jose": "catalog:",
+    "nodemailer": "catalog:",
+    "parse5": "7.3.0",
+    "pino": "catalog:",
+    "reflect-metadata": "catalog:",
+    "rxjs": "catalog:",
+    "sharp": "catalog:",
+    "ulid": "catalog:",
+    "@fastify/proxy-addr": "5.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "mysql2": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "files": [
+    "dist"
+  ],
+  "license": "Apache-2.0"
+}

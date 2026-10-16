@@ -1,0 +1,1768 @@
+{
+  "shell": {
+    "title": "团队设置",
+    "navigation": "团队设置",
+    "sections": {
+      "team": "团队",
+      "infrastructure": "AI 基础设施",
+      "operations": "费用与运维"
+    },
+    "items": {
+      "general": "基本信息",
+      "people": "成员与权限",
+      "providers": "模型服务",
+      "models": "模型",
+      "sources": "资源来源",
+      "modelResources": "模型资源",
+      "capabilities": "能力",
+      "usage": "用量与额度",
+      "tasks": "任务记录"
+    }
+  },
+  "interfaceSemantics": {
+    "text_plain": "文本",
+    "prompt_rich": "富文本提示词",
+    "artifact_image": "图片素材",
+    "artifact_file": "文件素材",
+    "number_scalar": "数值",
+    "boolean_flag": "开关",
+    "value_object": "结构化对象",
+    "quality_signals": "质量信息",
+    "canvas_geometry": "画板几何信息",
+    "value_list": "列表",
+    "artifact_image_list": "图片素材列表",
+    "region_list": "区域列表",
+    "tensor_image_rgb": "RGB 图像张量",
+    "tensor_mask_alpha": "透明度蒙版张量",
+    "value_any": "通用数据"
+  },
+  "modelResources": {
+    "title": "模型资源",
+    "opening": "正在打开模型资源设置",
+    "forbiddenTitle": "无法管理模型资源",
+    "forbiddenDescription": "当前账号没有能力管理权限。",
+    "add": "导入模型资源",
+    "addCustom": "添加自定义模型",
+    "addTitle": "添加自定义模型",
+    "addRecommendedTitle": "添加推荐模型",
+    "newRevisionTitle": "更新模型",
+    "search": "搜索模型",
+    "reload": "重新加载",
+    "loadError": "无法加载模型资源",
+    "loadErrorDescription": "请检查连接后重新加载。",
+    "empty": "还没有模型资源",
+    "emptyInstalledTitle": "还没有添加模型",
+    "emptyInstalledDescription": "可以从推荐模型中选择当前需要的模型。",
+    "emptyRecommendationsTitle": "没有推荐模型",
+    "emptyRecommendationsDescription": "当前没有可以添加的推荐模型。",
+    "viewRecommendations": "查看推荐模型",
+    "views": {
+      "installed": "已添加 {{count}}",
+      "recommendations": "推荐 {{count}}"
+    },
+    "save": "发布",
+    "finish": "完成添加",
+    "cancel": "取消",
+    "close": "关闭",
+    "archiveTitle": "归档此模型资源？",
+    "archiveDescription": "归档后不能用于新的实现配置；已固定此版本的历史运行保持不变。",
+    "restoreTitle": "恢复此模型资源？",
+    "restoreDescription": "恢复后可重新用于新的实现配置。",
+    "columns": {
+      "model": "模型资源",
+      "target": "运行位置",
+      "format": "格式",
+      "size": "大小",
+      "version": "版本",
+      "usage": "实现引用",
+      "status": "状态",
+      "actions": "操作"
+    },
+    "status": {
+      "active": "可用",
+      "archived": "已归档",
+      "available": "可导入",
+      "notAdded": "未添加"
+    },
+    "catalog": {
+      "import": "添加",
+      "importDescription": "系统将下载并检查这个推荐模型。",
+      "downloadSize": "下载大小",
+      "completing": "检查完成，正在添加模型。",
+      "addFailed": "无法完成添加",
+      "addFailedDescription": "模型已经完成检查，但暂时无法保存，请重试。",
+      "retry": "重试"
+    },
+    "targets": {
+      "browser": "浏览器本地",
+      "worker": "云端运行",
+      "provider": "服务端",
+      "unmatched": "尚无兼容运行器"
+    },
+    "actions": {
+      "newRevision": "更新模型",
+      "createCapability": "创建能力",
+      "archive": "归档",
+      "restore": "恢复",
+      "more": "更多"
+    },
+    "fields": {
+      "key": "模型资源 Key",
+      "name": "名称（可修改）",
+      "description": "描述（可选）",
+      "format": "格式",
+      "url": "模型文件地址",
+      "file": "模型文件",
+      "license": "许可证",
+      "licenseUrl": "许可证地址"
+    },
+    "placeholders": {
+      "url": "粘贴 Hugging Face 文件页或稳定 HTTPS 文件地址",
+      "key": "例如 image.background-removal.isnet",
+      "name": "例如 ISNet 通用抠图模型"
+    },
+    "help": {
+      "file": "选择需要检查并添加的模型文件。"
+    },
+    "compatibleAdapters": "检测到的运行器",
+    "runtimeMatch": {
+      "probable": "待验证"
+    },
+    "progress": {
+      "stages": {
+        "fetching": "下载",
+        "analyzing": "检查",
+        "saving": "添加"
+      },
+      "fetching": "正在下载模型文件。文件较大时可能需要几分钟，请保持页面打开。",
+      "fetchingSized": "正在下载 {{size}} 的模型文件。文件较大时可能需要几分钟，请保持页面打开。",
+      "downloaded": "已下载 {{downloaded}} / {{size}}（{{percent}}%）",
+      "analyzing": "下载完成，正在检查模型格式和完整性。",
+      "saving": "检查完成，正在添加到模型列表。"
+    },
+    "import": {
+      "url": "从链接添加",
+      "upload": "上传模型文件",
+      "chooseFile": "选择模型文件",
+      "continue": "检查模型",
+      "retry": "重新尝试",
+      "cancelDownload": "取消下载",
+      "cancelling": "正在取消",
+      "cancelledTitle": "下载已取消",
+      "cancelledDescription": "这个模型没有添加，可以重新开始或关闭。",
+      "readyTitle": "模型检查完成",
+      "readyDescription": "确认名称和必要信息后即可完成添加。",
+      "status": {
+        "fetching": "正在下载模型",
+        "analyzing": "正在检查模型",
+        "saving": "正在添加模型",
+        "failed": "无法检查模型"
+      },
+      "failures": {
+        "model_import_invalid_url": "模型文件地址无效",
+        "model_import_dns_failed": "暂时无法连接模型文件所在主机",
+        "model_import_private_address": "该地址指向不允许访问的网络",
+        "model_import_too_many_redirects": "模型文件地址重定向次数过多",
+        "model_import_http_failed": "下载模型文件时连接中断",
+        "model_import_http_status": "暂时无法从模型来源下载，请重新尝试",
+        "model_import_content_too_large": "模型文件超过当前部署允许的大小",
+        "model_import_deadline_exceeded": "模型文件下载超时",
+        "model_import_analysis_failed": "无法识别此模型文件",
+        "unknown": "无法完成模型资源分析"
+      }
+    },
+    "validation": {
+      "resolve": "补全后即可发布。",
+      "url": "请填写模型文件地址",
+      "file": "请选择模型文件",
+      "key": "Key 需使用小写分段格式，例如 image.background-removal.isnet",
+      "name": "请填写模型名称",
+      "license": "请确认模型许可证",
+      "licenseUrl": "许可证地址需使用 HTTPS"
+    },
+    "toast": {
+      "saved": "模型资源已发布",
+      "saveFailed": "无法发布模型资源",
+      "saveFailedDescription": "请检查待确认信息和当前版本后重试。",
+      "cancelFailed": "无法取消下载",
+      "cancelFailedDescription": "下载状态可能已经改变，请稍后重试。",
+      "importFailed": "无法开始模型资源分析",
+      "importFailedDescription": "请确认文件地址可访问，或重新选择本地文件。",
+      "statusUpdated": "模型资源状态已更新",
+      "statusFailed": "无法更新模型资源状态",
+      "statusFailedDescription": "资源状态可能已变化，请重新加载后重试。"
+    }
+  },
+  "capabilityDefinitions": {
+    "title": "能力",
+    "opening": "正在打开能力设置",
+    "forbiddenTitle": "无法管理能力",
+    "forbiddenDescription": "当前账号没有能力管理权限。",
+    "editTitle": "编辑能力信息",
+    "create": "新增能力",
+    "next": "下一步",
+    "createCustom": "创建自定义能力",
+    "createTitle": "新增能力",
+    "createDescription": "仅在可添加列表中没有所需能力时创建自定义能力。",
+    "openRoutes": "管理运行方式",
+    "search": "搜索能力",
+    "reload": "重新加载",
+    "loadError": "无法加载能力",
+    "loadErrorDescription": "请检查连接后重新加载。",
+    "empty": "还没有能力",
+    "emptyInstalledTitle": "还没有安装能力",
+    "emptyInstalledDescription": "可以从推荐能力中选择当前需要的功能。",
+    "emptyRecommendationsTitle": "没有推荐能力",
+    "emptyRecommendationsDescription": "当前没有可安装的推荐能力。",
+    "viewRecommendations": "查看推荐能力",
+    "save": "保存",
+    "cancel": "取消",
+    "close": "关闭",
+    "inputCount": "{{count}} 个输入",
+    "outputCount": "{{count}} 个输出",
+    "archiveTitle": "归档此能力？",
+    "archiveDescription": "归档后不会再用于新的发现和流程搭建；历史流程与运行记录保持不变。",
+    "restoreTitle": "恢复此能力？",
+    "restoreDescription": "恢复后，此能力会重新进入允许的发现与流程搭建范围。",
+    "columns": {
+      "capability": "能力",
+      "category": "分类",
+      "contract": "输入与输出",
+      "surfaces": "使用入口",
+      "routes": "运行方式",
+      "status": "状态",
+      "actions": "操作"
+    },
+    "status": {
+      "active": "已启用",
+      "archived": "已归档",
+      "ready": "可用",
+      "needsConfiguration": "需要配置",
+      "notInstalled": "可添加",
+      "installing": "正在添加",
+      "failed": "添加失败"
+    },
+    "statusReasons": {
+      "noImplementation": "还没有实现方式",
+      "implementationUnavailable": "当前实现需要处理"
+    },
+    "views": {
+      "installed": "已添加 {{count}}",
+      "recommendations": "可添加 {{count}}",
+      "archived": "已归档 {{count}}"
+    },
+    "emptyArchivedTitle": "没有已归档的能力",
+    "runtime": {
+      "none": "尚未配置"
+    },
+    "languages": {
+      "zh": "中文",
+      "en": "English"
+    },
+    "details": {
+      "back": "返回能力列表",
+      "contract": "如何使用",
+      "inputs": "使用时需要",
+      "outputs": "完成后得到",
+      "required": "必填",
+      "optional": "可选",
+      "primary": "主要结果",
+      "none": "无",
+      "runMethods": "实现方式",
+      "runMethodsHint": "系统会优先使用排在前面且当前可用的实现。"
+    },
+    "actions": {
+      "edit": "编辑信息",
+      "archive": "归档",
+      "restore": "恢复",
+      "more": "更多操作",
+      "install": "添加",
+      "installing": "正在添加",
+      "retryInstall": "重试",
+      "configure": "完成配置",
+      "manage": "查看详情"
+    },
+    "install": {
+      "title": "添加“{{name}}”",
+      "recommendedModelTitle": "准备所需模型",
+      "recommendedModelDescription": "系统会优先使用已添加的兼容模型；没有时才添加推荐模型，并在准备完成后自动启用能力。",
+      "readyDescription": "添加完成后，这项能力会立即可用。",
+      "chooseModel": "选择要使用的模型",
+      "modelServiceRequiredTitle": "需要先配置模型",
+      "modelServiceRequiredDescription": "当前没有可以完成此功能的模型，请先前往模型服务添加并启用一个兼容模型。",
+      "configureModels": "前往模型服务",
+      "addModelAndInstall": "准备并添加",
+      "confirm": "添加",
+      "completed": "能力已添加并可以使用",
+      "started": "正在准备能力",
+      "startedDescription": "所需模型准备完成后，能力会自动启用。",
+      "failed": "无法添加能力",
+      "failedDescription": "请检查相关配置后重试。"
+    },
+    "fields": {
+      "key": "能力 Key",
+      "name": "名称",
+      "description": "用途（可选）",
+      "category": "分类",
+      "tags": "标签",
+      "surfaces": "使用入口"
+    },
+    "surfaces": {
+      "workflow": "Workflow",
+      "agent": "Agent",
+      "canvas": "画板"
+    },
+    "fieldTypes": {
+      "string": "文本",
+      "number": "数字",
+      "integer": "整数",
+      "boolean": "布尔值",
+      "object": "对象",
+      "array": "数组",
+      "enum": "枚举"
+    },
+    "contentTypes": {
+      "text_plain": "文字",
+      "prompt_rich": "文字要求",
+      "artifact_image": "图片",
+      "artifact_file": "文件",
+      "number_scalar": "数字",
+      "boolean_flag": "是或否",
+      "value_object": "结构化信息",
+      "value_list": "列表",
+      "artifact_image_list": "多张图片",
+      "region_list": "图片区域",
+      "quality_signals": "质量信息",
+      "canvas_geometry": "画板位置",
+      "tensor_mask_alpha": "蒙版"
+    },
+    "interface": {
+      "input": "需要什么",
+      "output": "会得到什么",
+      "addField": "添加一项",
+      "empty": "请添加至少一项",
+      "contentType": "内容类型",
+      "semanticType": "数据含义",
+      "required": "必填",
+      "primary": "主要结果"
+    },
+    "placeholders": {
+      "name": "例如 背景移除",
+      "category": "选择能力分类",
+      "description": "说明这项能力适合完成什么任务",
+      "key": "例如 image.background-compose",
+      "tags": "用逗号分隔，例如 图片编辑, 合成",
+      "fieldKey": "字段名，例如 foreground",
+      "semanticType": "数据语义，例如 artifact.image",
+      "label": "字段名称",
+      "example": "用于发布校验的示例值",
+      "enumValues": "枚举值，用逗号分隔",
+      "defaultValue": "默认值（可选；对象或数组使用 JSON）",
+      "minimum": "最小值（可选）",
+      "maximum": "最大值（可选）"
+    },
+    "validation": {
+      "resolve": "补全当前信息后即可继续。",
+      "key": "Key 需使用小写分段格式，例如 image.background-compose",
+      "title": "请填写名称",
+      "description": "请填写描述或留空",
+      "category": "请填写分类",
+      "surface": "请选择至少一个使用入口",
+      "inputEmpty": "请定义至少一个公开输入",
+      "outputEmpty": "请定义至少一个公开输出",
+      "fieldKey": "字段名需以字母开头，并只使用字母、数字和下划线",
+      "fieldDuplicate": "同一接口中不能出现重复字段名",
+      "fieldLabel": "请填写字段名称",
+      "fieldSemantic": "请为每个字段填写分段的数据语义",
+      "fieldEnum": "请为枚举字段填写至少一个可选值",
+      "fieldExample": "请填写与字段类型一致的示例值",
+      "fieldDefault": "默认值需符合字段类型、枚举与取值范围",
+      "fieldRange": "最小值与最大值需为有效数字，且最小值不能大于最大值",
+      "primary": "请指定且只指定一个主要输出",
+      "inputMapping": "请为当前接口的每个输入选择新接口中的来源字段",
+      "outputMapping": "请为新接口的每个输出选择当前接口中的来源字段"
+    },
+    "implementation": {
+      "add": "添加实现方式",
+      "addTitle": "添加实现方式",
+      "createTitle": "选择实现方式",
+      "replaceTitle": "更换实现方式",
+      "create": "创建能力",
+      "name": "运行方式名称",
+      "description": "说明",
+      "source": "选择模型或处理方式",
+      "sourcePlaceholder": "选择已添加的模型、模型服务或内置处理",
+      "modelResourceOption": "模型 · {{name}}",
+      "modelServiceOption": "模型服务 · {{provider}} · {{model}}",
+      "pluginOption": "内置处理 · {{name}}",
+      "modelService": "模型服务",
+      "builtIn": {
+        "browser": "内置处理 · 本机",
+        "worker": "内置处理 · 云端",
+        "provider": "内置处理"
+      },
+      "runtime": "处理方式",
+      "runtimePlaceholder": "选择处理方式",
+      "advanced": "高级设置",
+      "advancedHint": "通常无需修改",
+      "autoConfigured": "已自动配置",
+      "autoConfiguredDescription": "能力输入和模型参数已经匹配。",
+      "noSourceTitle": "还没有可用的模型或内置处理",
+      "noSourceDescription": "可以返回调整需要和结果，或先配置支持这种内容的模型。",
+      "configureModels": "前往模型服务",
+      "configuration": "运行配置",
+      "inputMapping": "输入字段映射",
+      "outputMapping": "输出字段映射",
+      "capabilityInput": "能力输入 · {{name}}",
+      "configurationValue": "运行配置 · {{name}}",
+      "constant": "固定值",
+      "constantPlaceholder": "输入 JSON 值或文本",
+      "priority": "优先级（数字越小越优先）",
+      "fallback": "允许切换下一运行方式",
+      "fallbackReasons": {
+        "not_applicable": "当前输入不适用",
+        "unavailable": "当前运行方式不可用",
+        "retry_exhausted": "重试仍失败"
+      },
+      "testReady": "发布前将自动检查配置",
+      "testReadyDescription": "系统会验证输入、输出和运行配置。",
+      "publishHint": "发布前会自动检查配置；发布后请返回能力详情运行一次真实测试。",
+      "publish": "发布实现",
+      "validation": {
+        "resolve": "完成当前选择后即可保存。",
+        "name": "请填写运行方式名称",
+        "description": "请填写说明或留空",
+        "source": "请选择已添加的模型、模型服务或内置处理",
+        "adapter": "请选择处理方式",
+        "configuration": "请完成运行配置",
+        "inputMapping": "请为每个运行器输入指定来源",
+        "outputMapping": "请为每个能力输出指定结果字段",
+        "priority": "优先级需为大于零的整数"
+      },
+      "toast": {
+        "published": "运行方式已发布",
+        "failed": "无法发布运行方式",
+        "failedDescription": "请检查底层来源、字段映射和优先级后重试。"
+      }
+    },
+    "test": {
+      "action": "测试能力",
+      "title": "测试“{{name}}”",
+      "description": "使用当前已启用的实现运行一次真实任务。",
+      "start": "开始测试",
+      "retry": "重新测试",
+      "newTest": "新测试",
+      "done": "完成",
+      "restoredTitle": "已恢复现有测试",
+      "restoring": "正在读取原始输入和最新状态。",
+      "restoredDescription": "这里显示现有测试及其原始输入。选择“新测试”后才会开始另一次测试。",
+      "restoreFailed": "暂时无法读取已保存的测试。可选择“新测试”单独开始一次测试。",
+      "chooseImage": "选择一张图片",
+      "chooseImages": "选择图片",
+      "useDefault": "使用默认设置",
+      "cancelRun": "取消测试",
+      "cancelling": "正在取消",
+      "running": "正在运行能力",
+      "result": "运行结果",
+      "currentInput": "本次输入",
+      "failed": "能力测试失败",
+      "cancelled": "测试已取消",
+      "cancelledDescription": "没有产生新结果，可以修改输入后重新测试。",
+      "browser": {
+        "title": "浏览器处理",
+        "connecting": "正在连接此设备以处理浏览器步骤，请保持对话框打开。",
+        "ready": "此设备已连接，可处理本次测试的浏览器步骤。测试完成前请保持对话框打开。",
+        "reconnecting": "此设备的连接已中断，正在重试；也可以立即重新连接。",
+        "unavailable": "此设备暂时无法运行这个浏览器步骤，请重新连接后继续。",
+        "permissionRequired": "当前角色已无法在此设备运行这项测试。",
+        "failures": {
+          "manifest": "暂时无法读取此能力获准使用的浏览器运行环境，请重新连接后重试。",
+          "probe": "此设备无法启动本地浏览器处理器，请重新连接后重试。",
+          "register": "此设备暂时无法注册浏览器处理器，请重新连接后重试。",
+          "runtime": "浏览器处理器连接已中断，请重新连接后继续。"
+        },
+        "reconnect": "重新连接"
+      },
+      "failures": {
+        "unavailable": "当前没有可用的运行方式，请检查运行方式后重试。",
+        "budgetUnavailable": "当前额度不足，请调整额度后重新测试。",
+        "timedOut": "本次运行超时，请稍后重新测试。",
+        "unknown": "本次测试未完成，请检查输入或运行方式后重试。"
+      },
+      "output": {
+        "items": "{{count}} 项结果",
+        "fields": "已返回 {{count}} 项信息",
+        "empty": "没有返回可显示的内容",
+        "yes": "是",
+        "no": "否"
+      },
+      "noImageAssets": "还没有可测试的图片",
+      "openAssets": "前往资产库添加"
+    },
+    "discard": {
+      "title": "放弃未保存的修改？",
+      "description": "当前修改尚未保存。",
+      "action": "放弃修改"
+    },
+    "toast": {
+      "created": "能力已创建",
+      "createFailed": "无法创建能力",
+      "createFailedDescription": "请检查公开输入、输出和基本信息后重试。",
+      "saved": "能力信息已保存",
+      "saveFailed": "无法保存能力信息",
+      "saveFailedDescription": "能力信息可能已变化，请重新加载后重试。",
+      "statusUpdated": "能力状态已更新",
+      "statusFailed": "无法更新能力状态",
+      "statusFailedDescription": "能力状态可能已变化，请重新加载后重试。"
+    },
+    "agentAvailability": {
+      "unavailable": "Agent 暂时无法使用此能力，请检查实现方式和调用配置。",
+      "deployment_policy_missing": "Agent 暂时无法使用此能力：部署尚未配置模型服务调用约束，请联系部署管理员。",
+      "agent_not_exposed": "此能力尚未开放给 Agent 使用。",
+      "evaluation_failed": "暂时无法确认 Agent 是否可以使用此能力，请稍后刷新。",
+      "schema_conflict": "Agent 的输入参数与当前实现不兼容，请检查实现方式。",
+      "provider_unconfigured": "Agent 暂时无法使用此能力，请配置可用的模型服务。",
+      "binding_unavailable": "Agent 暂时无法使用此能力，请添加或启用实现方式。",
+      "budget_unavailable": "Agent 暂时无法使用此能力，请检查服务额度。"
+    }
+  },
+  "modelServices": {
+    "title": "模型服务",
+    "navigation": "模型服务配置",
+    "tabs": {
+      "models": "模型",
+      "providers": "供应商"
+    }
+  },
+  "models": {
+    "parameters": {
+      "update": "更新参数",
+      "review": "核对参数更新",
+      "current": "当前参数",
+      "next": "更新后参数",
+      "preserved": "已保留已有修改：{{fields}}",
+      "draftOnly": "采用后仅更新草稿，保存模型后生效。",
+      "apply": "采用更新",
+      "keep": "保留当前参数",
+      "upToDate": "参数已是最新",
+      "failed": "无法更新参数"
+    },
+    "title": "模型",
+    "description": "管理团队可以使用的模型、供应商、能力与费用。",
+    "opening": "正在打开模型设置",
+    "loading": "正在加载模型",
+    "configuredTitle": "已配置模型",
+    "editTitle": "编辑模型",
+    "save": "保存模型",
+    "cancel": "取消",
+    "modalityFlow": "输入 {{inputs}}；输出 {{outputs}}",
+    "forbiddenTitle": "无法管理模型",
+    "forbiddenDescription": "需要模型服务管理权限。",
+    "loadErrorTitle": "无法加载模型",
+    "listTitle": "已配置模型",
+    "listDescription": "相同 Slug 代表同一个模型；供应商模型映射和价格分别固定到对应 Deployment。",
+    "add": "添加模型",
+    "addUnavailable": "先刷新并启用至少一个包含可选模型的 Provider。",
+    "addTitle": "添加模型",
+    "addDescription": "从内部 models.dev 参考自动填入，或手工创建统一模型；随后再映射供应商模型并设置价格。",
+    "addSubmit": "添加模型",
+    "emptyTitle": "还没有已配置模型",
+    "emptyDescription": "从可选模型中添加一个模型。",
+    "providerRequiredTitle": "请先连接模型服务",
+    "providerRequiredDescription": "连接供应商并获取模型后，返回此处添加模型并设置 Agent 默认模型。",
+    "actions": {
+      "edit": "编辑",
+      "createCapability": "创建能力",
+      "viewAvailable": "查看可选模型"
+    },
+    "operations": {
+      "text_generate": "文本生成",
+      "image_generate": "图片生成",
+      "image_edit": "图片编辑",
+      "other": "模型操作"
+    },
+    "available": {
+      "loading": "正在加载可选模型",
+      "providerModels": "供应商模型",
+      "loadErrorTitle": "无法加载可选模型",
+      "emptyTitle": "还没有可选模型",
+      "emptyDescription": "请先添加供应商并拉取模型。"
+    },
+    "columns": {
+      "model": "模型",
+      "provider": "Provider",
+      "capabilities": "能力",
+      "modalities": "模态",
+      "context": "上下文",
+      "status": "状态",
+      "actions": "操作"
+    },
+    "modalities": {
+      "text": "文本",
+      "image": "图像",
+      "audio": "音频",
+      "video": "视频",
+      "pdf": "PDF"
+    },
+    "capabilities": {
+      "text": "文本生成",
+      "image": "图像"
+    },
+    "status": {
+      "ready": "可用",
+      "unavailable": "不可用",
+      "awaitingProvider": "待启用供应商",
+      "draft": "草稿"
+    },
+    "fields": {
+      "provider": "Provider",
+      "reference": "models.dev 模型",
+      "referencePlaceholder": "搜索并自动填入模型信息",
+      "slug": "统一 Slug",
+      "displayName": "展示名称",
+      "family": "模型系列",
+      "description": "描述",
+      "contextWindow": "最大上下文",
+      "maximumOutputTokens": "最大输出 Token",
+      "inputModalities": "输入模态",
+      "outputModalities": "输出模态",
+      "agentTextTransport": "Agent API 格式",
+      "reasoningSupport": "思考强度支持",
+      "webSearchSupport": "网络搜索支持",
+      "model": "模型",
+      "capability": "能力",
+      "inputPrice": "输入价格（美元 / 百万 Token）",
+      "outputPrice": "输出价格（美元 / 百万 Token）",
+      "cachePrice": "缓存读取价格（可选）",
+      "maximumCharge": "单次最高预留（美元）",
+      "toolCall": "工具调用"
+    },
+    "import": {
+      "action": "导入供应商模型",
+      "title": "供应商模型",
+      "description": "从供应商当前目录批量导入，再映射到统一 Slug。导入本身不会让模型立即可用。",
+      "selectAll": "选中全部未导入模型",
+      "selected": "导入 {{count}} 个模型",
+      "canonicalModel": "统一模型",
+      "selectCanonical": "选择现有 Slug",
+      "notImported": "未导入",
+      "map": "映射",
+      "publish": "配置价格并启用",
+      "loadError": "无法加载供应商模型目录",
+      "error": "无法导入供应商模型"
+    },
+    "mapping": {
+      "error": "无法保存模型映射"
+    },
+    "pricing": {
+      "title": "启用 {{model}}",
+      "description": "价格会固定到此次 Deployment，并用于自动结算。",
+      "sectionTitle": "计费配置",
+      "mode": "结算方式",
+      "fixed": "固定单次费用",
+      "metered": "按 Token 计费",
+      "providerReported": "按供应商返回的实际费用",
+      "fixedCharge": "每次成功调用费用（USD）",
+      "fields": {
+        "fixedCharge": "每次成功调用费用（USD）",
+        "input": "普通输入 / 百万 Token",
+        "cacheRead": "缓存读取 / 百万 Token（可选）",
+        "cacheWrite": "缓存写入 / 百万 Token（可选）",
+        "output": "输出 / 百万 Token",
+        "maximumCharge": "单次费用上限",
+        "maximumChargeUsd": "单次费用上限（USD）"
+      },
+      "error": "无法启用供应商模型"
+    },
+    "support": {
+      "supported": "支持",
+      "unsupported": "不支持"
+    },
+    "reasoningLevels": {
+      "off": "关闭",
+      "low": "低",
+      "medium": "中",
+      "high": "高"
+    },
+    "webSearchModes": {
+      "off": "关闭",
+      "auto": "按需使用",
+      "required": "必须使用"
+    },
+    "agentSettings": {
+      "title": "Agent 设置",
+      "defaultModel": "默认模型",
+      "fastModel": "快速模型",
+      "reasoningLevel": "思考强度",
+      "webSearch": "网络搜索",
+      "confirmActions": "执行前确认",
+      "confirmOn": "需要",
+      "confirmOff": "直接执行",
+      "save": "保存",
+      "unavailable": "Agent 模型设置暂时不可用。",
+      "chooseModels": "请选择默认模型和快速模型。",
+      "noAvailableModels": "暂无可用于 Agent 的模型。",
+      "noAvailableModelsPlaceholder": "暂无可用模型",
+      "toast": {
+        "updated": "Agent 模型已更新",
+        "failed": "无法更新 Agent 模型"
+      },
+      "unavailableOption": "待配置",
+      "reasons": {
+        "profile": "发布模型配置",
+        "deployment": "启用模型连接",
+        "endpoint": "验证并启用供应商连接",
+        "credential": "更新有效的供应商密钥",
+        "pricing": "发布有效的固定或按量价格",
+        "budget": "启用预算并更新有效期",
+        "tool_call": "确认模型支持工具调用并重新发布",
+        "unknown": "检查模型及供应商配置"
+      },
+      "configureModel": "配置",
+      "toolCallUnconfirmed": "工具调用未确认",
+      "viewModels": "查看模型配置",
+      "needsSetup": "Agent 待配置",
+      "shortReasons": {
+        "profile": "模型未发布",
+        "deployment": "连接未启用",
+        "endpoint": "供应商未通过验证",
+        "credential": "密钥不可用",
+        "pricing": "计费未就绪",
+        "budget": "预算未生效或已过期",
+        "tool_call": "工具调用未确认",
+        "unknown": "配置需要确认"
+      }
+    },
+    "validation": {
+      "editorNotOpen": "模型配置尚未打开。",
+      "model": "请选择模型。",
+      "provider": "请选择供应商。",
+      "pricingMode": "当前供应商模型不支持供应商报告计费。",
+      "publishedProvider": "模型发布后未找到所选供应商。",
+      "tokenLimits": "请同步模型数据，或根据供应商说明填写有效的上下文和输出上限；未知值不会自动填充。"
+    },
+    "providerStatus": {
+      "discovered": "已导入",
+      "mapped": "已映射",
+      "active": "可用",
+      "disabled": "已停用",
+      "removed": "已移除"
+    },
+    "pricingHelp": "价格用于自动结算；单次最高预留只用于运行前的额度保护。",
+    "reference": {
+      "action": "使用 models.dev 参考价格",
+      "applied": "已填入 {{provider}} 的公开参考价格，请在保存前确认。",
+      "unavailable": "没有找到适合当前 Provider 的参考模型数据。",
+      "syncLatest": "同步最新模型数据",
+      "synced": "已同步最新模型数据",
+      "syncedDescription": "已更新 {{count}} 项，请检查后保存。",
+      "syncFailed": "无法同步模型数据",
+      "notFound": "暂无参考模型数据",
+      "pricingConflict": "价格来源存在冲突，当前价格保持不变。",
+      "metadataConflict": "找到多个不同的模型记录，冲突字段未覆盖。",
+      "stale": "暂时无法获取最新数据，已使用本地缓存；请检查后保存。",
+      "sourceUnavailable": "models.dev 暂时不可用，并且没有可用的本地模型数据。",
+      "updatedDraft": "参考数据已填入，待保存",
+      "noChanges": "未更新任何字段",
+      "missingFields": "{{fields}} 未获取到明确参考值，已保留原值，请确认。",
+      "source": "模型参数参考：{{source}}。",
+      "draftSummary": "已更新 {{count}} 项，保存后生效。",
+      "reviewDetails": "同步详情"
+    },
+    "defaults": {
+      "title": "应用默认值",
+      "description": "应用只选择已配置模型，不重复维护 Provider 或价格。",
+      "agent": "Agent 默认模型",
+      "save": "保存默认值"
+    },
+    "toast": {
+      "addedTitle": "模型已添加",
+      "addedDescription": "模型现在可以被应用和能力配置使用。",
+      "addErrorTitle": "无法添加模型",
+      "defaultUpdatedTitle": "默认模型已更新",
+      "defaultUpdatedDescription": "新的 Agent 运行将使用所选模型。",
+      "defaultErrorTitle": "无法更新默认模型",
+      "savedTitle": "模型已保存",
+      "savedDescription": "模型配置已经生效。",
+      "saveErrorTitle": "无法保存模型"
+    },
+    "toolCallHelp": "Agent 需要此能力。确认供应商支持后，保存模型即可用于 Agent。",
+    "toolCallStates": {
+      "unknown": "未确认",
+      "supported": "支持",
+      "unsupported": "不支持"
+    }
+  },
+  "resourceSources": {
+    "title": "资源来源",
+    "loading": "正在加载",
+    "loadErrorTitle": "加载失败",
+    "reload": "重新加载",
+    "forbiddenTitle": "无法修改资源设置",
+    "forbiddenDescription": "当前账号没有权限。",
+    "configure": "配置",
+    "completeConfiguration": "完成配置后即可开启",
+    "requiredField": "请填写",
+    "empty": "暂无可用来源",
+    "columns": {
+      "source": "素材来源",
+      "coverage": "内容",
+      "configure": "配置",
+      "enabled": "开启"
+    },
+    "allAvailable": "全部",
+    "allKind": {
+      "image": "图片",
+      "vector": "图标",
+      "font": "字体",
+      "art_text": "艺术字"
+    },
+    "restrictedTo": "仅 {{values}}",
+    "toggle": "开启或关闭 {{name}}",
+    "checkAndEnable": "保存并开启",
+    "close": "关闭",
+    "cancel": "取消",
+    "endpoint": "服务地址",
+    "credential": "访问凭据",
+    "toast": {
+      "enabled": "已开启",
+      "enableFailed": "开启失败",
+      "disabled": "已关闭",
+      "error": "操作失败"
+    }
+  },
+  "gateway": {
+    "emptyTitle": "没有可管理的团队设置",
+    "emptyDescription": "当前角色仍可使用工作台。"
+  },
+  "general": {
+    "title": "基本信息",
+    "identityTitle": "团队身份",
+    "forbiddenTitle": "无法修改团队信息",
+    "forbiddenDescription": "需要团队管理员权限。",
+    "loading": "正在同步团队信息",
+    "recheckPermission": "重新检查权限",
+    "reload": "重新加载",
+    "forbiddenLoadTitle": "无法修改团队信息",
+    "loadErrorTitle": "无法加载团队信息",
+    "forbiddenLoadDescription": "请联系团队所有者调整权限。",
+    "staleTitle": "当前信息可能不是最新",
+    "staleDescription": "恢复连接后可继续保存。",
+    "refreshing": "正在刷新",
+    "refresh": "重新获取",
+    "savedTitle": "基本信息已保存",
+    "savedDescription": "团队名称已更新。",
+    "savedAfterRecovery": "已确认团队名称更新成功。",
+    "conflictTitle": "团队信息已经变化",
+    "conflictDescription": "已显示最新名称，请确认后重新编辑。",
+    "confirmingTitle": "正在确认团队名称",
+    "confirmingDescription": "已重新读取团队信息。",
+    "leaveTitle": "离开基本信息？",
+    "leaveDescription": "尚未保存的更改不会保留。",
+    "nameRequired": "请输入团队名称。",
+    "nameLabel": "团队名称",
+    "slugLabel": "团队标识",
+    "slugDescription": "用于团队链接，创建后不可修改。",
+    "save": "保存更改"
+  },
+  "people": {
+    "title": "成员与权限",
+    "forbiddenTitle": "无法管理成员与邀请",
+    "forbiddenDescription": "需要团队管理员权限。",
+    "loading": "正在载入成员与邀请",
+    "reload": "重新加载",
+    "loadForbiddenTitle": "无法管理这个团队",
+    "loadErrorTitle": "无法加载成员与邀请",
+    "loadErrorDescription": "请检查权限或连接后重试。",
+    "loadMoreErrorDescription": "当前列表仍然保留，请检查连接后重试。",
+    "leaveTitle": "离开成员与权限？",
+    "leaveDescription": "尚未建立的邀请不会保留。",
+    "searchLabel": "搜索成员或邀请",
+    "searchPlaceholder": "姓名、邮箱或角色",
+    "searchPartial": "当前只搜索已载入内容；继续载入可扩大范围。",
+    "noSearchResults": "没有匹配的成员或邀请",
+    "moreSuffix": " · 仍有更多",
+    "table": {
+      "category": "类型",
+      "person": "成员",
+      "role": "角色",
+      "changeRoleLabel": "调整 {{name}} 的角色",
+      "status": "状态 / 有效期",
+      "actions": "操作",
+      "memberType": "成员",
+      "invitationType": "已邀请",
+      "awaitingAcceptance": "等待对方接受邀请",
+      "invitationNotSelectable": "邀请 {{email}} 不参与成员批量操作",
+      "empty": "暂无成员或待接受邀请"
+    },
+    "status": {
+      "active": "活跃",
+      "suspended": "已暂停",
+      "revoked": "已撤销"
+    },
+    "roles": {
+      "owner": {
+        "label": "所有者",
+        "description": "管理团队和全部设置"
+      },
+      "admin": {
+        "label": "管理员",
+        "description": "管理成员和制作设置"
+      },
+      "editor": {
+        "label": "设计成员",
+        "description": "创建项目并制作内容"
+      },
+      "operator": {
+        "label": "业务成员",
+        "description": "使用 Agent 和已发布能力完成业务任务"
+      },
+      "reviewer": {
+        "label": "审阅成员",
+        "description": "检查并确认结果"
+      },
+      "viewer": {
+        "label": "查看成员",
+        "description": "查看和下载内容"
+      }
+    },
+    "errors": {
+      "generic": "操作没有完成，请检查连接后重试。",
+      "lastOwner": "团队必须保留至少一位有效所有者。请先把另一位成员设为所有者。",
+      "conflict": "成员或邀请已发生变化，请重试。",
+      "forbidden": "当前角色不能执行这个管理操作。"
+    },
+    "toast": {
+      "resentTitle": "新邀请链接已建立",
+      "resentDescription": "旧链接已经失效，请只分享当前链接。",
+      "resendErrorTitle": "无法生成新邀请链接",
+      "revokedTitle": "邀请已撤销",
+      "revokedDescription": "原邀请链接不能再被接受。",
+      "revokeErrorTitle": "无法撤销邀请",
+      "memberUpdatedTitle": "成员权限已更新",
+      "memberUpdatedDescription": "新的权限已经生效。",
+      "memberErrorTitle": "无法更新成员",
+      "batchUpdatedTitle": "批量成员权限已更新",
+      "batchUpdatedDescription": "{{count}} 位成员的访问状态已经生效。",
+      "batchErrorTitle": "无法完成批量操作",
+      "batchErrorDescription": "{{error}} 所有已选成员均未更改。",
+      "copiedTitle": "邀请链接已复制",
+      "copiedDescription": "请私下发送给受邀成员。",
+      "copyErrorTitle": "无法复制邀请链接",
+      "copyErrorDescription": "请手动选择链接并复制。"
+    },
+    "invite": {
+      "action": "邀请成员",
+      "title": "邀请新成员",
+      "description": "链接将在 7 天后过期，仅限这个邮箱使用。",
+      "shareTitle": "分享邀请链接",
+      "shareDescription": "链接只显示一次，请立即复制。",
+      "created": "邀请已建立",
+      "sharePrivately": "请通过这个工作邮箱的私密渠道发送。",
+      "copy": "复制邀请链接",
+      "done": "完成",
+      "email": "工作邮箱",
+      "emailRequired": "请输入被邀请人的工作邮箱。",
+      "role": "团队角色",
+      "groups": {
+        "collaboration": "制作与协作",
+        "management": "团队管理"
+      },
+      "ownerWarningTitle": "所有者拥有最高权限",
+      "ownerWarningDescription": "对方加入后可以管理所有成员、邀请和团队设置，也可以调整你的权限。",
+      "ownerAcknowledge": "我确认要授予团队所有权",
+      "errorTitle": "无法建立邀请",
+      "cancel": "取消",
+      "submit": "建立邀请"
+    },
+    "members": {
+      "title": "成员",
+      "searchCount": "{{visible}} / 已载入 {{loaded}} 位成员",
+      "activeCount": "{{active}} 位活跃成员 · 已载入 {{loaded}} 位",
+      "noMatch": "没有匹配的成员",
+      "selectLabel": "选择 {{name}}",
+      "you": "你",
+      "fallbackName": "成员 {{id}}",
+      "ownerOnlyLabel": "只有所有者可以管理 {{name}}",
+      "manageLabel": "管理 {{name}}",
+      "changeRole": "调整角色",
+      "suspend": "暂停成员",
+      "restore": "恢复成员",
+      "loadMoreErrorTitle": "无法载入更多成员",
+      "loadMore": "载入更多成员"
+    },
+    "batch": {
+      "manage": "批量管理",
+      "done": "完成批量",
+      "selected": "已选择 {{count}} 位成员",
+      "description": "单次最多 100 位；批量操作不会留下部分完成状态。",
+      "limitReached": "已达到单次操作上限",
+      "selectCurrent": "选择当前结果",
+      "clear": "清除",
+      "suspendSelected": "暂停所选（{{count}}）",
+      "restoreSelected": "恢复所选（{{count}}）",
+      "confirmSuspend": "确认批量暂停",
+      "confirmRestore": "确认批量恢复",
+      "suspendTitle": "暂停 {{count}} 位成员？",
+      "restoreTitle": "恢复 {{count}} 位成员？",
+      "suspendDescription": "所选成员将立即失去团队访问权限，正在进行的工作不会被删除。",
+      "restoreDescription": "所选成员将立即恢复团队访问，并继续使用各自原有角色。",
+      "atomicDescription": "操作会在同一事务中完成；任一成员权限或版本发生变化时，所有成员都保持原状。"
+    },
+    "invitations": {
+      "title": "待接受邀请",
+      "validCount": "{{count}} 个仍有效",
+      "noMatch": "没有匹配的待接受邀请",
+      "empty": "暂无待接受邀请",
+      "expiresAt": "有效至 {{date}}",
+      "manage": "管理邀请",
+      "resend": "生成新链接",
+      "revoke": "撤销邀请",
+      "loadMoreErrorTitle": "无法载入更多邀请",
+      "loadMore": "载入更多邀请"
+    },
+    "confirm": {
+      "changeRoleAction": "确认调整",
+      "suspendAction": "确认暂停",
+      "restoreAction": "确认恢复",
+      "revokeAction": "确认撤销",
+      "changeRoleTitle": "将 {{name}} 调整为{{role}}？",
+      "suspendTitle": "暂停 {{name}}？",
+      "restoreTitle": "恢复 {{name}}？",
+      "revokeTitle": "撤销这个邀请？",
+      "changeRoleDescription": "当前角色为{{role}}。确认后，新权限立即生效；最后一位所有者不能降级。",
+      "suspendDescription": "该成员将立即失去访问权限，正在进行的工作不会被删除。最后一位所有者不能被暂停。",
+      "restoreDescription": "该成员将立即恢复团队访问，并继续使用{{role}}权限。",
+      "revokeDescription": "原链接会立即失效。若之后仍需加入，需要重新建立邀请。"
+    },
+    "addExisting": {
+      "action": "添加成员",
+      "method": "添加方式",
+      "existing": "已有账号",
+      "invite": "邀请加入",
+      "description": "输入对方已验证的账号邮箱，直接授予当前团队空间的权限。",
+      "submit": "添加成员",
+      "succeeded": "成员已添加",
+      "alreadyMember": "该账号已有成员记录，请在列表中调整或恢复权限。",
+      "failed": "无法添加，请确认对方已注册并验证邮箱，或改用邀请加入。",
+      "emailPlaceholder": "请输入账号邮箱"
+    }
+  },
+  "usage": {
+    "title": "用量与额度",
+    "forbiddenTitle": "无法查看用量与额度",
+    "forbiddenDescription": "需要团队管理员权限。",
+    "forbiddenLoadDescription": "请联系团队所有者调整权限。",
+    "loadErrorTitle": "无法加载用量与额度",
+    "loading": "正在同步用量与额度",
+    "recheckPermission": "重新检查权限",
+    "reload": "重新加载",
+    "refreshing": "正在刷新",
+    "refresh": "刷新",
+    "staleTitle": "当前数据可能不是最新",
+    "staleDescription": "恢复连接后可重新获取。",
+    "holdsTitle_one": "模型费用待确认 · 1 笔",
+    "holdsTitle_other": "模型费用待确认 · {{count}} 笔",
+    "holdsDescription": "这些费用暂时无法根据现有记录确认，相关额度已保留。",
+    "holdsAction": "查看待确认费用",
+    "holdsSummary_one": "1 笔费用待确认",
+    "holdsSummary_other": "{{count}} 笔费用待确认",
+    "availableSummary_one": "1 个服务额度可用",
+    "availableSummary_other": "{{count}} 个服务额度可用",
+    "unavailableSummary_one": "1 个服务额度未在使用。",
+    "unavailableSummary_other": "{{count}} 个服务额度未在使用。",
+    "safeSummary": "当前没有额度冻结或未知扣费。",
+    "needsAttention": "需要处理",
+    "safe": "暂无待核对费用",
+    "availableBalance": "可用服务剩余额度",
+    "onlyAvailableServices": "仅统计使用中的服务",
+    "totals": {
+      "used": "已使用",
+      "processing": "处理中",
+      "held": "待确认",
+      "remaining": "可用余额",
+      "limit": "额度上限"
+    },
+    "budgetsTitle": "服务额度",
+    "pausedBudgetsTitle": "暂停的服务（{{count}}）",
+    "noAvailableBudgetsTitle": "当前没有可用的服务额度",
+    "noAvailableBudgetsDescription": "启用模型服务后，它的可用额度会显示在这里。",
+    "updatedAt": "更新于 {{date}}",
+    "emptyBudgetsTitle": "还没有生效的服务额度",
+    "emptyBudgetsDescription": "连接并启用模型服务后，可在这里设置费用上限。",
+    "manageProviders": "管理模型服务",
+    "columns": {
+      "provider": "模型服务",
+      "status": "状态",
+      "consumed": "已占用 / 上限",
+      "remaining": "可用余额",
+      "period": "周期",
+      "actions": "操作"
+    },
+    "budgetStatus": {
+      "active": "可用",
+      "frozen": "已冻结",
+      "exhausted": "额度已用尽",
+      "closed": "已关闭",
+      "paused": "部分额度已保留"
+    },
+    "unknownCharge": "存在待确认费用",
+    "recordNormal": "额度记录正常",
+    "progressLabel": "{{name}} 已占用 {{amount}}，占本期上限 {{percent}}%",
+    "readOnly": "只读",
+    "multipleCurrencies": "多币种",
+    "notLinked": "未关联",
+    "viewRun": "查看任务详情",
+    "opening": "正在打开费用与额度",
+    "overviewLabel": "团队费用状态",
+    "limit": {
+      "action": "设置上限",
+      "title": "设置“{{name}}”额度",
+      "committed": "当前已占用",
+      "current": "当前上限",
+      "description": "币种：{{currency}}。",
+      "label": "新的额度上限",
+      "cancel": "取消",
+      "submit": "保存额度",
+      "errorTitle": "无法更新额度",
+      "updatedTitle": "额度上限已更新",
+      "updatedDescription": "新的上限立即用于之后开始的模型任务。",
+      "conflict": "额度已被其他管理员修改。关闭后刷新，再按最新数据重新设置。",
+      "belowCommitted": "额度不能低于已使用、处理中和待核对费用的合计。",
+      "genericError": "额度没有保存，请检查连接后重试。",
+      "invalidAmount": "请输入大于或等于 0 的有效金额。",
+      "minimumAmount": "不能低于当前已占用的 {{amount}}。"
+    },
+    "holds": {
+      "title": "待确认费用",
+      "description": "这些费用无法根据现有记录自动确认，相关额度会继续保留。",
+      "heldAt": "进入待确认：{{date}}",
+      "status": "状态",
+      "reconciling": "待内部核对",
+      "localSubmission": "Kanvas 提交（本地）",
+      "noSubmittedAt": "未记录提交时间",
+      "utc": "UTC 对照",
+      "run": "关联任务",
+      "externalTask": "外部任务",
+      "noExternalTask": "未取得外部任务编号",
+      "contactAdmin": "请联系模型服务管理员核对",
+      "provider": "模型服务",
+      "heldAmount": "当前保留"
+    },
+    "resolve": {
+      "action": "核对并结清",
+      "waitingRefresh": "已结清，等待刷新",
+      "title": "结清待确认费用",
+      "warningTitle": "这一步会恢复或扣减团队额度",
+      "warningDescription": "本地运行失败不能证明没有扣费。请先核对外部记录，无法确认时保留待确认状态。",
+      "evidenceTitle": "核对证据",
+      "evidenceDescription": "优先用外部任务编号搜索；没有编号时，使用模型服务、秒级时间和金额核对。",
+      "copyEvidence": "复制核对摘要",
+      "reconciliationTime": "核对时间",
+      "utcTime": "UTC 对照：{{date}} UTC",
+      "viewRun": "查看关联任务",
+      "copied": "核对摘要已复制，可粘贴到外部任务或账单搜索中。",
+      "copyFailed": "无法复制，请手动选择上方证据。",
+      "copyDescription": "摘要只包含核对所需事实，不包含凭据。",
+      "externalRecord": "外部记录显示",
+      "chargedChoice": "已产生扣费",
+      "notChargedChoice": "确认没有扣费",
+      "amountLabel": "实际扣费（{{currency}}）",
+      "amountPlaceholder": "例如 0.72",
+      "referenceLabel": "核对依据",
+      "referenceDescription": "按上方秒级时间核对任务或账单，填写可供管理员复核的简短说明；不要填写 API Key。",
+      "referencePlaceholder": "例如：账单日期、任务编号或核对结果",
+      "formErrorTitle": "没有结清",
+      "chargedSummary": "将按填写的实际扣费结清 {{provider}} 的这笔 {{amount}} 保留额度。",
+      "releasedSummary": "将把 {{provider}} 的这笔 {{amount}} 保留额度标记为未扣费并释放。",
+      "auditDescription": "提交后会写入不可变审计；信息不确定时请暂不处理。",
+      "cancel": "暂不处理",
+      "submitCharged": "按实际扣费结清",
+      "submitReleased": "释放待确认额度",
+      "submit": "确认结清方式",
+      "leaveTitle": "离开用量核对？",
+      "leaveDescription": "尚未提交的核对结果和依据不会保留。",
+      "discardAction": "放弃核对",
+      "discardTitle": "放弃尚未提交的核对？",
+      "discardDescription": "结清方式、实际扣费和核对依据不会保留；这笔费用仍保持待确认状态。",
+      "refreshingTitle": "费用已结清，正在刷新余额",
+      "refreshingDescription": "结清结果已经写入审计；余额刷新前不能再次提交。",
+      "successTitle": "待核对费用已结清",
+      "released_zero": "已根据外部核对结果释放额度，余额已更新。",
+      "released_other": "已根据外部核对结果释放额度，余额已更新。仍有 {{count}} 笔费用待核对。",
+      "charged_zero": "已按实际扣费 {{amount}} 完成记账，余额已更新。",
+      "charged_other": "已按实际扣费 {{amount}} 完成记账，余额已更新。仍有 {{count}} 笔费用待核对。",
+      "refreshErrorTitle": "费用已结清，余额暂未刷新",
+      "refreshErrorDescription": "结清结果已经写入审计，但页面可能仍显示旧余额。请刷新读取，不要重复提交。",
+      "conflict": "这笔记录已经变化。请关闭后刷新，并按最新状态重新核对。",
+      "genericError": "暂时无法结清这笔费用。没有更改额度，请检查连接后重试。",
+      "resolutionRequired": "请选择账单显示已扣费，或确认没有扣费。",
+      "amountInvalid": "请输入大于 0 且不超过 {{amount}} 的实际扣费。",
+      "evidenceRequired": "请填写用于复核的任务、账单日期或记录说明。"
+    },
+    "metrics": {
+      "title": "过去 30 天用量",
+      "tracked": "{{count}} 次处理已写入用量记录",
+      "tasks": "处理任务",
+      "taskValue": "{{count}} 次",
+      "latestAt": "最近记录于 {{date}}",
+      "unknown": "{{count}} 项用量数值未回传",
+      "emptyTitle": "过去 30 天还没有用量记录",
+      "emptyDescription": "完成浏览器、内部 Worker 或模型服务处理后，用量会自动出现在这里。",
+      "type": "用量类型",
+      "recorded": "已记录",
+      "latest": "最近记录",
+      "unknownRow": "{{count}} 项数值尚未回传，与待核对费用分开统计",
+      "recordedRow": "已完成记账"
+    },
+    "metricLabels": {
+      "duration": "处理时长",
+      "inputTokens": "输入 Token",
+      "inputTextTokens": "文本输入 Token",
+      "inputImageTokens": "图片输入 Token",
+      "outputTokens": "输出 Token",
+      "totalTokens": "总 Token",
+      "cost": "模型费用",
+      "other": "其他已记录用量"
+    },
+    "duration": {
+      "milliseconds": "{{value}} 毫秒",
+      "hours": "{{value}} 小时",
+      "minutes": "{{value}} 分",
+      "seconds": "{{value}} 秒"
+    },
+    "units": {
+      "milliseconds": "毫秒",
+      "seconds": "秒",
+      "tokens": "Token",
+      "bytes": "字节"
+    },
+    "evidence": {
+      "provider": "模型服务：{{value}}",
+      "amount": "保留金额：{{value}}",
+      "run": "Kanvas 运行：{{value}}",
+      "externalTask": "外部任务：{{value}}",
+      "localTime": "提交时间（本地）：{{value}}",
+      "utcTime": "提交时间（UTC）：{{value}}"
+    }
+  },
+  "providers": {
+    "title": "模型服务",
+    "forbiddenTitle": "无法管理模型服务",
+    "forbiddenDescription": "需要团队管理员权限。",
+    "loading": "正在同步模型服务",
+    "reload": "重新加载",
+    "loadErrorTitle": "无法加载模型服务",
+    "leaveTitle": "离开模型服务？",
+    "leaveDescription": "未保存的连接或 API Key 将被清空。",
+    "connect": "连接服务",
+    "activeSummary_one": "1 个服务可供新任务使用",
+    "activeSummary_other": "{{count}} 个服务可供新任务使用",
+    "noActiveSummary": "当前没有可供新任务使用的服务",
+    "attentionSummary": "{{attention}} 个需要处理，{{inactive}} 个未在使用。",
+    "attentionDescription": "检查失败或待检查的服务后即可继续使用。",
+    "inactiveSummary_one": "1 个未在使用，当前没有配置异常。",
+    "inactiveSummary_other": "{{count}} 个未在使用，当前没有配置异常。",
+    "viewRoutes": "查看使用这些服务的能力",
+    "storageErrorTitle": "暂时无法连接新服务",
+    "storageErrorDescription": "模型服务连接暂时不可用。",
+    "staleTitle": "当前服务状态可能不是最新",
+    "staleDescription": "恢复连接后可重新获取。",
+    "emptyTitle": "连接第一个模型服务",
+    "emptyDescription": "连接后即可为制作能力分配模型。",
+    "listTitle": "服务连接",
+    "configuredCount_one": "1 个已配置服务",
+    "configuredCount_other": "{{count}} 个已配置服务",
+    "directory": {
+      "allServices": "全部服务类型",
+      "filterLabel": "按类型筛选模型服务",
+      "searchPlaceholder": "搜索服务名称或模型",
+      "noMatches": "没有符合当前筛选条件的模型服务",
+      "columns": {
+        "budgetUsage": "预算与用量"
+      },
+      "lifecycle": {
+        "active": "已启用",
+        "disabled": "已暂停",
+        "draft": "未启用",
+        "revoked": "不可用"
+      },
+      "budget": {
+        "missing": "尚未设置预算",
+        "consumed": "已使用 {{amount}}",
+        "held": "{{amount}} 待核对"
+      },
+      "storage": {
+        "encrypted_database": "API Key 加密存储在 Kanvas 数据库中。",
+        "plaintext_database": "API Key 未加密存储在 Kanvas 数据库中。"
+      },
+      "remove": {
+        "action": "删除服务",
+        "title": "删除 {{name}}？",
+        "description": "删除后，这个服务将不再提供模型。",
+        "cancel": "取消",
+        "submit": "删除"
+      },
+      "create": {
+        "basicsTitle": "连接信息",
+        "basicsDescription": "选择服务并填写连接信息。",
+        "budgetLabel": "服务预算上限（USD）",
+        "budgetDescription": "达到上限后会停止新的模型调用；之后可在服务列表中调整。",
+        "budgetPlaceholder": "例如：20.00",
+        "modelsTitle": "可用模型",
+        "modelsDescription": "选择这个连接可供团队使用的模型。",
+        "searchModels": "搜索模型",
+        "selectAll": "全选",
+        "clear": "清空",
+        "selectModel": "选择 {{name}}",
+        "providerModel": "服务模型",
+        "modelIdentifier": "模型标识",
+        "modelIdentifierFor": "{{name}} 的模型标识",
+        "modelsEmptyTitle": "先拉取服务模型",
+        "modelsEmptyDescription": "填写 API Key 后，即可拉取这个连接提供的模型。",
+        "saveAndContinue": "保存并继续"
+      },
+      "errors": {
+        "editorClosed": "请重新打开模型服务连接。",
+        "invalidBudget": "请输入大于 0 的服务预算上限。",
+        "modelMissing": "模型 {{model}} 已不在当前目录中。",
+        "invalidIdentifier": "模型 {{model}} 的标识只能使用英文字母、数字、点、下划线、斜杠或连字符，最多 160 个字符。",
+        "importIncomplete": "服务没有返回全部已选模型，请重新拉取目录后再试。"
+      },
+      "toast": {
+        "createdTitle": "模型服务已添加",
+        "createdDescription": "连接、模型和预算已保存，请继续配置模型计费。",
+        "removedTitle": "模型服务已删除",
+        "removeErrorTitle": "无法删除模型服务"
+      }
+    },
+    "columns": {
+      "service": "服务",
+      "provider": "服务类型",
+      "models": "已添加模型",
+      "status": "状态",
+      "validation": "连接校验",
+      "actions": "操作"
+    },
+    "validationLabels": {
+      "passed": "校验通过",
+      "failed": "校验失败",
+      "pending": "待校验"
+    },
+    "validationAt": "{{status}} · {{date}}",
+    "modelCount_one": "1 个模型",
+    "modelCount_other": "{{count}} 个模型",
+    "notChecked": "尚未检查",
+    "credentialSuffix": "凭据 ····{{suffix}}",
+    "credentialManaged": "凭据已托管",
+    "recheck": "重新校验",
+    "check": "校验连接",
+    "manage": "管理 {{name}}",
+    "rotateKey": "更新 API Key",
+    "refreshCatalog": "刷新模型目录",
+    "reviewCatalog": "审阅模型变化",
+    "disable": "暂停新任务",
+    "overviewLabel": "模型服务状态",
+    "listLabel": "已配置的模型服务",
+    "actions": {
+      "activate": "启用",
+      "reactivate": "重新启用"
+    },
+    "activation": {
+      "title": "设置 {{name}} 的费用",
+      "description": "为每个模型设置自动结算方式。任务成功后按这里的规则结算；失败且确认未发起时自动释放。",
+      "mode": "结算方式",
+      "fixedMode": "固定单次费用",
+      "reportedMode": "按服务返回的实际费用",
+      "fixedAmount": "每次成功调用费用（USD）",
+      "maximumAmount": "单次费用上限（USD）",
+      "fixedHelp": "只有调用成功才按此金额结算。",
+      "reportedHelp": "服务返回实际费用；超过上限时暂停自动结算并进入内部核对。",
+      "invalidAmount": "请输入大于 0 的有效金额。",
+      "submit": "确认并启用"
+    },
+    "agentModel": {
+      "title": "Agent 默认模型",
+      "description": "新对话和新回复使用这里选择的模型；已经开始的运行继续使用启动时固定的版本。",
+      "label": "默认模型",
+      "save": "保存默认模型",
+      "updatedTitle": "Agent 默认模型已更新",
+      "updatedDescription": "新的 Agent 运行将使用所选模型，进行中的运行不受影响。",
+      "updateErrorTitle": "无法更新 Agent 默认模型",
+      "loadErrorTitle": "暂时无法读取 Agent 模型",
+      "emptyTitle": "还没有可用的 Agent 模型",
+      "emptyDescription": "先连接并发布一个支持文本生成且计费可自动结算的模型。",
+      "publish": "发布 Agent 模型",
+      "publishTitle": "发布 Agent 文本模型",
+      "publishDescription": "从 Provider 已发现的模型中选择一个，并填写供应商公开价格。发布后，用量会按模型返回的 Token 自动结算。",
+      "providerLabel": "Provider 服务",
+      "modelLabel": "模型",
+      "inputPrice": "输入价格（美元 / 百万 Token）",
+      "outputPrice": "输出价格（美元 / 百万 Token）",
+      "cachePrice": "缓存读取价格（可选）",
+      "maximumCharge": "单次最高预留（美元）",
+      "pricingHelp": "价格用于自动结算；单次最高预留只是运行前的额度保护，不是固定收费。",
+      "publishSubmit": "发布模型",
+      "publishSuccessTitle": "Agent 模型已发布",
+      "publishSuccessDescription": "现在可以把它设为 Agent 默认模型。",
+      "publishErrorTitle": "无法发布 Agent 模型"
+    },
+    "statusLabels": {
+      "active": "使用中",
+      "inactive": "未启用",
+      "revoked": "不可用",
+      "failed": "配置确认失败",
+      "ready": "待启用",
+      "disabled": "已暂停",
+      "pending": "待校验"
+    },
+    "fields": {
+      "invalidApiKey": "请输入新的有效 API Key。"
+    },
+    "catalog": {
+      "meta": "目录 r{{revision}} · {{date}}",
+      "pendingReview": "发现能力变化，当前调用仍使用已采用的 r{{revision}}"
+    },
+    "catalogReview": {
+      "title": "审阅 {{name}} 的模型变化",
+      "description": "这里只比较已保存的不可变目录。采用前 Kanvas 会再次连接供应商、校验模型，并在同一事务中切换新任务使用的模型与路由；运行中的任务继续使用原版本。",
+      "revisions": "当前调用使用已采用 r{{activated}}；最新目录待采用 r{{current}}。",
+      "notActivated": "未启用",
+      "blockersTitle": "当前变化无法采用",
+      "noBlockers": "检查通过，可以采用这版目录。",
+      "noChanges": "所选模型没有可展示的调用能力变化。",
+      "changes": {
+        "unchanged": "未变化",
+        "added": "新增",
+        "removed": "移除",
+        "changed": "已变化"
+      },
+      "operations": {
+        "image.generate": "图片生成",
+        "image.edit": "图片编辑"
+      },
+      "surfacesAdded": "新增接口：{{values}}",
+      "surfacesRemoved": "移除接口：{{values}}",
+      "parameterChange": "参数 {{key}}：{{change}}（{{fields}}）",
+      "blockers": {
+        "not_activated": "服务尚未首次启用，请先通过启用流程采用初始目录。",
+        "no_pending_changes": "当前没有等待采用的目录变化。",
+        "selected_model_removed": "已选模型 {{model}} 已从最新目录中消失。请先选择替代模型或停用对应路由。",
+        "selected_model_identity_only": "模型 {{model}} 目前只有身份信息，无法证明图片调用能力。",
+        "selected_model_no_image_output": "模型 {{model}} 不再声明图片输出能力。",
+        "selected_model_no_image_operation": "模型 {{model}} 不再提供图片生成或编辑操作。",
+        "selected_model_operation_removed": "模型 {{model}} 的 {{capability}} 操作已被移除。",
+        "selected_model_unsupported_route": "模型 {{model}} 的 {{capability}} 接口 {{apiSurface}} 没有可用适配器。"
+      },
+      "loading": "正在读取目录差异…",
+      "loadErrorTitle": "无法读取模型变化",
+      "adoptErrorTitle": "无法采用模型目录",
+      "cancel": "暂不采用",
+      "adopt": "采用目录 r{{revision}}"
+    },
+    "validation": {
+      "requiredApiKey": "请输入 API Key。",
+      "trimApiKey": "API Key 不能包含首尾空格。",
+      "invalidApiKeyFormat": "API Key 必须是 4096 个字符以内的可打印英文字符。",
+      "requiredBaseUrl": "请输入模型服务地址。",
+      "longBaseUrl": "模型服务地址不能超过 2048 个字符。",
+      "invalidBaseUrl": "请输入完整的 HTTPS 模型服务地址。",
+      "unsafeBaseUrl": "服务地址必须使用 HTTPS，且不能包含账号、查询参数或片段。",
+      "requiredName": "请输入服务名称。",
+      "invalidName": "服务名称不能超过 160 个字符或包含控制字符。",
+      "requiredModel": "请输入至少一个模型 ID。",
+      "tooManyModels": "一次最多配置 32 个模型 ID。",
+      "duplicateModels": "模型 ID 不能重复。",
+      "invalidModel": "每个模型 ID 不能超过 255 个字符或包含控制字符。"
+    },
+    "toast": {
+      "createdTitle": "模型服务已验证并添加",
+      "createdDescription": "API Key 与模型访问校验通过，可以继续启用。",
+      "checkedTitle": "连接校验通过",
+      "checkedDescription": "API Key 有效，配置的图片模型可以访问。",
+      "checkErrorTitle": "连接校验失败",
+      "reactivatedTitle": "模型服务已重新启用",
+      "activatedTitle": "模型服务已启用",
+      "activatedDescription": "请在执行策略中确认使用此服务的制作能力。",
+      "activateErrorTitle": "无法启用模型服务",
+      "rotatedTitle": "API Key 已更新",
+      "rotatedDescription": "新任务使用新 Key，已提交任务保留 15 分钟过渡时间；需要时可继续刷新模型目录。",
+      "catalogRefreshedTitle": "模型目录已刷新",
+      "catalogRefreshedDescription": "所选模型的调用能力没有变化，当前执行配置保持不变。",
+      "catalogChangesPendingDescription": "发现所选模型的能力变化，已保留供审阅；当前任务仍使用原执行配置。",
+      "catalogRefreshErrorTitle": "无法刷新模型目录",
+      "catalogAdoptedTitle": "模型目录已采用",
+      "catalogAdoptedDescription": "新任务已切换到审阅后的模型能力与路由；运行中的任务继续使用原版本。",
+      "disabledTitle": "已暂停新任务",
+      "disabledDescription": "新任务不再选择此服务，已提交任务仍可继续查询与收尾。",
+      "disableErrorTitle": "无法暂停模型服务"
+    },
+    "rotate": {
+      "title": "更新 {{name}} 的 API Key",
+      "description": "保存后，新任务会立即使用新的 Key。",
+      "noTarget": "请选择要更新的模型服务。",
+      "apiKey": "新的 API Key",
+      "transitionNote": "旧 Key 仅供已提交任务过渡 15 分钟；Kanvas 不会在服务商侧撤销它。",
+      "errorTitle": "无法更新 API Key",
+      "submit": "保存更新"
+    },
+    "validationDialog": {
+      "title": "校验 {{name}}",
+      "description": "Kanvas 将使用当前 Key 请求供应商的只读模型接口，不会生成图片或产生模型费用。",
+      "apiKey": "当前 API Key",
+      "submit": "开始校验"
+    },
+    "discard": {
+      "action": "放弃修改",
+      "rotationTitle": "放弃 API Key 更新？",
+      "createTitle": "放弃模型服务连接？",
+      "description": "放弃后，本次填写的内容将被清空。"
+    },
+    "disableDialog": {
+      "action": "暂停新任务",
+      "title": "暂停 {{name}} 的新任务？",
+      "description": "暂停后新任务不再选择此服务，已提交任务仍会继续查询并完成。没有其他候选时，对应制作能力将暂时不可用。"
+    },
+    "errors": {
+      "generic": "操作没有完成，请重新加载页面后重试。",
+      "conflict": "配置已发生变化，请刷新后重试。",
+      "invalid": "请检查标记字段。",
+      "forbidden": "当前角色不能管理模型服务。",
+      "unavailable": "模型服务连接暂时不可用。",
+      "policyNotInitialized": "模型服务初始化尚未完成，请联系实例管理员完成初始化后重试。"
+    },
+    "status": {
+      "active": "配置已验证，可供执行策略使用",
+      "activePending": "服务已启用，等待重新检查",
+      "revoked": "凭据已撤销，不能恢复使用",
+      "failed": "配置或凭据未通过检查",
+      "inactive": "已停用，可在需要时重新启用",
+      "ready": "检查通过，等待首次启用",
+      "pending": "需要先检查配置和凭据"
+    },
+    "create": {
+      "title": "连接模型服务",
+      "service": "服务类型",
+      "selectPreset": "选择服务",
+      "presets": {
+        "openai": "OpenAI 图片模型",
+        "newapi": "团队自建服务",
+        "tokenhub": "TokenHub 图片模型"
+      },
+      "name": "连接名称",
+      "namePlaceholder": "例如：主图片服务",
+      "apiKey": "API Key",
+      "apiKeyPlaceholder": "输入服务密钥",
+      "baseUrl": "服务地址",
+      "baseUrlPlaceholder": "https://newapi.example.com",
+      "baseUrlDescription": "填写 HTTPS 地址。",
+      "models": "模型",
+      "modelsPlaceholder": "选择一个或多个图片模型",
+      "modelsBeforeDiscoveryPlaceholder": "请先拉取可用模型",
+      "modelsBeforeDiscovery": "验证连接并获取模型目录后，才能选择模型。",
+      "modelsDescription": "只能选择具有可信图片生成或编辑能力的模型。",
+      "discoverModels": "拉取可用模型",
+      "discoveryErrorTitle": "无法获取模型目录",
+      "noSelectableModelsTitle": "没有可选择的图片模型",
+      "noSelectableModelsDescription": "供应商返回的模型目前只有身份信息，或尚无可信的图片生成与编辑能力描述。",
+      "capabilityUnknown": "图片能力尚未确认，暂不可选",
+      "capabilities": {
+        "image": {
+          "generate": "图片生成",
+          "edit": "图片编辑"
+        }
+      },
+      "catalogAfterCreate": "保存时会自动验证连接并同步模型目录；模型请在“模型”标签中统一导入和映射。",
+      "errorTitle": "无法保存模型服务",
+      "cancel": "取消",
+      "submit": "验证并添加"
+    },
+    "management": {
+      "models": "管理模型",
+      "modelsTitle": "管理 {{name}} 的模型",
+      "addSelected": "添加所选模型（{{count}}）",
+      "refresh": "刷新目录",
+      "refreshUnavailable": "当前连接无法刷新目录，请先检查服务状态。",
+      "failed": "未能完成操作",
+      "retryHint": "已添加的模型会保留。可再次提交，继续添加剩余模型。",
+      "retry": "重试",
+      "added": "模型已添加",
+      "nextStep": "接下来配置模型参数与价格并保存发布。已添加不代表已可调用；已有模型可在编辑中选择新增的供应商。",
+      "configure": "去配置模型",
+      "empty": "目录中暂无模型，可尝试刷新目录。",
+      "model": "供应商模型",
+      "identifier": "模型标识",
+      "identifierFor": "{{name}} 的模型标识",
+      "rename": "修改名称",
+      "renamed": "服务名称已更新",
+      "save": "保存名称",
+      "close": "关闭",
+      "status": {
+        "discovered": "待关联",
+        "mapped": "已添加 · 待配置",
+        "active": "已发布",
+        "disabled": "已停用",
+        "removed": "已移除"
+      },
+      "errors": {
+        "empty": "请选择要添加的模型。",
+        "missing": "所选模型已不在当前目录中，请刷新目录后重新选择。",
+        "identifier": "请检查所选模型的标识，只能使用字母、数字、点、下划线、斜杠和连字符，且以字母或数字开头，长度不超过 160 个字符。",
+        "unavailable": "服务或所选模型已不可用，请关闭窗口后检查最新状态。"
+      },
+      "selectModel": "选择 {{name}}"
+    }
+  },
+  "execution": {
+    "leaveTitle": "离开能力配置？",
+    "leaveDescription": "尚未发布的模型路由或实现配置不会保留。",
+    "needsReview": "需要检查",
+    "runnable": "可执行",
+    "emptyTitle": "还没有可管理的执行方式",
+    "emptyDescription": "发布制作能力和处理实现后，候选顺序会出现在这里。",
+    "errors": {
+      "confirmingTitle": "正在确认执行方式",
+      "confirmingDescription": "连接中断。页面会重新读取团队设置，不会重复提交。",
+      "conflictTitle": "执行方式已经变化",
+      "conflictDescription": "页面已刷新到最新顺序，请按当前状态重新操作。",
+      "forbiddenTitle": "管理权限已经变化",
+      "forbiddenDescription": "页面会重新检查团队权限；未保存的操作没有生效。",
+      "genericTitle": "无法更新执行方式",
+      "genericDescription": "请检查连接后重试。"
+    },
+    "toast": {
+      "resumedTitle": "执行方式已恢复",
+      "pausedTitle": "执行方式已暂停",
+      "statusDescription": "更新只影响之后开始的任务，运行中的任务保持原方案。",
+      "orderTitle": "执行顺序已更新",
+      "orderDescription": "之后开始的任务会使用新的候选顺序。",
+      "configurationTitle": "能力配置已更新",
+      "configurationDescription": "新任务会使用新的模型路由。"
+    },
+    "pause": {
+      "action": "暂停执行方式",
+      "lastRouteTitle": "暂停后“{{name}}”将不可用",
+      "title": "暂停“{{name}}”？",
+      "description": "之后开始的任务不会再选择这条执行方式；运行中任务和历史结果不受影响。",
+      "lastRouteDescription": "这是当前唯一启用的候选，确认后新的任务将无法使用这项制作能力。"
+    },
+    "discard": {
+      "action": "放弃更改",
+      "title": "放弃未发布的配置？",
+      "description": "模型路由、提示词或参数的本次更改不会保留。"
+    },
+    "edit": {
+      "action": "调整顺序",
+      "cancel": "取消",
+      "save": "保存顺序",
+      "preferred": "首选"
+    },
+    "binding": {
+      "configure": "配置模型",
+      "replace": "更换",
+      "moveUpLabel": "上移 {{name}}",
+      "moveDownLabel": "下移 {{name}}",
+      "pause": "暂停",
+      "resume": "恢复",
+      "status": {
+        "enabled": "已启用",
+        "paused": "已暂停",
+        "retired": "已退役"
+      }
+    },
+    "targets": {
+      "browser": "本地执行",
+      "worker": "云端执行",
+      "provider": "API 服务"
+    },
+    "availability": {
+      "ready": {
+        "label": "可以执行",
+        "description": "依赖已就绪，可以用于之后开始的任务。"
+      },
+      "contract_unavailable": {
+        "label": "制作能力不可用",
+        "description": "能力当前不可用，不能恢复这条运行方式。"
+      },
+      "implementation_unavailable": {
+        "label": "处理实现不可用",
+        "description": "当前处理实现未发布，不能恢复这条执行方式。"
+      },
+      "provider_unconfigured": {
+        "label": "模型服务未关联",
+        "description": "需要先关联已发布的模型服务路由。"
+      },
+      "provider_unavailable": {
+        "label": "模型服务不可用",
+        "description": "模型服务尚未启用或配置检查未通过。"
+      },
+      "credential_unavailable": {
+        "label": "凭据不可用",
+        "description": "模型服务没有可用凭据。"
+      },
+      "budget_unavailable": {
+        "label": "额度不可用",
+        "description": "当前模型服务额度未生效、已冻结或已用尽。"
+      }
+    },
+    "configure": {
+      "title": "配置“{{name}}”",
+      "notSelected": "尚未选择",
+      "modelTitle": "API 服务",
+      "routesLabel": "可用模型路由",
+      "availableBudget": "可用预算 ${{amount}}",
+      "budgetUnavailable": "预算当前不可用",
+      "providerUnavailable": "模型服务当前不可用",
+      "current": "当前",
+      "noCompatibleTitle": "没有兼容的模型路由",
+      "noCompatiblePrefix": "请先在",
+      "noCompatibleSuffix": "中添加并启用支持 {{surface}} 的模型。",
+      "protocol": "该协议",
+      "advanced": "提示词与参数",
+      "promptAdvanced": "底层提示词",
+      "promptLabel": "底层提示词模板",
+      "restorePrompt": "恢复默认",
+      "modelParametersTitle": "模型调用参数",
+      "modelParametersDescription": "控制 Workflow 或画板在每次调用时能否传入参数；可选参数可以设置路由默认值。",
+      "noModelParametersTitle": "这个模型没有可配置参数",
+      "noModelParametersDescription": "当前模型与操作没有发布可配置参数，保存路由时无需补充参数策略。",
+      "parameterCallerPolicy": "调用方式",
+      "parameterEnabled": "允许使用",
+      "parameterEnabledAria": "允许使用参数 {{name}}",
+      "parameterAlwaysEnabled": "模型必填参数",
+      "parameterDefault": "默认值",
+      "parameterDefaultAria": "{{name}} 的默认值",
+      "parameterDefaultPlaceholder": "不设置默认值",
+      "parameterAddDefault": "设置默认值",
+      "parameterClearDefault": "清除默认值",
+      "parameterRequiredDescription": "必须由 Workflow 或画板在本次调用中传入，路由不提供默认值。",
+      "parameterPolicies": {
+        "optional": "调用方可传",
+        "fixed": "固定",
+        "required": "调用方必传"
+      },
+      "parameterErrors": {
+        "policy_required": "请选择调用方式。",
+        "required_disabled": "模型必填参数不能停用。",
+        "fixed_default_required": "固定参数必须设置一个值。",
+        "required_default_forbidden": "调用方必传参数不能设置默认值。",
+        "policy_outside_model": "当前策略超出模型发布的可用值或范围。",
+        "default_outside_model": "默认值不在模型发布的可用值或范围内。"
+      },
+      "variables": {
+        "action": "查看可用变量",
+        "title": "可用变量",
+        "default": "由当前执行实现提供的动态内容。",
+        "prompt": "用户为本次任务输入的提示词。",
+        "promptBlock": "带有上下文说明的用户提示词；未填写时为空。",
+        "guidance": "用户为本次处理填写的补充要求。",
+        "guidanceBlock": "带有引导语的补充要求；未填写时为空。",
+        "scaleFactor": "本次放大倍数。",
+        "targetWidth": "目标画布宽度，单位为像素。",
+        "targetHeight": "目标画布高度，单位为像素。"
+      },
+      "cancel": "取消",
+      "submit": "应用到新任务"
+    }
+  }
+}

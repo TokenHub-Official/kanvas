@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "kanvas.skill-catalog-asset/v1",
+  "skillKey": "first-party.poster-generate-simple",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "基础海报生成",
+      "en-US": "Basic poster generation"
+    }
+  },
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "generate",
+      "displayName": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "基础海报生成",
+          "en-US": "Basic poster generation"
+        }
+      },
+      "description": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "输入海报需求，流程组合内置商业海报提示词并生成一张结果图。",
+          "en-US": "Turn a poster brief into a composed prompt and generate one result image."
+        }
+      },
+      "category": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "海报制作",
+          "en-US": "Poster creation"
+        }
+      },
+      "outputPresentation": "single_review",
+      "workflow": {
+        "key": "poster_generate_simple",
+        "revision": 1,
+        "canonicalDigest": "sha256:edd113df9c5ea59e10701bed575831efc996d8677b7b54e9c71d635dc15839ac"
+      }
+    }
+  ]
+}

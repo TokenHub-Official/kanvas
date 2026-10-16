@@ -1,0 +1,37 @@
+name: kanvas-dev
+
+services:
+  mysql:
+    image: mysql:8.0.45@sha256:4af1f8815716546f5b12410f7621f37f93db8dd11a184706ef59111930b8c2ff
+    environment:
+      MYSQL_DATABASE: kanvas
+      MYSQL_USER: kanvas
+      MYSQL_PASSWORD: replace-for-local-development
+      MYSQL_ROOT_PASSWORD: kanvas-root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_dev_data:/var/lib/mysql
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "mysqladmin ping --host=127.0.0.1 --user=root --password=kanvas-root --silent",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 20s
+
+  redis:
+    image: redis:7.2.16-alpine@sha256:ccd6aa8d45ff3f033d6fa15b8cc1a50579f65c89f38cf9bb607a954c4f2128ed
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  mysql_dev_data:

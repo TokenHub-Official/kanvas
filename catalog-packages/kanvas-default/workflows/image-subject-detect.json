@@ -1,0 +1,342 @@
+{
+  "schemaVersion": "kanvas.workflow-catalog-asset/v1",
+  "workflowKey": "image_subject_detect",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "图片主体检测",
+      "en-US": "Subject detection"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "识别图片中的视觉主体候选并返回边界、置信度与可审查蒙版，不修改原图。",
+      "en-US": "Detect visual subjects, bounds, confidence, and a reviewable mask."
+    }
+  },
+  "category": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "图片分析",
+      "en-US": "Image analysis"
+    }
+  },
+  "topology": {
+    "schemaVersion": 1,
+    "key": "image_subject_detect",
+    "entryNodeKey": "detect_subjects",
+    "limits": {
+      "maxNodeRuns": 1,
+      "timeoutMs": 300000
+    },
+    "nodes": [
+      {
+        "key": "detect_subjects",
+        "kind": "invoke",
+        "capability": {
+          "contractId": "image.subject.detect",
+          "revision": 1,
+          "canonicalDigest": "sha256:f2fc626d9c5320fef21d2414619983b41bbd0999656fb5bfa3cca628dfa69c5f"
+        },
+        "input": {
+          "$value": {
+            "source": "workflow_input",
+            "pointer": ""
+          }
+        },
+        "next": []
+      }
+    ],
+    "outputs": {
+      "schemaVersion": {
+        "required": true,
+        "value": "kanvas.image-subject-detect-result/v1"
+      },
+      "sourceWidth": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "detect_subjects",
+            "scope": "root",
+            "pointer": "/sourceWidth"
+          }
+        }
+      },
+      "sourceHeight": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "detect_subjects",
+            "scope": "root",
+            "pointer": "/sourceHeight"
+          }
+        }
+      },
+      "candidates": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "detect_subjects",
+            "scope": "root",
+            "pointer": "/candidates"
+          }
+        }
+      },
+      "maskArtifactId": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "detect_subjects",
+            "scope": "root",
+            "pointer": "/maskArtifactId"
+          }
+        }
+      },
+      "qualitySignals": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "detect_subjects",
+            "scope": "root",
+            "pointer": "/qualitySignals"
+          }
+        }
+      }
+    }
+  },
+  "inputSchema": {
+    "$id": "kanvas.image-subject-detect-input.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["sourceArtifactId"],
+    "properties": {
+      "includeMask": {
+        "type": "boolean",
+        "default": true,
+        "x-kanvas-semantic-type": "boolean.flag"
+      },
+      "maxSubjects": {
+        "type": "integer",
+        "default": 8,
+        "maximum": 16,
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "minimumAreaRatio": {
+        "type": "number",
+        "default": 0.001,
+        "maximum": 0.5,
+        "minimum": 0.00001,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      },
+      "minimumConfidence": {
+        "type": "number",
+        "default": 0.35,
+        "maximum": 0.95,
+        "minimum": 0.05,
+        "x-kanvas-semantic-type": "number.scalar"
+      }
+    },
+    "additionalProperties": false
+  },
+  "outputSchema": {
+    "$id": "kanvas.image-subject-detect-result.v1",
+    "type": "object",
+    "$defs": {
+      "pixelBounds": {
+        "type": "object",
+        "required": ["x", "y", "width", "height"],
+        "properties": {
+          "x": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "y": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "width": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "height": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "additionalProperties": false
+      },
+      "normalizedBounds": {
+        "type": "object",
+        "required": ["x", "y", "width", "height"],
+        "properties": {
+          "x": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0
+          },
+          "y": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0
+          },
+          "width": {
+            "type": "number",
+            "maximum": 1,
+            "exclusiveMinimum": 0
+          },
+          "height": {
+            "type": "number",
+            "maximum": 1,
+            "exclusiveMinimum": 0
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "schemaVersion",
+      "sourceWidth",
+      "sourceHeight",
+      "candidates",
+      "maskArtifactId",
+      "qualitySignals"
+    ],
+    "properties": {
+      "candidates": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "subjectId",
+            "rank",
+            "category",
+            "confidence",
+            "areaRatio",
+            "bounds",
+            "normalizedBounds"
+          ],
+          "properties": {
+            "rank": {
+              "type": "integer",
+              "maximum": 16,
+              "minimum": 1
+            },
+            "bounds": {
+              "$ref": "#/$defs/pixelBounds"
+            },
+            "category": {
+              "const": "visual_subject"
+            },
+            "areaRatio": {
+              "type": "number",
+              "maximum": 1,
+              "minimum": 0
+            },
+            "subjectId": {
+              "type": "string",
+              "pattern": "^subject-[1-9][0-9]*$"
+            },
+            "confidence": {
+              "type": "number",
+              "maximum": 1,
+              "minimum": 0
+            },
+            "normalizedBounds": {
+              "$ref": "#/$defs/normalizedBounds"
+            }
+          },
+          "additionalProperties": false
+        },
+        "maxItems": 16,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "sourceWidth": {
+        "type": "integer",
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "sourceHeight": {
+        "type": "integer",
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "schemaVersion": {
+        "const": "kanvas.image-subject-detect-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "maskArtifactId": {
+        "type": ["string", "null"],
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.mask"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "required": [
+          "schemaVersion",
+          "candidateCount",
+          "foregroundRatio",
+          "uncertainEdgeRatio",
+          "taxonomy",
+          "modelVariant",
+          "modelDigest"
+        ],
+        "properties": {
+          "taxonomy": {
+            "const": "class_agnostic_isnet"
+          },
+          "modelDigest": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          },
+          "modelVariant": {
+            "enum": ["u2net", "u2netp", "isnet-general", "isnet-general-fp16"],
+            "type": "string"
+          },
+          "schemaVersion": {
+            "const": "kanvas.image-subject-detect-quality/v1"
+          },
+          "candidateCount": {
+            "type": "integer",
+            "maximum": 16,
+            "minimum": 0
+          },
+          "foregroundRatio": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0
+          },
+          "uncertainEdgeRatio": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "quality.signals"
+      }
+    },
+    "additionalProperties": false
+  },
+  "requiredCapabilities": [
+    {
+      "key": "image.subject.detect",
+      "revision": 1,
+      "canonicalDigest": "sha256:f2fc626d9c5320fef21d2414619983b41bbd0999656fb5bfa3cca628dfa69c5f"
+    }
+  ],
+  "canonicalDigest": "sha256:4b95ef494cec44a1cbcda296ad739da05c5acf6e3feb3f20c3f93184eb2ae7f2"
+}

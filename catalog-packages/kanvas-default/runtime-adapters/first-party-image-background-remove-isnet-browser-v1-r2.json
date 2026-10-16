@@ -1,0 +1,205 @@
+{
+  "schemaVersion": "kanvas.runtime-adapter-definition/v1",
+  "adapterKey": "first-party.image.background-remove.isnet.browser.v1",
+  "revision": 2,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "背景移除 · 浏览器",
+      "en-US": "Background removal · Browser"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "将背景移除的公开输入输出转换为浏览器运行协议。",
+      "en-US": "Adapts the public Background removal contract to the Browser runtime protocol."
+    }
+  },
+  "executionTarget": "browser",
+  "sourceKinds": ["model_resource"],
+  "supportedModelFormats": ["onnx"],
+  "modelResourceInterfaceDigest": "sha256:c3a88630834b92c6b6798e3c0b80f68290e61225f2ba5fafdaac231c83ab839c",
+  "invocationInputSchema": {
+    "$id": "kanvas.image-background-remove-input.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["sourceArtifactId", "refinement"],
+    "properties": {
+      "refinement": {
+        "enum": ["standard", "fine"],
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "subjectHint": {
+        "type": "string",
+        "maxLength": 240,
+        "minLength": 1,
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "invocationOutputSchema": {
+    "$id": "kanvas.image-background-remove-result.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "schemaVersion",
+      "foregroundArtifactId",
+      "maskArtifactId",
+      "qualitySignals"
+    ],
+    "properties": {
+      "schemaVersion": {
+        "const": "kanvas.image-background-remove-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "maskArtifactId": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["$kanvas", "outputRole", "outputIndex"],
+        "properties": {
+          "$kanvas": {
+            "const": "attempt-output-artifact/v1"
+          },
+          "outputRole": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "outputIndex": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          }
+        },
+        "x-kanvas-attempt-output-artifact": true,
+        "x-kanvas-semantic-type": "artifact.mask"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "required": [
+          "schemaVersion",
+          "foregroundRatio",
+          "uncertainEdgeRatio",
+          "modelVariant",
+          "modelDigest",
+          "refinement"
+        ],
+        "properties": {
+          "refinement": {
+            "enum": ["standard", "fine"],
+            "type": "string"
+          },
+          "modelDigest": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          },
+          "modelVariant": {
+            "enum": ["u2net", "u2netp", "isnet-general", "isnet-general-fp16"],
+            "type": "string"
+          },
+          "schemaVersion": {
+            "const": "kanvas.image-background-remove-quality/v1"
+          },
+          "foregroundRatio": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0
+          },
+          "uncertainEdgeRatio": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "quality.signals"
+      },
+      "foregroundArtifactId": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["$kanvas", "outputRole", "outputIndex"],
+        "properties": {
+          "$kanvas": {
+            "const": "attempt-output-artifact/v1"
+          },
+          "outputRole": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "outputIndex": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          }
+        },
+        "x-kanvas-attempt-output-artifact": true,
+        "x-kanvas-semantic-type": "artifact.foreground"
+      }
+    },
+    "additionalProperties": false
+  },
+  "configurationSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "default": {
+      "model": {
+        "family": "isnet",
+        "sha256": "2eb4b5dda7ec41c617e59706e5aafa1f978c9a5f983d2518d9f0ae4d6eb04f20",
+        "source": "huggingface.co/imgly/isnet-general-onnx@440dea9095f704826361ef382869aa26773f7c2a/onnx/model_fp16.onnx",
+        "license": "MIT",
+        "variant": "isnet-general-fp16",
+        "inputSize": 1024,
+        "normalization": "isnet"
+      },
+      "backend": "wasm",
+      "wasmPaths": "/onnxruntime/",
+      "onnxRuntimeWebVersion": "1.27.0"
+    },
+    "const": {
+      "model": {
+        "family": "isnet",
+        "sha256": "2eb4b5dda7ec41c617e59706e5aafa1f978c9a5f983d2518d9f0ae4d6eb04f20",
+        "source": "huggingface.co/imgly/isnet-general-onnx@440dea9095f704826361ef382869aa26773f7c2a/onnx/model_fp16.onnx",
+        "license": "MIT",
+        "variant": "isnet-general-fp16",
+        "inputSize": 1024,
+        "normalization": "isnet"
+      },
+      "backend": "wasm",
+      "wasmPaths": "/onnxruntime/",
+      "onnxRuntimeWebVersion": "1.27.0"
+    }
+  },
+  "runtimeProfile": {
+    "kind": "browser.u2net.v1",
+    "version": 1,
+    "settings": {
+      "backend": "wasm",
+      "role": "background_remove"
+    }
+  },
+  "artifactInputs": [
+    {
+      "role": "sourceArtifactId",
+      "pointer": "/sourceArtifactId",
+      "required": true,
+      "mediaTypes": ["image/png", "image/jpeg", "image/webp"]
+    }
+  ],
+  "executable": {
+    "kind": "built_in",
+    "packageKey": "kanvas.browser-image-runtime",
+    "packageVersion": "1.0.0",
+    "entrypoint": "first-party.image.background-remove.isnet.browser.v1",
+    "releaseDigest": "sha256:1e6fd296bc36f853b9cbd5714800847c7b67f58a76139ce0839408c84d8f5bfa"
+  }
+}

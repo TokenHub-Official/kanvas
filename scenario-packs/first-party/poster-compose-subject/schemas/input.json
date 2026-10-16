@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kanvas.poster-compose-subject-input.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["backgroundArtifactId", "subjectPrompt"],
+  "properties": {
+    "backgroundArtifactId": {
+      "title": "背景图",
+      "description": "最终用于合成海报的背景图片。",
+      "type": "string",
+      "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+    },
+    "subjectPrompt": {
+      "title": "主体描述",
+      "description": "描述希望生成并放置到背景中的主体。",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
+    }
+  }
+}

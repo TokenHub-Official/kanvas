@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "packId": "first-party.workflow-authoring-acceptance",
+  "displayName": "Workflow authoring acceptance",
+  "workflows": [
+    {
+      "path": "workflows/workflow-authoring-acceptance.json"
+    }
+  ],
+  "skill": {
+    "path": "skill/manifest.json"
+  },
+  "requiredCapabilities": [
+    {
+      "contractId": "image.subject.detect",
+      "revision": 1,
+      "canonicalDigest": "sha256:fbce4aebf4673485b62dcf8a25e42cdf343839534d454fd95670062367cc6de5"
+    },
+    {
+      "contractId": "image.background.remove",
+      "revision": 2,
+      "canonicalDigest": "sha256:225c8e45a50157aa201e94119857549a8eaa7c780c6635ff40f28d14c9811024"
+    },
+    {
+      "contractId": "image.quality.assess",
+      "revision": 1,
+      "canonicalDigest": "sha256:63d124e91065b2e72af997ccfa1c834bc6595ec22f18aaae2e0037579088a398"
+    },
+    {
+      "contractId": "image.light.enhance",
+      "revision": 1,
+      "canonicalDigest": "sha256:b98b1d0d90e0f1b4124ee29c2343030a5d807f6ec78675495bfc6665003a8b80"
+    }
+  ]
+}

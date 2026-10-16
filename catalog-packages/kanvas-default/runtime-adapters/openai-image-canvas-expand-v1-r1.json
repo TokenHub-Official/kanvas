@@ -1,0 +1,370 @@
+{
+  "schemaVersion": "kanvas.runtime-adapter-definition/v1",
+  "adapterKey": "openai.image.canvas-expand.v1",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "扩展画布 · 模型服务",
+      "en-US": "Canvas expand · Model service"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "将扩展画布的公开输入输出转换为模型服务运行协议。",
+      "en-US": "Adapts the public Canvas expand contract to the Model service runtime protocol."
+    }
+  },
+  "executionTarget": "provider",
+  "sourceKinds": ["model_service"],
+  "supportedModelFormats": [],
+  "invocationInputSchema": {
+    "$id": "kanvas.image-canvas-expand-input.v1",
+    "type": "object",
+    "allOf": [
+      {
+        "if": {
+          "required": ["targetWidth"],
+          "properties": {
+            "targetWidth": {
+              "const": 1536
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "targetHeight": {
+              "const": 1024
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "required": ["targetHeight"],
+          "properties": {
+            "targetHeight": {
+              "const": 1536
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "targetWidth": {
+              "const": 1024
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "required": ["targetWidth", "targetHeight"],
+          "properties": {
+            "targetWidth": {
+              "const": 1024
+            },
+            "targetHeight": {
+              "const": 1024
+            }
+          }
+        },
+        "then": {
+          "properties": {}
+        }
+      }
+    ],
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "sourceArtifactId",
+      "targetWidth",
+      "targetHeight",
+      "sourcePlacement",
+      "generatedRegion"
+    ],
+    "properties": {
+      "prompt": {
+        "type": "string",
+        "maxLength": 4000,
+        "minLength": 1,
+        "x-kanvas-semantic-type": "prompt.rich"
+      },
+      "targetWidth": {
+        "enum": [1024, 1536],
+        "type": "integer",
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "targetHeight": {
+        "enum": [1024, 1536],
+        "type": "integer",
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "generatedRegion": {
+        "type": "object",
+        "required": ["left", "top", "right", "bottom"],
+        "properties": {
+          "top": {
+            "type": "integer",
+            "maximum": 1535,
+            "minimum": 0
+          },
+          "left": {
+            "type": "integer",
+            "maximum": 1535,
+            "minimum": 0
+          },
+          "right": {
+            "type": "integer",
+            "maximum": 1535,
+            "minimum": 0
+          },
+          "bottom": {
+            "type": "integer",
+            "maximum": 1535,
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "layout.bounds"
+      },
+      "sourcePlacement": {
+        "type": "object",
+        "required": ["x", "y"],
+        "properties": {
+          "x": {
+            "type": "integer",
+            "maximum": 1535,
+            "minimum": 0
+          },
+          "y": {
+            "type": "integer",
+            "maximum": 1535,
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "layout.placement"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "invocationOutputSchema": {
+    "$id": "kanvas.image-canvas-expand-result.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "schemaVersion",
+      "expandedArtifactId",
+      "generatedRegionMaskArtifactId",
+      "targetWidth",
+      "targetHeight",
+      "sourcePlacement",
+      "generatedRegion",
+      "qualitySignals"
+    ],
+    "properties": {
+      "targetWidth": {
+        "type": "integer",
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "targetHeight": {
+        "type": "integer",
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "schemaVersion": {
+        "const": "kanvas.image-canvas-expand-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "required": [
+          "schemaVersion",
+          "method",
+          "generative",
+          "originalPixelsPreserved"
+        ],
+        "properties": {
+          "method": {
+            "const": "generative_outpaint"
+          },
+          "generative": {
+            "const": true
+          },
+          "schemaVersion": {
+            "const": "kanvas.image-canvas-expand-quality/v1"
+          },
+          "originalPixelsPreserved": {
+            "const": true
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "quality.signals"
+      },
+      "generatedRegion": {
+        "type": "object",
+        "required": ["left", "top", "right", "bottom"],
+        "properties": {
+          "top": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "left": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "right": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "bottom": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "layout.bounds"
+      },
+      "sourcePlacement": {
+        "type": "object",
+        "required": ["x", "y", "width", "height"],
+        "properties": {
+          "x": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "y": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "width": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "height": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "layout.placement"
+      },
+      "expandedArtifactId": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["$kanvas", "outputRole", "outputIndex"],
+        "properties": {
+          "$kanvas": {
+            "const": "attempt-output-artifact/v1"
+          },
+          "outputRole": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "outputIndex": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          }
+        },
+        "x-kanvas-attempt-output-artifact": true,
+        "x-kanvas-semantic-type": "artifact.image"
+      },
+      "generatedRegionMaskArtifactId": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["$kanvas", "outputRole", "outputIndex"],
+        "properties": {
+          "$kanvas": {
+            "const": "attempt-output-artifact/v1"
+          },
+          "outputRole": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "outputIndex": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          }
+        },
+        "x-kanvas-attempt-output-artifact": true,
+        "x-kanvas-semantic-type": "artifact.mask"
+      }
+    },
+    "additionalProperties": false
+  },
+  "configurationSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "default": {
+      "method": "generative_outpaint",
+      "protocol": "images.edits.v1",
+      "dataEgress": "authorized_source_artifact",
+      "outputFormat": "png",
+      "providerInput": "transparent_canvas_and_edit_mask",
+      "promptTemplate": "Outpaint the transparent canvas into one coherent image. Preserve the opaque source region exactly in its current position, scale, composition, identity, text, colors, lighting, and geometry. Generate content only in the transparent region and continue edges naturally.{{promptBlock}}",
+      "outputMaterialization": "trusted_storage",
+      "originalPixelRestoration": "source_blend"
+    },
+    "const": {
+      "method": "generative_outpaint",
+      "protocol": "images.edits.v1",
+      "dataEgress": "authorized_source_artifact",
+      "outputFormat": "png",
+      "providerInput": "transparent_canvas_and_edit_mask",
+      "promptTemplate": "Outpaint the transparent canvas into one coherent image. Preserve the opaque source region exactly in its current position, scale, composition, identity, text, colors, lighting, and geometry. Generate content only in the transparent region and continue edges naturally.{{promptBlock}}",
+      "outputMaterialization": "trusted_storage",
+      "originalPixelRestoration": "source_blend"
+    }
+  },
+  "modelServiceSelector": {
+    "operation": "image.edit",
+    "apiSurface": "images.edits.v1"
+  },
+  "usageMetrics": [
+    {
+      "metricKey": "input_tokens",
+      "unitCode": "token"
+    },
+    {
+      "metricKey": "output_tokens",
+      "unitCode": "token"
+    },
+    {
+      "metricKey": "total_tokens",
+      "unitCode": "token"
+    },
+    {
+      "metricKey": "input_text_tokens",
+      "unitCode": "token"
+    },
+    {
+      "metricKey": "input_image_tokens",
+      "unitCode": "token"
+    }
+  ],
+  "artifactInputs": [
+    {
+      "role": "sourceArtifactId",
+      "pointer": "/sourceArtifactId",
+      "required": true,
+      "mediaTypes": ["image/png", "image/jpeg", "image/webp"]
+    }
+  ],
+  "executable": {
+    "kind": "built_in",
+    "packageKey": "kanvas.provider-image-runtime",
+    "packageVersion": "1.0.0",
+    "entrypoint": "openai.image.canvas-expand.v1",
+    "releaseDigest": "sha256:e0c25c0eff97e3dbc9dfe614fd598f91977d3573d8758dbe8e03fcb1802c6604"
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "schemaVersion": "kanvas.capability-implementation/v1",
+  "implementationKey": "first-party.image.background-remove.isnet-general.worker",
+  "revision": 2,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "背景移除 · Worker 运行",
+      "en-US": "Background removal · Worker runtime"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "通过Worker 运行提供背景移除，上层只依赖固定公开契约。",
+      "en-US": "Provides Background removal through Worker runtime behind the stable public contract."
+    }
+  },
+  "contract": {
+    "key": "image.background.remove",
+    "revision": 1,
+    "canonicalDigest": "sha256:bb01ecde8691522de0ddd8f90f8d2a14ab042fc50c7d62e73289c05710a73966"
+  },
+  "adapter": {
+    "adapterKey": "first-party.image.background-remove.isnet.webp-lossless.v2",
+    "revision": 2,
+    "canonicalDigest": "sha256:2f4f88653801fdf9fc2b3c8db955a312b8d022c47ba6dc47f54ba343c9948a24"
+  },
+  "source": {
+    "kind": "model_resource",
+    "resource": {
+      "key": "isnet.isnet-general",
+      "revision": 2,
+      "canonicalDigest": "sha256:9643d98b62d2fce7b07cfc8cfe9e2097b3a41215818521a293b84f57913a4d25"
+    }
+  },
+  "configuration": {
+    "model": {
+      "family": "isnet",
+      "sha256": "cc2c9f5c1751b9737cb81e708ff0c5e9542c2205daed22418a4fd2ab5d4c481a",
+      "source": "huggingface.co/imgly/isnet-general-onnx@440dea96dd4a3b06bbbf5abec3e26569dd7ec49f/onnx/model.onnx",
+      "license": "MIT",
+      "variant": "isnet-general",
+      "inputSize": 1024,
+      "normalization": "isnet"
+    },
+    "sharpVersion": "0.35.3",
+    "foregroundEncoding": "webp-lossless-effort-3",
+    "onnxRuntimeNodeVersion": "1.27.0"
+  },
+  "inputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "input",
+    "expression": {
+      "op": "source",
+      "root": "input",
+      "pointer": ""
+    }
+  },
+  "outputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "output",
+    "expression": {
+      "op": "source",
+      "root": "result",
+      "pointer": ""
+    }
+  },
+  "fixtures": [
+    {
+      "name": "default contract mapping",
+      "capabilityInput": {
+        "refinement": "standard",
+        "sourceArtifactId": "01K00000000000000000000001"
+      },
+      "configuration": {
+        "model": {
+          "family": "isnet",
+          "sha256": "cc2c9f5c1751b9737cb81e708ff0c5e9542c2205daed22418a4fd2ab5d4c481a",
+          "source": "huggingface.co/imgly/isnet-general-onnx@440dea96dd4a3b06bbbf5abec3e26569dd7ec49f/onnx/model.onnx",
+          "license": "MIT",
+          "variant": "isnet-general",
+          "inputSize": 1024,
+          "normalization": "isnet"
+        },
+        "sharpVersion": "0.35.3",
+        "foregroundEncoding": "webp-lossless-effort-3",
+        "onnxRuntimeNodeVersion": "1.27.0"
+      },
+      "expectedAdapterInput": {
+        "refinement": "standard",
+        "sourceArtifactId": "01K00000000000000000000001"
+      },
+      "adapterResult": {
+        "schemaVersion": "kanvas.image-background-remove-result/v1",
+        "maskArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "sample",
+          "outputIndex": 0
+        },
+        "qualitySignals": {
+          "refinement": "standard",
+          "modelDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "modelVariant": "u2net",
+          "schemaVersion": "kanvas.image-background-remove-quality/v1",
+          "foregroundRatio": 0,
+          "uncertainEdgeRatio": 0
+        },
+        "foregroundArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "sample",
+          "outputIndex": 0
+        }
+      },
+      "expectedCapabilityOutput": {
+        "schemaVersion": "kanvas.image-background-remove-result/v1",
+        "maskArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "sample",
+          "outputIndex": 0
+        },
+        "qualitySignals": {
+          "refinement": "standard",
+          "modelDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "modelVariant": "u2net",
+          "schemaVersion": "kanvas.image-background-remove-quality/v1",
+          "foregroundRatio": 0,
+          "uncertainEdgeRatio": 0
+        },
+        "foregroundArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "sample",
+          "outputIndex": 0
+        }
+      }
+    }
+  ]
+}

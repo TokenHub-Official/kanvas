@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "skillKey": "first-party.image-generate",
+  "displayName": "图片生成",
+  "nonProduction": false,
+  "agent": {
+    "surfaceKinds": ["agent_workspace"],
+    "toolFamilies": ["query", "workflow"],
+    "summary": "根据用户的视觉目标准备一项需要确认的图片生成任务，确认后通过已发布流程产生可追踪的图片结果。",
+    "exampleRequests": [
+      "生成一张 1:1 的秋季新品主视觉",
+      "为当前画板制作一张 16:9 的背景图",
+      "参考我附带的图片生成一个新的视觉版本"
+    ],
+    "instructionResourcePath": "SKILL.md"
+  },
+  "entrypoints": [
+    {
+      "entrypointKey": "generate",
+      "displayName": "生成图片",
+      "description": "根据设计指令生成一张可追踪的图片结果。",
+      "category": "生成与编辑",
+      "outputPresentation": "board",
+      "workflowPath": "workflows/image-generate.json"
+    }
+  ]
+}

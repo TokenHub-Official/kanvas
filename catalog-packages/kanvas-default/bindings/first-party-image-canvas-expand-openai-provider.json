@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "kanvas.capability-binding/v1",
+  "bindingKey": "first-party.image.canvas-expand.openai-provider",
+  "contract": {
+    "key": "image.canvas.expand",
+    "revision": 1,
+    "canonicalDigest": "sha256:fc9eaef48d0bcfc3bf7f40c3c66e2ff14d127590223cef1076a65ec51a218c44"
+  },
+  "implementation": {
+    "key": "first-party.image.canvas-expand.openai-provider",
+    "revision": 1,
+    "canonicalDigest": "sha256:70d0af57abb33f6c06552af37426991b2e383575b9036f52b7409d7b1dddbc28"
+  },
+  "priority": 1,
+  "enabled": true,
+  "eligibility": {},
+  "fallbackOn": []
+}

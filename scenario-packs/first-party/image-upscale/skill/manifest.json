@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "skillKey": "first-party.image-upscale",
+  "displayName": "图片放大",
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "upscale",
+      "displayName": "图片放大",
+      "description": "选择忠实 2× 放大，或允许生成新细节的高精度重建。",
+      "category": "画质修复",
+      "outputPresentation": "board",
+      "inputUiSchema": {
+        "schemaVersion": "kanvas.entrypoint-ui/v0",
+        "canvasTool": {
+          "surface": "canvas.image",
+          "operationId": "image.upscale",
+          "order": 120,
+          "costNotice": "忠实 2× 由 Worker 确定性执行；生成式重建会将授权图片发送到外部 Provider，并产生模型费用。",
+          "source": {
+            "parameterKey": "sourceArtifactId",
+            "value": "artifact_id"
+          },
+          "parameters": [
+            {
+              "key": "qualityIntent",
+              "label": "放大方式",
+              "control": "select",
+              "required": true,
+              "defaultValue": "faithful",
+              "options": [
+                {
+                  "value": "faithful",
+                  "label": "忠实 2×"
+                },
+                {
+                  "value": "reconstructive",
+                  "label": "生成式高精度重建"
+                }
+              ]
+            },
+            {
+              "key": "guidance",
+              "label": "重建提示（可选）",
+              "control": "text",
+              "required": false,
+              "maxLength": 1000
+            }
+          ],
+          "result": {
+            "artifactPath": [
+              "imageArtifactId"
+            ],
+            "outputModes": [
+              "add_node",
+              "replace_content",
+              "asset_only"
+            ]
+          }
+        }
+      },
+      "workflowPath": "workflows/image-upscale.json"
+    }
+  ]
+}

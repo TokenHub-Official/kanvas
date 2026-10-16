@@ -1,0 +1,112 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "name": "kanvas"
+  },
+  "spec": {
+    "replicas": 1,
+    "strategy": {
+      "type": "Recreate"
+    },
+    "selector": {
+      "matchLabels": {
+        "app": "kanvas"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "kanvas"
+        }
+      },
+      "spec": {
+        "automountServiceAccountToken": false,
+        "terminationGracePeriodSeconds": 600,
+        "securityContext": {
+          "runAsNonRoot": true,
+          "runAsUser": 10001,
+          "runAsGroup": 10001
+        },
+        "containers": [
+          {
+            "name": "kanvas",
+            "image": "registry.example.invalid/kanvas:release-id",
+            "ports": [
+              {
+                "name": "http",
+                "containerPort": 8080
+              }
+            ],
+            "envFrom": [
+              {
+                "secretRef": {
+                  "name": "kanvas-runtime"
+                }
+              }
+            ],
+            "env": [{ "name": "KANVAS_DB_MIGRATION_MODE", "value": "check" }],
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "readOnlyRootFilesystem": true,
+              "capabilities": {
+                "drop": ["ALL"]
+              }
+            },
+            "volumeMounts": [
+              {
+                "name": "tmp",
+                "mountPath": "/tmp"
+              }
+            ],
+            "resources": {
+              "requests": {
+                "cpu": "100m",
+                "memory": "256Mi"
+              },
+              "limits": {
+                "cpu": "1",
+                "memory": "1Gi"
+              }
+            },
+            "startupProbe": {
+              "httpGet": {
+                "path": "/health/startup",
+                "port": "http"
+              },
+              "periodSeconds": 5,
+              "failureThreshold": 60,
+              "timeoutSeconds": 5
+            },
+            "livenessProbe": {
+              "httpGet": {
+                "path": "/health/live",
+                "port": "http"
+              },
+              "periodSeconds": 15,
+              "failureThreshold": 3,
+              "timeoutSeconds": 5
+            },
+            "readinessProbe": {
+              "httpGet": {
+                "path": "/health/ready",
+                "port": "http"
+              },
+              "periodSeconds": 5,
+              "failureThreshold": 2,
+              "timeoutSeconds": 5
+            }
+          }
+        ],
+        "volumes": [
+          {
+            "name": "tmp",
+            "emptyDir": {
+              "sizeLimit": "4Gi"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

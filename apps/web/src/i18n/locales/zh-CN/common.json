@@ -1,0 +1,143 @@
+{
+  "skipToContent": "跳到主要内容",
+  "account": "当前账号：{{name}}",
+  "back": "返回",
+  "cancel": "取消",
+  "checkConnection": "请检查连接后重试。",
+  "returnHome": "返回 Kanvas",
+  "retry": "重新连接",
+  "switchAccount": "使用其他账号",
+  "switchingAccount": "正在切换账号",
+  "feedback": {
+    "loading": "正在准备工作区",
+    "retrying": "正在重试"
+  },
+  "appShell": {
+    "returnToWorkbench": "返回会话",
+    "nav": {
+      "primary": "主要导航",
+      "workbench": "会话",
+      "agents": "Agents",
+      "skills": "Skills",
+      "assets": "资产库",
+      "brand": "品牌",
+      "create": "创建",
+      "settings": "团队设置",
+      "tools": "工具",
+      "libraries": "资料库"
+    },
+    "roles": {
+      "owner": "所有者",
+      "admin": "管理员",
+      "editor": "设计成员",
+      "operator": "业务成员",
+      "reviewer": "审阅成员",
+      "viewer": "查看成员"
+    },
+    "workspace": {
+      "trigger": "切换团队空间，当前为 {{name}}",
+      "drawerTitle": "团队空间",
+      "settings": "团队设置",
+      "switch": "切换团队空间",
+      "searchLabel": "搜索团队空间",
+      "searchPlaceholder": "搜索名称或组织",
+      "noResults": "没有匹配的团队空间"
+    },
+    "account": {
+      "open": "打开 {{name}} 的账户菜单",
+      "language": "语言",
+      "languages": {
+        "zh-CN": "简体中文",
+        "en-US": "英语"
+      },
+      "signOut": "退出登录",
+      "signingOut": "正在退出",
+      "signOutErrorTitle": "暂时无法退出登录",
+      "signOutErrorDescription": "当前登录状态仍然有效。请检查连接后重试。"
+    },
+    "createDialog": {
+      "title": "开始创作",
+      "openImage": "打开图片",
+      "blankCanvas": "空白画板",
+      "readOnly": "当前团队空间为只读，暂时不能创建内容。"
+    },
+    "boundary": {
+      "reconnect": "重新连接",
+      "starting": "Kanvas 正在启动，连接后将自动继续",
+      "loadErrorTitle": "暂时无法加载团队空间",
+      "loadErrorDescription": "请检查连接后重试。正在进行的工作不会中断。",
+      "noAccessTitle": "你无法访问这个团队空间",
+      "noAccessDescription": "你的访问权限可能已变化。返回入口后会根据最新权限选择可用空间。",
+      "chooseWorkspace": "选择可用团队空间"
+    }
+  },
+  "opening": {
+    "agent": "正在打开 Agent",
+    "asset": "正在打开资产",
+    "assets": "正在打开资产库",
+    "brand": "正在打开品牌",
+    "execution": "正在打开执行策略",
+    "creation": "正在打开创作入口",
+    "invite": "正在打开团队邀请",
+    "operations": "正在打开运行诊断",
+    "people": "正在打开成员管理",
+    "providers": "正在打开模型服务",
+    "settings": "正在打开团队设置",
+    "setup": "正在打开初始化",
+    "skills": "正在打开团队能力",
+    "work": "正在打开制作工作",
+    "workflowEditor": "正在打开工作流编辑器",
+    "workflowTemplate": "正在打开模板",
+    "workflowTemplates": "正在打开工作流模板",
+    "workflows": "正在打开工作流",
+    "workspace": "正在打开工作台"
+  },
+  "dialog": {
+    "close": "关闭对话框",
+    "closeWhenReady": "操作完成后可关闭对话框"
+  },
+  "network": {
+    "offlineTitle": "当前处于离线状态",
+    "offlineDescription": "需要联网的操作会暂停。请保持页面打开，连接恢复后可继续。",
+    "restoredTitle": "连接已恢复",
+    "restoredDescription": "需要联网的页面和操作现在可以继续重试。"
+  },
+  "coverPicker": {
+    "title": "选择封面",
+    "apply": "使用此封面",
+    "cancel": "取消",
+    "search": "搜索图片",
+    "upload": "上传图片",
+    "retry": "重试",
+    "remove": "移除封面",
+    "selected": "已选择一张图片",
+    "noCover": "不使用封面",
+    "empty": "还没有可用图片",
+    "noMatches": "没有匹配的图片",
+    "uploadError": "图片上传失败，请重试。",
+    "invalidImage": "无法读取这张图片，请选择有效的 PNG、JPEG 或 WebP 图片。",
+    "tooLarge": "图片超过上传大小限制，请选择较小的图片。",
+    "permissionError": "当前没有上传权限，请检查登录状态或联系管理员。"
+  },
+  "visualPicker": {
+    "search": "搜索图片名称",
+    "selected": "已选：{{name}}",
+    "choose": "选择一张图片",
+    "locate": "定位所选",
+    "retry": "重试",
+    "loading": "正在加载图片",
+    "items": "图片素材",
+    "preview": "放大预览 {{name}}",
+    "empty": "暂无可选图片",
+    "noResults": "没有找到匹配的图片",
+    "clearSearch": "清空搜索",
+    "moreFailed": "后续图片加载失败，已显示的图片仍可选择",
+    "loadMore": "加载更多",
+    "closePreview": "关闭预览",
+    "applyFailed": "暂时无法应用，请重试或选择其他图片",
+    "unavailable": "素材已失效或无权访问，请选择其他图片",
+    "previewBackground": "预览背景",
+    "light": "浅色",
+    "dark": "深色"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "skillKey": "first-party.brand-social-starter",
+  "displayName": "品牌社媒视觉制作",
+  "nonProduction": false,
+  "agent": {
+    "surfaceKinds": ["agent_workspace", "workspace_home", "brand"],
+    "toolFamilies": ["query", "canvas_command", "workflow"],
+    "summary": "根据用户目标和品牌约束协调视觉制作；仅在用户明确要求使用画板或继续已明确的画板任务时进行画板排版。",
+    "exampleRequests": [
+      "用当前品牌做一张新品发布的方形社媒图",
+      "根据品牌 Logo 和主色准备一张活动宣传视觉",
+      "生成结果图并保留一个可以继续编辑的品牌海报画板"
+    ],
+    "instructionResourcePath": "SKILL.md"
+  },
+  "entrypoints": [
+    {
+      "entrypointKey": "compose",
+      "displayName": "品牌底图合成",
+      "description": "将已确认的品牌 Logo 合成到纯色方形底图；这是中间图片，不包含完整海报排版。",
+      "category": "品牌创作",
+      "outputPresentation": "single_review",
+      "workflowPath": "workflows/brand-social-starter.json"
+    }
+  ]
+}

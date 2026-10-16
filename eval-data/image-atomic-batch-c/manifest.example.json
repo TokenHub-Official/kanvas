@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "kanvas.image-atomic-batch-c-eval/v1",
+  "corpusId": "atom-batch-03-template-v1",
+  "evidenceClass": "template",
+  "anonymized": true,
+  "samples": [
+    {
+      "id": "crop-001",
+      "capability": "image.crop.suggest",
+      "target": "browser",
+      "implementationDigest": "sha256:d28502069cb368e73e92600aca2dc86639fe36894c0a3b20cd765b2cc1e8c351",
+      "categories": [
+        "off-center-subject",
+        "portrait"
+      ],
+      "candidateFile": "crop/candidate-001.json",
+      "expectedFile": "crop/ground-truth-001.json",
+      "thresholds": {
+        "meanTopOneIou": {
+          "operator": "gte",
+          "value": 0.75
+        },
+        "topThreeHitRate": {
+          "operator": "gte",
+          "value": 1
+        },
+        "meanSubjectRetention": {
+          "operator": "gte",
+          "value": 0.95
+        }
+      }
+    },
+    {
+      "id": "palette-001",
+      "capability": "image.palette.extract",
+      "target": "browser",
+      "implementationDigest": "sha256:a7328b321ee171692c912b216754b9c8db4a151b3476f3edfc468c094073b614",
+      "categories": [
+        "dominant-neutral",
+        "small-accent"
+      ],
+      "candidateFile": "palette/candidate-001.json",
+      "expectedFile": "palette/ground-truth-001.json",
+      "thresholds": {
+        "weightedColorDistance": {
+          "operator": "lte",
+          "value": 0.08
+        },
+        "weightedProportionError": {
+          "operator": "lte",
+          "value": 0.12
+        },
+        "paletteCoverage": {
+          "operator": "gte",
+          "value": 0.92
+        }
+      }
+    },
+    {
+      "id": "quality-001",
+      "capability": "image.quality.assess",
+      "target": "worker",
+      "implementationDigest": "sha256:5bfb273c488db8222f9d09c5c7b4927dfbdafd815345c68b18407ccfd436c6ae",
+      "categories": [
+        "controlled-blur",
+        "under-exposure"
+      ],
+      "candidateFile": "quality/candidate-001.json",
+      "expectedFile": "quality/ground-truth-001.json",
+      "thresholds": {
+        "scoreMae": {
+          "operator": "lte",
+          "value": 0.12
+        },
+        "findingF1": {
+          "operator": "gte",
+          "value": 0.85
+        },
+        "usabilityMatch": {
+          "operator": "eq",
+          "value": 1
+        }
+      }
+    },
+    {
+      "id": "compose-001",
+      "capability": "image.background.compose",
+      "target": "browser",
+      "implementationDigest": "sha256:13b7f5179254b8e9d888badf31bbae67d0e5ed8fa565fbc5bd45a1cc05f36abb",
+      "categories": [
+        "partial-alpha",
+        "contain"
+      ],
+      "candidateFile": "compose/candidate-001.png",
+      "expectedFile": "compose/ground-truth-001.png",
+      "candidateMaskFile": "compose/candidate-mask-001.png",
+      "expectedMaskFile": "compose/ground-truth-mask-001.png",
+      "thresholds": {
+        "pixelExactRatio": {
+          "operator": "gte",
+          "value": 0.999
+        },
+        "channelMae": {
+          "operator": "lte",
+          "value": 0.1
+        },
+        "alphaExactRatio": {
+          "operator": "eq",
+          "value": 1
+        },
+        "compositionMaskIou": {
+          "operator": "gte",
+          "value": 0.999
+        }
+      }
+    }
+  ]
+}

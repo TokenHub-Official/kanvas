@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "kanvas.workflow-catalog-asset/v1",
+  "workflowKey": "poster_generate_simple",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "基础海报生成",
+      "en-US": "Basic poster generation"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "输入海报需求，流程组合内置商业海报提示词并生成一张结果图。",
+      "en-US": "Turn a poster brief into a composed prompt and generate one result image."
+    }
+  },
+  "category": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "海报制作",
+      "en-US": "Poster creation"
+    }
+  },
+  "topology": {
+    "schemaVersion": 1,
+    "key": "poster_generate_simple",
+    "entryNodeKey": "generate_poster",
+    "limits": {
+      "maxNodeRuns": 1,
+      "timeoutMs": 300000
+    },
+    "nodes": [
+      {
+        "key": "generate_poster",
+        "kind": "invoke",
+        "capability": {
+          "contractId": "image.generate",
+          "revision": 1,
+          "canonicalDigest": "sha256:60d1cc4a6436d3a4b1297d571b46e43a51d07c6ffb4f2487bd307679c7260377"
+        },
+        "input": {
+          "prompt": {
+            "$string": [
+              "生成一张构图完整、视觉层级清晰、保留合理文字空间、适合商业投放的海报。用户额外需求：",
+              {
+                "$value": {
+                  "source": "workflow_input",
+                  "pointer": "/userPrompt"
+                }
+              }
+            ]
+          }
+        },
+        "next": []
+      }
+    ],
+    "outputs": {
+      "schemaVersion": {
+        "required": true,
+        "value": "kanvas.poster-generate-simple-result/v1"
+      },
+      "resultImageArtifactId": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "generate_poster",
+            "scope": "root",
+            "pointer": "/imageArtifactId"
+          }
+        }
+      }
+    }
+  },
+  "inputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "kanvas.poster-generate-simple-input.v1",
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["userPrompt"],
+    "properties": {
+      "userPrompt": {
+        "title": "海报需求",
+        "description": "描述主题、风格、氛围、配色和希望保留的文字空间。",
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 2000
+      }
+    }
+  },
+  "outputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "kanvas.poster-generate-simple-result.v1",
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["schemaVersion", "resultImageArtifactId"],
+    "properties": {
+      "schemaVersion": {
+        "const": "kanvas.poster-generate-simple-result/v1"
+      },
+      "resultImageArtifactId": {
+        "title": "结果图",
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+      }
+    }
+  },
+  "requiredCapabilities": [
+    {
+      "key": "image.generate",
+      "revision": 1,
+      "canonicalDigest": "sha256:60d1cc4a6436d3a4b1297d571b46e43a51d07c6ffb4f2487bd307679c7260377"
+    }
+  ],
+  "canonicalDigest": "sha256:edd113df9c5ea59e10701bed575831efc996d8677b7b54e9c71d635dc15839ac"
+}

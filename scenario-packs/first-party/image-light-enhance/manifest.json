@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "packId": "first-party.image-light-enhance",
+  "displayName": "Image light enhance",
+  "workflows": [
+    {
+      "path": "workflows/image-light-enhance.json"
+    }
+  ],
+  "skill": {
+    "path": "skill/manifest.json"
+  },
+  "capabilities": [
+    {
+      "path": "capabilities/image-light-enhance.json"
+    }
+  ],
+  "requiredCapabilities": [
+    {
+      "contractId": "image.light.enhance",
+      "revision": 1,
+      "canonicalDigest": "sha256:b98b1d0d90e0f1b4124ee29c2343030a5d807f6ec78675495bfc6665003a8b80"
+    }
+  ]
+}

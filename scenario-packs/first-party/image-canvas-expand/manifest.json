@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "packId": "first-party.image-canvas-expand",
+  "displayName": "Image canvas expand",
+  "workflows": [
+    {
+      "path": "workflows/image-canvas-expand.json"
+    }
+  ],
+  "skill": {
+    "path": "skill/manifest.json"
+  },
+  "capabilities": [
+    {
+      "path": "capabilities/image-canvas-expand.json"
+    }
+  ],
+  "requiredCapabilities": [
+    {
+      "contractId": "image.canvas.expand",
+      "revision": 1,
+      "canonicalDigest": "sha256:1d6c6649aba50dd38583b864e34b25891da12ae48ab9fe0935b0b846d3c0b76e"
+    }
+  ]
+}

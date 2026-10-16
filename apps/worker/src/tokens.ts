@@ -1,0 +1,1 @@
+export const APPLICATION_RUNTIME = Symbol("APPLICATION_RUNTIME");

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "kanvas.capability-binding/v1",
+  "bindingKey": "first-party.image.background-compose.deterministic.worker",
+  "contract": {
+    "key": "image.background.compose",
+    "revision": 1,
+    "canonicalDigest": "sha256:47cb3d93380ec07f1d7ef997cee934b077a37635af2d7f362b0f92f970eed5cd"
+  },
+  "implementation": {
+    "key": "first-party.image.background-compose.deterministic.worker",
+    "revision": 1,
+    "canonicalDigest": "sha256:8b5e3085a061a15044faa7144f4b1e70af4a6c0234c24a1df5098088de9c691c"
+  },
+  "priority": 2,
+  "enabled": true,
+  "eligibility": {},
+  "fallbackOn": []
+}

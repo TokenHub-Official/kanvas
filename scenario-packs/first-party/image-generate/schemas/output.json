@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kanvas.image-generate-result.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "imageArtifactId"],
+  "properties": {
+    "schemaVersion": { "const": "kanvas.image-generate-result/v1" },
+    "imageArtifactId": {
+      "title": "结果图",
+      "type": "string",
+      "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+    }
+  }
+}

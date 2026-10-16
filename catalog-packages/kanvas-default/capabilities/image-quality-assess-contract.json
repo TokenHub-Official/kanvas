@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "contractKey": "image.quality.assess",
+  "revision": 1,
+  "inputSchema": {
+    "$id": "kanvas.image-quality-assess-input.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["sourceArtifactId"],
+    "properties": {
+      "sampleSize": {
+        "type": "integer",
+        "default": 256,
+        "maximum": 1024,
+        "minimum": 64,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "subjectBounds": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["x", "y", "width", "height"],
+          "properties": {
+            "x": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "y": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "width": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "height": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "maxItems": 16,
+        "x-kanvas-semantic-type": "layout.bounds"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "outputSchema": {
+    "$id": "kanvas.image-quality-assess-result.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "schemaVersion",
+      "sourceWidth",
+      "sourceHeight",
+      "blurScore",
+      "underExposureRatio",
+      "overExposureRatio",
+      "noiseScore",
+      "compressionScore",
+      "subjectScaleRatio",
+      "usability",
+      "findings",
+      "qualitySignals"
+    ],
+    "properties": {
+      "findings": {
+        "type": "array",
+        "items": {
+          "enum": [
+            "blur",
+            "under_exposed",
+            "over_exposed",
+            "noise",
+            "compression",
+            "subject_too_small"
+          ],
+          "type": "string"
+        },
+        "maxItems": 6,
+        "uniqueItems": true,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "blurScore": {
+        "type": "number",
+        "maximum": 1,
+        "minimum": 0,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "usability": {
+        "enum": ["good", "review", "poor"],
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "noiseScore": {
+        "type": "number",
+        "maximum": 1,
+        "minimum": 0,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "sourceWidth": {
+        "type": "integer",
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "sourceHeight": {
+        "type": "integer",
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "schemaVersion": {
+        "const": "kanvas.image-quality-assess-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "required": [
+          "schemaVersion",
+          "generative",
+          "sourceModified",
+          "method",
+          "subjectBoundsProvided"
+        ],
+        "properties": {
+          "method": {
+            "const": "deterministic_pixel_diagnostics"
+          },
+          "generative": {
+            "const": false
+          },
+          "schemaVersion": {
+            "const": "kanvas.image-quality-assess-quality/v1"
+          },
+          "sourceModified": {
+            "const": false
+          },
+          "subjectBoundsProvided": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "quality.signals"
+      },
+      "compressionScore": {
+        "type": "number",
+        "maximum": 1,
+        "minimum": 0,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "overExposureRatio": {
+        "type": "number",
+        "maximum": 1,
+        "minimum": 0,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "subjectScaleRatio": {
+        "type": ["number", "null"],
+        "maximum": 1,
+        "minimum": 0,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "underExposureRatio": {
+        "type": "number",
+        "maximum": 1,
+        "minimum": 0,
+        "x-kanvas-semantic-type": "number.scalar"
+      }
+    },
+    "additionalProperties": false
+  },
+  "idempotencyMode": "keyed",
+  "supportedInvokers": ["user", "workflow", "agent", "canvas"]
+}

@@ -1,0 +1,48 @@
+{
+  "name": "@kanvas/database",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./runtime": {
+      "types": "./dist/runtime/index.d.ts",
+      "default": "./dist/runtime/index.js"
+    }
+  },
+  "scripts": {
+    "bootstrap:admin": "node dist/cli/bootstrap-admin.js",
+    "bootstrap:demo": "node dist/cli/bootstrap-demo.js",
+    "bootstrap:catalog": "node dist/cli/bootstrap-default-catalog.js",
+    "bootstrap:provider-settings-policy": "node dist/cli/bootstrap-provider-settings-policy.js",
+    "bootstrap:poster-workflows": "node dist/cli/bootstrap-poster-workflows.js",
+    "bootstrap:brand-social-starter": "node dist/cli/bootstrap-brand-social-starter.js",
+    "build": "tsc -p tsconfig.build.json",
+    "check-types": "tsc --noEmit -p tsconfig.json",
+    "dev": "tsc -p tsconfig.build.json --watch --preserveWatchOutput",
+    "lint": "eslint src test drizzle.config.ts",
+    "migrate": "node dist/cli/main.js",
+    "migrate:plan": "node dist/cli/main.js --plan",
+    "migration:generate": "drizzle-kit generate",
+    "test": "vitest run",
+    "test:integration:cancellation": "KANVAS_DATABASE_INTEGRATION=1 vitest run test/workflow-cancellation.integration.test.ts",
+    "test:integration:mysql": "pnpm --filter @kanvas/database... build && node test/run-disposable-integration.mjs"
+  },
+  "dependencies": {
+    "@kanvas/application": "workspace:*",
+    "@kanvas/contracts": "workspace:*",
+    "drizzle-orm": "catalog:",
+    "mysql2": "catalog:",
+    "ulid": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "drizzle-kit": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "license": "Apache-2.0"
+}

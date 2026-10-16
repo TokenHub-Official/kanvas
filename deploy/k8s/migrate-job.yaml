@@ -1,0 +1,45 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  # Use a new release-specific name; Jobs are not an exactly-once primitive.
+  name: kanvas-migrate-release-id
+spec:
+  backoffLimit: 0
+  activeDeadlineSeconds: 900
+  ttlSecondsAfterFinished: 86400
+  template:
+    spec:
+      restartPolicy: Never
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+      containers:
+        - name: migrate
+          image: registry.example.invalid/kanvas:release-id
+          command: [kanvas-db, migrate]
+          env:
+            - name: KANVAS_DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: kanvas-migration
+                  key: KANVAS_DATABASE_URL
+            - name: KANVAS_INSTANCE_ID
+              valueFrom:
+                secretKeyRef:
+                  name: kanvas-runtime
+                  key: KANVAS_INSTANCE_ID
+            - name: KANVAS_RELEASE_VERSION
+              value: release-id
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: [ALL]
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              memory: 512Mi

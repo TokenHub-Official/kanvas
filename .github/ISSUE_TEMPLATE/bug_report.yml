@@ -1,0 +1,56 @@
+name: Bug report
+description: Report a reproducible problem in Kanvas.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        Do not include API keys, cookies, database contents, user assets or
+        private deployment addresses. Use the private security channel for
+        vulnerabilities.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What happened, and what did you expect instead?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Provide the smallest deterministic sequence that reproduces the problem.
+      placeholder: |
+        1. Start from ...
+        2. Run ...
+        3. Observe ...
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Commit or version
+      description: Use an exact commit SHA or release version when possible.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include OS, Node.js version, browser and deployment mode as relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Redacted evidence
+      description: Add relevant logs or screenshots after removing secrets and user data.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched existing issues for the same problem.
+          required: true
+        - label: I removed secrets, credentials and private user data.
+          required: true

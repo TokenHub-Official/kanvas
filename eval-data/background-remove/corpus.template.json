@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "kanvas.background-remove-eval-corpus/v1",
+  "corpusId": "replace-with-versioned-anonymous-corpus-id",
+  "anonymized": true,
+  "samples": [],
+  "thresholds": {
+    "approvedBy": "replace-after-designer-review",
+    "approvedAt": "replace-after-designer-review",
+    "minimumMeanIou": 0,
+    "minimumMeanBoundaryF1": 0,
+    "maximumFailureRate": 0,
+    "maximumFallbackRate": 0,
+    "maximumP95LatencyMs": {
+      "browser": 0,
+      "worker": 0
+    }
+  }
+}

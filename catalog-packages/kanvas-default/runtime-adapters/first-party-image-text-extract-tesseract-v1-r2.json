@@ -1,0 +1,269 @@
+{
+  "schemaVersion": "kanvas.runtime-adapter-definition/v1",
+  "adapterKey": "first-party.image.text-extract.tesseract.v1",
+  "revision": 2,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "文字提取 · Tesseract Worker",
+      "en-US": "Text extraction · Tesseract Worker"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "使用已发布并校验摘要的语言模型，在 Worker 中执行文字识别。",
+      "en-US": "Runs text recognition in the Worker using a published, digest-verified language model."
+    }
+  },
+  "executionTarget": "worker",
+  "sourceKinds": ["model_resource"],
+  "supportedModelFormats": ["tesseract_data"],
+  "modelResourceInterfaceDigest": "sha256:5e66e0ca3c6bdfa0f353c799fe04f72b6e60ea8f9d5f5b7dcd0ac2755afb6703",
+  "invocationInputSchema": {
+    "$id": "kanvas.image-text-extract-input.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["sourceArtifactId"],
+    "properties": {
+      "languages": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$"
+        },
+        "maxItems": 8,
+        "minItems": 1,
+        "uniqueItems": true,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "granularity": {
+        "enum": ["line", "word"],
+        "type": "string",
+        "default": "line",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      },
+      "minimumConfidence": {
+        "type": "number",
+        "default": 0.5,
+        "maximum": 1,
+        "minimum": 0,
+        "x-kanvas-semantic-type": "number.scalar"
+      }
+    },
+    "additionalProperties": false
+  },
+  "invocationOutputSchema": {
+    "$id": "kanvas.image-text-extract-result.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "schemaVersion",
+      "sourceArtifactId",
+      "sourceWidth",
+      "sourceHeight",
+      "text",
+      "language",
+      "direction",
+      "confidence",
+      "blocks",
+      "regions",
+      "qualitySignals"
+    ],
+    "properties": {
+      "text": {
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "blocks": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["level", "text", "confidence", "polygon"],
+          "properties": {
+            "text": {
+              "type": "string",
+              "minLength": 1
+            },
+            "level": {
+              "enum": ["line", "word"],
+              "type": "string"
+            },
+            "polygon": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["x", "y"],
+                "properties": {
+                  "x": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "y": {
+                    "type": "number",
+                    "minimum": 0
+                  }
+                },
+                "additionalProperties": false
+              },
+              "maxItems": 4,
+              "minItems": 4
+            },
+            "confidence": {
+              "type": "number",
+              "maximum": 1,
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        },
+        "maxItems": 10000,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "regions": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["points"],
+          "properties": {
+            "points": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["x", "y"],
+                "properties": {
+                  "x": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "y": {
+                    "type": "number",
+                    "minimum": 0
+                  }
+                },
+                "additionalProperties": false
+              },
+              "maxItems": 4,
+              "minItems": 4
+            }
+          },
+          "additionalProperties": false
+        },
+        "maxItems": 10000,
+        "x-kanvas-semantic-type": "region.list"
+      },
+      "language": {
+        "type": ["string", "null"],
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "direction": {
+        "enum": ["ltr", "rtl", "ttb", "unknown"],
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "confidence": {
+        "type": "number",
+        "maximum": 1,
+        "minimum": 0,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "sourceWidth": {
+        "type": "integer",
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "sourceHeight": {
+        "type": "integer",
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "schemaVersion": {
+        "const": "kanvas.image-text-extract-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "required": ["schemaVersion", "method", "generative", "lowConfidence"],
+        "properties": {
+          "method": {
+            "const": "tesseract_wasm_lstm"
+          },
+          "generative": {
+            "const": false
+          },
+          "lowConfidence": {
+            "type": "boolean"
+          },
+          "schemaVersion": {
+            "const": "kanvas.image-text-extract-quality/v1"
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "quality.signals"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "configurationSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "default": {
+      "model": {
+        "family": "tesseract",
+        "variant": "tessdata-fast-eng",
+        "languageTag": "en",
+        "modelCode": "eng",
+        "sha256": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
+        "license": "Apache-2.0"
+      },
+      "engineVersion": "7.0.0",
+      "maximumSourceBytes": 67108864,
+      "maximumSourcePixels": 32000000
+    },
+    "const": {
+      "model": {
+        "family": "tesseract",
+        "variant": "tessdata-fast-eng",
+        "languageTag": "en",
+        "modelCode": "eng",
+        "sha256": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
+        "license": "Apache-2.0"
+      },
+      "engineVersion": "7.0.0",
+      "maximumSourceBytes": 67108864,
+      "maximumSourcePixels": 32000000
+    }
+  },
+  "runtimeProfile": {
+    "kind": "worker.tesseract.v1",
+    "version": 1,
+    "settings": {
+      "engineVersion": "7.0.0"
+    }
+  },
+  "artifactInputs": [
+    {
+      "role": "sourceArtifactId",
+      "pointer": "/sourceArtifactId",
+      "required": true,
+      "mediaTypes": ["image/png", "image/jpeg", "image/webp"]
+    }
+  ],
+  "executable": {
+    "kind": "built_in",
+    "packageKey": "kanvas.worker-image-runtime",
+    "packageVersion": "1.0.0",
+    "entrypoint": "first-party.image.text-extract.tesseract.v1",
+    "releaseDigest": "sha256:b3ab34a41dec676cd461f0c902fb5e552989f5a4cfded936d96a78be47613d60"
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "key": "image_background_compose",
+  "entryNodeKey": "compose",
+  "limits": {
+    "maxNodeRuns": 1,
+    "timeoutMs": 180000
+  },
+  "nodes": [
+    {
+      "key": "compose",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "image.background.compose",
+        "revision": 1,
+        "canonicalDigest": "sha256:12ad204a0ae4b2537d3103ffa8d9a4c3878ae774657ac99d823d75c1d6d040f9"
+      },
+      "input": {
+        "$value": {
+          "source": "workflow_input",
+          "pointer": ""
+        }
+      },
+      "next": []
+    }
+  ],
+  "outputs": {
+    "schemaVersion": {
+      "required": true,
+      "value": "kanvas.image-background-compose-result/v1"
+    },
+    "imageArtifactId": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "compose",
+          "scope": "root",
+          "pointer": "/imageArtifactId"
+        }
+      }
+    },
+    "compositionMaskArtifactId": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "compose",
+          "scope": "root",
+          "pointer": "/compositionMaskArtifactId"
+        }
+      }
+    },
+    "canvas": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "compose",
+          "scope": "root",
+          "pointer": "/canvas"
+        }
+      }
+    },
+    "resolvedPlacement": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "compose",
+          "scope": "root",
+          "pointer": "/resolvedPlacement"
+        }
+      }
+    },
+    "inputArtifactIds": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "compose",
+          "scope": "root",
+          "pointer": "/inputArtifactIds"
+        }
+      }
+    },
+    "qualitySignals": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "compose",
+          "scope": "root",
+          "pointer": "/qualitySignals"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "contractKey": "image.denoise",
+  "revision": 1,
+  "inputSchema": {
+    "$id": "kanvas.image-denoise-input.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["sourceArtifactId"],
+    "properties": {
+      "strength": {
+        "type": "number",
+        "default": 0.5,
+        "maximum": 1,
+        "minimum": 0.1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "outputSchema": {
+    "$id": "kanvas.image-denoise-result.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "schemaVersion",
+      "imageArtifactId",
+      "noiseEstimate",
+      "method",
+      "strength",
+      "qualitySignals"
+    ],
+    "properties": {
+      "method": {
+        "const": "median_blend",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "strength": {
+        "type": "number",
+        "maximum": 1,
+        "minimum": 0.1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "noiseEstimate": {
+        "type": "number",
+        "maximum": 1,
+        "minimum": 0,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "schemaVersion": {
+        "const": "kanvas.image-denoise-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "required": [
+          "schemaVersion",
+          "qualityIntent",
+          "generative",
+          "alphaPreserved",
+          "kernelSize"
+        ],
+        "properties": {
+          "generative": {
+            "const": false
+          },
+          "kernelSize": {
+            "const": 3
+          },
+          "qualityIntent": {
+            "const": "faithful"
+          },
+          "schemaVersion": {
+            "const": "kanvas.image-denoise-quality/v1"
+          },
+          "alphaPreserved": {
+            "const": true
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "quality.signals"
+      },
+      "imageArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "idempotencyMode": "keyed",
+  "supportedInvokers": ["user", "workflow", "agent", "canvas"]
+}

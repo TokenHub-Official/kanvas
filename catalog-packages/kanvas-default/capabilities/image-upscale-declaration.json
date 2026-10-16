@@ -1,0 +1,257 @@
+{
+  "schemaVersion": "kanvas.capability-declaration-asset/v1",
+  "contract": {
+    "key": "image.upscale",
+    "revision": 1,
+    "canonicalDigest": "sha256:d570660767b9971cda6f0b0b83407424c936a99db381d881cb424d87fb0d2f7b"
+  },
+  "declaration": {
+    "schemaVersion": "kanvas.capability-declaration/v1",
+    "catalog": {
+      "title": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "画质增强",
+          "en-US": "Image upscale"
+        }
+      },
+      "description": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "放大图片并增强细节。",
+          "en-US": "Upscale an image and improve its details."
+        }
+      },
+      "category": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "图像处理",
+          "en-US": "Image processing"
+        }
+      },
+      "sourceKind": "built_in",
+      "tags": ["upscale", "quality", "enhance"],
+      "surfaces": ["workflow", "agent", "canvas"]
+    },
+    "parameters": [
+      {
+        "key": "guidance",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "补充说明",
+            "en-US": "Additional guidance"
+          }
+        },
+        "semanticType": "prompt.rich",
+        "required": false,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["mixed_rich_text"],
+          "default": "mixed_rich_text"
+        },
+        "editor": "rich_prompt"
+      },
+      {
+        "key": "scaleFactor",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "放大倍数",
+            "en-US": "Scale factor"
+          }
+        },
+        "semanticType": "value.any",
+        "required": false,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["constant", "workflow_input", "upstream"],
+          "default": "constant"
+        },
+        "editor": "enum",
+        "defaultValue": 2
+      },
+      {
+        "key": "qualityIntent",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "增强方式",
+            "en-US": "Quality intent"
+          }
+        },
+        "semanticType": "text.plain",
+        "required": true,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["constant", "workflow_input", "upstream"],
+          "default": "constant"
+        },
+        "editor": "enum"
+      },
+      {
+        "key": "sourceArtifactId",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "源图片",
+            "en-US": "Source image"
+          }
+        },
+        "description": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "选择需要处理的流程输入或上游图片。",
+            "en-US": "Choose a workflow input or upstream image to process."
+          }
+        },
+        "semanticType": "artifact.image",
+        "required": true,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["workflow_input", "upstream", "canvas_selection"],
+          "default": "upstream"
+        },
+        "editor": "artifact_picker"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "imageArtifactId",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "结果图",
+            "en-US": "Result image"
+          }
+        },
+        "semanticType": "artifact.image",
+        "primary": true,
+        "visibility": "author"
+      },
+      {
+        "key": "outputHeight",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "结果高度",
+            "en-US": "Output height"
+          }
+        },
+        "semanticType": "value.any",
+        "primary": false,
+        "visibility": "author"
+      },
+      {
+        "key": "outputWidth",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "结果宽度",
+            "en-US": "Output width"
+          }
+        },
+        "semanticType": "value.any",
+        "primary": false,
+        "visibility": "author"
+      },
+      {
+        "key": "qualityIntent",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "增强方式",
+            "en-US": "Quality intent"
+          }
+        },
+        "semanticType": "text.plain",
+        "primary": false,
+        "visibility": "author"
+      },
+      {
+        "key": "scaleFactor",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "放大倍数",
+            "en-US": "Scale factor"
+          }
+        },
+        "semanticType": "value.any",
+        "primary": false,
+        "visibility": "author"
+      },
+      {
+        "key": "qualitySignals",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "质量信息",
+            "en-US": "Quality signals"
+          }
+        },
+        "semanticType": "quality.signals",
+        "primary": false,
+        "visibility": "advanced"
+      },
+      {
+        "key": "sourceHeight",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "原图高度",
+            "en-US": "Source height"
+          }
+        },
+        "semanticType": "value.any",
+        "primary": false,
+        "visibility": "advanced"
+      },
+      {
+        "key": "sourceWidth",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "原图宽度",
+            "en-US": "Source width"
+          }
+        },
+        "semanticType": "value.any",
+        "primary": false,
+        "visibility": "advanced"
+      },
+      {
+        "key": "schemaVersion",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "结果版本",
+            "en-US": "Result version"
+          }
+        },
+        "semanticType": "value.any",
+        "primary": false,
+        "visibility": "hidden"
+      }
+    ],
+    "canvas": {
+      "actionGroup": "image.edit",
+      "interactionBehavior": "form",
+      "completionBehavior": "review_required",
+      "outputModes": ["replace_content", "add_node", "asset_only"],
+      "order": 60
+    }
+  }
+}

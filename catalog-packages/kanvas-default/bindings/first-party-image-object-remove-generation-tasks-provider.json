@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "kanvas.capability-binding/v1",
+  "bindingKey": "first-party.image.object-remove.generation-tasks-provider",
+  "contract": {
+    "key": "image.object.remove",
+    "revision": 1,
+    "canonicalDigest": "sha256:17642c3a8100a24c4733bcd132c077874b72816ee1533ca79bf2e13bfac63535"
+  },
+  "implementation": {
+    "key": "first-party.image.object-remove.generation-tasks-provider",
+    "revision": 1,
+    "canonicalDigest": "sha256:8699216310cc4f03329c2a5e9af8abbbe32db748a441479fa3d87454976b7159"
+  },
+  "priority": 2,
+  "enabled": true,
+  "eligibility": {},
+  "fallbackOn": []
+}

@@ -1,0 +1,360 @@
+{
+  "schemaVersion": "kanvas.workflow-catalog-asset/v1",
+  "workflowKey": "image_quality_assess",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "图片质量诊断",
+      "en-US": "Image quality assessment"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "本地分析模糊、曝光、噪声、压缩与主体尺度，只返回质量事实。",
+      "en-US": "Assess blur, exposure, noise, compression, and subject scale without changing the image."
+    }
+  },
+  "category": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "图片分析",
+      "en-US": "Image analysis"
+    }
+  },
+  "topology": {
+    "schemaVersion": 1,
+    "key": "image_quality_assess",
+    "entryNodeKey": "assess",
+    "limits": {
+      "maxNodeRuns": 1,
+      "timeoutMs": 180000
+    },
+    "nodes": [
+      {
+        "key": "assess",
+        "kind": "invoke",
+        "capability": {
+          "contractId": "image.quality.assess",
+          "revision": 1,
+          "canonicalDigest": "sha256:ff70de4c7da3e30e8ac70a4a8fecc4ac7a8cc499de9ee6060779f7fbe112c3f8"
+        },
+        "input": {
+          "$value": {
+            "source": "workflow_input",
+            "pointer": ""
+          }
+        },
+        "next": []
+      }
+    ],
+    "outputs": {
+      "schemaVersion": {
+        "required": true,
+        "value": "kanvas.image-quality-assess-result/v1"
+      },
+      "sourceWidth": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "assess",
+            "scope": "root",
+            "pointer": "/sourceWidth"
+          }
+        }
+      },
+      "sourceHeight": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "assess",
+            "scope": "root",
+            "pointer": "/sourceHeight"
+          }
+        }
+      },
+      "blurScore": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "assess",
+            "scope": "root",
+            "pointer": "/blurScore"
+          }
+        }
+      },
+      "underExposureRatio": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "assess",
+            "scope": "root",
+            "pointer": "/underExposureRatio"
+          }
+        }
+      },
+      "overExposureRatio": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "assess",
+            "scope": "root",
+            "pointer": "/overExposureRatio"
+          }
+        }
+      },
+      "noiseScore": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "assess",
+            "scope": "root",
+            "pointer": "/noiseScore"
+          }
+        }
+      },
+      "compressionScore": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "assess",
+            "scope": "root",
+            "pointer": "/compressionScore"
+          }
+        }
+      },
+      "subjectScaleRatio": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "assess",
+            "scope": "root",
+            "pointer": "/subjectScaleRatio"
+          }
+        }
+      },
+      "usability": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "assess",
+            "scope": "root",
+            "pointer": "/usability"
+          }
+        }
+      },
+      "findings": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "assess",
+            "scope": "root",
+            "pointer": "/findings"
+          }
+        }
+      },
+      "qualitySignals": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "assess",
+            "scope": "root",
+            "pointer": "/qualitySignals"
+          }
+        }
+      }
+    }
+  },
+  "inputSchema": {
+    "$id": "kanvas.image-quality-assess-input.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["sourceArtifactId"],
+    "properties": {
+      "sampleSize": {
+        "type": "integer",
+        "default": 256,
+        "maximum": 1024,
+        "minimum": 64,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "subjectBounds": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["x", "y", "width", "height"],
+          "properties": {
+            "x": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "y": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "width": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "height": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "maxItems": 16,
+        "x-kanvas-semantic-type": "layout.bounds"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "outputSchema": {
+    "$id": "kanvas.image-quality-assess-result.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "schemaVersion",
+      "sourceWidth",
+      "sourceHeight",
+      "blurScore",
+      "underExposureRatio",
+      "overExposureRatio",
+      "noiseScore",
+      "compressionScore",
+      "subjectScaleRatio",
+      "usability",
+      "findings",
+      "qualitySignals"
+    ],
+    "properties": {
+      "findings": {
+        "type": "array",
+        "items": {
+          "enum": [
+            "blur",
+            "under_exposed",
+            "over_exposed",
+            "noise",
+            "compression",
+            "subject_too_small"
+          ],
+          "type": "string"
+        },
+        "maxItems": 6,
+        "uniqueItems": true,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "blurScore": {
+        "type": "number",
+        "maximum": 1,
+        "minimum": 0,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "usability": {
+        "enum": ["good", "review", "poor"],
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "noiseScore": {
+        "type": "number",
+        "maximum": 1,
+        "minimum": 0,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "sourceWidth": {
+        "type": "integer",
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "sourceHeight": {
+        "type": "integer",
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "schemaVersion": {
+        "const": "kanvas.image-quality-assess-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "required": [
+          "schemaVersion",
+          "generative",
+          "sourceModified",
+          "method",
+          "subjectBoundsProvided"
+        ],
+        "properties": {
+          "method": {
+            "const": "deterministic_pixel_diagnostics"
+          },
+          "generative": {
+            "const": false
+          },
+          "schemaVersion": {
+            "const": "kanvas.image-quality-assess-quality/v1"
+          },
+          "sourceModified": {
+            "const": false
+          },
+          "subjectBoundsProvided": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "quality.signals"
+      },
+      "compressionScore": {
+        "type": "number",
+        "maximum": 1,
+        "minimum": 0,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "overExposureRatio": {
+        "type": "number",
+        "maximum": 1,
+        "minimum": 0,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "subjectScaleRatio": {
+        "type": ["number", "null"],
+        "maximum": 1,
+        "minimum": 0,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "underExposureRatio": {
+        "type": "number",
+        "maximum": 1,
+        "minimum": 0,
+        "x-kanvas-semantic-type": "number.scalar"
+      }
+    },
+    "additionalProperties": false
+  },
+  "requiredCapabilities": [
+    {
+      "key": "image.quality.assess",
+      "revision": 1,
+      "canonicalDigest": "sha256:ff70de4c7da3e30e8ac70a4a8fecc4ac7a8cc499de9ee6060779f7fbe112c3f8"
+    }
+  ],
+  "canonicalDigest": "sha256:487499e66a0d7b6ddd357092d571285f73f58070fe9b3d66eeca767f6c5711e6"
+}

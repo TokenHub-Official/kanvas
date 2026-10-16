@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; form-action 'none'; base-uri 'none'"
+    />
+    <title>Capability tool</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 28px;
+        color: #151515;
+        background: #fff;
+        font:
+          14px/1.6 system-ui,
+          sans-serif;
+      }
+      main {
+        max-width: 680px;
+        margin: auto;
+      }
+      h1 {
+        margin: 0 0 24px;
+        font-size: 24px;
+      }
+      label {
+        display: block;
+        margin-top: 16px;
+        font-weight: 600;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        margin-top: 6px;
+        padding: 12px;
+        font: inherit;
+        border: 1px solid #dedce8;
+        border-radius: 12px;
+        background: white;
+        color: inherit;
+      }
+      input,
+      select,
+      textarea {
+        width: 100%;
+      }
+      textarea {
+        min-height: 100px;
+        resize: vertical;
+      }
+      input[type="checkbox"] {
+        width: auto;
+      }
+      button {
+        cursor: pointer;
+        font-weight: 600;
+      }
+      button:disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
+      #start {
+        background: #3048f5;
+        color: white;
+        border-color: #3048f5;
+      }
+      :focus-visible {
+        outline: 3px solid #3048f5;
+        outline-offset: 3px;
+      }
+      .actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 20px;
+      }
+      pre {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        background: #f1f0fa;
+        padding: 16px;
+        border-radius: 12px;
+        font: inherit;
+      }
+      #error {
+        color: #c33b32;
+      }
+      [hidden] {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1 id="heading"></h1>
+      <p id="status" role="status" aria-live="polite"></p>
+      <form id="form">
+        <label for="capability" id="capability-label"></label>
+        <select id="capability" disabled required></select>
+        <div id="fields"></div>
+        <div class="actions">
+          <button id="start" type="button" disabled></button>
+          <button id="refresh" type="button" disabled></button>
+          <button id="cancel" type="button" hidden></button>
+        </div>
+      </form>
+      <p id="error" role="alert"></p>
+      <details id="output-details" hidden>
+        <summary id="output-label"></summary>
+        <pre id="output" tabindex="0"></pre>
+      </details>
+    </main>
+    <script>
+      const english = document.documentElement.lang.startsWith("en");
+      const locale = english ? "en-US" : "zh-CN";
+      const words = english
+        ? {
+            heading: "Run a capability",
+            capability: "Capability",
+            start: "Run",
+            retry: "Retry submission",
+            refresh: "Refresh",
+            cancel: "Cancel task",
+            connecting: "Connecting…",
+            ready: "Ready",
+            empty:
+              "No compatible capability is available. Ask an administrator to publish a capability with text or numeric inputs.",
+            queued: "Queued",
+            running: "Running",
+            completed: "Completed",
+            failed: "Task failed. You can edit the inputs and run again.",
+            cancelled: "Cancelled",
+            cancelling: "Cancellation requested",
+            truncated: "Only the first 100 available capabilities are shown.",
+            browser:
+              "This task requires a browser executor. This example does not start browser models. Cancel it and choose a server capability.",
+            pending:
+              "The previous submission has no confirmed response. Retry with the same inputs to recover it.",
+            errors: {
+              request_failed: "Request failed. Refresh to recover.",
+              permission_denied:
+                "You do not have permission to run capabilities.",
+              unavailable:
+                "This capability is no longer available. Refresh the list.",
+              invalid_input: "Check your inputs.",
+              rejected:
+                "The request was rejected. Check the inputs, permissions and available budget.",
+              submission_unknown:
+                "Submission status is unknown. Retry with the same inputs; this will reuse the original request.",
+              previous_pending:
+                "Recover the previous submission with its original inputs first.",
+              run_active: "A task is already running. Refresh to view it.",
+              busy: "Another request is in progress. Try again.",
+              timeout:
+                "The connection timed out. Refresh status, or retry the same submission.",
+              no_run:
+                "No task to refresh. Retry the submission if its status is unknown.",
+              session_limit:
+                "Reconnect the tool to continue. The latest task is retained.",
+            },
+          }
+        : {
+            heading: "调用能力",
+            capability: "能力",
+            start: "运行",
+            retry: "重试提交",
+            refresh: "刷新",
+            cancel: "取消任务",
+            connecting: "正在连接…",
+            ready: "可以运行",
+            empty: "暂无适用能力，请管理员发布接受文本或数值输入的能力。",
+            queued: "排队中",
+            running: "运行中",
+            completed: "已完成",
+            failed: "任务失败，可以修改输入后重新运行。",
+            cancelled: "已取消",
+            cancelling: "已请求取消",
+            truncated: "当前仅显示前 100 个可用能力。",
+            browser:
+              "此任务需要浏览器执行器。本示例不会启动浏览器模型，请取消并选择服务端能力。",
+            pending: "上次提交尚未收到确认，请保持原输入重试以恢复任务。",
+            errors: {
+              request_failed: "请求失败，请刷新恢复。",
+              permission_denied: "你没有运行能力的权限。",
+              unavailable: "此能力已不可用，请刷新列表。",
+              invalid_input: "请检查输入。",
+              rejected: "请求被拒绝，请检查输入、权限和可用预算。",
+              submission_unknown:
+                "提交结果尚未确认，请保持原输入重试，将复用原请求。",
+              previous_pending: "请先使用原输入恢复上一次提交。",
+              run_active: "已有运行中的任务，请刷新查看。",
+              busy: "正在处理请求，请稍后重试。",
+              timeout: "连接超时，请刷新状态，或使用原输入重试提交。",
+              no_run: "暂无可查询任务，若提交状态未知，请重试提交。",
+              session_limit: "请重新连接工具以继续，最近的任务会保留。",
+            },
+          };
+      const byId = (id) => document.getElementById(id);
+      byId("heading").textContent = words.heading;
+      byId("output-label").textContent = english
+        ? "View structured result"
+        : "查看结构化结果";
+      byId("capability-label").textContent = words.capability;
+      byId("start").textContent = words.start;
+      byId("refresh").textContent = words.refresh;
+      byId("cancel").textContent = words.cancel;
+      byId("status").textContent = words.connecting;
+      let port,
+        items = [],
+        busy = false,
+        active = false,
+        hasRun = false,
+        unknown = false,
+        timer;
+      const pending = new Map();
+      const connectionTimeout = setTimeout(() => {
+        if (!port) byId("error").textContent = words.errors.timeout;
+      }, 10000);
+      function request(method, params = {}) {
+        return new Promise((resolve, reject) => {
+          const id = crypto.randomUUID();
+          const timeout = setTimeout(() => {
+            pending.delete(id);
+            reject(new Error("timeout"));
+          }, 20000);
+          pending.set(id, { resolve, reject, timeout });
+          port.postMessage({ version: 1, id, method, params });
+        });
+      }
+      function controls() {
+        byId("capability").disabled =
+          busy || active || unknown || items.length === 0;
+        byId("start").disabled = busy || active || items.length === 0;
+        byId("start").textContent = unknown ? words.retry : words.start;
+        byId("refresh").disabled = busy || !port;
+        byId("cancel").hidden = !active;
+        byId("cancel").disabled = busy;
+        for (const field of byId("fields").querySelectorAll(
+          "input,textarea,select",
+        ))
+          field.disabled = busy || active || unknown;
+      }
+      function fields(values = {}) {
+        byId("fields").replaceChildren();
+        const item = items.find(
+          (candidate) => candidate.id === byId("capability").value,
+        );
+        if (!item) return;
+        for (const [key, schema] of Object.entries(item.schema.properties)) {
+          const label = document.createElement("label");
+          label.textContent = item.labels[key]?.[locale] || key;
+          let input;
+          if (schema.enum) {
+            input = document.createElement("select");
+            for (const value of schema.enum) {
+              const option = document.createElement("option");
+              option.value = String(value);
+              option.textContent = String(value);
+              input.append(option);
+            }
+          } else {
+            input = document.createElement(
+              schema.type === "string" ? "textarea" : "input",
+            );
+            if (schema.type === "boolean") input.type = "checkbox";
+            if (schema.type === "number" || schema.type === "integer") {
+              input.type = "number";
+              input.step = schema.type === "integer" ? "1" : "any";
+            }
+          }
+          input.name = key;
+          input.required =
+            item.schema.required?.includes(key) && schema.type !== "boolean";
+          if (schema.maxLength)
+            input.maxLength = Math.min(schema.maxLength, 12000);
+          if (schema.minimum !== undefined) input.min = schema.minimum;
+          if (schema.maximum !== undefined) input.max = schema.maximum;
+          const value = values[key] ?? schema.const ?? schema.default;
+          if (schema.type === "boolean") {
+            if (schema.enum) input.value = String(value ?? false);
+            else input.checked = value === true;
+          } else if (value !== undefined) input.value = String(value);
+          if (schema.const !== undefined) input.readOnly = true;
+          label.append(input);
+          byId("fields").append(label);
+        }
+      }
+      function showError(error) {
+        byId("error").textContent =
+          words.errors[error.message] || words.errors.request_failed;
+      }
+      function showRun(run) {
+        hasRun = true;
+        unknown = false;
+        active = run.status === "queued" || run.status === "running";
+        byId("status").textContent =
+          run.cancelRequested && active ? words.cancelling : words[run.status];
+        if (run.browserRequired && active)
+          byId("error").textContent = words.browser;
+        byId("output-details").hidden = run.output === null;
+        byId("output").textContent =
+          typeof run.output === "string"
+            ? run.output
+            : JSON.stringify(run.output, null, 2);
+        clearTimeout(timer);
+        if (active)
+          timer = setTimeout(
+            () => action(async () => showRun(await request("run.status"))),
+            3000,
+          );
+      }
+      async function action(work) {
+        if (busy) return;
+        busy = true;
+        byId("error").textContent = "";
+        controls();
+        try {
+          await work();
+        } catch (error) {
+          showError(error);
+        } finally {
+          busy = false;
+          controls();
+        }
+      }
+      async function load() {
+        const data = await request("capabilities.list");
+        items = data.items;
+        byId("capability").replaceChildren();
+        for (const item of items) {
+          const option = document.createElement("option");
+          option.value = item.id;
+          option.textContent = item.title;
+          byId("capability").append(option);
+        }
+        byId("status").textContent = items.length
+          ? data.truncated
+            ? words.truncated
+            : words.ready
+          : words.empty;
+        if (data.recovery) {
+          if (items.some((item) => item.id === data.recovery.capabilityId))
+            byId("capability").value = data.recovery.capabilityId;
+          fields(data.recovery.input);
+          unknown = data.recovery.pending;
+          if (unknown) byId("status").textContent = words.pending;
+          else showRun(await request("run.status"));
+        } else fields();
+      }
+      window.addEventListener("message", (event) => {
+        if (
+          port ||
+          event.source !== window.parent ||
+          event.data?.type !== "kanvas.tool.connect" ||
+          event.data.version !== 1 ||
+          event.ports.length !== 1
+        )
+          return;
+        port = event.ports[0];
+        clearTimeout(connectionTimeout);
+        port.onmessage = (message) => {
+          const response = message.data;
+          if (response?.version !== 1) return;
+          const handler = pending.get(response.id);
+          if (!handler) return;
+          clearTimeout(handler.timeout);
+          pending.delete(response.id);
+          if (response.ok) handler.resolve(response.data);
+          else handler.reject(new Error(response.error));
+        };
+        port.start();
+        action(load);
+      });
+      byId("capability").addEventListener("change", () => fields());
+      byId("refresh").addEventListener("click", () =>
+        action(async () => {
+          if (hasRun) showRun(await request("run.status"));
+          else await load();
+        }),
+      );
+      byId("cancel").addEventListener("click", () =>
+        action(async () => showRun(await request("run.cancel"))),
+      );
+      byId("start").addEventListener("click", () => {
+        if (!byId("form").reportValidity()) return;
+        action(async () => {
+          const item = items.find(
+            (candidate) => candidate.id === byId("capability").value,
+          );
+          if (!item) throw new Error("unavailable");
+          const input = {};
+          for (const field of byId("fields").querySelectorAll(
+            "input,textarea,select",
+          )) {
+            const schema = item.schema.properties[field.name];
+            if (schema.const !== undefined) input[field.name] = schema.const;
+            else if (schema.type === "boolean")
+              input[field.name] = schema.enum
+                ? field.value === "true"
+                : field.checked;
+            else if (field.value !== "")
+              input[field.name] =
+                schema.type === "string" ? field.value : Number(field.value);
+          }
+          try {
+            showRun(
+              await request("run.start", { capabilityId: item.id, input }),
+            );
+          } catch (error) {
+            unknown =
+              unknown ||
+              ["timeout", "submission_unknown", "previous_pending"].includes(
+                error.message,
+              );
+            if (error.message === "rejected") unknown = false;
+            throw error;
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

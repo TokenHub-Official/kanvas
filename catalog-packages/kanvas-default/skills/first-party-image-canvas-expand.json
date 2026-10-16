@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "kanvas.skill-catalog-asset/v1",
+  "skillKey": "first-party.image-canvas-expand",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "扩图",
+      "en-US": "Canvas expansion"
+    }
+  },
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "expand",
+      "displayName": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "扩图",
+          "en-US": "Canvas expansion"
+        }
+      },
+      "description": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "在固定目标画布中生成原图之外的区域，并保留原图区像素与 Generated Region Mask。",
+          "en-US": "Generate content outside the original image while preserving the source pixels and expansion mask."
+        }
+      },
+      "category": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "构图",
+          "en-US": "Image editing"
+        }
+      },
+      "outputPresentation": "board",
+      "workflow": {
+        "key": "image_canvas_expand",
+        "revision": 1,
+        "canonicalDigest": "sha256:fc35e786001083fd9a1ff3b72d3e68faf892d7bf943f738a752be9cd09c55e18"
+      }
+    }
+  ]
+}

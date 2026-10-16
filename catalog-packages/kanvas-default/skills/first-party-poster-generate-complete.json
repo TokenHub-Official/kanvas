@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "kanvas.skill-catalog-asset/v1",
+  "skillKey": "first-party.poster-generate-complete",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "完整海报生成",
+      "en-US": "Complete poster generation"
+    }
+  },
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "generate",
+      "displayName": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "完整海报生成",
+          "en-US": "Complete poster generation"
+        }
+      },
+      "description": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "可选参考图；有参考图时进入图片编辑，没有参考图时直接生成，最终返回统一结果图。",
+          "en-US": "Choose image generation or image editing based on an optional reference image, then return one normalized result."
+        }
+      },
+      "category": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "海报制作",
+          "en-US": "Poster creation"
+        }
+      },
+      "outputPresentation": "single_review",
+      "workflow": {
+        "key": "poster_generate_complete",
+        "revision": 1,
+        "canonicalDigest": "sha256:4e410bd7c70c29d9a5fa7cbdaac9f0655355d9fa625e697f8ad8a494934a7986"
+      }
+    }
+  ]
+}

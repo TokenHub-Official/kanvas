@@ -1,0 +1,226 @@
+{
+  "schemaVersion": "kanvas.capability-declaration-asset/v1",
+  "contract": {
+    "key": "image.palette.extract",
+    "revision": 1,
+    "canonicalDigest": "sha256:9c3decb73bf3872b4581a3b025a1af843b2f870334036e2f80d7210014768626"
+  },
+  "declaration": {
+    "schemaVersion": "kanvas.capability-declaration/v1",
+    "catalog": {
+      "title": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "色板提取",
+          "en-US": "Palette extract"
+        }
+      },
+      "description": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "从图片中提取主要颜色。",
+          "en-US": "Extract dominant colors from an image."
+        }
+      },
+      "category": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "图像分析",
+          "en-US": "Image analysis"
+        }
+      },
+      "sourceKind": "built_in",
+      "tags": ["palette", "color"],
+      "surfaces": ["workflow", "agent", "canvas"]
+    },
+    "parameters": [
+      {
+        "key": "colorCount",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "颜色数量",
+            "en-US": "Color count"
+          }
+        },
+        "semanticType": "number.scalar",
+        "required": false,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["constant", "workflow_input", "upstream"],
+          "default": "constant"
+        },
+        "editor": "number",
+        "defaultValue": 6
+      },
+      {
+        "key": "sampleSize",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "采样尺寸",
+            "en-US": "Sample size"
+          }
+        },
+        "semanticType": "number.scalar",
+        "required": false,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["constant", "workflow_input", "upstream"],
+          "default": "constant"
+        },
+        "editor": "number",
+        "defaultValue": 128
+      },
+      {
+        "key": "alphaThreshold",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "透明度阈值",
+            "en-US": "Alpha threshold"
+          }
+        },
+        "semanticType": "number.scalar",
+        "required": false,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["constant", "workflow_input", "upstream"],
+          "default": "constant"
+        },
+        "editor": "number",
+        "defaultValue": 16
+      },
+      {
+        "key": "sourceArtifactId",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "源图片",
+            "en-US": "Source image"
+          }
+        },
+        "description": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "选择需要处理的流程输入或上游图片。",
+            "en-US": "Choose a workflow input or upstream image to process."
+          }
+        },
+        "semanticType": "artifact.image",
+        "required": true,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["workflow_input", "upstream"],
+          "default": "upstream"
+        },
+        "editor": "artifact_picker"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "colors",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "主要颜色",
+            "en-US": "Dominant colors"
+          }
+        },
+        "semanticType": "value.any",
+        "primary": true,
+        "visibility": "author"
+      },
+      {
+        "key": "colorSpace",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "色彩空间",
+            "en-US": "Color space"
+          }
+        },
+        "semanticType": "value.any",
+        "primary": false,
+        "visibility": "author"
+      },
+      {
+        "key": "transparentRatio",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "透明区域占比",
+            "en-US": "Transparent ratio"
+          }
+        },
+        "semanticType": "number.scalar",
+        "primary": false,
+        "visibility": "author"
+      },
+      {
+        "key": "qualitySignals",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "质量信息",
+            "en-US": "Quality signals"
+          }
+        },
+        "semanticType": "quality.signals",
+        "primary": false,
+        "visibility": "advanced"
+      },
+      {
+        "key": "sourceHeight",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "原图高度",
+            "en-US": "Source height"
+          }
+        },
+        "semanticType": "number.scalar",
+        "primary": false,
+        "visibility": "advanced"
+      },
+      {
+        "key": "sourceWidth",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "原图宽度",
+            "en-US": "Source width"
+          }
+        },
+        "semanticType": "number.scalar",
+        "primary": false,
+        "visibility": "advanced"
+      },
+      {
+        "key": "schemaVersion",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "结果版本",
+            "en-US": "Result version"
+          }
+        },
+        "semanticType": "value.any",
+        "primary": false,
+        "visibility": "hidden"
+      }
+    ]
+  }
+}

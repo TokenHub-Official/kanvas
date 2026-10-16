@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "kanvas.skill-catalog-asset/v1",
+  "skillKey": "first-party.image-object-remove",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "物体移除",
+      "en-US": "Object removal"
+    }
+  },
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "remove",
+      "displayName": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "移除物体",
+          "en-US": "Object removal"
+        }
+      },
+      "description": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "根据显式区域 Mask 生成修复结果，同时保留规范 Removed Region Mask。",
+          "en-US": "Repair explicitly selected regions while preserving a normalized removal mask."
+        }
+      },
+      "category": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "清理与隔离",
+          "en-US": "Image cleanup"
+        }
+      },
+      "outputPresentation": "board",
+      "workflow": {
+        "key": "image_object_remove",
+        "revision": 1,
+        "canonicalDigest": "sha256:92919dc4a9f55e303ad8de23455ef51868db7b55d175520e43ec36785b827af0"
+      }
+    }
+  ]
+}

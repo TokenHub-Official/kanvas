@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "kanvas.capability-binding/v1",
+  "bindingKey": "first-party.image.denoise.median-blend.worker",
+  "contract": {
+    "key": "image.denoise",
+    "revision": 1,
+    "canonicalDigest": "sha256:69d938542b5535de25f24a073641535b473f940bcccfeab8e95262e7ca8b22d4"
+  },
+  "implementation": {
+    "key": "first-party.image.denoise.median-blend.worker",
+    "revision": 1,
+    "canonicalDigest": "sha256:6d61c12ddcbd49aa085a9e29ce9eaf84b6104177a6c4c750e6a5d9a6b49cc02c"
+  },
+  "priority": 1,
+  "enabled": true,
+  "eligibility": {},
+  "fallbackOn": ["not_applicable", "unavailable", "retry_exhausted"]
+}

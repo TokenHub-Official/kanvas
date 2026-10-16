@@ -1,0 +1,70 @@
+:root {
+  color-scheme: light;
+  font-family:
+    "SF Pro Text",
+    "PingFang SC",
+    "Microsoft YaHei",
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  color: var(--ink);
+  background: var(--mist);
+  font-synthesis: none;
+  text-rendering: optimizelegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  min-height: 100%;
+  background: var(--mist);
+}
+
+html:has([data-app-shell]) {
+  scrollbar-gutter: stable;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  color: var(--ink);
+  background: var(--mist);
+}
+
+::placeholder {
+  color: var(--placeholder);
+  opacity: 1;
+}
+
+button,
+[role="button"],
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:not(:disabled),
+[role="button"]:not([aria-disabled="true"]) {
+  cursor: pointer;
+}
+
+button:disabled,
+[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
+:where(a, button, select, [role="button"]):focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px var(--focus-halo);
+}
+
+::selection {
+  color: var(--ink);
+  background: var(--acid);
+}

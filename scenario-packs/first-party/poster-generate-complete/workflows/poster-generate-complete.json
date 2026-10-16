@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "key": "poster_generate_complete",
+  "entryNodeKey": "has_reference",
+  "limits": {
+    "maxNodeRuns": 3,
+    "timeoutMs": 600000
+  },
+  "nodes": [
+    {
+      "key": "has_reference",
+      "kind": "switch",
+      "value": {
+        "$value": {
+          "source": "workflow_input",
+          "pointer": "/referenceArtifactId"
+        }
+      },
+      "cases": [
+        {
+          "when": {
+            "operator": "exists"
+          },
+          "next": [
+            "edit_from_reference"
+          ]
+        }
+      ],
+      "defaultNext": [
+        "generate_without_reference"
+      ]
+    },
+    {
+      "key": "generate_without_reference",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "image.generate",
+        "revision": 2,
+        "canonicalDigest": "sha256:ab27d66ae9e0ce75be370628477f388468a8330b2c7e864be026cf01b7851314"
+      },
+      "input": {
+        "prompt": {
+          "$string": [
+            "生成一张完整商业海报，构图清晰并保留合理文字空间。用户额外需求：",
+            {
+              "$value": {
+                "source": "workflow_input",
+                "pointer": "/requirements"
+              }
+            }
+          ]
+        }
+      },
+      "next": []
+    },
+    {
+      "key": "edit_from_reference",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "image.edit",
+        "revision": 2,
+        "canonicalDigest": "sha256:6d9f3b13443acc7912ced9f2cab31d96e56b953a8ae80a7e2fa51794a70fb3cf"
+      },
+      "input": {
+        "sourceArtifactId": {
+          "$value": {
+            "source": "workflow_input",
+            "pointer": "/referenceArtifactId"
+          }
+        },
+        "prompt": {
+          "$string": [
+            "基于参考图片生成一张完整商业海报，保留主体特征并优化构图。用户额外需求：",
+            {
+              "$value": {
+                "source": "workflow_input",
+                "pointer": "/requirements"
+              }
+            }
+          ]
+        }
+      },
+      "next": []
+    }
+  ],
+  "outputs": {
+    "schemaVersion": {
+      "required": true,
+      "value": "kanvas.poster-generate-complete-result/v1"
+    },
+    "resultImageArtifactId": {
+      "required": true,
+      "value": {
+        "$coalesce": [
+          {
+            "$value": {
+              "source": "node_output",
+              "nodeKey": "generate_without_reference",
+              "scope": "root",
+              "pointer": "/imageArtifactId"
+            }
+          },
+          {
+            "$value": {
+              "source": "node_output",
+              "nodeKey": "edit_from_reference",
+              "scope": "root",
+              "pointer": "/imageArtifactId"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

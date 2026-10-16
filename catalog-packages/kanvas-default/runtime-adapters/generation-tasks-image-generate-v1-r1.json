@@ -1,0 +1,189 @@
+{
+  "schemaVersion": "kanvas.runtime-adapter-definition/v1",
+  "adapterKey": "generation-tasks.image.generate.v1",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "图片生成 · 模型服务",
+      "en-US": "Image generate · Model service"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "将图片生成的公开输入输出转换为模型服务运行协议。",
+      "en-US": "Adapts the public Image generate contract to the Model service runtime protocol."
+    }
+  },
+  "executionTarget": "provider",
+  "sourceKinds": ["model_service"],
+  "supportedModelFormats": [],
+  "invocationInputSchema": {
+    "$id": "kanvas.image-generate-input.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["prompt"],
+    "properties": {
+      "seed": {
+        "type": "integer",
+        "maximum": 4294967295,
+        "minimum": 0,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "size": {
+        "enum": ["auto", "1024x1024", "1536x1024", "1024x1536"],
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "prompt": {
+        "type": "string",
+        "maxLength": 8000,
+        "minLength": 1,
+        "x-kanvas-semantic-type": "prompt.rich"
+      },
+      "quality": {
+        "enum": ["auto", "low", "medium", "high"],
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "background": {
+        "enum": ["auto", "opaque", "transparent"],
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "resolution": {
+        "enum": ["auto", "512", "1k", "2k", "4k"],
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "aspectRatio": {
+        "enum": [
+          "auto",
+          "1:1",
+          "3:2",
+          "2:3",
+          "4:3",
+          "3:4",
+          "4:5",
+          "5:4",
+          "16:9",
+          "9:16",
+          "21:9"
+        ],
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "outputFormat": {
+        "enum": ["png", "jpeg", "webp"],
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "numberOfImages": {
+        "type": "integer",
+        "maximum": 4,
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "outputCompression": {
+        "type": "integer",
+        "maximum": 100,
+        "minimum": 0,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "referenceArtifactIds": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+        },
+        "maxItems": 14,
+        "minItems": 1,
+        "uniqueItems": true,
+        "x-kanvas-semantic-type": "artifact.image_list"
+      }
+    },
+    "additionalProperties": false,
+    "x-kanvas-provider-parameter-keys": [
+      "aspectRatio",
+      "resolution",
+      "size",
+      "quality",
+      "outputFormat",
+      "background",
+      "outputCompression",
+      "numberOfImages",
+      "seed"
+    ],
+    "x-kanvas-provider-model-operation": "image.generate"
+  },
+  "invocationOutputSchema": {
+    "$id": "kanvas.image-generate-result.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["schemaVersion", "imageArtifactId"],
+    "properties": {
+      "schemaVersion": {
+        "const": "kanvas.image-generate-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "imageArtifactId": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["$kanvas", "outputRole", "outputIndex"],
+        "properties": {
+          "$kanvas": {
+            "const": "attempt-output-artifact/v1"
+          },
+          "outputRole": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "outputIndex": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          }
+        },
+        "x-kanvas-attempt-output-artifact": true,
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "configurationSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "default": {
+      "protocol": "generation.tasks.v1",
+      "promptTemplate": "{{prompt}}",
+      "outputMaterialization": "trusted_storage"
+    },
+    "const": {
+      "protocol": "generation.tasks.v1",
+      "promptTemplate": "{{prompt}}",
+      "outputMaterialization": "trusted_storage"
+    }
+  },
+  "modelServiceSelector": {
+    "operation": "image.generate",
+    "apiSurface": "generation.tasks.v1"
+  },
+  "usageMetrics": [],
+  "artifactInputs": [
+    {
+      "role": "referenceArtifactIds",
+      "pointer": "/referenceArtifactIds",
+      "required": false,
+      "mediaTypes": ["image/png", "image/jpeg", "image/webp"]
+    }
+  ],
+  "executable": {
+    "kind": "built_in",
+    "packageKey": "kanvas.provider-image-runtime",
+    "packageVersion": "1.0.0",
+    "entrypoint": "generation-tasks.image.generate.v1",
+    "releaseDigest": "sha256:70a7500b9cdb2e452f41745cb83e7fdda7a1214644a0101918666fa3416c2f6a"
+  }
+}

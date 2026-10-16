@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "key": "image_upscale",
+  "entryNodeKey": "upscale",
+  "limits": {
+    "maxNodeRuns": 1,
+    "timeoutMs": 300000
+  },
+  "nodes": [
+    {
+      "key": "upscale",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "image.upscale",
+        "revision": 1,
+        "canonicalDigest": "sha256:8cb7edcd88a078c80014a146d85dca7ca41eca2b7f12a348e696ff2e8122f6ff"
+      },
+      "input": {
+        "$value": {
+          "source": "workflow_input",
+          "pointer": ""
+        }
+      },
+      "next": []
+    }
+  ],
+  "outputs": {
+    "schemaVersion": {
+      "required": true,
+      "value": "kanvas.image-upscale-result/v1"
+    },
+    "imageArtifactId": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "upscale",
+          "scope": "root",
+          "pointer": "/imageArtifactId"
+        }
+      }
+    },
+    "qualityIntent": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "upscale",
+          "scope": "root",
+          "pointer": "/qualityIntent"
+        }
+      }
+    },
+    "scaleFactor": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "upscale",
+          "scope": "root",
+          "pointer": "/scaleFactor"
+        }
+      }
+    },
+    "sourceWidth": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "upscale",
+          "scope": "root",
+          "pointer": "/sourceWidth"
+        }
+      }
+    },
+    "sourceHeight": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "upscale",
+          "scope": "root",
+          "pointer": "/sourceHeight"
+        }
+      }
+    },
+    "outputWidth": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "upscale",
+          "scope": "root",
+          "pointer": "/outputWidth"
+        }
+      }
+    },
+    "outputHeight": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "upscale",
+          "scope": "root",
+          "pointer": "/outputHeight"
+        }
+      }
+    },
+    "qualitySignals": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "upscale",
+          "scope": "root",
+          "pointer": "/qualitySignals"
+        }
+      }
+    }
+  }
+}

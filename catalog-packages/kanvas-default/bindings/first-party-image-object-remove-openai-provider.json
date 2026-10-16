@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "kanvas.capability-binding/v1",
+  "bindingKey": "first-party.image.object-remove.openai-provider",
+  "contract": {
+    "key": "image.object.remove",
+    "revision": 1,
+    "canonicalDigest": "sha256:b76f3bfd17fdf2fd4857ceac2149aa80e67beb4f710999fe524ae6fddccf5e1c"
+  },
+  "implementation": {
+    "key": "first-party.image.object-remove.openai-provider",
+    "revision": 1,
+    "canonicalDigest": "sha256:56204b8b9d2b77db4f7e66960e55c8f2cdb6b76b173c5a4851fd8149e8d922c9"
+  },
+  "priority": 1,
+  "enabled": true,
+  "eligibility": {},
+  "fallbackOn": ["not_applicable", "unavailable", "retry_exhausted"]
+}

@@ -1,0 +1,48 @@
+import type { ThemeConfig } from "antd";
+
+export const kanvasInverseControlTheme: ThemeConfig = {
+  token: {
+    colorBgContainer: "transparent",
+    colorBgContainerDisabled: "var(--inverse-control-fill-disabled)",
+    colorBorder: "var(--inverse-control-border-rest)",
+    colorBorderDisabled: "var(--inverse-control-border-disabled)",
+    colorFill: "var(--inverse-control-fill-active)",
+    colorFillSecondary: "var(--inverse-control-fill-hover)",
+    colorFillTertiary: "var(--inverse-control-fill-rest)",
+    colorPrimary: "#FFFFFF",
+    colorPrimaryActive: "#E8E8E8",
+    colorPrimaryBorder: "#FFFFFF",
+    colorPrimaryHover: "#FAFAFA",
+    colorText: "var(--on-primary)",
+    colorTextDisabled: "var(--inverse-control-text-disabled)",
+    colorTextPlaceholder: "var(--on-primary-muted)",
+  },
+  components: {
+    Button: {
+      defaultActiveBg: "var(--inverse-control-fill-active)",
+      defaultActiveBorderColor: "var(--inverse-control-border-hover)",
+      defaultActiveColor: "var(--on-primary)",
+      defaultBg: "transparent",
+      defaultBgDisabled: "var(--inverse-control-fill-disabled)",
+      defaultBorderColor: "var(--inverse-control-border-rest)",
+      defaultColor: "var(--on-primary)",
+      defaultHoverBg: "var(--inverse-control-fill-hover)",
+      defaultHoverBorderColor: "var(--inverse-control-border-hover)",
+      defaultHoverColor: "var(--on-primary)",
+      defaultShadow: "none",
+      primaryColor: "#3048F5",
+      primaryShadow: "none",
+      textHoverBg: "var(--inverse-control-fill-hover)",
+      textTextActiveColor: "var(--on-primary)",
+      textTextColor: "var(--on-primary)",
+      textTextHoverColor: "var(--on-primary)",
+    },
+    Input: {
+      activeBg: "var(--inverse-control-fill-active)",
+      activeBorderColor: "var(--paper)",
+      activeShadow: "var(--inverse-control-focus-shadow)",
+      hoverBg: "var(--inverse-control-fill-hover)",
+      hoverBorderColor: "var(--inverse-control-border-hover)",
+    },
+  },
+};

@@ -1,0 +1,227 @@
+{
+  "schemaVersion": 1,
+  "contractKey": "image.subject.detect",
+  "revision": 1,
+  "inputSchema": {
+    "$id": "kanvas.image-subject-detect-input.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["sourceArtifactId"],
+    "properties": {
+      "includeMask": {
+        "type": "boolean",
+        "default": true,
+        "x-kanvas-semantic-type": "boolean.flag"
+      },
+      "maxSubjects": {
+        "type": "integer",
+        "default": 8,
+        "maximum": 16,
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "minimumAreaRatio": {
+        "type": "number",
+        "default": 0.001,
+        "maximum": 0.5,
+        "minimum": 0.00001,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      },
+      "minimumConfidence": {
+        "type": "number",
+        "default": 0.35,
+        "maximum": 0.95,
+        "minimum": 0.05,
+        "x-kanvas-semantic-type": "number.scalar"
+      }
+    },
+    "additionalProperties": false
+  },
+  "outputSchema": {
+    "$id": "kanvas.image-subject-detect-result.v1",
+    "type": "object",
+    "$defs": {
+      "pixelBounds": {
+        "type": "object",
+        "required": ["x", "y", "width", "height"],
+        "properties": {
+          "x": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "y": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "width": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "height": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "additionalProperties": false
+      },
+      "normalizedBounds": {
+        "type": "object",
+        "required": ["x", "y", "width", "height"],
+        "properties": {
+          "x": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0
+          },
+          "y": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0
+          },
+          "width": {
+            "type": "number",
+            "maximum": 1,
+            "exclusiveMinimum": 0
+          },
+          "height": {
+            "type": "number",
+            "maximum": 1,
+            "exclusiveMinimum": 0
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "schemaVersion",
+      "sourceWidth",
+      "sourceHeight",
+      "candidates",
+      "maskArtifactId",
+      "qualitySignals"
+    ],
+    "properties": {
+      "candidates": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "subjectId",
+            "rank",
+            "category",
+            "confidence",
+            "areaRatio",
+            "bounds",
+            "normalizedBounds"
+          ],
+          "properties": {
+            "rank": {
+              "type": "integer",
+              "maximum": 16,
+              "minimum": 1
+            },
+            "bounds": {
+              "$ref": "#/$defs/pixelBounds"
+            },
+            "category": {
+              "const": "visual_subject"
+            },
+            "areaRatio": {
+              "type": "number",
+              "maximum": 1,
+              "minimum": 0
+            },
+            "subjectId": {
+              "type": "string",
+              "pattern": "^subject-[1-9][0-9]*$"
+            },
+            "confidence": {
+              "type": "number",
+              "maximum": 1,
+              "minimum": 0
+            },
+            "normalizedBounds": {
+              "$ref": "#/$defs/normalizedBounds"
+            }
+          },
+          "additionalProperties": false
+        },
+        "maxItems": 16,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "sourceWidth": {
+        "type": "integer",
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "sourceHeight": {
+        "type": "integer",
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "schemaVersion": {
+        "const": "kanvas.image-subject-detect-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "maskArtifactId": {
+        "type": ["string", "null"],
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.mask"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "required": [
+          "schemaVersion",
+          "candidateCount",
+          "foregroundRatio",
+          "uncertainEdgeRatio",
+          "taxonomy",
+          "modelVariant",
+          "modelDigest"
+        ],
+        "properties": {
+          "taxonomy": {
+            "const": "class_agnostic_isnet"
+          },
+          "modelDigest": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          },
+          "modelVariant": {
+            "enum": ["u2net", "u2netp", "isnet-general", "isnet-general-fp16"],
+            "type": "string"
+          },
+          "schemaVersion": {
+            "const": "kanvas.image-subject-detect-quality/v1"
+          },
+          "candidateCount": {
+            "type": "integer",
+            "maximum": 16,
+            "minimum": 0
+          },
+          "foregroundRatio": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0
+          },
+          "uncertainEdgeRatio": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "quality.signals"
+      }
+    },
+    "additionalProperties": false
+  },
+  "idempotencyMode": "keyed",
+  "supportedInvokers": ["user", "workflow", "agent", "canvas"]
+}

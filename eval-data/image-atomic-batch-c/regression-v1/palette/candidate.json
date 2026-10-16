@@ -1,0 +1,24 @@
+{
+  "colors": [
+    {
+      "rank": 1,
+      "hex": "#DC1E1E",
+      "red": 220,
+      "green": 30,
+      "blue": 30,
+      "proportion": 0.6,
+      "luminance": 0.276055,
+      "role": "dominant"
+    },
+    {
+      "rank": 2,
+      "hex": "#141414",
+      "red": 20,
+      "green": 20,
+      "blue": 20,
+      "proportion": 0.4,
+      "luminance": 0.078431,
+      "role": "neutral"
+    }
+  ]
+}

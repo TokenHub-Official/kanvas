@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "packId": "test.valid-pack",
+  "displayName": "Valid declarative fixture",
+  "workflows": [
+    {
+      "path": "workflows/foundation-probe.json"
+    }
+  ],
+  "requiredCapabilities": [
+    {
+      "contractId": "foundation.validate",
+      "revision": 1,
+      "canonicalDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "name": "@kanvas/recovery",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "kanvas": "./dist/cli/main.js",
+    "kanvas-backup": "./dist/cli/main.js",
+    "kanvas-recovery": "./dist/cli/main.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "check-types": "tsc --noEmit -p tsconfig.json",
+    "dev": "tsc -p tsconfig.build.json --watch --preserveWatchOutput",
+    "lint": "eslint src test",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@kanvas/application": "workspace:*",
+    "@kanvas/database": "workspace:*",
+    "@kanvas/secrets": "workspace:*",
+    "@kanvas/storage": "workspace:*",
+    "mysql2": "catalog:",
+    "ulid": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "license": "Apache-2.0"
+}

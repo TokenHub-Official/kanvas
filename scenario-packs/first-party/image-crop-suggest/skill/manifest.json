@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "skillKey": "first-party.image-crop-suggest",
+  "displayName": "智能裁剪建议",
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "suggest",
+      "displayName": "生成裁剪建议",
+      "description": "按目标比例生成有序裁切区域，只返回建议，不修改图片。",
+      "category": "图片分析",
+      "outputPresentation": "board",
+      "workflowPath": "workflows/image-crop-suggest.json"
+    }
+  ]
+}

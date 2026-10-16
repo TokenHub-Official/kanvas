@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "kanvas.capability-implementation/v1",
+  "implementationKey": "first-party.image.edit.generation-tasks-provider",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "图片编辑 · 模型服务",
+      "en-US": "Image edit · Model service"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "通过模型服务提供图片编辑，上层只依赖固定公开契约。",
+      "en-US": "Provides Image edit through Model service behind the stable public contract."
+    }
+  },
+  "contract": {
+    "key": "image.edit",
+    "revision": 1,
+    "canonicalDigest": "sha256:749ee1483f197e5a11b73cbae2e6e20311f8499c7e9d6a356575ff6794ddebf1"
+  },
+  "adapter": {
+    "adapterKey": "generation-tasks.image.edit.v1",
+    "revision": 1,
+    "canonicalDigest": "sha256:91b18e669a99293677d79cbdf7171d49e94c8724fe58e0f5fd6bac70cadcc8e5"
+  },
+  "source": {
+    "kind": "model_service",
+    "selector": {
+      "operation": "image.edit",
+      "apiSurface": "generation.tasks.v1"
+    }
+  },
+  "configuration": {
+    "protocol": "generation.tasks.v1",
+    "dataEgress": "authorized_source_artifact",
+    "promptTemplate": "{{prompt}}",
+    "outputMaterialization": "trusted_storage"
+  },
+  "inputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "input",
+    "expression": {
+      "op": "source",
+      "root": "input",
+      "pointer": ""
+    }
+  },
+  "outputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "output",
+    "expression": {
+      "op": "source",
+      "root": "result",
+      "pointer": ""
+    }
+  },
+  "fixtures": [
+    {
+      "name": "default contract mapping",
+      "capabilityInput": {
+        "prompt": "sample",
+        "sourceArtifactId": "01K00000000000000000000001"
+      },
+      "configuration": {
+        "protocol": "generation.tasks.v1",
+        "dataEgress": "authorized_source_artifact",
+        "promptTemplate": "{{prompt}}",
+        "outputMaterialization": "trusted_storage"
+      },
+      "expectedAdapterInput": {
+        "prompt": "sample",
+        "sourceArtifactId": "01K00000000000000000000001"
+      },
+      "adapterResult": {
+        "schemaVersion": "kanvas.image-edit-result/v1",
+        "imageArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "sample",
+          "outputIndex": 0
+        },
+        "sourceArtifactId": "01K00000000000000000000001"
+      },
+      "expectedCapabilityOutput": {
+        "schemaVersion": "kanvas.image-edit-result/v1",
+        "imageArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "sample",
+          "outputIndex": 0
+        },
+        "sourceArtifactId": "01K00000000000000000000001"
+      }
+    }
+  ]
+}

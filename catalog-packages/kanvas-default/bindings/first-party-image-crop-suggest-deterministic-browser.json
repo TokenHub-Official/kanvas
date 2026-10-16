@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "kanvas.capability-binding/v1",
+  "bindingKey": "first-party.image.crop-suggest.deterministic.browser",
+  "contract": {
+    "key": "image.crop.suggest",
+    "revision": 1,
+    "canonicalDigest": "sha256:a16b6a9f160d7f33591891805d78cb71928ae7d540ae7610776a23d612240f49"
+  },
+  "implementation": {
+    "key": "first-party.image.crop-suggest.deterministic.browser",
+    "revision": 1,
+    "canonicalDigest": "sha256:3a3bee5d74820f14f44636021df5da91a03660cdff7491b01f2644b008fc0c47"
+  },
+  "priority": 1,
+  "enabled": true,
+  "eligibility": {},
+  "fallbackOn": ["not_applicable", "unavailable", "retry_exhausted"]
+}

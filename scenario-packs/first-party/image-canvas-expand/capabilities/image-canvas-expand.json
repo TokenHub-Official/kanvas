@@ -1,0 +1,256 @@
+{
+  "schemaVersion": 1,
+  "contractKey": "image.canvas.expand",
+  "revision": 1,
+  "inputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "kanvas.image-canvas-expand-input.v1",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "sourceArtifactId",
+      "targetWidth",
+      "targetHeight",
+      "sourcePlacement",
+      "generatedRegion"
+    ],
+    "properties": {
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+      },
+      "targetWidth": {
+        "type": "integer",
+        "enum": [
+          1024,
+          1536
+        ]
+      },
+      "targetHeight": {
+        "type": "integer",
+        "enum": [
+          1024,
+          1536
+        ]
+      },
+      "sourcePlacement": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "x",
+          "y"
+        ],
+        "properties": {
+          "x": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1535
+          },
+          "y": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1535
+          }
+        }
+      },
+      "generatedRegion": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "left",
+          "top",
+          "right",
+          "bottom"
+        ],
+        "properties": {
+          "left": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1535
+          },
+          "top": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1535
+          },
+          "right": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1535
+          },
+          "bottom": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1535
+          }
+        }
+      },
+      "prompt": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 4000
+      }
+    },
+    "allOf": [
+      {
+        "if": {
+          "properties": {
+            "targetWidth": {
+              "const": 1536
+            }
+          },
+          "required": [
+            "targetWidth"
+          ]
+        },
+        "then": {
+          "properties": {
+            "targetHeight": {
+              "const": 1024
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "targetHeight": {
+              "const": 1536
+            }
+          },
+          "required": [
+            "targetHeight"
+          ]
+        },
+        "then": {
+          "properties": {
+            "targetWidth": {
+              "const": 1024
+            }
+          }
+        }
+      }
+    ]
+  },
+  "outputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "kanvas.image-canvas-expand-result.v1",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "schemaVersion",
+      "expandedArtifactId",
+      "generatedRegionMaskArtifactId",
+      "targetWidth",
+      "targetHeight",
+      "sourcePlacement",
+      "generatedRegion",
+      "qualitySignals"
+    ],
+    "properties": {
+      "schemaVersion": {
+        "const": "kanvas.image-canvas-expand-result/v1"
+      },
+      "expandedArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+      },
+      "generatedRegionMaskArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+      },
+      "targetWidth": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "targetHeight": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "sourcePlacement": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "x",
+          "y",
+          "width",
+          "height"
+        ],
+        "properties": {
+          "x": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "y": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "width": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "height": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "generatedRegion": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "left",
+          "top",
+          "right",
+          "bottom"
+        ],
+        "properties": {
+          "left": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "top": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "right": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "bottom": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "qualitySignals": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schemaVersion",
+          "method",
+          "generative",
+          "originalPixelsPreserved"
+        ],
+        "properties": {
+          "schemaVersion": {
+            "const": "kanvas.image-canvas-expand-quality/v1"
+          },
+          "method": {
+            "const": "generative_outpaint"
+          },
+          "generative": {
+            "const": true
+          },
+          "originalPixelsPreserved": {
+            "const": true
+          }
+        }
+      }
+    }
+  },
+  "idempotencyMode": "keyed",
+  "supportedInvokers": [
+    "workflow"
+  ]
+}

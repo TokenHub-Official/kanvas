@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "skillKey": "first-party.image-subject-detect",
+  "displayName": "图片主体检测",
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "detect-subjects",
+      "displayName": "检测主体",
+      "description": "识别图片中的视觉主体候选并返回边界、置信度与可审查蒙版，不修改原图。",
+      "category": "图片分析",
+      "outputPresentation": "board",
+      "inputUiSchema": {
+        "schemaVersion": "kanvas.entrypoint-ui/v0",
+        "canvasTool": {
+          "surface": "canvas.image",
+          "operationId": "image.subject.detect",
+          "order": 110,
+          "costNotice": "浏览器本地模型优先，不产生外部模型调用费用；浏览器不可用时固定回退 Worker。",
+          "source": {
+            "parameterKey": "sourceArtifactId",
+            "value": "artifact_id"
+          },
+          "parameters": [],
+          "result": {
+            "artifactPath": [
+              "maskArtifactId"
+            ],
+            "maskArtifactPath": [
+              "maskArtifactId"
+            ],
+            "outputModes": [
+              "add_node",
+              "asset_only"
+            ]
+          }
+        }
+      },
+      "workflowPath": "workflows/image-subject-detect.json"
+    }
+  ]
+}

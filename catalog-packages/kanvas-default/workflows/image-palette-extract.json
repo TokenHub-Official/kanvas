@@ -1,0 +1,296 @@
+{
+  "schemaVersion": "kanvas.workflow-catalog-asset/v1",
+  "workflowKey": "image_palette_extract",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "提取图片调色板",
+      "en-US": "Palette extraction"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "在浏览器本地确定性提取主色、比例与色彩角色。",
+      "en-US": "Extract dominant colors, ratios, and color roles locally in the browser."
+    }
+  },
+  "category": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "图片分析",
+      "en-US": "Image analysis"
+    }
+  },
+  "topology": {
+    "schemaVersion": 1,
+    "key": "image_palette_extract",
+    "entryNodeKey": "extract",
+    "limits": {
+      "maxNodeRuns": 1,
+      "timeoutMs": 120000
+    },
+    "nodes": [
+      {
+        "key": "extract",
+        "kind": "invoke",
+        "capability": {
+          "contractId": "image.palette.extract",
+          "revision": 1,
+          "canonicalDigest": "sha256:448e89b7d130bb8f8952441e1621635410fb0a6222728aae56546e340e6e6ff6"
+        },
+        "input": {
+          "$value": {
+            "source": "workflow_input",
+            "pointer": ""
+          }
+        },
+        "next": []
+      }
+    ],
+    "outputs": {
+      "schemaVersion": {
+        "required": true,
+        "value": "kanvas.image-palette-extract-result/v1"
+      },
+      "sourceWidth": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "extract",
+            "scope": "root",
+            "pointer": "/sourceWidth"
+          }
+        }
+      },
+      "sourceHeight": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "extract",
+            "scope": "root",
+            "pointer": "/sourceHeight"
+          }
+        }
+      },
+      "colorSpace": {
+        "required": true,
+        "value": "srgb"
+      },
+      "colors": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "extract",
+            "scope": "root",
+            "pointer": "/colors"
+          }
+        }
+      },
+      "transparentRatio": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "extract",
+            "scope": "root",
+            "pointer": "/transparentRatio"
+          }
+        }
+      },
+      "qualitySignals": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "extract",
+            "scope": "root",
+            "pointer": "/qualitySignals"
+          }
+        }
+      }
+    }
+  },
+  "inputSchema": {
+    "$id": "kanvas.image-palette-extract-input.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["sourceArtifactId"],
+    "properties": {
+      "colorCount": {
+        "type": "integer",
+        "default": 6,
+        "maximum": 12,
+        "minimum": 2,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "sampleSize": {
+        "type": "integer",
+        "default": 128,
+        "maximum": 512,
+        "minimum": 32,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "alphaThreshold": {
+        "type": "integer",
+        "default": 16,
+        "maximum": 255,
+        "minimum": 0,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "outputSchema": {
+    "$id": "kanvas.image-palette-extract-result.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "schemaVersion",
+      "sourceWidth",
+      "sourceHeight",
+      "colorSpace",
+      "colors",
+      "transparentRatio",
+      "qualitySignals"
+    ],
+    "properties": {
+      "colors": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "rank",
+            "hex",
+            "red",
+            "green",
+            "blue",
+            "proportion",
+            "luminance",
+            "role"
+          ],
+          "properties": {
+            "hex": {
+              "type": "string",
+              "pattern": "^#[0-9A-F]{6}$"
+            },
+            "red": {
+              "type": "integer",
+              "maximum": 255,
+              "minimum": 0
+            },
+            "blue": {
+              "type": "integer",
+              "maximum": 255,
+              "minimum": 0
+            },
+            "rank": {
+              "type": "integer",
+              "maximum": 12,
+              "minimum": 1
+            },
+            "role": {
+              "enum": ["dominant", "accent", "neutral"],
+              "type": "string"
+            },
+            "green": {
+              "type": "integer",
+              "maximum": 255,
+              "minimum": 0
+            },
+            "luminance": {
+              "type": "number",
+              "maximum": 1,
+              "minimum": 0
+            },
+            "proportion": {
+              "type": "number",
+              "maximum": 1,
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        },
+        "maxItems": 12,
+        "minItems": 1,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "colorSpace": {
+        "const": "srgb",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "sourceWidth": {
+        "type": "integer",
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "sourceHeight": {
+        "type": "integer",
+        "minimum": 1,
+        "x-kanvas-semantic-type": "number.scalar"
+      },
+      "schemaVersion": {
+        "const": "kanvas.image-palette-extract-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "required": [
+          "schemaVersion",
+          "generative",
+          "sourceModified",
+          "deterministic",
+          "quantizationBits",
+          "sampledPixelCount"
+        ],
+        "properties": {
+          "generative": {
+            "const": false
+          },
+          "deterministic": {
+            "const": true
+          },
+          "schemaVersion": {
+            "const": "kanvas.image-palette-extract-quality/v1"
+          },
+          "sourceModified": {
+            "const": false
+          },
+          "quantizationBits": {
+            "const": 5
+          },
+          "sampledPixelCount": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "quality.signals"
+      },
+      "transparentRatio": {
+        "type": "number",
+        "maximum": 1,
+        "minimum": 0,
+        "x-kanvas-semantic-type": "number.scalar"
+      }
+    },
+    "additionalProperties": false
+  },
+  "requiredCapabilities": [
+    {
+      "key": "image.palette.extract",
+      "revision": 1,
+      "canonicalDigest": "sha256:448e89b7d130bb8f8952441e1621635410fb0a6222728aae56546e340e6e6ff6"
+    }
+  ],
+  "canonicalDigest": "sha256:63f22b5bd28bb3df92f8824008dee2182df93dbe5a73676fd121a44c032d8e1f"
+}

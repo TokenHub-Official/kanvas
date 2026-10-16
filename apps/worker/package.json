@@ -1,0 +1,58 @@
+{
+  "name": "@kanvas/worker",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "check-types": "tsc --noEmit -p tsconfig.json",
+    "dev": "node --env-file-if-exists=../../.env.local --env-file-if-exists=.env.local ../../tools/development/watch-typescript-service.mjs",
+    "lint": "eslint src test",
+    "start": "node dist/main.js",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@ai-sdk/anthropic": "3.0.114",
+    "@ai-sdk/deepseek": "2.0.18",
+    "@ai-sdk/google": "3.0.43",
+    "@ai-sdk/openai": "3.0.26",
+    "@ai-sdk/provider": "3.0.14",
+    "@kanvas/agent-runtime": "workspace:*",
+    "@kanvas/application": "workspace:*",
+    "@kanvas/contracts": "workspace:*",
+    "@kanvas/database": "workspace:*",
+    "@kanvas/image-atomic-core": "workspace:*",
+    "@kanvas/secrets": "workspace:*",
+    "@kanvas/storage": "workspace:*",
+    "@nestjs/common": "catalog:",
+    "@nestjs/core": "catalog:",
+    "@opentelemetry/exporter-metrics-otlp-http": "catalog:",
+    "@opentelemetry/exporter-trace-otlp-http": "catalog:",
+    "@opentelemetry/sdk-metrics": "catalog:",
+    "@opentelemetry/sdk-node": "catalog:",
+    "ai": "6.0.182",
+    "ajv": "catalog:",
+    "ajv-formats": "catalog:",
+    "bullmq": "catalog:",
+    "https-proxy-agent": "catalog:",
+    "ioredis": "catalog:",
+    "onnxruntime-node": "catalog:",
+    "pino": "catalog:",
+    "reflect-metadata": "catalog:",
+    "rxjs": "catalog:",
+    "sharp": "catalog:",
+    "tesseract.js": "7.0.0",
+    "ulid": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "mysql2": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "files": [
+    "dist"
+  ],
+  "license": "Apache-2.0"
+}

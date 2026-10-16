@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kanvas.image-layers-separate-result.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "foregroundArtifactId",
+    "subjectMaskArtifactId",
+    "subjectCandidates",
+    "textBlocks",
+    "textRegions",
+    "subjectQualitySignals",
+    "textQualitySignals"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "kanvas.image-layers-separate-result/v1"
+    },
+    "foregroundArtifactId": {
+      "type": "string",
+      "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+    },
+    "subjectMaskArtifactId": {
+      "type": "string",
+      "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+    },
+    "subjectCandidates": {
+      "type": "array"
+    },
+    "textBlocks": {
+      "type": "array"
+    },
+    "textRegions": {
+      "type": "array"
+    },
+    "subjectQualitySignals": {
+      "type": "object"
+    },
+    "textQualitySignals": {
+      "type": "object"
+    }
+  }
+}

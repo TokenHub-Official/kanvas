@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "contractKey": "image.denoise",
+  "revision": 1,
+  "inputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "kanvas.image-denoise-input.v1",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "sourceArtifactId"
+    ],
+    "properties": {
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+      },
+      "strength": {
+        "type": "number",
+        "minimum": 0.1,
+        "maximum": 1,
+        "default": 0.5
+      }
+    }
+  },
+  "outputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "kanvas.image-denoise-result.v1",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "schemaVersion",
+      "imageArtifactId",
+      "noiseEstimate",
+      "method",
+      "strength",
+      "qualitySignals"
+    ],
+    "properties": {
+      "schemaVersion": {
+        "const": "kanvas.image-denoise-result/v1"
+      },
+      "imageArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+      },
+      "noiseEstimate": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+      },
+      "method": {
+        "const": "median_blend"
+      },
+      "strength": {
+        "type": "number",
+        "minimum": 0.1,
+        "maximum": 1
+      },
+      "qualitySignals": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schemaVersion",
+          "qualityIntent",
+          "generative",
+          "alphaPreserved",
+          "kernelSize"
+        ],
+        "properties": {
+          "schemaVersion": {
+            "const": "kanvas.image-denoise-quality/v1"
+          },
+          "qualityIntent": {
+            "const": "faithful"
+          },
+          "generative": {
+            "const": false
+          },
+          "alphaPreserved": {
+            "const": true
+          },
+          "kernelSize": {
+            "const": 3
+          }
+        }
+      }
+    }
+  },
+  "idempotencyMode": "keyed",
+  "supportedInvokers": [
+    "workflow"
+  ]
+}

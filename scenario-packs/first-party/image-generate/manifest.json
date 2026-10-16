@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "packId": "first-party.image-generate",
+  "displayName": "Image generation",
+  "workflows": [{ "path": "workflows/image-generate.json" }],
+  "skill": { "path": "skill/manifest.json" },
+  "capabilities": [],
+  "requiredCapabilities": [
+    {
+      "contractId": "image.generate",
+      "revision": 1,
+      "canonicalDigest": "sha256:72f47781bd10c36283c6003cc3132fcf85d3658c9117e2b4703c4b4e605277c5"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "kanvas.capability-binding/v1",
+  "bindingKey": "first-party.image.upscale.reconstructive.openai-provider",
+  "contract": {
+    "key": "image.upscale",
+    "revision": 1,
+    "canonicalDigest": "sha256:60c6e7350194d500038b75edfc41473deaecd7b145191a43a4d10061c35b359d"
+  },
+  "implementation": {
+    "key": "first-party.image.upscale.reconstructive.openai-provider",
+    "revision": 1,
+    "canonicalDigest": "sha256:c4e471f334a9e7f520de1c5de5f390fdc1ac71778fa227d08e2ff97710eb3b1d"
+  },
+  "priority": 2,
+  "enabled": true,
+  "eligibility": {
+    "all": [
+      {
+        "pointer": "/qualityIntent",
+        "operator": "equals",
+        "value": "reconstructive"
+      }
+    ]
+  },
+  "fallbackOn": []
+}

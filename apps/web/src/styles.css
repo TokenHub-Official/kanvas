@@ -1,0 +1,263 @@
+@layer theme, base, antd, components, utilities;
+
+@import "tailwindcss";
+@import "./styles/tokens.css";
+@import "./styles/base.css";
+@import "./styles/motion.css";
+
+/* stylelint-disable-next-line at-rule-no-unknown -- Tailwind v4 dependency source */
+@source "../node_modules/streamdown/dist/*.js";
+/* stylelint-disable-next-line at-rule-no-unknown -- Tailwind v4 dependency source */
+@source "../node_modules/@streamdown/code/dist/*.js";
+
+.agent-message-content > * + * {
+  margin-block-start: 1.25rem;
+}
+
+.agent-markdown {
+  max-width: 100%;
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+
+.agent-markdown > :first-child {
+  margin-block-start: 0 !important;
+}
+
+.agent-markdown > :last-child {
+  margin-block-end: 0 !important;
+}
+
+.agent-markdown p,
+.agent-markdown ul,
+.agent-markdown ol {
+  margin-block: 0.75rem;
+}
+
+.agent-markdown ul,
+.agent-markdown ol {
+  padding-inline-start: 1.35rem;
+}
+
+.agent-markdown ul ul,
+.agent-markdown ul ol,
+.agent-markdown ol ul,
+.agent-markdown ol ol {
+  margin-block: 0.3rem;
+}
+
+.agent-markdown li + li {
+  margin-block-start: 0.25rem;
+}
+
+.agent-markdown li > p {
+  margin-block: 0;
+}
+
+.agent-markdown input[type="checkbox"] {
+  accent-color: var(--primary);
+  opacity: 1;
+}
+
+.agent-markdown h1,
+.agent-markdown h2,
+.agent-markdown h3,
+.agent-markdown h4,
+.agent-markdown h5,
+.agent-markdown h6 {
+  color: var(--ink);
+  font-weight: 650;
+  letter-spacing: -0.012em;
+}
+
+.agent-markdown h1 {
+  margin-block: 1.75rem 0.75rem;
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+
+.agent-markdown h2 {
+  margin-block: 1.5rem 0.7rem;
+  font-size: 1.125rem;
+  line-height: 1.45;
+}
+
+.agent-markdown h3 {
+  margin-block: 1.25rem 0.55rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.agent-markdown h4,
+.agent-markdown h5,
+.agent-markdown h6 {
+  margin-block: 1rem 0.45rem;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+.agent-markdown [data-streamdown="link"] {
+  color: var(--primary);
+  font-weight: 550;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.agent-markdown [data-streamdown="inline-code"] {
+  border: 1px solid rgb(21 21 21 / 7%);
+  border-radius: 6px;
+  background: var(--mist);
+  color: var(--ink);
+  font-size: 0.88em;
+  padding: 0.12em 0.38em;
+}
+
+.agent-markdown [data-streamdown="blockquote"] {
+  margin-block: 1rem;
+  border-inline-start: 2px solid rgb(48 72 245 / 35%);
+  border-radius: 0 10px 10px 0;
+  background: rgb(245 245 245 / 72%);
+  color: var(--ink);
+  font-style: normal;
+  padding: 0.7rem 1rem;
+}
+
+.agent-markdown [data-streamdown="blockquote"] + [data-streamdown^="heading-"] {
+  margin-block-start: 1.75rem;
+}
+
+.agent-markdown [data-streamdown="horizontal-rule"] {
+  margin-block: 1.5rem;
+  border-color: rgb(21 21 21 / 10%);
+}
+
+.agent-markdown [data-streamdown="code-block"] {
+  max-width: 100%;
+  margin-block: 1rem;
+  gap: 0.4rem;
+  border-color: var(--line);
+  border-radius: 12px;
+  background: var(--mist);
+  padding: 0.45rem;
+}
+
+.agent-markdown [data-streamdown="code-block-header"] {
+  color: var(--muted);
+}
+
+.agent-markdown [data-streamdown="code-block-body"] {
+  border-color: var(--line);
+  border-radius: 9px;
+  background: var(--paper);
+}
+
+.agent-markdown [data-streamdown="code-block-actions"] {
+  border-color: var(--line);
+  background: rgb(255 255 255 / 86%);
+  box-shadow: var(--shadow-overlay-control);
+}
+
+.agent-markdown [data-streamdown="code-block-actions"] button,
+.agent-markdown [data-streamdown="table-wrapper"] button {
+  color: var(--muted);
+}
+
+.agent-markdown [data-streamdown="code-block-actions"] button:hover,
+.agent-markdown [data-streamdown="table-wrapper"] button:hover {
+  background: var(--mist-deep);
+  color: var(--ink);
+}
+
+.agent-markdown [data-streamdown="table-wrapper"] {
+  max-width: 100%;
+  margin-block: 1rem;
+  overflow-x: auto;
+  border-color: var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+}
+
+.agent-markdown [data-streamdown="table"] {
+  min-width: 100%;
+}
+
+.agent-markdown [data-streamdown="table-header-cell"] {
+  background: var(--mist);
+  color: var(--ink);
+  font-weight: 650;
+}
+
+.agent-markdown [data-streamdown="table-cell"],
+.agent-markdown [data-streamdown="table-header-cell"] {
+  border-color: var(--line);
+  padding: 0.6rem 0.75rem;
+}
+
+.agent-markdown [data-streamdown="image-wrapper"] {
+  margin-block: 1rem;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--mist);
+}
+
+.agent-markdown [data-streamdown="image"] {
+  display: block;
+  max-height: 520px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.agent-markdown del {
+  color: var(--muted);
+  text-decoration-thickness: 1px;
+}
+
+[data-streamdown="link-safety-modal"] {
+  color: var(--ink);
+}
+
+[data-streamdown="table-fullscreen"] button {
+  color: var(--muted);
+}
+
+[data-streamdown="link-safety-modal"] button:hover {
+  background: var(--mist-deep);
+  color: var(--ink);
+}
+
+[data-streamdown="table-fullscreen"] {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+[data-streamdown="table-fullscreen"] [data-streamdown="table-header"] {
+  background: var(--mist);
+}
+
+[data-streamdown="table-fullscreen"] [data-streamdown="table"],
+[data-streamdown="table-fullscreen"] [data-streamdown="table-cell"],
+[data-streamdown="table-fullscreen"] [data-streamdown="table-header-cell"] {
+  border-color: var(--line);
+}
+
+[data-streamdown="table-fullscreen"] button:hover {
+  background: var(--mist-deep);
+  color: var(--ink);
+}
+
+/*
+  THESIS: Kanvas Studio opens on the work itself, not a dashboard of records.
+  OWN-WORLD: paper and lilac mist surround cobalt actions, acid focus signals,
+  graphite proofing surfaces, and image-led project boards with minimal chrome.
+  STORY: designers see what needs judgment, resume a real project, and reuse
+  accepted artwork without crossing an administrative index.
+  FIRST VIEWPORT: an actual pending result owns the workbench; a decisive cobalt
+  panel keeps the next action and short review queue beside it.
+  FORM: artifact-first professional proofing studio, following the established
+  Canva/Lovart craft bar while preserving Kanvas delivery and review truth.
+*/

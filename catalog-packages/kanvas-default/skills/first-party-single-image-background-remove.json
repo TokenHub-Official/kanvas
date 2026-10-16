@@ -1,0 +1,185 @@
+{
+  "schemaVersion": "kanvas.skill-catalog-asset/v1",
+  "skillKey": "first-party.single-image-background-remove",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "单图去背景",
+      "en-US": "Single-image background removal"
+    }
+  },
+  "nonProduction": false,
+  "entrypoints": [
+    {
+      "entrypointKey": "remove-background",
+      "displayName": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "去背景",
+          "en-US": "Single-image background removal"
+        }
+      },
+      "description": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "从当前图片生成透明底前景，并保留可审查的蒙版产物。",
+          "en-US": "Create a transparent foreground and retain a reviewable mask."
+        }
+      },
+      "category": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "图片清理",
+          "en-US": "Image cleanup"
+        }
+      },
+      "outputPresentation": "board",
+      "inputUiSchema": {
+        "schemaVersion": "kanvas.entrypoint-ui/v0",
+        "canvasTool": {
+          "surface": "canvas.image",
+          "completionBehavior": "auto_replace_safe",
+          "interactionBehavior": "direct",
+          "operationId": "image.background.remove",
+          "order": 100,
+          "costNotice": "浏览器本地模型优先，不产生外部模型调用费用；回退 Worker 时由 Workspace 基础设施承担计算成本。",
+          "source": {
+            "parameterKey": "sourceArtifactId",
+            "value": "artifact_id"
+          },
+          "parameters": [
+            {
+              "key": "refinement",
+              "label": "边缘处理",
+              "control": "select",
+              "required": true,
+              "defaultValue": "standard",
+              "options": [
+                {
+                  "value": "standard",
+                  "label": "标准"
+                },
+                {
+                  "value": "fine",
+                  "label": "精细"
+                }
+              ]
+            },
+            {
+              "key": "subjectHint",
+              "label": "主体提示（可选）",
+              "control": "text",
+              "required": false,
+              "maxLength": 240
+            }
+          ],
+          "result": {
+            "artifactPath": ["foregroundArtifactId"],
+            "maskArtifactPath": ["maskArtifactId"],
+            "outputModes": ["add_node", "replace_content", "set_background"]
+          }
+        }
+      },
+      "inputUiSchemaByLocale": {
+        "zh-CN": {
+          "schemaVersion": "kanvas.entrypoint-ui/v0",
+          "canvasTool": {
+            "surface": "canvas.image",
+            "completionBehavior": "auto_replace_safe",
+            "interactionBehavior": "direct",
+            "operationId": "image.background.remove",
+            "order": 100,
+            "costNotice": "浏览器本地模型优先，不产生外部模型调用费用；回退 Worker 时由 Workspace 基础设施承担计算成本。",
+            "source": {
+              "parameterKey": "sourceArtifactId",
+              "value": "artifact_id"
+            },
+            "parameters": [
+              {
+                "key": "refinement",
+                "label": "边缘处理",
+                "control": "select",
+                "required": true,
+                "defaultValue": "standard",
+                "options": [
+                  {
+                    "value": "standard",
+                    "label": "标准"
+                  },
+                  {
+                    "value": "fine",
+                    "label": "精细"
+                  }
+                ]
+              },
+              {
+                "key": "subjectHint",
+                "label": "主体提示（可选）",
+                "control": "text",
+                "required": false,
+                "maxLength": 240
+              }
+            ],
+            "result": {
+              "artifactPath": ["foregroundArtifactId"],
+              "maskArtifactPath": ["maskArtifactId"],
+              "outputModes": ["add_node", "replace_content", "set_background"]
+            }
+          }
+        },
+        "en-US": {
+          "schemaVersion": "kanvas.entrypoint-ui/v0",
+          "canvasTool": {
+            "surface": "canvas.image",
+            "completionBehavior": "auto_replace_safe",
+            "interactionBehavior": "direct",
+            "operationId": "image.background.remove",
+            "order": 100,
+            "costNotice": "Execution follows the configured capability priority and may use local compute or a model service.",
+            "source": {
+              "parameterKey": "sourceArtifactId",
+              "value": "artifact_id"
+            },
+            "parameters": [
+              {
+                "key": "refinement",
+                "label": "Edge refinement",
+                "control": "select",
+                "required": true,
+                "defaultValue": "standard",
+                "options": [
+                  {
+                    "value": "standard",
+                    "label": "Standard"
+                  },
+                  {
+                    "value": "fine",
+                    "label": "Fine"
+                  }
+                ]
+              },
+              {
+                "key": "subjectHint",
+                "label": "Subject hint",
+                "control": "text",
+                "required": false,
+                "maxLength": 240
+              }
+            ],
+            "result": {
+              "artifactPath": ["foregroundArtifactId"],
+              "maskArtifactPath": ["maskArtifactId"],
+              "outputModes": ["add_node", "replace_content", "set_background"]
+            }
+          }
+        }
+      },
+      "workflow": {
+        "key": "single_image_background_remove",
+        "revision": 1,
+        "canonicalDigest": "sha256:2e14593d5bbe69230ce3e990cc28d02a1df8c6c423f0e5d42db3c5129fa561f2"
+      }
+    }
+  ]
+}

@@ -1,0 +1,269 @@
+{
+  "schemaVersion": "kanvas.workflow-catalog-asset/v1",
+  "workflowKey": "image_upscale",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "图片放大",
+      "en-US": "Image upscale"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "选择忠实 2× 放大，或允许生成新细节的高精度重建。",
+      "en-US": "Choose faithful 2x resizing or generative high-fidelity reconstruction."
+    }
+  },
+  "category": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "画质修复",
+      "en-US": "Image enhancement"
+    }
+  },
+  "topology": {
+    "schemaVersion": 1,
+    "key": "image_upscale",
+    "entryNodeKey": "upscale",
+    "limits": {
+      "maxNodeRuns": 1,
+      "timeoutMs": 300000
+    },
+    "nodes": [
+      {
+        "key": "upscale",
+        "kind": "invoke",
+        "capability": {
+          "contractId": "image.upscale",
+          "revision": 1,
+          "canonicalDigest": "sha256:60c6e7350194d500038b75edfc41473deaecd7b145191a43a4d10061c35b359d"
+        },
+        "input": {
+          "$value": {
+            "source": "workflow_input",
+            "pointer": ""
+          }
+        },
+        "next": []
+      }
+    ],
+    "outputs": {
+      "schemaVersion": {
+        "required": true,
+        "value": "kanvas.image-upscale-result/v1"
+      },
+      "imageArtifactId": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "upscale",
+            "scope": "root",
+            "pointer": "/imageArtifactId"
+          }
+        }
+      },
+      "qualityIntent": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "upscale",
+            "scope": "root",
+            "pointer": "/qualityIntent"
+          }
+        }
+      },
+      "scaleFactor": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "upscale",
+            "scope": "root",
+            "pointer": "/scaleFactor"
+          }
+        }
+      },
+      "sourceWidth": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "upscale",
+            "scope": "root",
+            "pointer": "/sourceWidth"
+          }
+        }
+      },
+      "sourceHeight": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "upscale",
+            "scope": "root",
+            "pointer": "/sourceHeight"
+          }
+        }
+      },
+      "outputWidth": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "upscale",
+            "scope": "root",
+            "pointer": "/outputWidth"
+          }
+        }
+      },
+      "outputHeight": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "upscale",
+            "scope": "root",
+            "pointer": "/outputHeight"
+          }
+        }
+      },
+      "qualitySignals": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "upscale",
+            "scope": "root",
+            "pointer": "/qualitySignals"
+          }
+        }
+      }
+    }
+  },
+  "inputSchema": {
+    "$id": "kanvas.image-upscale-input.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": ["sourceArtifactId", "qualityIntent"],
+    "properties": {
+      "guidance": {
+        "type": "string",
+        "maxLength": 1000,
+        "minLength": 1,
+        "x-kanvas-semantic-type": "prompt.rich"
+      },
+      "scaleFactor": {
+        "const": 2,
+        "default": 2,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "qualityIntent": {
+        "enum": ["faithful", "reconstructive"],
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "outputSchema": {
+    "$id": "kanvas.image-upscale-result.v1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "schemaVersion",
+      "imageArtifactId",
+      "qualityIntent",
+      "scaleFactor",
+      "sourceWidth",
+      "sourceHeight",
+      "outputWidth",
+      "outputHeight",
+      "qualitySignals"
+    ],
+    "properties": {
+      "outputWidth": {
+        "type": ["integer", "null"],
+        "minimum": 1,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "scaleFactor": {
+        "const": 2,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "sourceWidth": {
+        "type": ["integer", "null"],
+        "minimum": 1,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "outputHeight": {
+        "type": ["integer", "null"],
+        "minimum": 1,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "sourceHeight": {
+        "type": ["integer", "null"],
+        "minimum": 1,
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "qualityIntent": {
+        "enum": ["faithful", "reconstructive"],
+        "type": "string",
+        "x-kanvas-semantic-type": "text.plain"
+      },
+      "schemaVersion": {
+        "const": "kanvas.image-upscale-result/v1",
+        "x-kanvas-semantic-type": "value.any"
+      },
+      "qualitySignals": {
+        "type": "object",
+        "required": [
+          "schemaVersion",
+          "method",
+          "generative",
+          "resamplingKernel"
+        ],
+        "properties": {
+          "method": {
+            "enum": ["deterministic_resample", "generative_reconstruction"],
+            "type": "string"
+          },
+          "generative": {
+            "type": "boolean"
+          },
+          "schemaVersion": {
+            "const": "kanvas.image-upscale-quality/v1"
+          },
+          "resamplingKernel": {
+            "enum": ["lanczos3", null],
+            "type": ["string", "null"]
+          }
+        },
+        "additionalProperties": false,
+        "x-kanvas-semantic-type": "quality.signals"
+      },
+      "imageArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+        "x-kanvas-semantic-type": "artifact.image"
+      }
+    },
+    "additionalProperties": false
+  },
+  "requiredCapabilities": [
+    {
+      "key": "image.upscale",
+      "revision": 1,
+      "canonicalDigest": "sha256:60c6e7350194d500038b75edfc41473deaecd7b145191a43a4d10061c35b359d"
+    }
+  ],
+  "canonicalDigest": "sha256:66a47fe284f57c8f4b85adc4c6524b98b05aa074e67811b94455c763d1f4efda"
+}

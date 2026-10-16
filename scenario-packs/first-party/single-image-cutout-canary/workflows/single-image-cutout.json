@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "key": "single_image_cutout_canary",
+  "entryNodeKey": "remove_background",
+  "limits": {
+    "maxNodeRuns": 1,
+    "timeoutMs": 60000
+  },
+  "nodes": [
+    {
+      "key": "remove_background",
+      "kind": "invoke",
+      "capability": {
+        "contractId": "test.image.background.remove",
+        "revision": 1,
+        "canonicalDigest": "sha256:3e700ea4d6cd47e3f116b0507590e0d622f757acc4503b09db1d9bc49172f43d"
+      },
+      "input": {
+        "$value": {
+          "source": "workflow_input",
+          "pointer": ""
+        }
+      },
+      "next": []
+    }
+  ],
+  "outputs": {
+    "schemaVersion": {
+      "required": true,
+      "value": "kanvas.deterministic-image-result/v1"
+    },
+    "imageArtifactId": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "remove_background",
+          "scope": "root",
+          "pointer": "/imageArtifactId"
+        }
+      }
+    },
+    "sourceArtifactId": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "remove_background",
+          "scope": "root",
+          "pointer": "/sourceArtifactId"
+        }
+      }
+    },
+    "capabilityRunId": {
+      "required": true,
+      "value": {
+        "$value": {
+          "source": "node_output",
+          "nodeKey": "remove_background",
+          "scope": "root",
+          "pointer": "/capabilityRunId"
+        }
+      }
+    }
+  }
+}

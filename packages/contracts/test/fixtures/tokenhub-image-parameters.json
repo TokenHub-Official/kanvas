@@ -1,0 +1,76 @@
+{
+  "models": [
+    {
+      "providerModelId": "gpt-image-2",
+      "operations": {
+        "image.generate": {
+          "parameters": [
+            {
+              "key": "aspectRatio",
+              "valueType": "enum",
+              "values": [
+                "auto",
+                "1:1",
+                "3:2",
+                "2:3",
+                "4:3",
+                "3:4",
+                "4:5",
+                "5:4",
+                "16:9",
+                "9:16",
+                "21:9"
+              ]
+            },
+            {
+              "key": "quality",
+              "valueType": "enum",
+              "values": ["auto", "low", "medium", "high"]
+            },
+            {
+              "key": "outputFormat",
+              "valueType": "enum",
+              "values": ["png", "jpeg", "webp"]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "providerModelId": "gpt-image-2-edit",
+      "operations": {
+        "image.edit": {
+          "parameters": [
+            {
+              "key": "aspectRatio",
+              "valueType": "enum",
+              "values": [
+                "auto",
+                "1:1",
+                "3:2",
+                "2:3",
+                "4:3",
+                "3:4",
+                "4:5",
+                "5:4",
+                "16:9",
+                "9:16",
+                "21:9"
+              ]
+            },
+            {
+              "key": "quality",
+              "valueType": "enum",
+              "values": ["auto", "low", "medium", "high"]
+            },
+            {
+              "key": "outputFormat",
+              "valueType": "enum",
+              "values": ["png", "jpeg", "webp"]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

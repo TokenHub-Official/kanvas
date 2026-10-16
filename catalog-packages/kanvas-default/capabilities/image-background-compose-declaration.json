@@ -1,0 +1,288 @@
+{
+  "schemaVersion": "kanvas.capability-declaration-asset/v1",
+  "contract": {
+    "key": "image.background.compose",
+    "revision": 1,
+    "canonicalDigest": "sha256:8592a0c5793194f8824f6a6d2a907bdd4e72d65b7ef761920302e0907c637b99"
+  },
+  "declaration": {
+    "schemaVersion": "kanvas.capability-declaration/v1",
+    "catalog": {
+      "title": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "背景合成",
+          "en-US": "Background compose"
+        }
+      },
+      "description": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "把主体放入纯色或图片背景，并调整画面布局。",
+          "en-US": "Place a subject on a color or image background and adjust the layout."
+        }
+      },
+      "category": {
+        "defaultLocale": "zh-CN",
+        "values": {
+          "zh-CN": "图像处理",
+          "en-US": "Image processing"
+        }
+      },
+      "sourceKind": "built_in",
+      "tags": ["background", "compose", "poster"],
+      "surfaces": ["workflow", "agent", "canvas"]
+    },
+    "parameters": [
+      {
+        "key": "foregroundArtifactId",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "主体",
+            "en-US": "Subject"
+          }
+        },
+        "description": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "选择要放入背景中的主体，通常来自背景移除或图层分离。",
+            "en-US": "Choose the subject to place on the background, usually from cutout or layer separation."
+          }
+        },
+        "semanticType": "artifact.foreground",
+        "required": true,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["workflow_input", "upstream"],
+          "default": "upstream"
+        },
+        "editor": "artifact_picker"
+      },
+      {
+        "key": "maskArtifactId",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "蒙版",
+            "en-US": "Mask"
+          }
+        },
+        "description": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "选择与图片或前景空间一致的蒙版。",
+            "en-US": "Choose a mask aligned with the image or foreground."
+          }
+        },
+        "semanticType": "artifact.mask",
+        "required": false,
+        "exposurePolicy": {
+          "allowed": ["hidden_derived"],
+          "default": "hidden_derived"
+        },
+        "sourcePolicy": {
+          "allowed": ["derived"],
+          "default": "derived"
+        },
+        "editor": "artifact_picker"
+      },
+      {
+        "key": "background",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "背景",
+            "en-US": "Background"
+          }
+        },
+        "description": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "选择纯色背景或流程中的背景图片。",
+            "en-US": "Choose a solid color or an image from the workflow."
+          }
+        },
+        "semanticType": "background.source",
+        "required": true,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["constant", "workflow_input", "upstream"],
+          "default": "constant"
+        },
+        "editor": "background_source",
+        "defaultValue": {
+          "kind": "color",
+          "color": "#FFFFFFFF"
+        }
+      },
+      {
+        "key": "canvas",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "画面尺寸",
+            "en-US": "Canvas size"
+          }
+        },
+        "description": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "设置最终结果的宽度和高度。",
+            "en-US": "Set the final output width and height."
+          }
+        },
+        "semanticType": "layout.canvas",
+        "required": true,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["constant", "workflow_input", "upstream"],
+          "default": "constant"
+        },
+        "editor": "canvas_size",
+        "defaultValue": {
+          "width": 1024,
+          "height": 1024
+        }
+      },
+      {
+        "key": "placement",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "主体位置与大小",
+            "en-US": "Subject position and size"
+          }
+        },
+        "description": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "设置主体在画面中的位置、大小和显示方式。",
+            "en-US": "Set the subject position, size and display behavior in the image."
+          }
+        },
+        "semanticType": "layout.placement",
+        "required": true,
+        "exposurePolicy": {
+          "allowed": ["workflow_author", "template_input"],
+          "default": "workflow_author"
+        },
+        "sourcePolicy": {
+          "allowed": ["constant", "workflow_input", "upstream"],
+          "default": "constant"
+        },
+        "editor": "placement",
+        "defaultValue": {
+          "x": 0,
+          "y": 0,
+          "fit": "contain",
+          "width": 1024,
+          "height": 1024,
+          "opacity": 1
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "key": "imageArtifactId",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "结果图",
+            "en-US": "Result image"
+          }
+        },
+        "semanticType": "artifact.image",
+        "primary": true,
+        "visibility": "author"
+      },
+      {
+        "key": "canvas",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "画面尺寸",
+            "en-US": "Canvas size"
+          }
+        },
+        "semanticType": "layout.canvas",
+        "primary": false,
+        "visibility": "advanced"
+      },
+      {
+        "key": "compositionMaskArtifactId",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "合成蒙版",
+            "en-US": "Composition mask"
+          }
+        },
+        "semanticType": "artifact.mask",
+        "primary": false,
+        "visibility": "advanced"
+      },
+      {
+        "key": "inputArtifactIds",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "使用的素材",
+            "en-US": "Input assets"
+          }
+        },
+        "semanticType": "artifact.image_list",
+        "primary": false,
+        "visibility": "advanced"
+      },
+      {
+        "key": "qualitySignals",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "质量信息",
+            "en-US": "Quality signals"
+          }
+        },
+        "semanticType": "quality.signals",
+        "primary": false,
+        "visibility": "advanced"
+      },
+      {
+        "key": "resolvedPlacement",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "实际放置位置",
+            "en-US": "Resolved placement"
+          }
+        },
+        "semanticType": "layout.placement",
+        "primary": false,
+        "visibility": "advanced"
+      },
+      {
+        "key": "schemaVersion",
+        "label": {
+          "defaultLocale": "zh-CN",
+          "values": {
+            "zh-CN": "结果版本",
+            "en-US": "Result version"
+          }
+        },
+        "semanticType": "value.any",
+        "primary": false,
+        "visibility": "hidden"
+      }
+    ]
+  }
+}

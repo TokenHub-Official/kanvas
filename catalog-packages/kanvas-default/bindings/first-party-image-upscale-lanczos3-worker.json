@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "kanvas.capability-binding/v1",
+  "bindingKey": "first-party.image.upscale.lanczos3.worker",
+  "contract": {
+    "key": "image.upscale",
+    "revision": 1,
+    "canonicalDigest": "sha256:d570660767b9971cda6f0b0b83407424c936a99db381d881cb424d87fb0d2f7b"
+  },
+  "implementation": {
+    "key": "first-party.image.upscale.lanczos3.worker",
+    "revision": 1,
+    "canonicalDigest": "sha256:7a391b0ba1eb9563c8e88b2fd3ad3a20f94d954a422a27ff3e337e2ccbf560c5"
+  },
+  "priority": 1,
+  "enabled": true,
+  "eligibility": {
+    "all": [
+      {
+        "pointer": "/qualityIntent",
+        "operator": "equals",
+        "value": "faithful"
+      }
+    ]
+  },
+  "fallbackOn": ["not_applicable", "unavailable", "retry_exhausted"]
+}

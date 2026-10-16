@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "packId": "first-party.single-image-background-remove",
+  "displayName": "Single-image background removal",
+  "workflows": [
+    {
+      "path": "workflows/single-image-background-remove.json"
+    }
+  ],
+  "skill": {
+    "path": "skill/manifest.json"
+  },
+  "capabilities": [
+    {
+      "path": "capabilities/image-background-remove.json"
+    }
+  ],
+  "requiredCapabilities": [
+    {
+      "contractId": "image.background.remove",
+      "revision": 2,
+      "canonicalDigest": "sha256:225c8e45a50157aa201e94119857549a8eaa7c780c6635ff40f28d14c9811024"
+    }
+  ]
+}

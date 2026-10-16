@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kanvas.poster-compose-subject-result.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "resultImageArtifactId"],
+  "properties": {
+    "schemaVersion": { "const": "kanvas.poster-compose-subject-result/v1" },
+    "resultImageArtifactId": {
+      "title": "最终海报",
+      "type": "string",
+      "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+    }
+  }
+}

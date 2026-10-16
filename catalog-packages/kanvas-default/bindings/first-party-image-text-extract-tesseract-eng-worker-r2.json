@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "kanvas.capability-binding/v1",
+  "bindingKey": "first-party.image.text-extract.tesseract-eng.worker.r2",
+  "contract": {
+    "key": "image.text.extract",
+    "revision": 1,
+    "canonicalDigest": "sha256:03f89dc7869def6ef351da6272742ca4c39d99716b129b68b6d7c42b7a673b12"
+  },
+  "implementation": {
+    "key": "first-party.image.text-extract.tesseract-eng.worker",
+    "revision": 2,
+    "canonicalDigest": "sha256:ca3c066da7f008e1fce6289821ef6d9e9e0d413c8de34a2b090d314a7c8a55b3"
+  },
+  "priority": 10,
+  "enabled": true,
+  "eligibility": {},
+  "fallbackOn": ["not_applicable", "unavailable", "retry_exhausted"]
+}

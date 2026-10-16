@@ -1,0 +1,123 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Verify repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - name: Set up Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 22.22.0
+      - name: Set up pnpm
+        uses: pnpm/action-setup@f520eceda224fe1a4aed5a2a27a194379a409996 # v6
+        with:
+          cache: true
+          run_install: false
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Check public source boundary
+        run: pnpm release:check
+      - name: Audit production dependencies
+        run: pnpm audit:prod
+      - name: Run release gate
+        run: pnpm verify
+
+  mysql-integration:
+    name: MySQL integration
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    services:
+      mysql:
+        image: mysql:8.0.45@sha256:4af1f8815716546f5b12410f7621f37f93db8dd11a184706ef59111930b8c2ff
+        env:
+          MYSQL_ROOT_HOST: "%"
+          MYSQL_ROOT_PASSWORD: kanvas-ci-root
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --host=127.0.0.1 --user=root --password=kanvas-ci-root --silent"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - name: Set up Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 22.22.0
+      - name: Set up pnpm
+        uses: pnpm/action-setup@f520eceda224fe1a4aed5a2a27a194379a409996 # v6
+        with:
+          cache: true
+          run_install: false
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Run disposable MySQL suite
+        run: pnpm test:integration:mysql
+        env:
+          KANVAS_DATABASE_HOST: 127.0.0.1
+          KANVAS_DATABASE_PORT: "3306"
+          KANVAS_INTEGRATION_DATABASE_ADMIN_USER: root
+          KANVAS_INTEGRATION_DATABASE_ADMIN_PASSWORD: kanvas-ci-root
+
+  containers:
+    name: Build containers
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - name: Validate Compose files
+        run: |
+          cp deploy/.env.example deploy/.env
+          docker compose -f deploy/compose.dev.yaml config --quiet
+          docker compose --env-file deploy/.env -f deploy/compose.yaml config --quiet
+      - name: Build standalone image
+        run: docker build --target standalone --tag kanvas:ci .
+      - name: Verify standalone image packaging
+        run: sh deploy/verify-image.sh standalone kanvas:ci
+      - name: Build Server image
+        run: docker build --target server --tag kanvas-server:ci .
+      - name: Verify Server image packaging
+        run: sh deploy/verify-image.sh server kanvas-server:ci
+      - name: Build Worker image
+        run: docker build --target worker --tag kanvas-worker:ci .
+      - name: Verify Worker image packaging
+        run: sh deploy/verify-image.sh worker kanvas-worker:ci
+      - name: Build Web image
+        run: docker build --target web --tag kanvas-web:ci .
+      - name: Verify Web image packaging
+        run: sh deploy/verify-image.sh web kanvas-web:ci
+
+  secrets:
+    name: Scan reachable Git history
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out complete history
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          fetch-depth: 0
+      - name: Install verified Gitleaks
+        run: |
+          curl --fail --location --retry 3 --output /tmp/gitleaks.tar.gz https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz
+          echo '551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb  /tmp/gitleaks.tar.gz' | sha256sum --check
+          tar -xzf /tmp/gitleaks.tar.gz -C /tmp gitleaks
+      - name: Scan public history
+        run: /tmp/gitleaks git --log-opts="--all" --redact --no-banner .

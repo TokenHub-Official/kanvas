@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "contractKey": "image.light.enhance",
+  "revision": 1,
+  "inputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "kanvas.image-light-enhance-input.v1",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "sourceArtifactId"
+    ],
+    "properties": {
+      "sourceArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+      },
+      "exposureStops": {
+        "type": "number",
+        "minimum": -2,
+        "maximum": 2,
+        "default": 0
+      },
+      "shadows": {
+        "type": "number",
+        "minimum": -1,
+        "maximum": 1,
+        "default": 0
+      },
+      "highlights": {
+        "type": "number",
+        "minimum": -1,
+        "maximum": 1,
+        "default": 0
+      },
+      "temperature": {
+        "type": "number",
+        "minimum": -1,
+        "maximum": 1,
+        "default": 0
+      },
+      "tint": {
+        "type": "number",
+        "minimum": -1,
+        "maximum": 1,
+        "default": 0
+      }
+    }
+  },
+  "outputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "kanvas.image-light-enhance-result.v1",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "schemaVersion",
+      "imageArtifactId",
+      "parameters",
+      "qualitySignals"
+    ],
+    "properties": {
+      "schemaVersion": {
+        "const": "kanvas.image-light-enhance-result/v1"
+      },
+      "imageArtifactId": {
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+      },
+      "parameters": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "exposureStops",
+          "shadows",
+          "highlights",
+          "temperature",
+          "tint"
+        ],
+        "properties": {
+          "exposureStops": {
+            "type": "number",
+            "minimum": -2,
+            "maximum": 2
+          },
+          "shadows": {
+            "type": "number",
+            "minimum": -1,
+            "maximum": 1
+          },
+          "highlights": {
+            "type": "number",
+            "minimum": -1,
+            "maximum": 1
+          },
+          "temperature": {
+            "type": "number",
+            "minimum": -1,
+            "maximum": 1
+          },
+          "tint": {
+            "type": "number",
+            "minimum": -1,
+            "maximum": 1
+          }
+        }
+      },
+      "qualitySignals": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schemaVersion",
+          "method",
+          "generative",
+          "alphaPreserved",
+          "clippedLowRatio",
+          "clippedHighRatio"
+        ],
+        "properties": {
+          "schemaVersion": {
+            "const": "kanvas.image-light-enhance-quality/v1"
+          },
+          "method": {
+            "const": "deterministic_tone_curve"
+          },
+          "generative": {
+            "const": false
+          },
+          "alphaPreserved": {
+            "const": true
+          },
+          "clippedLowRatio": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "clippedHighRatio": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      }
+    }
+  },
+  "idempotencyMode": "keyed",
+  "supportedInvokers": [
+    "workflow"
+  ]
+}

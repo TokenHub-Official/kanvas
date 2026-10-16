@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "skillKey": "first-party.canvas-editing",
+  "displayName": "画板创建与文字编辑",
+  "nonProduction": false,
+  "agent": {
+    "surfaceKinds": ["agent_workspace"],
+    "toolFamilies": ["query", "canvas_command"],
+    "summary": "仅在用户明确要求使用画板或继续已明确的画板任务时，创建真实画板，读取当前页面与元素，并通过版本保护的画板命令完成可撤销的文字修改或放置本会话图片结果。",
+    "exampleRequests": [
+      "创建一张 1080×1080 的新品海报画板并加入标题",
+      "把当前画板选中的标题改成红色",
+      "看看这张画板里有哪些文字并调整主标题",
+      "把刚才生成的主视觉放到当前画板"
+    ],
+    "instructionResourcePath": "SKILL.md"
+  },
+  "entrypoints": []
+}

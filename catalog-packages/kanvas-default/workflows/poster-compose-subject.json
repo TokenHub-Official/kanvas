@@ -1,0 +1,205 @@
+{
+  "schemaVersion": "kanvas.workflow-catalog-asset/v1",
+  "workflowKey": "poster_compose_subject",
+  "revision": 1,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "主体生成并融入背景",
+      "en-US": "Generate and compose subject"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "生成主体、提取透明前景和蒙版，再将主体合成到用户提供的背景图。",
+      "en-US": "Generate a subject, extract its foreground and mask, then compose it onto a supplied background."
+    }
+  },
+  "category": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "海报制作",
+      "en-US": "Poster creation"
+    }
+  },
+  "topology": {
+    "schemaVersion": 1,
+    "key": "poster_compose_subject",
+    "entryNodeKey": "generate_subject",
+    "limits": {
+      "maxNodeRuns": 3,
+      "timeoutMs": 600000
+    },
+    "nodes": [
+      {
+        "key": "generate_subject",
+        "kind": "invoke",
+        "capability": {
+          "contractId": "image.generate",
+          "revision": 1,
+          "canonicalDigest": "sha256:60d1cc4a6436d3a4b1297d571b46e43a51d07c6ffb4f2487bd307679c7260377"
+        },
+        "input": {
+          "prompt": {
+            "$string": [
+              "生成单一、边缘清晰、适合抠图和海报合成的主体。主体描述：",
+              {
+                "$value": {
+                  "source": "workflow_input",
+                  "pointer": "/subjectPrompt"
+                }
+              }
+            ]
+          }
+        },
+        "next": ["remove_subject_background"]
+      },
+      {
+        "key": "remove_subject_background",
+        "kind": "invoke",
+        "capability": {
+          "contractId": "image.background.remove",
+          "revision": 1,
+          "canonicalDigest": "sha256:85e608e6977c5a84b51856c768f914784d4fc79e9fa5babecd70bb3e6b3c7c5d"
+        },
+        "input": {
+          "sourceArtifactId": {
+            "$value": {
+              "source": "node_output",
+              "nodeKey": "generate_subject",
+              "scope": "root",
+              "pointer": "/imageArtifactId"
+            }
+          },
+          "refinement": "fine"
+        },
+        "next": ["compose_poster"]
+      },
+      {
+        "key": "compose_poster",
+        "kind": "invoke",
+        "capability": {
+          "contractId": "image.background.compose",
+          "revision": 1,
+          "canonicalDigest": "sha256:47cb3d93380ec07f1d7ef997cee934b077a37635af2d7f362b0f92f970eed5cd"
+        },
+        "input": {
+          "foregroundArtifactId": {
+            "$value": {
+              "source": "node_output",
+              "nodeKey": "remove_subject_background",
+              "scope": "root",
+              "pointer": "/foregroundArtifactId"
+            }
+          },
+          "maskArtifactId": {
+            "$value": {
+              "source": "node_output",
+              "nodeKey": "remove_subject_background",
+              "scope": "root",
+              "pointer": "/maskArtifactId"
+            }
+          },
+          "background": {
+            "kind": "artifact",
+            "artifactId": {
+              "$value": {
+                "source": "workflow_input",
+                "pointer": "/backgroundArtifactId"
+              }
+            },
+            "fit": "cover"
+          },
+          "canvas": {
+            "width": 1024,
+            "height": 1024
+          },
+          "placement": {
+            "x": 128,
+            "y": 128,
+            "width": 768,
+            "height": 768,
+            "fit": "contain",
+            "opacity": 1
+          }
+        },
+        "next": []
+      }
+    ],
+    "outputs": {
+      "schemaVersion": {
+        "required": true,
+        "value": "kanvas.poster-compose-subject-result/v1"
+      },
+      "resultImageArtifactId": {
+        "required": true,
+        "value": {
+          "$value": {
+            "source": "node_output",
+            "nodeKey": "compose_poster",
+            "scope": "root",
+            "pointer": "/imageArtifactId"
+          }
+        }
+      }
+    }
+  },
+  "inputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "kanvas.poster-compose-subject-input.v1",
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["backgroundArtifactId", "subjectPrompt"],
+    "properties": {
+      "backgroundArtifactId": {
+        "title": "背景图",
+        "description": "最终用于合成海报的背景图片。",
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+      },
+      "subjectPrompt": {
+        "title": "主体描述",
+        "description": "描述希望生成并放置到背景中的主体。",
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 2000
+      }
+    }
+  },
+  "outputSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "kanvas.poster-compose-subject-result.v1",
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["schemaVersion", "resultImageArtifactId"],
+    "properties": {
+      "schemaVersion": {
+        "const": "kanvas.poster-compose-subject-result/v1"
+      },
+      "resultImageArtifactId": {
+        "title": "最终海报",
+        "type": "string",
+        "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+      }
+    }
+  },
+  "requiredCapabilities": [
+    {
+      "key": "image.generate",
+      "revision": 1,
+      "canonicalDigest": "sha256:60d1cc4a6436d3a4b1297d571b46e43a51d07c6ffb4f2487bd307679c7260377"
+    },
+    {
+      "key": "image.background.remove",
+      "revision": 1,
+      "canonicalDigest": "sha256:85e608e6977c5a84b51856c768f914784d4fc79e9fa5babecd70bb3e6b3c7c5d"
+    },
+    {
+      "key": "image.background.compose",
+      "revision": 1,
+      "canonicalDigest": "sha256:47cb3d93380ec07f1d7ef997cee934b077a37635af2d7f362b0f92f970eed5cd"
+    }
+  ],
+  "canonicalDigest": "sha256:6b96383facf57921b2014cbc536af3548ff6c476ba3891412022c8ed5738c09d"
+}

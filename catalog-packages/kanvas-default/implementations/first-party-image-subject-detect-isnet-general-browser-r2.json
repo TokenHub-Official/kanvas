@@ -1,0 +1,142 @@
+{
+  "schemaVersion": "kanvas.capability-implementation/v1",
+  "implementationKey": "first-party.image.subject-detect.isnet-general.browser",
+  "revision": 2,
+  "displayName": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "主体检测 · 浏览器运行",
+      "en-US": "Subject detect · Browser runtime"
+    }
+  },
+  "description": {
+    "defaultLocale": "zh-CN",
+    "values": {
+      "zh-CN": "通过浏览器运行提供主体检测，上层只依赖固定公开契约。",
+      "en-US": "Provides Subject detect through Browser runtime behind the stable public contract."
+    }
+  },
+  "contract": {
+    "key": "image.subject.detect",
+    "revision": 1,
+    "canonicalDigest": "sha256:2c3a0832762b13ee4f5a5a0ed1c999010975af9e065e6a132ce875abd8491bf6"
+  },
+  "adapter": {
+    "adapterKey": "first-party.image.subject-detect.isnet.browser.v1",
+    "revision": 2,
+    "canonicalDigest": "sha256:c02af683e2a5267cd24da611e93d88937c19de32aa917df7a81e157973ce66b6"
+  },
+  "source": {
+    "kind": "model_resource",
+    "resource": {
+      "key": "isnet.isnet-general-fp16",
+      "revision": 2,
+      "canonicalDigest": "sha256:067cbdb65aaa3d734e61754ea345e4f851337263e1ec6fb8fd5427ef26d987bd"
+    }
+  },
+  "configuration": {
+    "model": {
+      "family": "isnet",
+      "sha256": "2eb4b5dda7ec41c617e59706e5aafa1f978c9a5f983d2518d9f0ae4d6eb04f20",
+      "source": "huggingface.co/imgly/isnet-general-onnx@440dea96dd4a3b06bbbf5abec3e26569dd7ec49f/onnx/model_fp16.onnx",
+      "license": "MIT",
+      "variant": "isnet-general-fp16",
+      "inputSize": 1024,
+      "normalization": "isnet"
+    },
+    "backend": "wasm",
+    "wasmPaths": "/onnxruntime/",
+    "onnxRuntimeWebVersion": "1.27.0"
+  },
+  "inputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "input",
+    "expression": {
+      "op": "source",
+      "root": "input",
+      "pointer": ""
+    }
+  },
+  "outputMapping": {
+    "schemaVersion": "kanvas.capability-mapping/v1",
+    "direction": "output",
+    "expression": {
+      "op": "source",
+      "root": "result",
+      "pointer": ""
+    }
+  },
+  "fixtures": [
+    {
+      "name": "default contract mapping",
+      "capabilityInput": {
+        "includeMask": true,
+        "maxSubjects": 8,
+        "minimumAreaRatio": 0.001,
+        "sourceArtifactId": "01K00000000000000000000001",
+        "minimumConfidence": 0.35
+      },
+      "configuration": {
+        "model": {
+          "family": "isnet",
+          "sha256": "2eb4b5dda7ec41c617e59706e5aafa1f978c9a5f983d2518d9f0ae4d6eb04f20",
+          "source": "huggingface.co/imgly/isnet-general-onnx@440dea96dd4a3b06bbbf5abec3e26569dd7ec49f/onnx/model_fp16.onnx",
+          "license": "MIT",
+          "variant": "isnet-general-fp16",
+          "inputSize": 1024,
+          "normalization": "isnet"
+        },
+        "backend": "wasm",
+        "wasmPaths": "/onnxruntime/",
+        "onnxRuntimeWebVersion": "1.27.0"
+      },
+      "expectedAdapterInput": {
+        "includeMask": true,
+        "maxSubjects": 8,
+        "minimumAreaRatio": 0.001,
+        "sourceArtifactId": "01K00000000000000000000001",
+        "minimumConfidence": 0.35
+      },
+      "adapterResult": {
+        "candidates": [],
+        "sourceWidth": 1,
+        "sourceHeight": 1,
+        "schemaVersion": "kanvas.image-subject-detect-result/v1",
+        "maskArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "sample",
+          "outputIndex": 0
+        },
+        "qualitySignals": {
+          "taxonomy": "class_agnostic_isnet",
+          "modelDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "modelVariant": "u2net",
+          "schemaVersion": "kanvas.image-subject-detect-quality/v1",
+          "candidateCount": 0,
+          "foregroundRatio": 0,
+          "uncertainEdgeRatio": 0
+        }
+      },
+      "expectedCapabilityOutput": {
+        "candidates": [],
+        "sourceWidth": 1,
+        "sourceHeight": 1,
+        "schemaVersion": "kanvas.image-subject-detect-result/v1",
+        "maskArtifactId": {
+          "$kanvas": "attempt-output-artifact/v1",
+          "outputRole": "sample",
+          "outputIndex": 0
+        },
+        "qualitySignals": {
+          "taxonomy": "class_agnostic_isnet",
+          "modelDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "modelVariant": "u2net",
+          "schemaVersion": "kanvas.image-subject-detect-quality/v1",
+          "candidateCount": 0,
+          "foregroundRatio": 0,
+          "uncertainEdgeRatio": 0
+        }
+      }
+    }
+  ]
+}
