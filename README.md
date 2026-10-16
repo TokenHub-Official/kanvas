@@ -5,7 +5,11 @@ source material, canvas editing, workflows, browser and worker execution,
 provider calls, human review, delivery, and reusable assets in one recoverable
 and traceable production loop.
 
-Kanvas is maintained by [TokenHub](https://github.com/TokenHub-Official).
+Kanvas is an open-source project maintained by [TokenHub](https://tokenhub.com),
+a unified API platform for text, image, video, and audio models.
+
+Explore available models at [tokenhub.com](https://tokenhub.com).
+
 It is currently pre-release software; review the deployment and backup guidance
 before using it with important data.
 
